@@ -1,8 +1,0 @@
-ffms [error]: could not create indexer
-lavf [error]: could not open input file
-raw [error]: raw input requires a resolution.
-x264 [error]: could not open input file `original_videos_A.mkv' via any method!
-
-real	0m0,021s
-user	0m0,014s
-sys	0m0,007s
