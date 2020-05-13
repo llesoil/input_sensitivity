@@ -59,7 +59,7 @@ x264_config.csv -> all the configurations we tested for this paper
 ## Additional advices:
 
 - include a initial set of launches of x264 to warm your laptop/server
-- close other programs to avoid putting a biais in your measures
+- close other programs to avoid putting a biais in your measurements
 
 
 ## X264 Version :

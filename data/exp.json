@@ -1,0 +1,34 @@
+{ "hardware" :
+  {"cpu" : 
+    { "manufacturer" : "intel",
+      "processor" : "intel(r) xeon(r) gold 6238",
+     "cores" : "88",
+     "c_speed" : "2.10GHz"
+    },
+   "gpu" : null,
+   "type" : "server"
+  },
+  "os" : 
+  { "name" : "linux",
+    "distr" : "ubuntu",
+    "version" : "18.04"
+  },
+  "software" :
+  { "name" : "x264",
+    "version" : "0.152.2854",
+    "features" :  ["cabac", "ref", "deblock", "analyse", "me", "subme", "mixed_ref", 
+                   "me_range", "trellis", "8x8dct", "fast_pskip", "chroma_qp_offset",
+                   "bframes", "b_pyramid", "b_adapt", "direct", "weightb", "open_gop",
+                   "weightp", "scenecut", "rc_lookahead", "mbtree", "qpmax", "aq-mode"]
+  },
+  "dataset" :
+  { "name" : "youtube ugc",
+    "content" : "video",
+    "url" : "https://media.withyoutube.com/"
+  },
+  "paper" :
+  { "title" : "Input sensitivity of configurable system : a case study with video compression",
+    "url" : "https://hal.archives-ouvertes.fr/mytoken",
+    "short" : "we study the performance differences of x264 between different input videos"
+  } 
+}
