@@ -18,9 +18,9 @@ Each video has its own folder.
 
 The encoded videos are available on the following address:
 
-https://media.xiph.org/video/derf/
+https://media.withyoutube.com/
 
-You can check the ./dataset_building/video_list.csv file to see the list of videos used for this project
+You can check the data folder to see the list of videos used for this project
 
 ## Code
 
