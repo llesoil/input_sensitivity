@@ -38,9 +38,6 @@ We are interested if you collect others measurements.
 
 ## Contacts
 
-You can contact Luc Lesoil at luc.lesoil@irisa.fr or Mathieu Acher at mathieu.acher@irisa.fr if you have any question about this project!
-
-
 
 
 
