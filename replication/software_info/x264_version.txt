@@ -1,0 +1,10 @@
+x264 0.159.2991 1771b55
+
+built on Jan 29 2020, gcc: 7.4.0
+
+x264 configuration: --chroma-format=all
+
+libx264 configuration: --chroma-format=all
+
+x264 license: GPL version 2 or later
+

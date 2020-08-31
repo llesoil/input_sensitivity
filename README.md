@@ -31,12 +31,17 @@ You can check the data folder to see the list of videos used for this project.
 
 ## Resources
 
-Additional information about experimental protocol.
+Additional information about the experiment and ideas explored during the redaction of the paper!
 
 ## Replication
 
-To replicate measurements, just follow the readme of the dataset_build folder!
+See the replication folder;
+- To replicate measurements, just follow the readme of the dataset_build folder!
+- To consult the configuration of the hardware used for our experiments, see hardware_info
+- To consult information about the operating system in which we used x264, see linux_info
+- To consult x264 configuration, see software_info
+
 
 ## Results
 
-See the ./results folder.
+See the results folder.
