@@ -1,5 +1,0 @@
-y4m [error]: bad sequence header magic
-x264 [error]: could not open input file `./data/video/sintel9.y4m'
-Command exited with non-zero status 255
-0.00user 0.00system 0:00.00elapsed 100%CPU (0avgtext+0avgdata 2660maxresident)k
-0inputs+8outputs (0major+97minor)pagefaults 0swaps
