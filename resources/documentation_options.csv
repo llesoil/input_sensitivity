@@ -7,7 +7,8 @@ me,Categorical,Set the full-pixel motion estimation method.
 subme,Numeric,Set the subpixel estimation complexity. Higher numbers are better. Levels 1-5 simply control the subpixel refinement strength. Level 6 enables RDO for mode decision and level 8 enables RDO for motion vectors and intra prediction modes. RDO levels are significantly slower than the previous levels. 
 no_mixed_ref,Boolean,Mixed refs will select refs on a per-8x8 partition rather than per-macroblock basis. This improves quality when using multiple reference frames albeit at some speed cost. Setting this option will disable it.  
 me_range,Numeric,merange controls the max range of the motion search in pixels. For hex and dia the range is clamped to 4-16 with a default of 16. For umh and esa it can be increased beyond the default 16 to allow for a wider-range motion search which is useful on HD footage and for high-motion footage. Note that for umh esa and tesa increasing merange will significantly slow down encoding.  
-trellis,Numeric,Performs Trellis quantization to increase efficiency.  no_8x8dct,Boolean,Adaptive 8x8 DCT enables the intelligent adaptive use of 8x8 transforms in I-frames. This disables the feature.  
+trellis,Numeric,Performs Trellis quantization to increase efficiency.  
+no_8x8dct,Boolean,Adaptive 8x8 DCT enables the intelligent adaptive use of 8x8 transforms in I-frames. This disables the feature.  
 no_fast_pskip,Boolean,Disables early skip detection on P-frames. Very slightly increases quality at a large speed cost.  
 chroma_qp_offset,Numeric,Add an offset to the quantizer of chroma planes when encoding. The offset can be negative.  
 bframes,Numeric,Sets the maximum number of concurrent B-frames that x264 can use.  
