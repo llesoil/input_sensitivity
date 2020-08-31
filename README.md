@@ -1,12 +1,17 @@
-# Learning Once and for All - On the Input Sensitivity of Configurable Systems
+# Learning Once and for All
+# On the Input Sensitivity of Configurable Systems
 
 Dear ICSE reviewers,
 
 You can find additional code, resources and results in this repository.
 
+## Code
+
+All the code is in the src folder.
+
 ## Data
 
-### Results
+### Measurements
 
 All the measurements are in the ./data/res_ugc folder.
 
@@ -24,14 +29,14 @@ https://media.withyoutube.com/
 
 You can check the data folder to see the list of videos used for this project.
 
-## Code
+## Resources
 
-All the code is in the src folder.
-
+Additional information about experimental protocol.
 
 ## Replication
 
 To replicate measurements, just follow the readme of the dataset_build folder!
 
+## Results
 
-
+See the ./results folder.
