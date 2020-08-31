@@ -23,7 +23,7 @@ The encoded videos are available in the Youtube UGC Dataset cloud:
 
 https://console.cloud.google.com/storage/browser/ugc-dataset/original_videos;tab=objects?prefix=
 
-Alternatively, you can check 'Explore' in the Youtube UGC Dataset homepage:
+Alternatively, to see the content of each video, you can check 'Explore' in the Youtube UGC Dataset homepage:
 
 https://media.withyoutube.com/
 
