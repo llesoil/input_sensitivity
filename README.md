@@ -15,13 +15,6 @@ https://anonymous.4open.science/repository/df319578-8767-47b0-919d-a8e57eb67d25/
 
 ## Data
 
-See README.md in the data folder.
-
-We highly recommend to consult this page, containing code and additional explanations on the paper results; https://anonymous.4open.science/repository/df319578-8767-47b0-919d-a8e57eb67d25/src/main/bitrate.md
-
-
-## Data
-
 See the README.md file in the data folder.
 
 ### Measurements
