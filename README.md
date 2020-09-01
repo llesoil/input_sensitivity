@@ -9,11 +9,16 @@ You can find additional code, resources and results in this repository.
 
 All the code is in the src folder.
 
+We highly recommend to consult this page, containing code and additional explanations on the paper results; https://anonymous.4open.science/repository/df319578-8767-47b0-919d-a8e57eb67d25/src/main/bitrate.md
+
+
 ## Data
+
+See the README.md file in the data folder.
 
 ### Measurements
 
-All the measurements are in the ./data/res_ugc folder.
+All the measurements are in the data/res_ugc folder.
 
 Data is also available here: https://zenodo.org/record/3928253
 
@@ -33,15 +38,12 @@ You can check the data folder to see the list of videos used for this project.
 
 Additional information about the experiment and ideas explored during the redaction of the paper!
 
+See the README.md file in the resources folder.
+
 ## Replication
 
-See the replication folder;
-- To replicate measurements, just follow the readme of the dataset_build folder!
-- To consult the configuration of the hardware used for our experiments, see hardware_info
-- To consult information about the operating system in which we used x264, see linux_info
-- To consult x264 configuration, see software_info
-
+See the README.md file in the replication folder.
 
 ## Results
 
-See the results folder.
+See the README.md file in the results folder.
