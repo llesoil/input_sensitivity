@@ -58,6 +58,6 @@ See README.md in the results folder.
 
 ## Acknowledgement
 
-We would like to thank Yilin Wang for his help and explanations about input properties.
+We would like to thank Yilin Wang for the explanations about input properties.
 
 
