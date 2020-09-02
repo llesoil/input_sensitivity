@@ -1,4 +1,42 @@
-## INSTALL:
+We provide you some instructions, to reproduce the measurements in the same environment :
+
+
+## 1. Install Docker
+
+If docker is not installed on your laptop, just follow this link; https://docs.docker.com/get-docker/
+
+When it's done, you should be able to run the following command : 
+
+```docker --version```
+
+    >```Docker version 19.03.12, build 48a66213fe```
+
+
+Useful links if you struggle with docker installation :
+
+- https://www.ibm.com/cloud/blog/installing-docker-windows-fixes-common-problems
+
+- https://medium.com/@randima.somathilaka/docker-engine-install-fails-in-ubuntu-3e70762c2187
+
+- https://runnable.com/docker/install-docker-on-macos
+
+
+## 2. Pull the image of ubuntu 18.04, launch it
+
+Run the following command;
+
+```sudo docker pull ubuntu:18.04```
+
+Once downloaded, you can launch the image by typing the following command line
+
+```sudo docker run -it ubuntu:18.04 /bin/bash```
+
+Note that this is an ubuntu 18.04.1 version.
+
+
+### 3. 
+
+
 
 First of all, you need to install x264, either by compiling the source code in https://www.videolan.org/developers/x264.html or with the following command line:
 

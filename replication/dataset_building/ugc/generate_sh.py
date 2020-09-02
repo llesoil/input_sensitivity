@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 
-x264_config = pd.read_csv('./influent.csv', delimiter=',', header=None).set_index(0)
+x264_config = pd.read_csv('configs.csv', delimiter=',', header=None).set_index(0)
 
 x264_config = x264_config.fillna('None')
 
@@ -46,7 +46,7 @@ for j in range(nb_config):
     csvLines.append(csvLine)
 
 for i in range(nb_config):
-    with open('./scripts/std/'+str(i)+'.sh','w') as f:
+    with open('./scripts/'+str(i)+'.sh','w') as f:
         f.write('#!/bin/bash\n\n')
         f.write(numbLines[i])
         f.write('\nlogfilename="./logs/$numb.log"\ninputlocation="$1"\noutputlocation="./video$numb.264"\n\n')
