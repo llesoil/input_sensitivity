@@ -1,10 +1,9 @@
-x264 0.159.2991 1771b55
-
-built on Jan 29 2020, gcc: 7.4.0
-
-x264 configuration: --chroma-format=all
-
-libx264 configuration: --chroma-format=all
-
+x264 0.152.2854 e9a5903
+(libswscale 4.8.100)
+(libavformat 57.83.100)
+(ffmpegsource 2.23.0.0)
+built on Jan 19 2018, gcc: 7.2.0
+x264 configuration: --bit-depth=8 --chroma-format=all
+libx264 configuration: --bit-depth=8 --chroma-format=all
 x264 license: GPL version 2 or later
-
+libswscale/libavformat/ffmpegsource license: GPL version 2 or later
