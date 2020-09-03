@@ -18,10 +18,14 @@ We aim at quantifying the differences of x264's performances due to input videos
 
 Once this statement is proved, we use the properties of input videos (e.g. height, width, spatial and temporal complexities, etc.) to **find a configuration optimizing a performance** (in our case minimize the bitrate of video compressions).
 
+We propose an approach, Inputec, that finds a configuration tailored for inputs.
+
 The second research question is :
 RQ2. Can we use Inputec to find configurations adapted to input videos?
 
-We propose an approach, Inputec, that finds a configuration tailored for inputs.
+We detail the results of our experiment in the related paper.
+
+To fully understand the code and results, we advise to read the related submission paper.
 
 
 
@@ -99,6 +103,8 @@ We highly recommend to consult this page, containing a preview of the (heavily c
 https://anonymous.4open.science/repository/df319578-8767-47b0-919d-a8e57eb67d25/src/main/bitrate.md
 
 If you want to run it, we provide a [python file](https://anonymous.4open.science/repository/df319578-8767-47b0-919d-a8e57eb67d25/src/main/bitrate.py) generating these results and all the graphs of the paper.
+
+This python file will require a working python environment; the libraries can be installed with the [requirements.txt](https://anonymous.4open.science/repository/df319578-8767-47b0-919d-a8e57eb67d25/replication/requirements.txt) file.
 
 
 #### II- 2. Results
