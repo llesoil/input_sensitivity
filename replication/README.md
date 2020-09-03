@@ -1,15 +1,6 @@
 ## Replication
 
-This folder details the configuration of the experimental environment to gather measurements, and provides indications to replicate (or reproduce) our experiment ;
+The directory "dataset_building" details how to replicate the measurements (or reproduce with other videos).
 
-- dataset_building folder provides insights to replicate the measurements; old references the first study we made to replicate Pereira et al. results, and the ugc the files to apply that for ugc with the new configurations.
-
-- Hardware configurations (number of cores, frequency, etc.) are detailed in hardware_info folder. Each file contains the output of a linux command in the server we used for the experiment.
-
-- Linux configuration (distribution, version) are detailed in linux_info folder. Each file contains the output of a linux command in the server we used for the experiment.
-
-- x264 configuration (version, compilation) are detailed in hardware_info folder.
-
-
-- requirements.txt references the different python libraries needed to run the different scripts and notebooks.
+The directory "information" details the configuration of the environment used to measure x264 performances. **You don't need it to replicate the measurements**, but it can be useful to have some additional information about the environment. 
 
