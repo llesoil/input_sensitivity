@@ -1,28 +1,0 @@
-[info]: indexing input file [0.2%]                                      ffms [info]: 1280x720p 1:1 @ 24/1 fps (vfr)
-x264 [info]: using SAR=1/1
-x264 [info]: using cpu capabilities: MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2
-x264 [info]: profile High, level 3.1
-[0.2%] 1/480 frames, 5.56 fps, 3791.42 kb/s, eta 0:01:26  [11.7%] 56/480 frames, 129.94 fps, 508.07 kb/s, eta 0:00:03  [22.7%] 109/480 frames, 159.52 fps, 542.29 kb/s, eta 0:00:02  [34.0%] 163/480 frames, 173.78 fps, 543.23 kb/s, eta 0:00:01  [45.6%] 219/480 frames, 184.22 fps, 519.85 kb/s, eta 0:00:01  [56.5%] 271/480 frames, 187.39 fps, 543.10 kb/s, eta 0:00:01  [67.5%] 324/480 frames, 190.49 fps, 550.60 kb/s, eta 0:00:00  [78.5%] 377/480 frames, 192.75 fps, 557.04 kb/s, eta 0:00:00  [90.2%] 433/480 frames, 196.17 fps, 549.73 kb/s, eta 0:00:00                                                                                 x264 [info]: frame I:2     Avg QP:11.66  size: 28782
-x264 [info]: frame P:252   Avg QP:16.74  size:  4176
-x264 [info]: frame B:226   Avg QP:28.38  size:  1037
-x264 [info]: consecutive B-frames: 25.2% 29.2% 20.6% 25.0%
-x264 [info]: mb I  I16..4: 73.5% 13.3% 13.2%
-x264 [info]: mb P  I16..4:  2.1%  0.2%  0.1%  P16..4: 11.4%  1.6%  0.6%  0.0%  0.0%    skip:84.0%
-x264 [info]: mb B  I16..4:  0.1%  0.0%  0.0%  B16..8: 11.4%  0.9%  0.0%  direct: 0.5%  skip:87.0%  L0:58.7% L1:38.9% BI: 2.4%
-x264 [info]: 8x8 transform intra:9.8% inter:29.6%
-x264 [info]: coded y,uvDC,uvAC intra: 9.0% 0.0% 0.0% inter: 2.6% 0.0% 0.0%
-x264 [info]: i16 v,h,dc,p: 63% 33%  4%  0%
-x264 [info]: i8 v,h,dc,ddl,ddr,vr,hd,vl,hu: 18%  5% 75%  0%  0%  0%  0%  0%  1%
-x264 [info]: i4 v,h,dc,ddl,ddr,vr,hd,vl,hu: 27% 16% 35%  3%  4%  4%  5%  3%  4%
-x264 [info]: i8c dc,h,v,p: 100%  0%  0%  0%
-x264 [info]: Weighted P-Frames: Y:4.4% UV:0.0%
-x264 [info]: ref P L0: 67.6% 12.6% 10.3%  6.0%  3.5%  0.1%  0.0%
-x264 [info]: ref B L0: 47.5% 37.4% 13.1%  2.0%
-x264 [info]: ref B L1: 95.8%  4.2%
-x264 [info]: kb/s:537.76
-
-encoded 480 frames, 207.14 fps, 537.76 kb/s
-
-real	0m2,493s
-user	0m12,134s
-sys	0m0,289s
