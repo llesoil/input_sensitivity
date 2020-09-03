@@ -14,17 +14,11 @@ In this paper, we want to prove that **input videos have an influence on x264 co
 In particular, the first research question is :
 RQ1. Do Input Videos Change Performances of x264 Configurations?
 
-![intro_input_sensitivity](./replication/information/experiment_config/introduction_input_sensitivity.png)
-
 We aim at quantifying the differences of x264's performances due to input videos, and how input videos interact with software features.
 
 Once this statement is proved, we use the properties of input videos (e.g. height, width, spatial and temporal complexities, etc.) to **find a configuration optimizing a performance** (in our case minimize the bitrate of video compressions).
 
-![inputec](./results/inputec_approach.png)
-
 We propose an approach, Inputec, that finds a configuration tailored for inputs.
-
-You can find our paper in the root of the repository; see icse2021-paper1259.pdf
 
 
 
