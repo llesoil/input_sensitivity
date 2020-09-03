@@ -1,0 +1,25 @@
+Name , Type , Documentation  
+no_cabac , Boolean , Disables CABAC (Context Adaptive Binary Arithmetic Coder) stream compression and falls back to the less efficient CAVLC (Context Adaptive Variable Length Coder) system. Significantly reduces both the compression efficiency (10-20% typically) and the decoding requirements 
+ref,Categorical,Controls the size of the DPB (Decoded Picture Buffer). The range is from 0-16. In short this value is the number of previous frames each P-frame can use as references. (B-frames can use one or two fewer depending on if they are used as references or not.) The minimum number of refs that can be referenced is 1.  
+deblock,Categorical,Controls the loop filter (aka inloop deblocker) which is part of the H.264 standard. It is very efficient in terms of encoding time vs. quality gained.  
+analyse,Categorical,Not found in the documentation  
+me,Categorical,Set the full-pixel motion estimation method. 
+subme,Numeric,Set the subpixel estimation complexity. Higher numbers are better. Levels 1-5 simply control the subpixel refinement strength. Level 6 enables RDO for mode decision and level 8 enables RDO for motion vectors and intra prediction modes. RDO levels are significantly slower than the previous levels. 
+no_mixed_ref,Boolean,Mixed refs will select refs on a per-8x8 partition rather than per-macroblock basis. This improves quality when using multiple reference frames albeit at some speed cost. Setting this option will disable it.  
+me_range,Numeric,merange controls the max range of the motion search in pixels. For hex and dia the range is clamped to 4-16 with a default of 16. For umh and esa it can be increased beyond the default 16 to allow for a wider-range motion search which is useful on HD footage and for high-motion footage. Note that for umh esa and tesa increasing merange will significantly slow down encoding.  
+trellis,Numeric,Performs Trellis quantization to increase efficiency.  
+no_8x8dct,Boolean,Adaptive 8x8 DCT enables the intelligent adaptive use of 8x8 transforms in I-frames. This disables the feature.  
+no_fast_pskip,Boolean,Disables early skip detection on P-frames. Very slightly increases quality at a large speed cost.  
+chroma_qp_offset,Numeric,Add an offset to the quantizer of chroma planes when encoding. The offset can be negative.  
+bframes,Numeric,Sets the maximum number of concurrent B-frames that x264 can use.  
+b_pyramid,Categorical,Allow the use of B-frames as references for other frames. Without this setting frames can only reference I- or P-frames. Although I/P-frames are more valued as references because of their higher quality B-frames can also be useful. B-frames designated as references will get a quantizer halfway between P-frames and normal B-frames. You need to use at least two B-frames before B-pyramid will work.  
+b_adapt,Numeric,Set the adaptive B-frame placement decision algorithm. This setting controls how x264 decides between placing a P- or B-frame.  
+direct,Categorical,Set prediction mode for 'direct' motion vectors. There are two modes available: spatial and temporal. You can also select none to disable direct MVs and auto to allow x264 to swap between them as it sees fit. If you set auto x264 outputs information on the usage at the end of the encode. 'auto' works best in a 2pass encode but will work in single-pass encodes too. In first-pass auto mode x264 keeps a running average of how well each method has so far performed and picks the next prediction mode from that. Note that you should only enable auto on the second pass if it was enabled on the first pass; if it wasn't the second pass will default to temporal. Direct none wastes bits and is strongly discouraged.  
+no_weightb,Boolean , H.264 allows you to 'weight' references in B-frames which allows you to change how much each reference affects the predicted picture. This disables that feature.  
+open_gop,Boolean , Open-GOP is an encoding technique which increases efficiency.  
+weightp,Numeric,Enables use of explicit weighted prediction to improve compression in P-frames. Higher modes are slower.  
+scenecut,Categorical , Sets the threshold for I/IDR frame placement (read: scene change detection).  
+rc_lookahead,Numeric , Sets the number of frames to use for mb-tree ratecontrol and vbv-lookahead.  
+no_mbtree, Boolean, Disable macroblock tree ratecontrol. Using macroblock tree ratecontrol overall improves the compression by keeping track of temporal propagation across frames and weighting accordingly. Requires a new large statsfile in addition to the already existing for multipass encodes.   
+qpmax , Numeric , Defines the maximum quantizer that x264 can use. The default of 51 is the highest quantizer available for use in the H.264 spec and is extremely low quality. 
+aq-mode,Numeric,Adaptive Quantization Mode
