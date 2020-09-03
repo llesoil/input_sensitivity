@@ -27,7 +27,7 @@ Check that you are in the root/replication/dataset_building/ugc/ folder, and run
 
 ```sudo docker build -t inputs .```
 
-It will build a docker image with the x264 version in a 18.04 linux environment (~800MB of space).
+You will need administrator privileges to run the command. It will build a docker image with the x264 version in a 18.04 linux environment (~800MB of space).
 
 You can skip the following lines of information and go straight to 3.
 
@@ -52,6 +52,8 @@ Once downloaded, you can launch the image by typing the following command line
 To run the docker image, just type:
 
 ```sudo docker run -it inputs```
+
+This command 
 
 Go to the experiment directory
 
