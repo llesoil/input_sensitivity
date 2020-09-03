@@ -27,7 +27,7 @@ Check that you are in the root/replication/dataset_building/ugc/ folder, and run
 
 ```sudo docker build -t inputs .```
 
-It will build a docker image with the x264 version in a 18.04 linux environment.
+It will build a docker image with the x264 version in a 18.04 linux environment (~800MB of space).
 
 You can skip the following lines of information and go straight to 3.
 
