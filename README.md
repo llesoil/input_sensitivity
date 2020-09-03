@@ -111,7 +111,9 @@ This python file will require a working python environment; the libraries can be
 
 Results produced by the code, previously presented in subsection II-1.
 
-See README.md in the results folder.
+The ["results" folder](https://anonymous.4open.science/repository/df319578-8767-47b0-919d-a8e57eb67d25/results) contains all the figures depicted in the paper.
+
+Other results are in the sub-directory [others](https://anonymous.4open.science/repository/df319578-8767-47b0-919d-a8e57eb67d25/results/others).
 
 
 # Acknowledgement
