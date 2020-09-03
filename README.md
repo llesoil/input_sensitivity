@@ -23,7 +23,7 @@ All the measurements are in the data/res_ugc folder.
 
 Data is also available here: https://zenodo.org/record/3928253
 
-We provide a docker file to build, in order to reproduce the measurements, see :
+We provide a docker image to build (i.e. a Dockerfile) to reproduce the measurements. You can follow the steps in this directory:
 
 https://anonymous.4open.science/repository/df319578-8767-47b0-919d-a8e57eb67d25/replication/dataset_building/ugc/
 
