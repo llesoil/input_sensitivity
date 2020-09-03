@@ -77,11 +77,11 @@ You may be interested to **replicate** the measurements with other datasets of v
 
 #### I- 2. Replication
 
-We provide a docker image to build (i.e. a Dockerfile) to replicate or reproduce the measurements (i.e. see these [files](https://anonymous.4open.science/repository/df319578-8767-47b0-919d-a8e57eb67d25/data/ugc/res_ugc/)).
+We provide a **docker image to build (i.e. a Dockerfile) to replicate or reproduce the measurements**.
 
 To use it, you can follow the steps in this directory:
 
-https://anonymous.4open.science/repository/df319578-8767-47b0-919d-a8e57eb67d25/replication/dataset_building/ugc/
+https://anonymous.4open.science/repository/df319578-8767-47b0-919d-a8e57eb67d25/replication/measurements
 
 The "replication" folder details the configuration of our server (hardware details, operating system distribution and version, software version) and provides a Dockerfile to build in order to replicate the measurements.
 
@@ -98,11 +98,11 @@ To analyze these measurements, we use **code**, that gives **results**, depicted
 
 The code is in the "src" folder.
 
-We highly recommend to consult this page, containing a preview of the (heavily commented) code leading to the results of the paper; 
+**We highly recommend to consult this page, containing a preview of the (heavily commented) code leading to the results of the paper**; 
 
 https://anonymous.4open.science/repository/df319578-8767-47b0-919d-a8e57eb67d25/src/main/bitrate.md
 
-If you want to run it, we provide a [python file](https://anonymous.4open.science/repository/df319578-8767-47b0-919d-a8e57eb67d25/src/main/bitrate.py) generating these results and all the graphs of the paper.
+If you want to run it, we provide a runnable [python file](https://anonymous.4open.science/repository/df319578-8767-47b0-919d-a8e57eb67d25/src/main/bitrate.py) generating these results and all the graphs of the paper.
 
 This python file will require a working python environment; the libraries can be installed with the [requirements.txt](https://anonymous.4open.science/repository/df319578-8767-47b0-919d-a8e57eb67d25/replication/requirements.txt) file.
 
