@@ -18,6 +18,9 @@ We aim at quantifying the differences of x264's performances due to input videos
 
 Once this statement is proved, we use the properties of input videos (e.g. height, width, spatial and temporal complexities, etc.) to **find a configuration optimizing a performance** (in our case minimize the bitrate of video compressions).
 
+The second research question is :
+RQ2. Can we use Inputec to find configurations adapted to input videos?
+
 We propose an approach, Inputec, that finds a configuration tailored for inputs.
 
 
@@ -78,6 +81,8 @@ https://anonymous.4open.science/repository/df319578-8767-47b0-919d-a8e57eb67d25/
 
 The "replication" folder details the configuration of our server (hardware details, operating system distribution and version, software version) and provides a Dockerfile to build in order to replicate the measurements.
 
+Data about the experiment, x264 configuration knowledge (a.k.a. domain knowledge), and ideas explored during the redaction of the paper are available in the "information" sub-directory.
+
 
 
 ### II- Analyze
@@ -101,13 +106,6 @@ If you want to run it, we provide a [python file](https://anonymous.4open.scienc
 Results produced by the code, previously presented in subsection II-1.
 
 See README.md in the results folder.
-
-
-#### II- 3. Resources
-
-Additional information about the experiment, the x264 configuration knowledge (a.k.a. domain knowledge), and ideas explored during the redaction of the paper!
-
-See README.md in the resources folder.
 
 
 # Acknowledgement
