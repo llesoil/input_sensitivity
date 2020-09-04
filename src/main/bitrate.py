@@ -12,6 +12,7 @@
 
 # In[1]:
 
+print("Import libraries...")
 
 # for arrays
 import numpy as np
@@ -52,24 +53,13 @@ import os
 # compute time
 from time import time
 
-# Neural network high level framework
-import keras
-# Sequential is a sequence of blocs
-# Input deals with the data fed to the network
-from keras.models import Sequential,Input,Model
-# Dense is a feedforward layer with fully connected nodes
-# Dropout allows to keep part of data, and to "drop out" a the rest
-# Flatten makes the data "flat", i.e. in one dimension
-from keras.layers import Dense, Dropout, Flatten
-# Conv -> convolution, MaxPooling is relative to Pooling
-# Activation if the function composing the data in output of a layer
-from keras.layers import Conv2D, MaxPooling2D, Activation
-
+print("Done!")
 
 # #### Now, we import data
 
 # In[2]:
 
+print("Import measurements...")
 
 #because x264 output is "m:s", where m is the number of minutes and s the number of seconds 
 # we define a function to convert this format into the number of seconds
@@ -95,11 +85,12 @@ for v in v_names:
     assert data.shape == (201,34), v
     listVideo.append(data)
 
+print("Done!")
 
 # In[3]:
 
 
-print(" We consider ", len(listVideo), " videos")
+print("We consider ", len(listVideo), " videos")
 
 
 # #### Just a few words about the time needed to compute the data; about a month is needed to fully replicate the experience
@@ -108,17 +99,19 @@ print(" We consider ", len(listVideo), " videos")
 
 
 totalTime = np.sum([np.sum(vid["etime"]) for vid in listVideo])
-print("Hours : "+str(totalTime/(3600)))
-print("Days : "+str(totalTime/(24*3600)))
+#print("Hours of computation needed : "+str(totalTime/(3600)))
+print("Days of computation of measurement: "+str(totalTime/(24*3600)))
 
 
 # #### Our focus in this paper is the bitrate, in kilobits per second
 
 # In[5]:
 
-
 #our variable of interest
 predDimension = "kbs"
+
+print("Performance considered :",predDimension)
+
 
 for i in range(len(listVideo)):
     sizes = listVideo[i][predDimension]
@@ -136,8 +129,15 @@ for i in range(len(listVideo)):
 # 
 # Other alternatives : Kullback-Leibler divergences to detect outliers, and Pearson correlation to compute only linear correlations 
 
+print("Section II in the paper")
+
+print("RQ1 - Do Input Videos Change Performances of x264 Configurations?")
+
+print("RQ1.1 - Do software performances stay consistent across inputs?")
+
 # In[6]:
 
+print("Computation of Spearman correlations... Let's start the coffee machine, it takes a while :-)")
 
 # number of videos
 nbVideos = len(listVideo)
@@ -163,6 +163,7 @@ for i in range(nbVideos):
 corrDescription = [corrSpearman[i][j] for i in range(nbVideos) for j in range(nbVideos) if i >j]
 pd.Series(corrDescription).describe()
 
+print("Done!")
 
 # #### Few statistics about input videos, mentioned in the text
 
@@ -278,10 +279,13 @@ def plot_correlationmatrix_dendogram(corr, img_name, ticks, method= 'ward'):
     # finally we cut the dendogram to have 4 groups, and return thietr indexes
     return cut_tree(links, n_clusters = 4)
 
+print("Computation of Performance groups... Enjoy your coffee, it will last few minutes!")
+
 group_no_ordered = plot_correlationmatrix_dendogram(corrSpearman, 
                                  "corrmatrix-ugc-dendo-Spearman-" + predDimension + ".pdf",
                                  [k/5 for k in np.arange(-10,10,1)], method='ward')
 
+print("Done!")
 
 # #### To match the increasing number of groups to the order of the figure (from the left to the right), we change the ids of groups
 
@@ -308,6 +312,7 @@ print("Group 4 contains", sum(groups==3), "input videos.")
 
 # In[16]:
 
+print("Rankings of configurations")
 
 # first example ; we compute the rankings of the bitrate distribution for the first input video
 bitrates = listVideo[0][predDimension]
@@ -405,6 +410,7 @@ pd.Series(rankings.loc[np.argmax(stds),:]).describe()
 
 pd.Series(rankings.loc[np.argmin(stds),:]).describe()
 
+print("config... Done!")
 
 # ## RQ1-2- Are there some configuration options more sensitive to input videos?
 
@@ -412,6 +418,9 @@ pd.Series(rankings.loc[np.argmin(stds),:]).describe()
 
 # In[26]:
 
+print("RQ1-2- Are there some configuration options more sensitive to input videos?")
+
+print("Computation of feature importances - You can check our repo while the code works for you, or read our paper if you're interested!")
 
 # the list of p = 24 features
 listFeatures = ["cabac", "ref", "deblock", "analyse", "me", "subme", "mixed_ref", "me_range", "trellis", 
@@ -501,6 +510,7 @@ def compute_Importances(listVid, id_short = None):
 # we compute the feature importances
 res_imp = compute_Importances(listVideo)
 
+print("Computation of feature importances - Done!")
 
 # ## Figure 2a
 # #### Then, we depict a boxplot of features importances; for each feature, there are 1397 feature importances (one per video)
@@ -544,11 +554,13 @@ plt.yticks(range(1, len(listImp) + 1), names, size= 16)
 plt.savefig("../../results/boxplot_features_imp_rf_"+predDimension+".png")
 plt.show()
 
+print("Figure 2a generated")
 
 # #### B-] Since feature importances do not get how the predicting variables (i.e. the configuraiton options) affect the variable to predict (i.e. the bitrate), we add linear regression coefficients
 
 # In[29]:
 
+print("Computation of feature effects - Start! Btw, did you check the information subfolder (in replication/information)? It details our working environement!")
 
 # alternatively, we can only select the important features to plot the tukey diagrams
 short_features = ["mbtree", "aq-mode", "subme"]
@@ -633,6 +645,7 @@ res_coef = compute_poly(listVideo)
 # and we print them
 res_coef
 
+print("Computation of feature effects - Done!")
 
 # ## Figure 2b
 # #### Same idea for this plot, see the last cell of RQ1.2-A-]
@@ -674,6 +687,8 @@ plt.savefig("../../results/boxplot_features_imp_linear_"+predDimension+".png")
 plt.show()
 
 
+print("Figure 2b, done!")
+
 # # In the paper, here starts Section III
 
 # ## RQ1bis - Can we group together videos having same performance distributions?
@@ -684,6 +699,9 @@ plt.show()
 
 # In[31]:
 
+print("In the paper, here starts Section III")
+
+print("Load the videos metadata!")
 
 # we load the file (in itself an aggregation of datasets)
 # the file is available in the data folder, then ugc_meta
@@ -779,7 +797,7 @@ def boxplot_imp(res, xlim = None, criteria = 'max', name = None, xname='Feature 
 
 input_sizes = pd.read_csv("../../data/ugc/ugc_meta/sizes.csv", delimiter=',').set_index('name')
 
-
+print("Finished!")
 # ## Figure 4
 # 
 # #### Summary for each group
@@ -793,6 +811,7 @@ input_sizes = pd.read_csv("../../data/ugc/ugc_meta/sizes.csv", delimiter=',').se
 
 # In[35]:
 
+print("Group descriptions... start!")
 
 # [begin what if] they should be already defined, to remove?
 listFeatures = ["cabac", "ref", "deblock", "analyse", "me", "subme", "mixed_ref", "me_range", 
@@ -907,33 +926,34 @@ def summary_group(id_group):
 
 # In[36]:
 
-
+print("Group 1")
 summary_group(0)
 
 
 # In[37]:
 
-
+print("Group 2")
 summary_group(1)
 
 
 # In[38]:
 
-
+print("Group 3")
 summary_group(2)
 
 
 # In[39]:
 
-
+print("Group 4")
 summary_group(3)
 
 
+print("Figure 4 is an aggregation of the previous outputs.")
 # ### Inter-group correlogram
 
 # In[40]:
 
-
+print("Inter-group correlations... start!")
 group_perf =groups
 id_list_0 = [i for i in range(len(listVideo)) if group_perf[i]==1]
 id_list_1 = [i for i in range(len(listVideo)) if group_perf[i]==3]
@@ -1005,7 +1025,7 @@ print(stds)
 print('MEDIAN')
 print(res_med)
 
-
+print("Inter-group correlations... start!")
 # #### In a group (correlation intra), the performances are highly or very highly correlated
 # 
 # #### Between the different (correlaiton inter), the performances of inputs are generally moderate or low (except for groups 3 and 4)
@@ -1057,6 +1077,9 @@ conf
 
 # In[42]:
 
+print("Section IV in ther paper")
+
+print("Initialisation")
 
 listFeatures = ["cabac", "ref", "deblock", "analyse", "me", "subme", "mixed_ref", "me_range", "trellis", 
                 "8x8dct", "fast_pskip", "chroma_qp_offset", "bframes", "b_pyramid", 
@@ -1107,6 +1130,7 @@ def find_rank(sorted_perfs, val):
 
 # In[44]:
 
+print("Inputec training : it takes a while, again... Sorry for the inconvenience! ")
 
 # we separate the list of videos into a training (i.e. offline) set and a test set (i.e. online)
 train_ind, test_ind = train_test_split([k for k in range(len(listVideo))], test_size = 0.25)
@@ -1244,7 +1268,8 @@ end = time()
 
 print("Average time for one video prediction < ", int(100*(end-start)/len(test_index))/100, "second(s)!")
 
-
+print("Inputec training... Done! ")
+print("Baseline definitions... Start!")
 # ## Baselines
 # 
 # To evaluate Inputec, we compare it to different baselines. 
@@ -1458,6 +1483,8 @@ plt.savefig("../../results/res_box_baseline.png")
 # show the figure
 plt.show()
 
+print("Baseline definitions... Done!")
+print("Figure 5a ok!")
 
 # ## Figure 5b - Rankings of configurations, baseline vs Inputec
 
@@ -1493,25 +1520,27 @@ plt.xticks(size=20)
 plt.savefig("../../results/res_box_baseline_rank.png")
 plt.show()
 
+print("Figure 5b ok!")
 
 # #### Statistical tests - Welch t-test
 
 # In[63]:
 
-
-stats.ttest_ind(inputec_ranks, b3_ranks, equal_var = False)
+print("Statistical tests - Welch t-tests")
+print("Inputec vs b3")
+print(stats.ttest_ind(inputec_ranks, b3_ranks, equal_var = False))
 
 
 # In[64]:
 
-
-stats.ttest_ind(inputec_ranks, b2_ranks, equal_var = False)
+print("Inputec vs b2")
+print(stats.ttest_ind(inputec_ranks, b2_ranks, equal_var = False))
 
 
 # In[65]:
 
-
-stats.ttest_ind(inputec_ranks, b1_ranks, equal_var = False)
+print("Inputec vs b1")
+print(stats.ttest_ind(inputec_ranks, b1_ranks, equal_var = False))
 
 
 # Three Welch’s t-tests confirm that the rankings of Inputecare significantly different from B1, B2 and B3 rankings. 
@@ -1526,6 +1555,7 @@ stats.ttest_ind(inputec_ranks, b1_ranks, equal_var = False)
 
 # In[66]:
 
+print("First variant of Inputec - with less configurations")
 
 nb_config_ce = 20
 
@@ -1635,9 +1665,12 @@ pd.Series(inputec_m2).describe()
 
 # In[74]:
 
+print("First variant of Inputec - ranks distribution results")
+print(pd.Series(inputec_m2_ranks).describe())
 
-pd.Series(inputec_m2_ranks).describe()
+print("First variant of Inputec - Done !")
 
+print("Second variant of Inputec - drop unaffordable input properties")
 
 # ### M3 - Property selection
 # 
@@ -1759,16 +1792,10 @@ pd.Series(inputec_m3).describe()
 
 
 # In[83]:
+print("Second variant of Inputec - ranks distribution results")
+print(pd.Series(inputec_m3_ranks).describe())
 
-
-pd.Series(inputec_m3_ranks).describe()
-
-
-# In[ ]:
-
-
-
-
+print("Second variant of Inputec - Done !")
 
 # In[ ]:
 
@@ -1777,6 +1804,13 @@ pd.Series(inputec_m3_ranks).describe()
 
 
 # In[ ]:
+
+
+print("DONE!!! Thanks for waiting, thanks for testing our artifact :-)")
+print("You can check the results directory (see code/results)")
+
+# In[ ]:
+
 
 
 

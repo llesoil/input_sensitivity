@@ -1,0 +1,512 @@
+root@354ec5ef81cc:/code/src/main# python3 bitrate.py 
+Import libraries...
+Done!
+Import measurements...
+Done!
+We consider  1397  videos
+Days of computation of measurement: 33.781504050925925
+Performance considered : kbs
+Section II in the paper
+RQ1 - Do Input Videos Change Performances of x264 Configurations?
+RQ1.1 - Do software performances stay consistent across inputs?
+Computation of Spearman correlations... Let's start the coffee machine, it takes a while :-)
+Done!
+Value :  -0.69431464627679
+i :  503 , j :  9
+Computation of Performance groups... Enjoy your coffee, it will last few minutes!
+/usr/local/lib/python3.6/dist-packages/seaborn/matrix.py:649: UserWarning: Clustering large matrix with scipy. Installing `fastcluster` may give better performance.
+  warnings.warn(msg)
+Done!
+Group 1 contains 470 input videos.
+Group 2 contains 219 input videos.
+Group 3 contains 292 input videos.
+Group 4 contains 416 input videos.
+Rankings of configurations
+Config min std :  200
+Config max std :  16
+Config med std :  58.682728061838525
+For config. 200,  92 % of configurations are between 105 and 130!
+config... Done!
+RQ1-2- Are there some configuration options more sensitive to input videos?
+Computation of feature importances - You can check our repo while the code works for you, or read our paper if you're interested!
+Computation of feature importances - Done!
+Figure 2a generated
+Computation of feature effects - Start! Btw, did you check the information subfolder (in replication/information)? It details our working environement!
+Computation of feature effects - Done!
+Figure 2b, done!
+In the paper, here starts Section III
+Load the videos metadata!
+Finished!
+Group descriptions... start!
+Group 1
+Group 0 : 470 videos!
+
+
+input avg size : 1637205973.9170213
+input std size : 2438557837.558484
+
+
+
+
+Imp mbtree: 0.09014893617021277
+Imp std mbtree: 0.09444225495055093
+Imp aq-mode: 0.276
+Imp std aq-mode: 0.19430333819582862
+Imp subme: 0.4857234042553192
+Imp std subme: 0.24536166984007285
+
+
+Coef mbtree: 0.33312765957446805
+Coef mbtree std : 0.19396699840176548
+Coef aq-mode: -0.5040851063829788
+Coef aq_mode std : 0.13980804922909124
+Coef subme: -0.3180851063829787
+Coef subme std: 0.09194212559556819
+
+
+Mean cpu in the group: 1074.5
+Std dev : cpu in the group: 398.9
+Mean etime in the group: 8.9
+Std dev : etime in the group: 10.7
+Mean fps in the group: 389.4
+Std dev : fps in the group: 302.9
+Mean kbs in the group: 15015.6
+Std dev : kbs in the group: 19927.0
+Mean size in the group: 37383809.7
+Std dev : size in the group: 49629655.1
+
+
+bitrate.py:905: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  meta_perf_group['str_video_cat'] = [str(meta_perf_group.index[i]).split('_')[0] for i in range(meta_perf_group.shape[0])]
+str_video_cat
+Animation         0.252874
+CoverSong         0.277108
+Gaming            0.363636
+HDR               0.057692
+HowTo             0.252874
+Lecture           0.086538
+LiveMusic         0.324324
+LyricVideo        0.216667
+MusicVideo        0.282051
+NewsClip          0.489583
+Sports            0.567742
+TelevisionClip    0.254545
+VR                0.426966
+VerticalVideo     0.289474
+Vlog              0.449367
+dtype: float64
+
+
+Mean perf_group : 0.0
+std perf_group : 0.0
+Mean SLEEQ_DMOS : -0.029323948203180957
+std SLEEQ_DMOS : 0.9164326353194944
+Mean BANDING_DMOS : -0.1830523651266118
+std BANDING_DMOS : 0.5248708286866567
+Mean WIDTH : -0.06749438276653899
+std WIDTH : 0.9073123854036537
+Mean HEIGHT : -0.08048432049239089
+std HEIGHT : 0.9052824339899326
+Mean SPATIAL_COMPLEXITY : 0.7962067871438034
+std SPATIAL_COMPLEXITY : 0.8957660811284948
+Mean TEMPORAL_COMPLEXITY : 0.2400374302535763
+std TEMPORAL_COMPLEXITY : 0.8396682455969656
+Mean CHUNK_COMPLEXITY_VARIATION : 0.5913149635812424
+std CHUNK_COMPLEXITY_VARIATION : 1.2310288951280874
+Mean COLOR_COMPLEXITY : -0.08257837385744365
+std COLOR_COMPLEXITY : 0.7750806293391255
+
+
+Correlations intra-group: 
+count    220900.000000
+mean          0.817473
+std           0.106043
+min           0.150032
+25%           0.758338
+50%           0.837353
+75%           0.897179
+max           1.000000
+dtype: float64
+
+Group 2
+Group 1 : 219 videos!
+
+
+input avg size : 4415585852.876713
+input std size : 7212521059.6005535
+
+
+
+
+Imp mbtree: 0.4735616438356165
+Imp std mbtree: 0.19513982713969638
+Imp aq-mode: 0.13424657534246576
+Imp std aq-mode: 0.1270269572823012
+Imp subme: 0.14502283105022834
+Imp std subme: 0.14361724381407784
+
+
+Coef mbtree: -0.6810958904109589
+Coef mbtree std : 0.18010824987381613
+Coef aq-mode: 0.3553881278538813
+Coef aq_mode std : 0.20988844622573236
+Coef subme: -0.16114155251141554
+Coef subme std: 0.12383916900657123
+
+
+Mean cpu in the group: 1029.7
+Std dev : cpu in the group: 377.2
+Mean etime in the group: 19.1
+Std dev : etime in the group: 30.4
+Mean fps in the group: 244.2
+Std dev : fps in the group: 256.7
+Mean kbs in the group: 9223.9
+Std dev : kbs in the group: 11328.4
+Mean size in the group: 22805170.5
+Std dev : size in the group: 28350618.9
+
+
+bitrate.py:905: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  meta_perf_group['str_video_cat'] = [str(meta_perf_group.index[i]).split('_')[0] for i in range(meta_perf_group.shape[0])]
+str_video_cat
+Animation         0.126437
+CoverSong         0.216867
+Gaming            0.139860
+HDR               0.519231
+HowTo             0.103448
+Lecture           0.240385
+LiveMusic         0.135135
+LyricVideo        0.183333
+MusicVideo        0.153846
+NewsClip          0.062500
+Sports            0.064516
+TelevisionClip    0.072727
+VR                0.089888
+VerticalVideo     0.197368
+Vlog              0.208861
+dtype: float64
+
+
+Mean perf_group : 1.0
+std perf_group : 0.0
+Mean SLEEQ_DMOS : 0.005360393998249836
+std SLEEQ_DMOS : 0.8958933053763064
+Mean BANDING_DMOS : 0.1688188082623658
+std BANDING_DMOS : 1.20468743040557
+Mean WIDTH : 0.521797505328845
+std WIDTH : 1.15643497785651
+Mean HEIGHT : 0.5052755770836741
+std HEIGHT : 1.1096896137917487
+Mean SPATIAL_COMPLEXITY : -0.9518615639075219
+std SPATIAL_COMPLEXITY : 0.40397004942488374
+Mean TEMPORAL_COMPLEXITY : 0.5388584880818494
+std TEMPORAL_COMPLEXITY : 1.1076262376057906
+Mean CHUNK_COMPLEXITY_VARIATION : -0.45496791524535657
+std CHUNK_COMPLEXITY_VARIATION : 0.5680391006251411
+Mean COLOR_COMPLEXITY : 0.11564808669923886
+std COLOR_COMPLEXITY : 1.3199383771341777
+
+
+Correlations intra-group: 
+count    47961.000000
+mean         0.792342
+std          0.139192
+min         -0.070206
+25%          0.727803
+50%          0.824210
+75%          0.891503
+max          1.000000
+dtype: float64
+
+Group 3
+Group 2 : 292 videos!
+
+
+input avg size : 2092791930.6780822
+input std size : 3964394793.670366
+
+
+
+
+Imp mbtree: 0.34284246575342464
+Imp std mbtree: 0.22435249870708335
+Imp aq-mode: 0.04544520547945206
+Imp std aq-mode: 0.07466000844209848
+Imp subme: 0.3568493150684931
+Imp std subme: 0.24366424638277218
+
+
+Coef mbtree: -0.41743150684931507
+Coef mbtree std : 0.14839983973029075
+Coef aq-mode: -0.1354109589041096
+Coef aq_mode std : 0.13883135878205718
+Coef subme: -0.23380136986301372
+Coef subme std: 0.10317694070873534
+
+
+Mean cpu in the group: 813.9
+Std dev : cpu in the group: 345.9
+Mean etime in the group: 8.4
+Std dev : etime in the group: 16.5
+Mean fps in the group: 546.0
+Std dev : fps in the group: 434.1
+Mean kbs in the group: 4882.3
+Std dev : kbs in the group: 9150.7
+Mean size in the group: 12024467.4
+Std dev : size in the group: 22828024.5
+
+
+bitrate.py:905: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  meta_perf_group['str_video_cat'] = [str(meta_perf_group.index[i]).split('_')[0] for i in range(meta_perf_group.shape[0])]
+str_video_cat
+Animation         0.321839
+CoverSong         0.325301
+Gaming            0.132867
+HDR               0.211538
+HowTo             0.356322
+Lecture           0.375000
+LiveMusic         0.148649
+LyricVideo        0.300000
+MusicVideo        0.192308
+NewsClip          0.114583
+Sports            0.109677
+TelevisionClip    0.381818
+VR                0.179775
+VerticalVideo     0.171053
+Vlog              0.094937
+dtype: float64
+
+
+Mean perf_group : 2.0
+std perf_group : 0.0
+Mean SLEEQ_DMOS : -0.01814251799112101
+std SLEEQ_DMOS : 1.1494241899350455
+Mean BANDING_DMOS : 0.25552197476787375
+std BANDING_DMOS : 1.4454605442030628
+Mean WIDTH : -0.07598371613632829
+std WIDTH : 1.024378109279234
+Mean HEIGHT : -0.058524867104368716
+std HEIGHT : 1.0499745827215659
+Mean SPATIAL_COMPLEXITY : -0.5083848327860403
+std SPATIAL_COMPLEXITY : 0.6503684809214616
+Mean TEMPORAL_COMPLEXITY : -0.6269825619095771
+std TEMPORAL_COMPLEXITY : 0.8379776438960976
+Mean CHUNK_COMPLEXITY_VARIATION : -0.5086953347981382
+std CHUNK_COMPLEXITY_VARIATION : 0.4932909402230662
+Mean COLOR_COMPLEXITY : -0.05210136381348378
+std COLOR_COMPLEXITY : 0.96647269804029
+
+
+Correlations intra-group: 
+count    85264.000000
+mean         0.854160
+std          0.087861
+min          0.388941
+25%          0.806319
+50%          0.870667
+75%          0.920543
+max          1.000000
+dtype: float64
+
+Group 4
+Group 3 : 416 videos!
+
+
+input avg size : 1930201013.7163463
+input std size : 4601483233.336385
+
+
+
+
+Imp mbtree: 0.054783653846153864
+Imp std mbtree: 0.0685035886350502
+Imp aq-mode: 0.15314903846153846
+Imp std aq-mode: 0.1821438487396454
+Imp subme: 0.5145673076923077
+Imp std subme: 0.24221693488812385
+
+
+Coef mbtree: -0.1120673076923077
+Coef mbtree std : 0.14862528801958744
+Coef aq-mode: -0.28807692307692306
+Coef aq_mode std : 0.1810244720126415
+Coef subme: -0.28870192307692305
+Coef subme std: 0.1088345056114392
+
+
+Mean cpu in the group: 912.9
+Std dev : cpu in the group: 354.9
+Mean etime in the group: 8.9
+Std dev : etime in the group: 19.8
+Mean fps in the group: 480.0
+Std dev : fps in the group: 361.5
+Mean kbs in the group: 7462.7
+Std dev : kbs in the group: 11611.8
+Mean size in the group: 18439974.0
+Std dev : size in the group: 28795627.9
+
+
+bitrate.py:905: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  meta_perf_group['str_video_cat'] = [str(meta_perf_group.index[i]).split('_')[0] for i in range(meta_perf_group.shape[0])]
+str_video_cat
+Animation         0.298851
+CoverSong         0.180723
+Gaming            0.363636
+HDR               0.211538
+HowTo             0.287356
+Lecture           0.298077
+LiveMusic         0.391892
+LyricVideo        0.300000
+MusicVideo        0.371795
+NewsClip          0.333333
+Sports            0.258065
+TelevisionClip    0.290909
+VR                0.303371
+VerticalVideo     0.342105
+Vlog              0.246835
+dtype: float64
+
+
+Mean perf_group : 3.0
+std perf_group : 0.0
+Mean SLEEQ_DMOS : 0.04304313611366742
+std SLEEQ_DMOS : 1.0324835249359274
+Mean BANDING_DMOS : -0.06141616353886917
+std BANDING_DMOS : 0.851350507488393
+Mean WIDTH : -0.1451058861897496
+std WIDTH : 0.907527351712292
+Mean HEIGHT : -0.13398668162361801
+std HEIGHT : 0.9261314439588301
+Mean SPATIAL_COMPLEXITY : -0.04161330838537622
+std SPATIAL_COMPLEXITY : 0.835141893103915
+Mean TEMPORAL_COMPLEXITY : -0.11478051209497389
+std TEMPORAL_COMPLEXITY : 0.961429130919884
+Mean CHUNK_COMPLEXITY_VARIATION : -0.071492840585083
+std CHUNK_COMPLEXITY_VARIATION : 0.7880940717413094
+Mean COLOR_COMPLEXITY : 0.06898678596010178
+std COLOR_COMPLEXITY : 1.0467618562050365
+
+
+Correlations intra-group: 
+count    173056.000000
+mean          0.733806
+std           0.172576
+min          -0.157557
+25%           0.633778
+50%           0.773363
+75%           0.867401
+max           1.000000
+dtype: float64
+
+Figure 4 is an aggregation of the previous outputs.
+Inter-group correlations... start!
+AVG
+[[0.7923419  0.45023686 0.0414419  0.67379695]
+ [0.         0.73380599 0.59842234 0.71700603]
+ [0.         0.         0.81747322 0.37538304]
+ [0.         0.         0.         0.85416018]]
+STD
+[[0.         0.20491938 0.21617771 0.17425259]
+ [0.         0.         0.17676751 0.15529403]
+ [0.         0.         0.         0.18792134]
+ [0.         0.         0.         0.        ]]
+MEDIAN
+[[0.         0.47675224 0.04817805 0.71022817]
+ [0.         0.         0.61590102 0.74202928]
+ [0.         0.         0.         0.38420647]
+ [0.         0.         0.         0.        ]]
+Inter-group correlations... start!
+Test accuracy : 0.6714285714285714
+Test accuracy : 0.6476190476190476
+Test accuracy : 0.6261904761904762
+Test accuracy : 0.638095238095238
+Test accuracy : 0.6404761904761904
+Test accuracy : 0.6190476190476191
+Test accuracy : 0.6571428571428571
+Test accuracy : 0.6642857142857143
+Test accuracy : 0.6309523809523809
+Test accuracy : 0.6357142857142857
+0.643095238095238
+Section IV in ther paper
+Initialisation
+Inputec training : it takes a while, again... Sorry for the inconvenience! 
+Training size :  210447
+Average time for one video prediction <  1.2 second(s)!
+Inputec training... Done! 
+Baseline definitions... Start!
+Id of B1 configuration : 171
+Id of B2 configuration : 190
+Baseline definitions... Done!
+Figure 5a ok!
+Figure 5b ok!
+Statistical tests - Welch t-tests
+Inputec vs b3
+Ttest_indResult(statistic=-89.72564886129305, pvalue=0.0)
+Inputec vs b2
+Ttest_indResult(statistic=-22.8472598384158, pvalue=6.3997332129796946e-77)
+Inputec vs b1
+Ttest_indResult(statistic=-14.474437041740147, pvalue=3.266302029048617e-39)
+First variant of Inputec - with less configurations
+Training size :  20940
+Test size :  7000
+[2.68734488e-02 1.29692105e-02 9.33909677e-03 7.60989254e-03
+ 1.59103747e-01 8.03577035e-02 5.61685077e-02 3.96739143e-02
+ 1.78405484e-02 1.54122781e-02 1.28773575e-03 1.72925070e-01
+ 1.81054392e-03 1.65061866e-03 3.43616070e-01 4.48854866e-04
+ 2.25245974e-03 3.70527540e-03 4.97312973e-04 8.20402824e-04
+ 4.48021415e-03 2.66595038e-03 2.90156469e-04 2.99564171e-04
+ 6.38393060e-04 2.40457871e-04 0.00000000e+00 1.23991461e-03
+ 2.91460380e-03 6.66109368e-03 1.04525513e-02 0.00000000e+00
+ 1.57544093e-02]
+['SLEEQ_DMOS', 'BANDING_DMOS', 'WIDTH', 'HEIGHT', 'SPATIAL_COMPLEXITY', 'TEMPORAL_COMPLEXITY', 'CHUNK_COMPLEXITY_VARIATION', 'COLOR_COMPLEXITY', 'video_category', 'cabac', 'ref', 'deblock', 'analyse', 'me', 'subme', 'mixed_ref', 'me_range', 'trellis', '8x8dct', 'fast_pskip', 'chroma_qp_offset', 'bframes', 'b_pyramid', 'b_adapt', 'direct', 'weightb', 'open_gop', 'weightp', 'scenecut', 'rc_lookahead', 'mbtree', 'qpmax', 'aq-mode', 'bitrate']
+First variant of Inputec - ranks distribution results
+count    350.000000
+mean      36.791429
+std       31.624669
+min        0.000000
+25%       11.000000
+50%       28.000000
+75%       55.000000
+max      149.000000
+dtype: float64
+First variant of Inputec - Done !
+Second variant of Inputec - drop unaffordable input properties
+Training size :  210447
+Test size :  70350
+[8.93458584e-03 7.28746509e-03 1.03907854e-01 7.36024800e-02
+ 3.67446762e-02 3.27993502e-02 1.57900000e-02 4.22729263e-02
+ 2.40671092e-03 6.13619700e-04 3.07918656e-03 2.37777867e-03
+ 4.97844934e-01 8.84948127e-04 4.43795347e-04 7.30999774e-03
+ 8.05784155e-04 2.98517305e-03 3.16605308e-03 1.20962515e-02
+ 9.68461451e-03 7.61840973e-03 2.74983161e-03 8.08528708e-03
+ 0.00000000e+00 1.50929110e-03 9.73936172e-04 5.21799574e-03
+ 4.09048899e-02 0.00000000e+00 6.79021727e-02]
+Second variant of Inputec - ranks distribution results
+count    350.000000
+mean      15.160000
+std       26.152793
+min        0.000000
+25%        0.000000
+50%        4.000000
+75%       17.000000
+max      153.000000
+dtype: float64
+Second variant of Inputec - Done !
+DONE!!! Thanks for waiting, thanks for testing our artifact :-)
+You can check the results directory (see code/results)
