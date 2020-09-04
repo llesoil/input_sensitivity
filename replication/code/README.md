@@ -43,17 +43,24 @@ Additionally, you can open the Dockerfile in this directory to see the different
 
 - We clone a git repository (anonymous account, you can check the repo) to run the bitrate.py scripts
 
-- We launch the code
+- We create an empty directory for results
 
 
 ## 3. Launch the code
 
 To launch the code, just type:
 
-```sudo docker run input_code "cd code/src/main && python3 bitrate.py"```
+```sudo docker run -it input_code```
 
-In the command line, you will see the outputs printed and explained in the related [markdown](https://anonymous.4open.science/r/df319578-8767-47b0-919d-a8e57eb67d25/src/main/bitrate.md).
+You will enter the container. Then, got in the script directory :
 
+```cd code/src/main```
+
+And launch the python script :
+
+```python3 bitrate.py```
+
+In the command line outputs, you will see the outputs printed and explained in the related [markdown](https://anonymous.4open.science/r/df319578-8767-47b0-919d-a8e57eb67d25/src/main/bitrate.md).
 
 ### See the repository for the files ; https://github.com/anonymous4opens/code
 
