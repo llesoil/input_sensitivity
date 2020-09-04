@@ -33,7 +33,7 @@ You can skip the following lines of information and go straight to 3.
 
 Additionally, you can open the Dockerfile in this directory to see the different steps of the building.
 
-- First, we use a linux 18.04 environement, we update the packages
+- First, we use a linux 18.04 environment, we update the packages
 
 - We install git to download code (from an "anonymous account")
 

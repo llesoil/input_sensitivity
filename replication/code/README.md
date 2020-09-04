@@ -1,6 +1,6 @@
 ## Replication - code
 
-We provide you some instructions, to launch the code resulting to the graphs printed in the paper.
+We provide you some instructions to launch the code resulting to the graphs printed in the paper.
 
 
 ## 1. Install Docker
@@ -35,7 +35,7 @@ You can skip the following lines of information and go straight to 3.
 
 Additionally, you can open the Dockerfile in this directory to see the different steps of the building.
 
-- First, we use a linux 18.04 environement, we update the packages
+- First, we use a linux 18.04 environment, we update the packages
 
 - We install git to download code (from an "anonymous account")
 
@@ -60,7 +60,15 @@ And launch the python script :
 
 ```python3 bitrate.py```
 
-In the command line outputs, you will see the outputs printed and explained in the related [markdown](https://anonymous.4open.science/r/df319578-8767-47b0-919d-a8e57eb67d25/src/main/bitrate.md).
+In the command line outputs, you will see the outputs (as in the [outputs.txt](https://anonymous.4open.science/r/df319578-8767-47b0-919d-a8e57eb67d25/replication/code/outputs.txt) file) printed and explained in the related [markdown](https://anonymous.4open.science/r/df319578-8767-47b0-919d-a8e57eb67d25/src/main/bitrate.md).
+
+The python script is relatively long to run entirely (at least 15 minutes if you have a good laptop). Once the run is finished, you can attest that the results directory contains the figure printed in our paper:
+
+```ls ../../results```
+
+We apply modifications to corrmatrix-ugc-dendo-Spearman-kbs.pdf (i.e. convert it to png, add explanations about the scale and highlight groups), but the content (correlogram and dendograms) is the same as corrmatrix_modif.png (i.e. figure 1).
+
+Figure 3 is just an overview of the approach, and is not an output of the code.
 
 ### See the repository for the files ; https://github.com/anonymous4opens/code
 
