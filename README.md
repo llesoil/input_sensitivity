@@ -123,9 +123,9 @@ Other results are in the sub-directory [others](https://anonymous.4open.science/
 
 If you don't care about paper details, go straight to the [replication](https://anonymous.4open.science/repository/df319578-8767-47b0-919d-a8e57eb67d25/replication/) folder:
 
-- the sub-directory [measurements](https://anonymous.4open.science/repository/df319578-8767-47b0-919d-a8e57eb67d25/measurements/) provides a docker file, build it to reproduce the measurements
+- the sub-directory [measurements](https://anonymous.4open.science/repository/df319578-8767-47b0-919d-a8e57eb67d25/replication/measurements/) provides a docker file, build it to reproduce the measurements
 
-- the sub-directory [code](https://anonymous.4open.science/repository/df319578-8767-47b0-919d-a8e57eb67d25/code/) provides a docker file, build it to run the code and get the results
+- the sub-directory [code](https://anonymous.4open.science/repository/df319578-8767-47b0-919d-a8e57eb67d25/replication/code/) provides a docker file, build it to run the code and get the results
 
 
 # Acknowledgement
