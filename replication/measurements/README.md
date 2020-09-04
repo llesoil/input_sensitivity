@@ -23,7 +23,7 @@ Useful links if you struggle with docker installation :
 
 ## 2. Build the image of the container
 
-Check that you are in the root/replication/dataset_building/ugc/ folder, and run the following command;
+Check that you are in the root/replication/measurements/ folder, and run the following command;
 
 ```sudo docker build -t inputs .```
 
@@ -53,11 +53,11 @@ To run the docker image, just type:
 
 ```sudo docker run -it inputs```
 
-This command 
+This command will require to be in the docker container, in interactive mode. 
 
-Go to the experiment directory
+Go to the  directory
 
-```cd experiment```
+```cd code```
 
 Launch the measurements
 
