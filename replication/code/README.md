@@ -48,11 +48,11 @@ Additionally, you can open the Dockerfile in this directory to see the different
 
 ## 3. Launch the code
 
-To launch the code, just type:
+To access the container, just type:
 
 ```sudo docker run -it input_code```
 
-You will enter the container. Then, got in the script directory :
+You will then enter in the container environement. Then, got in the script directory :
 
 ```cd code/src/main```
 
