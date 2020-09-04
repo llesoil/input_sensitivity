@@ -104,7 +104,9 @@ https://anonymous.4open.science/repository/df319578-8767-47b0-919d-a8e57eb67d25/
 
 If you want to run it, we provide a runnable [python file](https://anonymous.4open.science/repository/df319578-8767-47b0-919d-a8e57eb67d25/src/main/bitrate.py) generating these results and all the graphs of the paper.
 
-This python file will require a working python environment; the libraries can be installed with the [requirements.txt](https://anonymous.4open.science/repository/df319578-8767-47b0-919d-a8e57eb67d25/replication/requirements.txt) file.
+This python file will require a working python environment and python libraires; see the [requirements.txt](https://anonymous.4open.science/repository/df319578-8767-47b0-919d-a8e57eb67d25/replication/code/requirements.txt) file.
+
+We provide a 
 
 
 #### II- 2. Results
@@ -114,6 +116,16 @@ Results produced by the code, previously presented in subsection II-1.
 The ["results" folder](https://anonymous.4open.science/repository/df319578-8767-47b0-919d-a8e57eb67d25/results) contains all the figures depicted in the paper.
 
 Other results are in the sub-directory [others](https://anonymous.4open.science/repository/df319578-8767-47b0-919d-a8e57eb67d25/results/others).
+
+
+# Artifact evaluation
+
+
+If you don't care about paper details, go straight to the [replication](https://anonymous.4open.science/repository/df319578-8767-47b0-919d-a8e57eb67d25/replication/) folder:
+
+- the sub-directory [measurements](https://anonymous.4open.science/repository/df319578-8767-47b0-919d-a8e57eb67d25/measurements/) provides a docker file, build it to reproduce the measurements
+
+- the sub-directory [code](https://anonymous.4open.science/repository/df319578-8767-47b0-919d-a8e57eb67d25/code/) provides a docker file, build it to run the code and get the results
 
 
 # Acknowledgement
