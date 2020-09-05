@@ -49,7 +49,7 @@ We provide instructions useful to **replicate** or reproduce our dataset.
 
 #### I- 1. Data
 
-Data are available in the "data" folder. 
+Data are available in the "data" folder.
 
 For this experiment, showing that input videos have an influence on video compression's performances, we first need **videos** to encode.
 
@@ -65,13 +65,13 @@ Alternatively, and to see more concretely the content of each video, you can vis
 
 https://media.withyoutube.com/
 
-For each of these videos, and for 201 configurations, we compressed the video with x264 and measured five performances (bitrate, cpu consumption, frame encoded per second, encoded size of videos and encoding time). For each video, there is a related .csv file that contains these **measurements**.
+For each of these videos, and for 201 configurations, we compressed the video with x264 and measured five performances (bitrate, cpu consumption, number of frames encoded per second, encoded size of videos and encoding time). For each video, there is a related .csv file that contains these **measurements**.
 
 ##### I- 1. b-] Measurements
 
-All these measurements are in the data/res_ugc folder, follow this [link](https://anonymous.4open.science/repository/df319578-8767-47b0-919d-a8e57eb67d25/data/ugc/res_ugc/).
+All these measurements are in the data/ugc/res_ugc folder, follow this [link](https://anonymous.4open.science/repository/df319578-8767-47b0-919d-a8e57eb67d25/data/ugc/res_ugc/).
 
-We shared our measurements here, in order to make it accessible for everyone: https://zenodo.org/record/3928253
+We shared our measurements in zenodo.org, in order to make it accessible for everyone: https://zenodo.org/record/3928253
 
 You may be interested to **replicate** the measurements with other datasets of videos.
 
@@ -79,11 +79,11 @@ You may be interested to **replicate** the measurements with other datasets of v
 
 We provide a **docker image to build (i.e. a Dockerfile) to replicate or reproduce the measurements**.
 
-To use it, you can follow the steps in this directory:
+To use it, you can follow the steps in the "replication/measurements" directory:
 
 https://anonymous.4open.science/repository/df319578-8767-47b0-919d-a8e57eb67d25/replication/measurements
 
-The "replication" folder details the configuration of our server (hardware details, operating system distribution and version, software version) and provides a Dockerfile to build in order to replicate the measurements.
+The "replication" folder details the configuration of our server (hardware details, operating system distribution and version, software version) and contains a Dockerfile to build in order to replicate the measurements.
 
 Data about the experiment, x264 configuration knowledge (a.k.a. domain knowledge), and ideas explored during the redaction of the paper are available in the "information" sub-directory.
 
@@ -92,7 +92,6 @@ Data about the experiment, x264 configuration knowledge (a.k.a. domain knowledge
 ### II- Analyze
 
 To analyze these measurements, we use **code**, that gives **results**, depicted and discussed in the submission paper.
-
 
 #### II- 1. Code
 
