@@ -1,0 +1,2891 @@
+root@0b8074320e9d:/experiment# bash launchUGC.sh 
+
+cat listVideo.csv | while read line
+  do
+    read -d, videoname extension < <(echo $line)
+    echo $videoname
+    echo $extension
+    path="./videos/$videoname.$extension"
+    newPath="$videoname.$extension"
+    echo $newPath
+    x64configs=`ls ./scripts/*.sh`
+    csvOutput="./res/$videoname.csv"
+    cp $path $newPath
+    echo "Starting to work with video: " $videoname
+    header='configurationID,cabac,ref,deblock,analyse,me,subme,mixed_ref,me_range,trellis,8x8dct,fast_pskip,chroma_qp_offset,bframes,b_pyramid,b_adapt,direct,weightb,open_gop,weightp,scenecut,rc_lookahead,mbtree,qpmax,aq-mode,size,usertime,systemtime,elapsedtime,cpu,frames,fps,kbs'
+    touch $csvOutput
+    cat /dev/null > $csvOutput
+    echo "$header" > $csvOutput
+    for x264config in $x64configs
+    do
+        echo "Processing: " $x264config
+        csvLine=`bash $x264config $newPath`
+        echo "$csvLine" >> $csvOutput
+    done
+    rm $newPath
+done
++ cat listVideo.csv
++ read line
++ read -d, videoname extension
+echo $line
+++ echo Animation_360P-24d4 mp4
++ echo Animation_360P-24d4
+Animation_360P-24d4
++ echo mp4
+mp4
++ path=./videos/Animation_360P-24d4.mp4
++ newPath=Animation_360P-24d4.mp4
++ echo Animation_360P-24d4.mp4
+Animation_360P-24d4.mp4
+++ ls ./scripts/0.sh ./scripts/1.sh ./scripts/10.sh ./scripts/100.sh ./scripts/101.sh ./scripts/102.sh ./scripts/103.sh ./scripts/104.sh ./scripts/105.sh ./scripts/106.sh ./scripts/107.sh ./scripts/108.sh ./scripts/109.sh ./scripts/11.sh ./scripts/110.sh ./scripts/111.sh ./scripts/112.sh ./scripts/113.sh ./scripts/114.sh ./scripts/115.sh ./scripts/116.sh ./scripts/117.sh ./scripts/118.sh ./scripts/119.sh ./scripts/12.sh ./scripts/120.sh ./scripts/121.sh ./scripts/122.sh ./scripts/123.sh ./scripts/124.sh ./scripts/125.sh ./scripts/126.sh ./scripts/127.sh ./scripts/128.sh ./scripts/129.sh ./scripts/13.sh ./scripts/130.sh ./scripts/131.sh ./scripts/132.sh ./scripts/133.sh ./scripts/134.sh ./scripts/135.sh ./scripts/136.sh ./scripts/137.sh ./scripts/138.sh ./scripts/139.sh ./scripts/14.sh ./scripts/140.sh ./scripts/141.sh ./scripts/142.sh ./scripts/143.sh ./scripts/144.sh ./scripts/145.sh ./scripts/146.sh ./scripts/147.sh ./scripts/148.sh ./scripts/149.sh ./scripts/15.sh ./scripts/150.sh ./scripts/151.sh ./scripts/152.sh ./scripts/153.sh ./scripts/154.sh ./scripts/155.sh ./scripts/156.sh ./scripts/157.sh ./scripts/158.sh ./scripts/159.sh ./scripts/16.sh ./scripts/160.sh ./scripts/161.sh ./scripts/162.sh ./scripts/163.sh ./scripts/164.sh ./scripts/165.sh ./scripts/166.sh ./scripts/167.sh ./scripts/168.sh ./scripts/169.sh ./scripts/17.sh ./scripts/170.sh ./scripts/171.sh ./scripts/172.sh ./scripts/173.sh ./scripts/174.sh ./scripts/175.sh ./scripts/176.sh ./scripts/177.sh ./scripts/178.sh ./scripts/179.sh ./scripts/18.sh ./scripts/180.sh ./scripts/181.sh ./scripts/182.sh ./scripts/183.sh ./scripts/184.sh ./scripts/185.sh ./scripts/186.sh ./scripts/187.sh ./scripts/188.sh ./scripts/189.sh ./scripts/19.sh ./scripts/190.sh ./scripts/191.sh ./scripts/192.sh ./scripts/193.sh ./scripts/194.sh ./scripts/195.sh ./scripts/196.sh ./scripts/197.sh ./scripts/198.sh ./scripts/199.sh ./scripts/2.sh ./scripts/20.sh ./scripts/200.sh ./scripts/21.sh ./scripts/22.sh ./scripts/23.sh ./scripts/24.sh ./scripts/25.sh ./scripts/26.sh ./scripts/27.sh ./scripts/28.sh ./scripts/29.sh ./scripts/3.sh ./scripts/30.sh ./scripts/31.sh ./scripts/32.sh ./scripts/33.sh ./scripts/34.sh ./scripts/35.sh ./scripts/36.sh ./scripts/37.sh ./scripts/38.sh ./scripts/39.sh ./scripts/4.sh ./scripts/40.sh ./scripts/41.sh ./scripts/42.sh ./scripts/43.sh ./scripts/44.sh ./scripts/45.sh ./scripts/46.sh ./scripts/47.sh ./scripts/48.sh ./scripts/49.sh ./scripts/5.sh ./scripts/50.sh ./scripts/51.sh ./scripts/52.sh ./scripts/53.sh ./scripts/54.sh ./scripts/55.sh ./scripts/56.sh ./scripts/57.sh ./scripts/58.sh ./scripts/59.sh ./scripts/6.sh ./scripts/60.sh ./scripts/61.sh ./scripts/62.sh ./scripts/63.sh ./scripts/64.sh ./scripts/65.sh ./scripts/66.sh ./scripts/67.sh ./scripts/68.sh ./scripts/69.sh ./scripts/7.sh ./scripts/70.sh ./scripts/71.sh ./scripts/72.sh ./scripts/73.sh ./scripts/74.sh ./scripts/75.sh ./scripts/76.sh ./scripts/77.sh ./scripts/78.sh ./scripts/79.sh ./scripts/8.sh ./scripts/80.sh ./scripts/81.sh ./scripts/82.sh ./scripts/83.sh ./scripts/84.sh ./scripts/85.sh ./scripts/86.sh ./scripts/87.sh ./scripts/88.sh ./scripts/89.sh ./scripts/9.sh ./scripts/90.sh ./scripts/91.sh ./scripts/92.sh ./scripts/93.sh ./scripts/94.sh ./scripts/95.sh ./scripts/96.sh ./scripts/97.sh ./scripts/98.sh ./scripts/99.sh
++ x64configs='./scripts/0.sh
+./scripts/1.sh
+./scripts/10.sh
+./scripts/100.sh
+./scripts/101.sh
+./scripts/102.sh
+./scripts/103.sh
+./scripts/104.sh
+./scripts/105.sh
+./scripts/106.sh
+./scripts/107.sh
+./scripts/108.sh
+./scripts/109.sh
+./scripts/11.sh
+./scripts/110.sh
+./scripts/111.sh
+./scripts/112.sh
+./scripts/113.sh
+./scripts/114.sh
+./scripts/115.sh
+./scripts/116.sh
+./scripts/117.sh
+./scripts/118.sh
+./scripts/119.sh
+./scripts/12.sh
+./scripts/120.sh
+./scripts/121.sh
+./scripts/122.sh
+./scripts/123.sh
+./scripts/124.sh
+./scripts/125.sh
+./scripts/126.sh
+./scripts/127.sh
+./scripts/128.sh
+./scripts/129.sh
+./scripts/13.sh
+./scripts/130.sh
+./scripts/131.sh
+./scripts/132.sh
+./scripts/133.sh
+./scripts/134.sh
+./scripts/135.sh
+./scripts/136.sh
+./scripts/137.sh
+./scripts/138.sh
+./scripts/139.sh
+./scripts/14.sh
+./scripts/140.sh
+./scripts/141.sh
+./scripts/142.sh
+./scripts/143.sh
+./scripts/144.sh
+./scripts/145.sh
+./scripts/146.sh
+./scripts/147.sh
+./scripts/148.sh
+./scripts/149.sh
+./scripts/15.sh
+./scripts/150.sh
+./scripts/151.sh
+./scripts/152.sh
+./scripts/153.sh
+./scripts/154.sh
+./scripts/155.sh
+./scripts/156.sh
+./scripts/157.sh
+./scripts/158.sh
+./scripts/159.sh
+./scripts/16.sh
+./scripts/160.sh
+./scripts/161.sh
+./scripts/162.sh
+./scripts/163.sh
+./scripts/164.sh
+./scripts/165.sh
+./scripts/166.sh
+./scripts/167.sh
+./scripts/168.sh
+./scripts/169.sh
+./scripts/17.sh
+./scripts/170.sh
+./scripts/171.sh
+./scripts/172.sh
+./scripts/173.sh
+./scripts/174.sh
+./scripts/175.sh
+./scripts/176.sh
+./scripts/177.sh
+./scripts/178.sh
+./scripts/179.sh
+./scripts/18.sh
+./scripts/180.sh
+./scripts/181.sh
+./scripts/182.sh
+./scripts/183.sh
+./scripts/184.sh
+./scripts/185.sh
+./scripts/186.sh
+./scripts/187.sh
+./scripts/188.sh
+./scripts/189.sh
+./scripts/19.sh
+./scripts/190.sh
+./scripts/191.sh
+./scripts/192.sh
+./scripts/193.sh
+./scripts/194.sh
+./scripts/195.sh
+./scripts/196.sh
+./scripts/197.sh
+./scripts/198.sh
+./scripts/199.sh
+./scripts/2.sh
+./scripts/20.sh
+./scripts/200.sh
+./scripts/21.sh
+./scripts/22.sh
+./scripts/23.sh
+./scripts/24.sh
+./scripts/25.sh
+./scripts/26.sh
+./scripts/27.sh
+./scripts/28.sh
+./scripts/29.sh
+./scripts/3.sh
+./scripts/30.sh
+./scripts/31.sh
+./scripts/32.sh
+./scripts/33.sh
+./scripts/34.sh
+./scripts/35.sh
+./scripts/36.sh
+./scripts/37.sh
+./scripts/38.sh
+./scripts/39.sh
+./scripts/4.sh
+./scripts/40.sh
+./scripts/41.sh
+./scripts/42.sh
+./scripts/43.sh
+./scripts/44.sh
+./scripts/45.sh
+./scripts/46.sh
+./scripts/47.sh
+./scripts/48.sh
+./scripts/49.sh
+./scripts/5.sh
+./scripts/50.sh
+./scripts/51.sh
+./scripts/52.sh
+./scripts/53.sh
+./scripts/54.sh
+./scripts/55.sh
+./scripts/56.sh
+./scripts/57.sh
+./scripts/58.sh
+./scripts/59.sh
+./scripts/6.sh
+./scripts/60.sh
+./scripts/61.sh
+./scripts/62.sh
+./scripts/63.sh
+./scripts/64.sh
+./scripts/65.sh
+./scripts/66.sh
+./scripts/67.sh
+./scripts/68.sh
+./scripts/69.sh
+./scripts/7.sh
+./scripts/70.sh
+./scripts/71.sh
+./scripts/72.sh
+./scripts/73.sh
+./scripts/74.sh
+./scripts/75.sh
+./scripts/76.sh
+./scripts/77.sh
+./scripts/78.sh
+./scripts/79.sh
+./scripts/8.sh
+./scripts/80.sh
+./scripts/81.sh
+./scripts/82.sh
+./scripts/83.sh
+./scripts/84.sh
+./scripts/85.sh
+./scripts/86.sh
+./scripts/87.sh
+./scripts/88.sh
+./scripts/89.sh
+./scripts/9.sh
+./scripts/90.sh
+./scripts/91.sh
+./scripts/92.sh
+./scripts/93.sh
+./scripts/94.sh
+./scripts/95.sh
+./scripts/96.sh
+./scripts/97.sh
+./scripts/98.sh
+./scripts/99.sh'
++ csvOutput=./res/Animation_360P-24d4.csv
++ cp ./videos/Animation_360P-24d4.mp4 Animation_360P-24d4.mp4
++ echo 'Starting to work with video: ' Animation_360P-24d4
+Starting to work with video:  Animation_360P-24d4
++ header=configurationID,cabac,ref,deblock,analyse,me,subme,mixed_ref,me_range,trellis,8x8dct,fast_pskip,chroma_qp_offset,bframes,b_pyramid,b_adapt,direct,weightb,open_gop,weightp,scenecut,rc_lookahead,mbtree,qpmax,aq-mode,size,usertime,systemtime,elapsedtime,cpu,frames,fps,kbs
++ touch ./res/Animation_360P-24d4.csv
++ cat /dev/null
++ echo configurationID,cabac,ref,deblock,analyse,me,subme,mixed_ref,me_range,trellis,8x8dct,fast_pskip,chroma_qp_offset,bframes,b_pyramid,b_adapt,direct,weightb,open_gop,weightp,scenecut,rc_lookahead,mbtree,qpmax,aq-mode,size,usertime,systemtime,elapsedtime,cpu,frames,fps,kbs
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/0.sh
+Processing:  ./scripts/0.sh
+++ bash ./scripts/0.sh Animation_360P-24d4.mp4
++ csvLine='1,0,1,0:0:0,0:0,dia,0,0,16,0,0,1,0,0,None,None,None,None,None,0,0,None,0,69,0,3159062,, 0m0.940s, 479 , 1235.21 , 1266.26'
++ echo '1,0,1,0:0:0,0:0,dia,0,0,16,0,0,1,0,0,None,None,None,None,None,0,0,None,0,69,0,3159062,, 0m0.940s, 479 , 1235.21 , 1266.26'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/1.sh
+Processing:  ./scripts/1.sh
+++ bash ./scripts/1.sh Animation_360P-24d4.mp4
++ csvLine='2,1,1,1:0:0,0x3:0x3,dia,1,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,None,0,69,1,1609428,, 0m1.200s, 479 , 1169.67 , 645.12'
++ echo '2,1,1,1:0:0,0x3:0x3,dia,1,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,None,0,69,1,1609428,, 0m1.200s, 479 , 1169.67 , 645.12'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/10.sh
+Processing:  ./scripts/10.sh
+++ bash ./scripts/10.sh Animation_360P-24d4.mp4
++ csvLine='11,0,1,1:0:0,0:0,dia,2,0,16,0,0,1,0,0,None,None,None,None,None,0,0,None,0,69,0,2087635,, 0m1.092s, 479 , 1215.68 , 836.80'
++ echo '11,0,1,1:0:0,0:0,dia,2,0,16,0,0,1,0,0,None,None,None,None,None,0,0,None,0,69,0,2087635,, 0m1.092s, 479 , 1215.68 , 836.80'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/100.sh
+Processing:  ./scripts/100.sh
+++ bash ./scripts/100.sh Animation_360P-24d4.mp4
++ csvLine='101,1,2,1:0:0,0x3:0x113,hex,6,1,16,1,1,1,0,8,2,1,spatial,1,0,1,0,60,1,69,1,1152475,, 0m2.473s, 479 , 691.10 , 461.95'
++ echo '101,1,2,1:0:0,0x3:0x113,hex,6,1,16,1,1,1,0,8,2,1,spatial,1,0,1,0,60,1,69,1,1152475,, 0m2.473s, 479 , 691.10 , 461.95'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/101.sh
+Processing:  ./scripts/101.sh
+++ bash ./scripts/101.sh Animation_360P-24d4.mp4
++ csvLine='102,1,2,1:0:0,0x3:0x113,hex,6,1,16,1,1,1,0,8,2,1,auto,1,0,1,0,10,1,69,0,1373732,, 0m2.180s, 479 , 797.53 , 550.64'
++ echo '102,1,2,1:0:0,0x3:0x113,hex,6,1,16,1,1,1,0,8,2,1,auto,1,0,1,0,10,1,69,0,1373732,, 0m2.180s, 479 , 797.53 , 550.64'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/102.sh
+Processing:  ./scripts/102.sh
+++ bash ./scripts/102.sh Animation_360P-24d4.mp4
++ csvLine='103,1,2,0:0:0,0x3:0x3,umh,6,1,16,1,1,1,0,8,2,1,spatial,1,0,1,0,10,1,69,0,1379293,, 0m2.786s, 479 , 739.80 , 552.87'
++ echo '103,1,2,0:0:0,0x3:0x3,umh,6,1,16,1,1,1,0,8,2,1,spatial,1,0,1,0,10,1,69,0,1379293,, 0m2.786s, 479 , 739.80 , 552.87'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/103.sh
+Processing:  ./scripts/103.sh
+++ bash ./scripts/103.sh Animation_360P-24d4.mp4
++ csvLine='104,1,16,1:0:0,0x3:0x113,hex,6,1,24,1,1,1,-2,3,2,1,auto,1,0,1,40,30,0,69,1,1197991,, 0m3.991s, 479 , 656.90 , 480.20'
++ echo '104,1,16,1:0:0,0x3:0x113,hex,6,1,24,1,1,1,-2,3,2,1,auto,1,0,1,40,30,0,69,1,1197991,, 0m3.991s, 479 , 656.90 , 480.20'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/104.sh
+Processing:  ./scripts/104.sh
+++ bash ./scripts/104.sh Animation_360P-24d4.mp4
++ csvLine='105,1,7,1:0:0,0x3:0x113,dia,6,1,24,1,1,1,-2,3,2,1,spatial,1,0,1,40,30,0,69,1,1221890,, 0m2.888s, 479 , 841.70 , 489.78'
++ echo '105,1,7,1:0:0,0x3:0x113,dia,6,1,24,1,1,1,-2,3,2,1,spatial,1,0,1,40,30,0,69,1,1221890,, 0m2.888s, 479 , 841.70 , 489.78'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/105.sh
+Processing:  ./scripts/105.sh
+++ bash ./scripts/105.sh Animation_360P-24d4.mp4
++ csvLine='106,0,5,1:0:0,0x3:0x113,tesa,0,1,16,1,1,1,-2,3,2,1,auto,1,0,1,40,30,1,69,1,1716419,, 0m1.964s, 479 , 909.93 , 688.00'
++ echo '106,0,5,1:0:0,0x3:0x113,tesa,0,1,16,1,1,1,-2,3,2,1,auto,1,0,1,40,30,1,69,1,1716419,, 0m1.964s, 479 , 909.93 , 688.00'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/106.sh
+Processing:  ./scripts/106.sh
+++ bash ./scripts/106.sh Animation_360P-24d4.mp4
++ csvLine='107,0,5,1:0:0,0x3:0x3,umh,0,1,16,1,1,0,-2,3,2,1,auto,1,0,1,40,30,1,69,1,1655546,, 0m2.063s, 479 , 912.42 , 663.60'
++ echo '107,0,5,1:0:0,0x3:0x3,umh,0,1,16,1,1,0,-2,3,2,1,auto,1,0,1,40,30,1,69,1,1655546,, 0m2.063s, 479 , 912.42 , 663.60'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/107.sh
+Processing:  ./scripts/107.sh
+++ bash ./scripts/107.sh Animation_360P-24d4.mp4
++ csvLine='108,1,2,0:0:0,0x113:0x113,hex,6,1,24,0,1,1,-2,3,2,1,auto,1,0,1,40,30,1,69,1,1138118,, 0m1.883s, 479 , 887.61 , 456.20'
++ echo '108,1,2,0:0:0,0x113:0x113,hex,6,1,24,0,1,1,-2,3,2,1,auto,1,0,1,40,30,1,69,1,1138118,, 0m1.883s, 479 , 887.61 , 456.20'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/108.sh
+Processing:  ./scripts/108.sh
+++ bash ./scripts/108.sh Animation_360P-24d4.mp4
++ csvLine='109,1,2,0:0:0,0x113:0x113,hex,6,1,16,1,0,0,-2,3,2,1,auto,1,0,1,40,30,1,69,1,1148817,, 0m2.058s, 479 , 852.69 , 460.49'
++ echo '109,1,2,0:0:0,0x113:0x113,hex,6,1,16,1,0,0,-2,3,2,1,auto,1,0,1,40,30,1,69,1,1148817,, 0m2.058s, 479 , 852.69 , 460.49'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/109.sh
+Processing:  ./scripts/109.sh
+++ bash ./scripts/109.sh Animation_360P-24d4.mp4
++ csvLine='110,1,2,0:0:0,0x113:0x113,hex,6,1,24,1,0,1,-2,3,2,1,auto,1,0,1,40,30,1,69,0,1517331,, 0m2.045s, 479 , 857.20 , 608.20'
++ echo '110,1,2,0:0:0,0x113:0x113,hex,6,1,24,1,0,1,-2,3,2,1,auto,1,0,1,40,30,1,69,0,1517331,, 0m2.045s, 479 , 857.20 , 608.20'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/11.sh
+Processing:  ./scripts/11.sh
+++ bash ./scripts/11.sh Animation_360P-24d4.mp4
++ csvLine='12,0,1,1:0:0,0:0,dia,2,0,24,0,0,1,0,0,None,None,None,None,None,0,0,None,0,69,0,2087635,, 0m1.102s, 479 , 1214.11 , 836.80'
++ echo '12,0,1,1:0:0,0:0,dia,2,0,24,0,0,1,0,0,None,None,None,None,None,0,0,None,0,69,0,2087635,, 0m1.102s, 479 , 1214.11 , 836.80'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/110.sh
+Processing:  ./scripts/110.sh
+++ bash ./scripts/110.sh Animation_360P-24d4.mp4
++ csvLine='111,1,2,0:0:0,0x113:0x113,hex,10,1,24,1,1,1,0,3,2,1,auto,1,0,2,40,30,0,69,1,1230881,, 0m3.547s, 479 , 684.44 , 493.38'
++ echo '111,1,2,0:0:0,0x113:0x113,hex,10,1,24,1,1,1,0,3,2,1,auto,1,0,2,40,30,0,69,1,1230881,, 0m3.547s, 479 , 684.44 , 493.38'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/111.sh
+Processing:  ./scripts/111.sh
+++ bash ./scripts/111.sh Animation_360P-24d4.mp4
++ csvLine='112,1,3,1:0:0,0x3:0x113,hex,7,1,16,1,1,1,-2,3,2,1,auto,1,0,2,40,50,1,69,1,1174979,, 0m2.786s, 479 , 691.59 , 470.97'
++ echo '112,1,3,1:0:0,0x3:0x113,hex,7,1,16,1,1,1,-2,3,2,1,auto,1,0,2,40,50,1,69,1,1174979,, 0m2.786s, 479 , 691.59 , 470.97'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/112.sh
+Processing:  ./scripts/112.sh
+++ bash ./scripts/112.sh Animation_360P-24d4.mp4
++ csvLine='113,1,3,1:0:0,0x3:0x113,umh,7,1,16,1,1,1,-2,3,2,1,auto,1,0,2,40,40,1,69,1,1172089,, 0m3.081s, 479 , 679.04 , 469.81'
++ echo '113,1,3,1:0:0,0x3:0x113,umh,7,1,16,1,1,1,-2,3,2,1,auto,1,0,2,40,40,1,69,1,1172089,, 0m3.081s, 479 , 679.04 , 469.81'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/113.sh
+Processing:  ./scripts/113.sh
+++ bash ./scripts/113.sh Animation_360P-24d4.mp4
++ csvLine='114,1,3,1:0:0,0x3:0x113,hex,7,1,16,0,1,1,-2,3,2,1,spatial,1,0,2,40,40,1,69,1,1132864,, 0m2.526s, 479 , 738.44 , 454.09'
++ echo '114,1,3,1:0:0,0x3:0x113,hex,7,1,16,0,1,1,-2,3,2,1,spatial,1,0,2,40,40,1,69,1,1132864,, 0m2.526s, 479 , 738.44 , 454.09'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/114.sh
+Processing:  ./scripts/114.sh
+++ bash ./scripts/114.sh Animation_360P-24d4.mp4
++ csvLine='115,1,7,1:0:0,0x3:0x113,hex,7,1,16,1,1,1,-2,3,2,1,auto,1,0,2,40,40,1,69,0,1490966,, 0m3.582s, 479 , 638.01 , 597.63'
++ echo '115,1,7,1:0:0,0x3:0x113,hex,7,1,16,1,1,1,-2,3,2,1,auto,1,0,2,40,40,1,69,0,1490966,, 0m3.582s, 479 , 638.01 , 597.63'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/115.sh
+Processing:  ./scripts/115.sh
+++ bash ./scripts/115.sh Animation_360P-24d4.mp4
++ csvLine='116,1,3,1:0:0,0x3:0x113,hex,10,1,16,1,1,1,0,3,2,1,auto,1,0,1,40,40,1,69,1,1160616,, 0m3.251s, 479 , 604.41 , 465.22'
++ echo '116,1,3,1:0:0,0x3:0x113,hex,10,1,16,1,1,1,0,3,2,1,auto,1,0,1,40,40,1,69,1,1160616,, 0m3.251s, 479 , 604.41 , 465.22'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/116.sh
+Processing:  ./scripts/116.sh
+++ bash ./scripts/116.sh Animation_360P-24d4.mp4
++ csvLine='117,1,3,1:0:0,0x3:0x3,hex,7,1,16,1,1,1,-2,3,2,1,auto,1,0,2,40,40,1,69,1,1173333,, 0m2.819s, 479 , 699.46 , 470.31'
++ echo '117,1,3,1:0:0,0x3:0x3,hex,7,1,16,1,1,1,-2,3,2,1,auto,1,0,2,40,40,1,69,1,1173333,, 0m2.819s, 479 , 699.46 , 470.31'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/117.sh
+Processing:  ./scripts/117.sh
+++ bash ./scripts/117.sh Animation_360P-24d4.mp4
++ csvLine='118,0,3,1:0:0,0x3:0x3,hex,7,1,16,1,1,1,-2,3,2,1,auto,1,0,2,40,40,1,69,1,1255463,, 0m2.868s, 479 , 699.47 , 503.23'
++ echo '118,0,3,1:0:0,0x3:0x3,hex,7,1,16,1,1,1,-2,3,2,1,auto,1,0,2,40,40,1,69,1,1255463,, 0m2.868s, 479 , 699.47 , 503.23'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/118.sh
+Processing:  ./scripts/118.sh
+++ bash ./scripts/118.sh Animation_360P-24d4.mp4
++ csvLine='119,1,3,1:0:0,0x3:0x3,hex,7,1,16,1,0,1,0,16,2,1,auto,1,0,2,40,40,1,69,1,1115078,, 0m3.012s, 479 , 609.48 , 446.96'
++ echo '119,1,3,1:0:0,0x3:0x3,hex,7,1,16,1,0,1,0,16,2,1,auto,1,0,2,40,40,1,69,1,1115078,, 0m3.012s, 479 , 609.48 , 446.96'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/119.sh
+Processing:  ./scripts/119.sh
+++ bash ./scripts/119.sh Animation_360P-24d4.mp4
++ csvLine='120,1,3,1:0:0,0x3:0x3,hex,7,1,16,1,0,1,0,16,2,1,auto,1,0,2,40,30,1,69,1,1107334,, 0m2.989s, 479 , 630.90 , 443.86'
++ echo '120,1,3,1:0:0,0x3:0x3,hex,7,1,16,1,0,1,0,16,2,1,auto,1,0,2,40,30,1,69,1,1107334,, 0m2.989s, 479 , 630.90 , 443.86'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/12.sh
+Processing:  ./scripts/12.sh
+++ bash ./scripts/12.sh Animation_360P-24d4.mp4
++ csvLine='13,0,1,1:0:0,0:0,dia,0,0,16,0,0,1,0,0,None,None,None,None,None,0,0,None,0,69,0,3159858,, 0m0.869s, 479 , 1195.82 , 1266.58'
++ echo '13,0,1,1:0:0,0:0,dia,0,0,16,0,0,1,0,0,None,None,None,None,None,0,0,None,0,69,0,3159858,, 0m0.869s, 479 , 1195.82 , 1266.58'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/120.sh
+Processing:  ./scripts/120.sh
+++ bash ./scripts/120.sh Animation_360P-24d4.mp4
++ csvLine='121,1,3,1:0:0,0x3:0x3,hex,7,1,16,1,0,1,0,16,2,1,spatial,1,0,2,40,40,1,69,0,1512724,, 0m3.207s, 479 , 590.68 , 606.35'
++ echo '121,1,3,1:0:0,0x3:0x3,hex,7,1,16,1,0,1,0,16,2,1,spatial,1,0,2,40,40,1,69,0,1512724,, 0m3.207s, 479 , 590.68 , 606.35'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/121.sh
+Processing:  ./scripts/121.sh
+++ bash ./scripts/121.sh Animation_360P-24d4.mp4
++ csvLine='122,1,3,1:0:0,0x3:0x3,hex,7,1,16,1,0,1,0,16,2,1,auto,1,0,1,40,40,1,69,1,1114986,, 0m3.006s, 479 , 593.85 , 446.93'
++ echo '122,1,3,1:0:0,0x3:0x3,hex,7,1,16,1,0,1,0,16,2,1,auto,1,0,1,40,40,1,69,1,1114986,, 0m3.006s, 479 , 593.85 , 446.93'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/122.sh
+Processing:  ./scripts/122.sh
+++ bash ./scripts/122.sh Animation_360P-24d4.mp4
++ csvLine='123,1,3,1:0:0,0x3:0x113,hex,11,1,16,0,0,1,0,16,2,1,auto,1,0,2,40,40,1,69,1,1106623,, 0m3.502s, 479 , 543.38 , 443.57'
++ echo '123,1,3,1:0:0,0x3:0x113,hex,11,1,16,0,0,1,0,16,2,1,auto,1,0,2,40,40,1,69,1,1106623,, 0m3.502s, 479 , 543.38 , 443.57'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/123.sh
+Processing:  ./scripts/123.sh
+++ bash ./scripts/123.sh Animation_360P-24d4.mp4
++ csvLine='124,1,3,1:0:0,0x3:0x3,hex,7,1,16,1,0,1,0,16,2,1,auto,1,0,2,0,50,0,69,0,1197559,, 0m3.372s, 479 , 687.80 , 480.02'
++ echo '124,1,3,1:0:0,0x3:0x3,hex,7,1,16,1,0,1,0,16,2,1,auto,1,0,2,0,50,0,69,0,1197559,, 0m3.372s, 479 , 687.80 , 480.02'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/124.sh
+Processing:  ./scripts/124.sh
+++ bash ./scripts/124.sh Animation_360P-24d4.mp4
++ csvLine='125,1,3,1:0:0,0x3:0x3,hex,7,1,16,1,0,1,0,16,2,1,auto,1,0,2,40,30,0,69,0,1209911,, 0m3.336s, 479 , 689.82 , 484.97'
++ echo '125,1,3,1:0:0,0x3:0x3,hex,7,1,16,1,0,1,0,16,2,1,auto,1,0,2,40,30,0,69,0,1209911,, 0m3.336s, 479 , 689.82 , 484.97'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/125.sh
+Processing:  ./scripts/125.sh
+++ bash ./scripts/125.sh Animation_360P-24d4.mp4
++ csvLine='126,1,3,0:0:0,0x3:0x3,hex,7,1,16,1,0,0,-2,16,2,1,auto,1,0,2,0,50,0,69,0,1209550,, 0m3.476s, 479 , 681.61 , 484.83'
++ echo '126,1,3,0:0:0,0x3:0x3,hex,7,1,16,1,0,0,-2,16,2,1,auto,1,0,2,0,50,0,69,0,1209550,, 0m3.476s, 479 , 681.61 , 484.83'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/126.sh
+Processing:  ./scripts/126.sh
+++ bash ./scripts/126.sh Animation_360P-24d4.mp4
++ csvLine='127,1,5,1:0:0,0x3:0x113,dia,4,1,16,1,1,1,-2,3,2,1,auto,1,0,2,40,40,1,69,1,1151613,, 0m2.126s, 479 , 851.82 , 461.61'
++ echo '127,1,5,1:0:0,0x3:0x113,dia,4,1,16,1,1,1,-2,3,2,1,auto,1,0,2,40,40,1,69,1,1151613,, 0m2.126s, 479 , 851.82 , 461.61'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/127.sh
+Processing:  ./scripts/127.sh
+++ bash ./scripts/127.sh Animation_360P-24d4.mp4
++ csvLine='128,1,5,0:0:0,0x3:0x113,dia,4,1,16,1,1,1,-2,3,2,1,spatial,1,0,2,40,40,1,69,1,1161712,, 0m2.387s, 479 , 797.69 , 465.65'
++ echo '128,1,5,0:0:0,0x3:0x113,dia,4,1,16,1,1,1,-2,3,2,1,spatial,1,0,2,40,40,1,69,1,1161712,, 0m2.387s, 479 , 797.69 , 465.65'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/128.sh
+Processing:  ./scripts/128.sh
+++ bash ./scripts/128.sh Animation_360P-24d4.mp4
++ csvLine='129,0,5,0:0:0,0x3:0x3,dia,4,1,24,1,0,1,-2,3,2,1,spatial,1,0,2,40,40,1,69,1,1227924,, 0m2.544s, 479 , 765.95 , 492.19'
++ echo '129,0,5,0:0:0,0x3:0x3,dia,4,1,24,1,0,1,-2,3,2,1,spatial,1,0,2,40,40,1,69,1,1227924,, 0m2.544s, 479 , 765.95 , 492.19'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/129.sh
+Processing:  ./scripts/129.sh
+++ bash ./scripts/129.sh Animation_360P-24d4.mp4
++ csvLine='130,1,5,0:0:0,0x3:0x113,dia,4,1,16,0,1,1,-2,3,2,1,spatial,1,0,2,40,20,0,69,1,1204032,, 0m2.287s, 479 , 901.53 , 482.62'
++ echo '130,1,5,0:0:0,0x3:0x113,dia,4,1,16,0,1,1,-2,3,2,1,spatial,1,0,2,40,20,0,69,1,1204032,, 0m2.287s, 479 , 901.53 , 482.62'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/13.sh
+Processing:  ./scripts/13.sh
+++ bash ./scripts/13.sh Animation_360P-24d4.mp4
++ csvLine='14,0,1,0:0:0,0:0,dia,0,1,16,0,0,1,0,0,None,None,None,None,None,0,0,None,0,69,0,3159062,, 0m0.986s, 479 , 1176.90 , 1266.26'
++ echo '14,0,1,0:0:0,0:0,dia,0,1,16,0,0,1,0,0,None,None,None,None,None,0,0,None,0,69,0,3159062,, 0m0.986s, 479 , 1176.90 , 1266.26'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/130.sh
+Processing:  ./scripts/130.sh
+++ bash ./scripts/130.sh Animation_360P-24d4.mp4
++ csvLine='131,1,5,0:0:0,0x3:0x3,dia,4,0,16,1,1,0,-2,3,2,1,spatial,1,0,2,40,20,0,69,1,1223580,, 0m2.573s, 479 , 799.85 , 490.45'
++ echo '131,1,5,0:0:0,0x3:0x3,dia,4,0,16,1,1,0,-2,3,2,1,spatial,1,0,2,40,20,0,69,1,1223580,, 0m2.573s, 479 , 799.85 , 490.45'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/131.sh
+Processing:  ./scripts/131.sh
+++ bash ./scripts/131.sh Animation_360P-24d4.mp4
++ csvLine='132,1,7,0:0:0,0x3:0x113,dia,4,1,16,1,1,0,-2,3,2,1,spatial,1,0,2,40,20,0,69,1,1216401,, 0m3.015s, 479 , 747.87 , 487.58'
++ echo '132,1,7,0:0:0,0x3:0x113,dia,4,1,16,1,1,0,-2,3,2,1,spatial,1,0,2,40,20,0,69,1,1216401,, 0m3.015s, 479 , 747.87 , 487.58'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/132.sh
+Processing:  ./scripts/132.sh
+++ bash ./scripts/132.sh Animation_360P-24d4.mp4
++ csvLine='133,1,5,0:0:0,0x3:0x113,dia,4,1,16,1,1,0,-2,3,2,1,auto,1,0,2,40,20,0,69,1,1210764,, 0m2.448s, 479 , 831.62 , 485.32'
++ echo '133,1,5,0:0:0,0x3:0x113,dia,4,1,16,1,1,0,-2,3,2,1,auto,1,0,2,40,20,0,69,1,1210764,, 0m2.448s, 479 , 831.62 , 485.32'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/133.sh
+Processing:  ./scripts/133.sh
+++ bash ./scripts/133.sh Animation_360P-24d4.mp4
++ csvLine='134,1,3,1:0:0,0x3:0x113,hex,7,1,16,1,1,1,-2,3,2,1,auto,1,0,2,40,None,1,69,1,1173333,, 0m3.089s, 479 , 656.28 , 470.31'
++ echo '134,1,3,1:0:0,0x3:0x113,hex,7,1,16,1,1,1,-2,3,2,1,auto,1,0,2,40,None,1,69,1,1173333,, 0m3.089s, 479 , 656.28 , 470.31'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/134.sh
+Processing:  ./scripts/134.sh
+++ bash ./scripts/134.sh Animation_360P-24d4.mp4
++ csvLine='135,1,3,1:0:0,0x3:0x113,hex,11,1,16,1,1,1,-2,0,None,None,None,None,None,0,0,None,0,69,1,1490621,, 0m3.580s, 479 , 700.97 , 597.49'
++ echo '135,1,3,1:0:0,0x3:0x113,hex,11,1,16,1,1,1,-2,0,None,None,None,None,None,0,0,None,0,69,1,1490621,, 0m3.580s, 479 , 700.97 , 597.49'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/135.sh
+Processing:  ./scripts/135.sh
+++ bash ./scripts/135.sh Animation_360P-24d4.mp4
++ csvLine='136,1,5,0:0:0,0x3:0x113,hex,7,1,16,1,1,1,0,0,None,None,None,None,None,0,0,None,1,69,0,1679301,, 0m2.940s, 479 , 670.97 , 673.12'
++ echo '136,1,5,0:0:0,0x3:0x113,hex,7,1,16,1,1,1,0,0,None,None,None,None,None,0,0,None,1,69,0,1679301,, 0m2.940s, 479 , 670.97 , 673.12'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/136.sh
+Processing:  ./scripts/136.sh
+++ bash ./scripts/136.sh Animation_360P-24d4.mp4
++ csvLine='137,1,3,1:0:0,0x3:0x113,hex,6,1,16,1,1,1,-2,0,None,None,None,None,None,0,0,None,0,69,1,1490186,, 0m2.965s, 479 , 776.67 , 597.32'
++ echo '137,1,3,1:0:0,0x3:0x113,hex,6,1,16,1,1,1,-2,0,None,None,None,None,None,0,0,None,0,69,1,1490186,, 0m2.965s, 479 , 776.67 , 597.32'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/137.sh
+Processing:  ./scripts/137.sh
+++ bash ./scripts/137.sh Animation_360P-24d4.mp4
++ csvLine='138,0,5,0:0:0,0x113:0x113,tesa,10,0,24,2,1,0,-2,3,2,1,spatial,1,0,2,40,50,1,69,1,1206046,, 0m16.565s, 479 , 109.45 , 483.43'
++ echo '138,0,5,0:0:0,0x113:0x113,tesa,10,0,24,2,1,0,-2,3,2,1,spatial,1,0,2,40,50,1,69,1,1206046,, 0m16.565s, 479 , 109.45 , 483.43'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/138.sh
+Processing:  ./scripts/138.sh
+++ bash ./scripts/138.sh Animation_360P-24d4.mp4
++ csvLine='139,1,16,0:0:0,0x113:0x113,tesa,10,1,24,2,0,1,-2,3,2,1,spatial,1,0,2,40,50,1,69,0,1440201,, 0m35.585s, 479 , 82.87 , 577.28'
++ echo '139,1,16,0:0:0,0x113:0x113,tesa,10,1,24,2,0,1,-2,3,2,1,spatial,1,0,2,40,50,1,69,0,1440201,, 0m35.585s, 479 , 82.87 , 577.28'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/139.sh
+Processing:  ./scripts/139.sh
+++ bash ./scripts/139.sh Animation_360P-24d4.mp4
++ csvLine='140,1,16,1:0:0,0x113:0x113,hex,10,1,24,2,1,1,-2,8,2,1,spatial,1,0,2,40,30,1,69,0,1421748,, 0m11.870s, 479 , 187.07 , 569.89'
++ echo '140,1,16,1:0:0,0x113:0x113,hex,10,1,24,2,1,1,-2,8,2,1,spatial,1,0,2,40,30,1,69,0,1421748,, 0m11.870s, 479 , 187.07 , 569.89'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/14.sh
+Processing:  ./scripts/14.sh
+++ bash ./scripts/14.sh Animation_360P-24d4.mp4
++ csvLine='15,0,1,0:0:0,0:0,dia,0,0,16,0,0,1,0,0,None,None,auto,None,None,0,0,None,0,69,0,3159062,, 0m0.971s, 479 , 1046.17 , 1266.26'
++ echo '15,0,1,0:0:0,0:0,dia,0,0,16,0,0,1,0,0,None,None,auto,None,None,0,0,None,0,69,0,3159062,, 0m0.971s, 479 , 1046.17 , 1266.26'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/140.sh
+Processing:  ./scripts/140.sh
+++ bash ./scripts/140.sh Animation_360P-24d4.mp4
++ csvLine='141,1,16,0:0:0,0x113:0x113,hex,10,1,24,1,1,0,-2,3,2,1,spatial,1,0,2,None,50,1,69,0,1503510,, 0m8.754s, 479 , 319.92 , 602.66'
++ echo '141,1,16,0:0:0,0x113:0x113,hex,10,1,24,1,1,0,-2,3,2,1,spatial,1,0,2,None,50,1,69,0,1503510,, 0m8.754s, 479 , 319.92 , 602.66'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/141.sh
+Processing:  ./scripts/141.sh
+++ bash ./scripts/141.sh Animation_360P-24d4.mp4
++ csvLine='142,1,16,0:0:0,0x113:0x113,hex,11,0,24,2,0,1,-2,0,None,None,None,None,None,0,0,None,0,69,1,1337971,, 0m18.687s, 479 , 138.13 , 536.31'
++ echo '142,1,16,0:0:0,0x113:0x113,hex,11,0,24,2,0,1,-2,0,None,None,None,None,None,0,0,None,0,69,1,1337971,, 0m18.687s, 479 , 138.13 , 536.31'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/142.sh
+Processing:  ./scripts/142.sh
+++ bash ./scripts/142.sh Animation_360P-24d4.mp4
++ csvLine='143,1,16,0:0:0,0x113:0x113,hex,10,1,24,2,1,1,-2,0,None,None,None,None,None,0,0,None,1,69,0,1577704,, 0m10.202s, 479 , 189.33 , 632.40'
++ echo '143,1,16,0:0:0,0x113:0x113,hex,10,1,24,2,1,1,-2,0,None,None,None,None,None,0,0,None,1,69,0,1577704,, 0m10.202s, 479 , 189.33 , 632.40'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/143.sh
+Processing:  ./scripts/143.sh
+++ bash ./scripts/143.sh Animation_360P-24d4.mp4
++ csvLine='144,0,8,0:0:0,0x113:0x113,umh,10,1,24,2,0,1,-2,0,None,None,None,None,None,0,0,None,0,69,1,1446327,, 0m25.540s, 479 , 92.86 , 579.74'
++ echo '144,0,8,0:0:0,0x113:0x113,umh,10,1,24,2,0,1,-2,0,None,None,None,None,None,0,0,None,0,69,1,1446327,, 0m25.540s, 479 , 92.86 , 579.74'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/144.sh
+Processing:  ./scripts/144.sh
+++ bash ./scripts/144.sh Animation_360P-24d4.mp4
++ csvLine='145,0,5,1:0:0,0x3:0x113,hex,8,1,16,2,1,1,0,3,2,1,spatial,1,0,2,40,50,1,69,1,1224104,, 0m6.050s, 479 , 227.02 , 490.66'
++ echo '145,0,5,1:0:0,0x3:0x113,hex,8,1,16,2,1,1,0,3,2,1,spatial,1,0,2,40,50,1,69,1,1224104,, 0m6.050s, 479 , 227.02 , 490.66'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/145.sh
+Processing:  ./scripts/145.sh
+++ bash ./scripts/145.sh Animation_360P-24d4.mp4
++ csvLine='146,1,5,1:0:0,0x113:0x113,hex,8,1,16,2,1,1,0,3,2,1,spatial,1,0,2,40,50,1,69,1,1138413,, 0m4.568s, 479 , 370.93 , 456.32'
++ echo '146,1,5,1:0:0,0x113:0x113,hex,8,1,16,2,1,1,0,3,2,1,spatial,1,0,2,40,50,1,69,1,1138413,, 0m4.568s, 479 , 370.93 , 456.32'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/146.sh
+Processing:  ./scripts/146.sh
+++ bash ./scripts/146.sh Animation_360P-24d4.mp4
++ csvLine='147,0,1,0:0:0,0x3:0x113,hex,8,1,16,1,1,1,0,3,2,1,spatial,1,0,2,40,50,1,69,0,1797872,, 0m3.406s, 479 , 538.17 , 720.65'
++ echo '147,0,1,0:0:0,0x3:0x113,hex,8,1,16,1,1,1,0,3,2,1,spatial,1,0,2,40,50,1,69,0,1797872,, 0m3.406s, 479 , 538.17 , 720.65'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/147.sh
+Processing:  ./scripts/147.sh
+++ bash ./scripts/147.sh Animation_360P-24d4.mp4
++ csvLine='148,0,3,0:0:0,0:0,hex,8,1,16,2,1,1,0,3,2,1,spatial,1,0,2,40,20,0,69,0,1555651,, 0m7.446s, 479 , 219.35 , 623.56'
++ echo '148,0,3,0:0:0,0:0,hex,8,1,16,2,1,1,0,3,2,1,spatial,1,0,2,40,20,0,69,0,1555651,, 0m7.446s, 479 , 219.35 , 623.56'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/148.sh
+Processing:  ./scripts/148.sh
+++ bash ./scripts/148.sh Animation_360P-24d4.mp4
++ csvLine='149,0,3,1:0:0,0x3:0x113,hex,8,1,16,2,1,0,0,3,2,1,spatial,1,0,2,40,40,0,69,0,1566302,, 0m7.749s, 479 , 215.66 , 627.83'
++ echo '149,0,3,1:0:0,0x3:0x113,hex,8,1,16,2,1,0,0,3,2,1,spatial,1,0,2,40,40,0,69,0,1566302,, 0m7.749s, 479 , 215.66 , 627.83'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/149.sh
+Processing:  ./scripts/149.sh
+++ bash ./scripts/149.sh Animation_360P-24d4.mp4
++ csvLine='150,1,3,1:0:0,0x3:0x113,hex,8,1,16,1,1,0,0,3,2,1,spatial,1,0,2,40,60,0,69,1,1224773,, 0m4.209s, 479 , 562.63 , 490.93'
++ echo '150,1,3,1:0:0,0x3:0x113,hex,8,1,16,1,1,0,0,3,2,1,spatial,1,0,2,40,60,0,69,1,1224773,, 0m4.209s, 479 , 562.63 , 490.93'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/15.sh
+Processing:  ./scripts/15.sh
+++ bash ./scripts/15.sh Animation_360P-24d4.mp4
++ csvLine='16,0,1,0:0:0,0:0,dia,0,0,16,0,0,1,0,0,None,None,spatial,None,None,0,0,None,0,69,0,3159062,, 0m1.012s, 479 , 1128.24 , 1266.26'
++ echo '16,0,1,0:0:0,0:0,dia,0,0,16,0,0,1,0,0,None,None,spatial,None,None,0,0,None,0,69,0,3159062,, 0m1.012s, 479 , 1128.24 , 1266.26'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/150.sh
+Processing:  ./scripts/150.sh
+++ bash ./scripts/150.sh Animation_360P-24d4.mp4
++ csvLine='151,0,3,1:0:0,0x3:0x113,umh,8,1,16,2,1,0,0,3,2,1,spatial,1,0,2,40,60,0,69,1,1325983,, 0m8.065s, 479 , 223.75 , 531.50'
++ echo '151,0,3,1:0:0,0x3:0x113,umh,8,1,16,2,1,0,0,3,2,1,spatial,1,0,2,40,60,0,69,1,1325983,, 0m8.065s, 479 , 223.75 , 531.50'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/151.sh
+Processing:  ./scripts/151.sh
+++ bash ./scripts/151.sh Animation_360P-24d4.mp4
++ csvLine='152,1,3,1:0:0,0x3:0x113,hex,8,1,16,2,1,0,0,3,2,1,spatial,1,0,2,40,60,0,69,1,1206792,, 0m5.757s, 479 , 386.08 , 483.72'
++ echo '152,1,3,1:0:0,0x3:0x113,hex,8,1,16,2,1,0,0,3,2,1,spatial,1,0,2,40,60,0,69,1,1206792,, 0m5.757s, 479 , 386.08 , 483.72'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/152.sh
+Processing:  ./scripts/152.sh
+++ bash ./scripts/152.sh Animation_360P-24d4.mp4
++ csvLine='153,1,3,1:0:0,0x3:0x113,hex,8,1,16,2,1,0,0,3,2,1,auto,1,0,2,40,60,0,69,1,1206814,, 0m5.873s, 479 , 373.18 , 483.73'
++ echo '153,1,3,1:0:0,0x3:0x113,hex,8,1,16,2,1,0,0,3,2,1,auto,1,0,2,40,60,0,69,1,1206814,, 0m5.873s, 479 , 373.18 , 483.73'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/153.sh
+Processing:  ./scripts/153.sh
+++ bash ./scripts/153.sh Animation_360P-24d4.mp4
++ csvLine='154,1,3,0:0:0,0x3:0x113,hex,8,1,16,2,1,0,0,3,2,1,spatial,1,0,2,40,10,0,69,1,1204705,, 0m5.812s, 479 , 379.55 , 482.89'
++ echo '154,1,3,0:0:0,0x3:0x113,hex,8,1,16,2,1,0,0,3,2,1,spatial,1,0,2,40,10,0,69,1,1204705,, 0m5.812s, 479 , 379.55 , 482.89'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/154.sh
+Processing:  ./scripts/154.sh
+++ bash ./scripts/154.sh Animation_360P-24d4.mp4
++ csvLine='155,1,3,1:0:0,0x3:0x113,hex,8,1,16,0,1,0,0,3,2,1,spatial,1,0,2,40,60,0,69,1,1194932,, 0m4.023s, 479 , 595.09 , 478.97'
++ echo '155,1,3,1:0:0,0x3:0x113,hex,8,1,16,0,1,0,0,3,2,1,spatial,1,0,2,40,60,0,69,1,1194932,, 0m4.023s, 479 , 595.09 , 478.97'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/155.sh
+Processing:  ./scripts/155.sh
+++ bash ./scripts/155.sh Animation_360P-24d4.mp4
++ csvLine='156,1,3,1:0:0,0x3:0x113,hex,8,1,16,2,1,0,0,3,2,1,spatial,1,0,2,40,10,0,69,0,1408233,, 0m5.753s, 479 , 381.64 , 564.47'
++ echo '156,1,3,1:0:0,0x3:0x113,hex,8,1,16,2,1,0,0,3,2,1,spatial,1,0,2,40,10,0,69,0,1408233,, 0m5.753s, 479 , 381.64 , 564.47'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/156.sh
+Processing:  ./scripts/156.sh
+++ bash ./scripts/156.sh Animation_360P-24d4.mp4
++ csvLine='157,1,8,1:0:0,0x3:0x113,umh,10,1,16,2,1,1,-2,3,2,2,spatial,None,0,2,40,60,1,69,1,1115864,, 0m9.847s, 479 , 200.48 , 447.28'
++ echo '157,1,8,1:0:0,0x3:0x113,umh,10,1,16,2,1,1,-2,3,2,2,spatial,None,0,2,40,60,1,69,1,1115864,, 0m9.847s, 479 , 200.48 , 447.28'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/157.sh
+Processing:  ./scripts/157.sh
+++ bash ./scripts/157.sh Animation_360P-24d4.mp4
++ csvLine='158,1,8,1:0:0,0x3:0x3,umh,9,1,16,2,1,1,-2,3,2,2,spatial,1,0,2,40,60,1,69,1,1159799,, 0m7.658s, 479 , 266.57 , 464.89'
++ echo '158,1,8,1:0:0,0x3:0x3,umh,9,1,16,2,1,1,-2,3,2,2,spatial,1,0,2,40,60,1,69,1,1159799,, 0m7.658s, 479 , 266.57 , 464.89'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/158.sh
+Processing:  ./scripts/158.sh
+++ bash ./scripts/158.sh Animation_360P-24d4.mp4
++ csvLine='159,1,16,1:0:0,0x3:0x3,umh,9,0,16,2,1,1,-2,3,2,2,spatial,1,0,2,40,60,1,69,1,1151971,, 0m11.759s, 479 , 205.58 , 461.75'
++ echo '159,1,16,1:0:0,0x3:0x3,umh,9,0,16,2,1,1,-2,3,2,2,spatial,1,0,2,40,60,1,69,1,1151971,, 0m11.759s, 479 , 205.58 , 461.75'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/159.sh
+Processing:  ./scripts/159.sh
+++ bash ./scripts/159.sh Animation_360P-24d4.mp4
++ csvLine='160,1,16,1:0:0,0x113:0x113,umh,6,1,16,2,1,1,-2,3,2,2,spatial,1,0,2,40,30,1,69,1,1151269,, 0m8.038s, 479 , 310.98 , 461.47'
++ echo '160,1,16,1:0:0,0x113:0x113,umh,6,1,16,2,1,1,-2,3,2,2,spatial,1,0,2,40,30,1,69,1,1151269,, 0m8.038s, 479 , 310.98 , 461.47'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/16.sh
+Processing:  ./scripts/16.sh
+++ bash ./scripts/16.sh Animation_360P-24d4.mp4
++ csvLine='17,0,1,0:0:0,0:0,hex,0,0,16,0,0,1,0,0,None,None,None,None,None,0,0,None,0,69,0,3149188,, 0m1.061s, 479 , 1109.82 , 1262.30'
++ echo '17,0,1,0:0:0,0:0,hex,0,0,16,0,0,1,0,0,None,None,None,None,None,0,0,None,0,69,0,3149188,, 0m1.061s, 479 , 1109.82 , 1262.30'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/160.sh
+Processing:  ./scripts/160.sh
+++ bash ./scripts/160.sh Animation_360P-24d4.mp4
++ csvLine='161,1,3,1:0:0,0x113:0x113,umh,6,1,16,0,1,0,-2,3,2,2,auto,1,0,2,40,60,1,69,1,1146136,, 0m2.998s, 479 , 508.14 , 459.41'
++ echo '161,1,3,1:0:0,0x113:0x113,umh,6,1,16,0,1,0,-2,3,2,2,auto,1,0,2,40,60,1,69,1,1146136,, 0m2.998s, 479 , 508.14 , 459.41'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/161.sh
+Processing:  ./scripts/161.sh
+++ bash ./scripts/161.sh Animation_360P-24d4.mp4
++ csvLine='162,1,16,1:0:0,0x113:0x113,umh,6,1,16,2,1,1,-2,3,2,2,spatial,1,0,2,40,None,0,69,1,1217873,, 0m9.229s, 479 , 311.99 , 488.17'
++ echo '162,1,16,1:0:0,0x113:0x113,umh,6,1,16,2,1,1,-2,3,2,2,spatial,1,0,2,40,None,0,69,1,1217873,, 0m9.229s, 479 , 311.99 , 488.17'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/162.sh
+Processing:  ./scripts/162.sh
+++ bash ./scripts/162.sh Animation_360P-24d4.mp4
++ csvLine='163,1,16,1:0:0,0x113:0x113,umh,6,1,16,2,1,1,-2,0,None,None,None,None,None,0,0,60,0,69,0,1669216,, 0m11.433s, 479 , 227.41 , 669.08'
++ echo '163,1,16,1:0:0,0x113:0x113,umh,6,1,16,2,1,1,-2,0,None,None,None,None,None,0,0,60,0,69,0,1669216,, 0m11.433s, 479 , 227.41 , 669.08'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/163.sh
+Processing:  ./scripts/163.sh
+++ bash ./scripts/163.sh Animation_360P-24d4.mp4
++ csvLine='164,0,5,1:0:0,0x113:0x113,umh,6,1,16,2,0,1,-2,0,None,None,None,None,None,0,0,20,1,69,0,1813681,, 0m4.534s, 479 , 414.59 , 726.99'
++ echo '164,0,5,1:0:0,0x113:0x113,umh,6,1,16,2,0,1,-2,0,None,None,None,None,None,0,0,20,1,69,0,1813681,, 0m4.534s, 479 , 414.59 , 726.99'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/164.sh
+Processing:  ./scripts/164.sh
+++ bash ./scripts/164.sh Animation_360P-24d4.mp4
++ csvLine='165,0,16,1:0:0,0x113:0x113,hex,6,1,24,0,1,1,0,3,2,2,auto,1,0,2,40,10,0,69,0,1543187,, 0m4.252s, 479 , 498.73 , 618.56'
++ echo '165,0,16,1:0:0,0x113:0x113,hex,6,1,24,0,1,1,0,3,2,2,auto,1,0,2,40,10,0,69,0,1543187,, 0m4.252s, 479 , 498.73 , 618.56'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/165.sh
+Processing:  ./scripts/165.sh
+++ bash ./scripts/165.sh Animation_360P-24d4.mp4
++ csvLine='166,0,16,0:0:0,0x113:0x113,hex,6,1,24,1,1,1,0,0,None,None,None,None,None,0,0,50,0,69,0,1864525,, 0m7.914s, 479 , 343.23 , 747.37'
++ echo '166,0,16,0:0:0,0x113:0x113,hex,6,1,24,1,1,1,0,0,None,None,None,None,None,0,0,50,0,69,0,1864525,, 0m7.914s, 479 , 343.23 , 747.37'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/166.sh
+Processing:  ./scripts/166.sh
+++ bash ./scripts/166.sh Animation_360P-24d4.mp4
++ csvLine='167,1,8,1:0:0,0x113:0x113,dia,7,1,24,1,1,1,0,0,None,None,None,None,None,0,0,50,0,69,0,1644682,, 0m4.624s, 479 , 567.67 , 659.25'
++ echo '167,1,8,1:0:0,0x113:0x113,dia,7,1,24,1,1,1,0,0,None,None,None,None,None,0,0,50,0,69,0,1644682,, 0m4.624s, 479 , 567.67 , 659.25'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/167.sh
+Processing:  ./scripts/167.sh
+++ bash ./scripts/167.sh Animation_360P-24d4.mp4
++ csvLine='168,1,8,1:0:0,0x3:0x113,umh,9,0,16,0,1,1,-2,3,2,1,spatial,1,0,2,40,30,1,69,1,1110248,, 0m6.470s, 479 , 406.11 , 445.03'
++ echo '168,1,8,1:0:0,0x3:0x113,umh,9,0,16,0,1,1,-2,3,2,1,spatial,1,0,2,40,30,1,69,1,1110248,, 0m6.470s, 479 , 406.11 , 445.03'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/168.sh
+Processing:  ./scripts/168.sh
+++ bash ./scripts/168.sh Animation_360P-24d4.mp4
++ csvLine='169,1,8,0:0:0,0x3:0x113,umh,9,0,16,0,1,1,-2,3,2,2,spatial,1,0,2,40,30,1,69,1,1127196,, 0m6.636s, 479 , 355.66 , 451.82'
++ echo '169,1,8,0:0:0,0x3:0x113,umh,9,0,16,0,1,1,-2,3,2,2,spatial,1,0,2,40,30,1,69,1,1127196,, 0m6.636s, 479 , 355.66 , 451.82'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/169.sh
+Processing:  ./scripts/169.sh
+++ bash ./scripts/169.sh Animation_360P-24d4.mp4
++ csvLine='170,1,8,1:0:0,0x3:0x113,umh,9,1,16,2,1,1,0,3,2,2,spatial,1,0,2,40,60,1,69,1,1146355,, 0m7.609s, 479 , 267.19 , 459.50'
++ echo '170,1,8,1:0:0,0x3:0x113,umh,9,1,16,2,1,1,0,3,2,2,spatial,1,0,2,40,60,1,69,1,1146355,, 0m7.609s, 479 , 267.19 , 459.50'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/17.sh
+Processing:  ./scripts/17.sh
+++ bash ./scripts/17.sh Animation_360P-24d4.mp4
++ csvLine='18,0,1,0:0:0,0:0,dia,0,0,16,0,0,1,0,3,2,1,None,1,0,0,0,None,0,69,0,2528664,, 0m1.084s, 479 , 1130.27 , 1013.58'
++ echo '18,0,1,0:0:0,0:0,dia,0,0,16,0,0,1,0,3,2,1,None,1,0,0,0,None,0,69,0,2528664,, 0m1.084s, 479 , 1130.27 , 1013.58'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/170.sh
+Processing:  ./scripts/170.sh
+++ bash ./scripts/170.sh Animation_360P-24d4.mp4
++ csvLine='171,1,8,1:0:0,0x3:0x113,umh,9,1,16,2,1,1,-2,3,2,2,spatial,1,0,2,40,50,1,69,1,1159832,, 0m7.583s, 479 , 271.73 , 464.90'
++ echo '171,1,8,1:0:0,0x3:0x113,umh,9,1,16,2,1,1,-2,3,2,2,spatial,1,0,2,40,50,1,69,1,1159832,, 0m7.583s, 479 , 271.73 , 464.90'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/171.sh
+Processing:  ./scripts/171.sh
+++ bash ./scripts/171.sh Animation_360P-24d4.mp4
++ csvLine='172,1,8,1:0:0,0x3:0x113,umh,9,1,16,2,1,1,-2,3,2,2,spatial,1,0,2,40,50,1,69,0,1532972,, 0m8.042s, 479 , 257.73 , 614.47'
++ echo '172,1,8,1:0:0,0x3:0x113,umh,9,1,16,2,1,1,-2,3,2,2,spatial,1,0,2,40,50,1,69,0,1532972,, 0m8.042s, 479 , 257.73 , 614.47'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/172.sh
+Processing:  ./scripts/172.sh
+++ bash ./scripts/172.sh Animation_360P-24d4.mp4
++ csvLine='173,1,2,1:0:0,0x3:0x113,umh,1,1,16,2,1,1,-2,3,2,2,spatial,1,0,2,40,50,1,69,1,1289143,, 0m2.064s, 479 , 815.83 , 516.73'
++ echo '173,1,2,1:0:0,0x3:0x113,umh,1,1,16,2,1,1,-2,3,2,2,spatial,1,0,2,40,50,1,69,1,1289143,, 0m2.064s, 479 , 815.83 , 516.73'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/173.sh
+Processing:  ./scripts/173.sh
+++ bash ./scripts/173.sh Animation_360P-24d4.mp4
++ csvLine='174,1,3,1:0:0,0x3:0x113,umh,6,1,16,2,1,1,-2,3,2,2,spatial,1,0,2,40,50,0,69,1,1244759,, 0m4.257s, 479 , 492.28 , 498.94'
++ echo '174,1,3,1:0:0,0x3:0x113,umh,6,1,16,2,1,1,-2,3,2,2,spatial,1,0,2,40,50,0,69,1,1244759,, 0m4.257s, 479 , 492.28 , 498.94'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/174.sh
+Processing:  ./scripts/174.sh
+++ bash ./scripts/174.sh Animation_360P-24d4.mp4
++ csvLine='175,1,2,1:0:0,0x113:0x113,umh,1,1,16,2,1,1,-2,3,2,2,spatial,1,0,2,40,50,1,69,1,1289143,, 0m2.065s, 479 , 813.14 , 516.73'
++ echo '175,1,2,1:0:0,0x113:0x113,umh,1,1,16,2,1,1,-2,3,2,2,spatial,1,0,2,40,50,1,69,1,1289143,, 0m2.065s, 479 , 813.14 , 516.73'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/175.sh
+Processing:  ./scripts/175.sh
+++ bash ./scripts/175.sh Animation_360P-24d4.mp4
++ csvLine='176,1,2,1:0:0,0x3:0x113,umh,9,0,24,2,1,1,-2,16,2,2,spatial,1,0,2,40,50,1,69,1,1175976,, 0m9.719s, 479 , 144.37 , 471.37'
++ echo '176,1,2,1:0:0,0x3:0x113,umh,9,0,24,2,1,1,-2,16,2,2,spatial,1,0,2,40,50,1,69,1,1175976,, 0m9.719s, 479 , 144.37 , 471.37'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/176.sh
+Processing:  ./scripts/176.sh
+++ bash ./scripts/176.sh Animation_360P-24d4.mp4
++ csvLine='177,1,2,1:0:0,0x3:0x113,umh,1,0,24,2,1,0,-2,16,2,2,auto,1,0,2,40,20,1,69,1,1298724,, 0m4.411s, 479 , 259.75 , 520.57'
++ echo '177,1,2,1:0:0,0x3:0x113,umh,1,0,24,2,1,0,-2,16,2,2,auto,1,0,2,40,20,1,69,1,1298724,, 0m4.411s, 479 , 259.75 , 520.57'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/177.sh
+Processing:  ./scripts/177.sh
+++ bash ./scripts/177.sh Animation_360P-24d4.mp4
++ csvLine='178,1,8,1:0:0,0x3:0x113,umh,10,0,24,2,1,0,-2,16,2,2,auto,1,0,2,40,20,1,69,1,1106583,, 0m15.966s, 479 , 116.81 , 443.56'
++ echo '178,1,8,1:0:0,0x3:0x113,umh,10,0,24,2,1,0,-2,16,2,2,auto,1,0,2,40,20,1,69,1,1106583,, 0m15.966s, 479 , 116.81 , 443.56'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/178.sh
+Processing:  ./scripts/178.sh
+++ bash ./scripts/178.sh Animation_360P-24d4.mp4
++ csvLine='179,1,8,1:0:0,0x3:0x113,umh,9,1,16,2,1,1,-2,3,2,2,spatial,1,0,2,0,60,1,69,0,1543834,, 0m8.760s, 479 , 257.80 , 618.82'
++ echo '179,1,8,1:0:0,0x3:0x113,umh,9,1,16,2,1,1,-2,3,2,2,spatial,1,0,2,0,60,1,69,0,1543834,, 0m8.760s, 479 , 257.80 , 618.82'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/179.sh
+Processing:  ./scripts/179.sh
+++ bash ./scripts/179.sh Animation_360P-24d4.mp4
++ csvLine='180,1,8,1:0:0,0x3:0x113,hex,9,1,16,2,1,1,-2,3,2,2,spatial,1,0,2,40,60,1,69,1,1161113,, 0m6.459s, 479 , 290.44 , 465.41'
++ echo '180,1,8,1:0:0,0x3:0x113,hex,9,1,16,2,1,1,-2,3,2,2,spatial,1,0,2,40,60,1,69,1,1161113,, 0m6.459s, 479 , 290.44 , 465.41'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/18.sh
+Processing:  ./scripts/18.sh
+++ bash ./scripts/18.sh Animation_360P-24d4.mp4
++ csvLine='19,1,1,0:0:0,0:0,dia,0,0,16,0,0,1,0,0,None,None,None,None,None,0,0,None,0,69,0,2918077,, 0m1.194s, 479 , 1117.55 , 1169.67'
++ echo '19,1,1,0:0:0,0:0,dia,0,0,16,0,0,1,0,0,None,None,None,None,None,0,0,None,0,69,0,2918077,, 0m1.194s, 479 , 1117.55 , 1169.67'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/180.sh
+Processing:  ./scripts/180.sh
+++ bash ./scripts/180.sh Animation_360P-24d4.mp4
++ csvLine='181,1,8,0:0:0,0x3:0x113,umh,9,1,16,2,1,1,-2,3,2,2,spatial,1,0,2,40,10,1,69,1,1080814,, 0m8.583s, 479 , 284.08 , 433.23'
++ echo '181,1,8,0:0:0,0x3:0x113,umh,9,1,16,2,1,1,-2,3,2,2,spatial,1,0,2,40,10,1,69,1,1080814,, 0m8.583s, 479 , 284.08 , 433.23'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/181.sh
+Processing:  ./scripts/181.sh
+++ bash ./scripts/181.sh Animation_360P-24d4.mp4
++ csvLine='182,1,8,0:0:0,0x3:0x113,umh,9,1,16,2,1,1,-2,3,2,2,spatial,1,0,2,40,40,1,69,1,1157390,, 0m7.764s, 479 , 277.06 , 463.92'
++ echo '182,1,8,0:0:0,0x3:0x113,umh,9,1,16,2,1,1,-2,3,2,2,spatial,1,0,2,40,40,1,69,1,1157390,, 0m7.764s, 479 , 277.06 , 463.92'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/182.sh
+Processing:  ./scripts/182.sh
+++ bash ./scripts/182.sh Animation_360P-24d4.mp4
++ csvLine='183,1,16,1:0:0,0x3:0x113,umh,10,1,24,2,1,1,0,8,2,2,spatial,1,0,2,40,60,1,69,1,1094652,, 0m16.526s, 479 , 132.35 , 438.77'
++ echo '183,1,16,1:0:0,0x3:0x113,umh,10,1,24,2,1,1,0,8,2,2,spatial,1,0,2,40,60,1,69,1,1094652,, 0m16.526s, 479 , 132.35 , 438.77'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/183.sh
+Processing:  ./scripts/183.sh
+++ bash ./scripts/183.sh Animation_360P-24d4.mp4
++ csvLine='184,1,16,1:0:0,0x3:0x113,umh,10,1,24,2,1,1,-2,8,2,2,spatial,1,0,0,40,60,1,69,0,1458482,, 0m17.476s, 479 , 125.86 , 584.61'
++ echo '184,1,16,1:0:0,0x3:0x113,umh,10,1,24,2,1,1,-2,8,2,2,spatial,1,0,0,40,60,1,69,0,1458482,, 0m17.476s, 479 , 125.86 , 584.61'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/184.sh
+Processing:  ./scripts/184.sh
+++ bash ./scripts/184.sh Animation_360P-24d4.mp4
++ csvLine='185,1,16,0:0:0,0x3:0x113,umh,10,1,24,2,1,1,-2,8,2,2,spatial,1,0,2,40,60,1,69,1,1107878,, 0m16.510s, 479 , 129.99 , 444.08'
++ echo '185,1,16,0:0:0,0x3:0x113,umh,10,1,24,2,1,1,-2,8,2,2,spatial,1,0,2,40,60,1,69,1,1107878,, 0m16.510s, 479 , 129.99 , 444.08'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/185.sh
+Processing:  ./scripts/185.sh
+++ bash ./scripts/185.sh Animation_360P-24d4.mp4
++ csvLine='186,1,8,1:0:0,0x3:0x113,umh,10,1,24,2,1,1,-2,8,2,2,spatial,1,0,2,40,50,1,69,1,1112314,, 0m11.551s, 479 , 156.06 , 445.85'
++ echo '186,1,8,1:0:0,0x3:0x113,umh,10,1,24,2,1,1,-2,8,2,2,spatial,1,0,2,40,50,1,69,1,1112314,, 0m11.551s, 479 , 156.06 , 445.85'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/186.sh
+Processing:  ./scripts/186.sh
+++ bash ./scripts/186.sh Animation_360P-24d4.mp4
++ csvLine='187,0,16,1:0:0,0x3:0x113,umh,10,1,24,2,1,1,-2,8,2,2,spatial,1,0,2,40,60,1,69,1,1168463,, 0m20.197s, 479 , 91.17 , 468.36'
++ echo '187,0,16,1:0:0,0x3:0x113,umh,10,1,24,2,1,1,-2,8,2,2,spatial,1,0,2,40,60,1,69,1,1168463,, 0m20.197s, 479 , 91.17 , 468.36'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/187.sh
+Processing:  ./scripts/187.sh
+++ bash ./scripts/187.sh Animation_360P-24d4.mp4
++ csvLine='188,1,16,1:0:0,0x3:0x113,umh,10,1,24,2,1,1,-2,8,2,2,auto,1,0,2,40,60,1,69,1,1106351,, 0m16.512s, 479 , 131.15 , 443.46'
++ echo '188,1,16,1:0:0,0x3:0x113,umh,10,1,24,2,1,1,-2,8,2,2,auto,1,0,2,40,60,1,69,1,1106351,, 0m16.512s, 479 , 131.15 , 443.46'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/188.sh
+Processing:  ./scripts/188.sh
+++ bash ./scripts/188.sh Animation_360P-24d4.mp4
++ csvLine='189,1,16,0:0:0,0x3:0x113,hex,11,1,24,2,1,1,-2,8,2,2,spatial,1,0,2,40,60,1,69,1,1112218,, 0m16.384s, 479 , 132.33 , 445.82'
++ echo '189,1,16,0:0:0,0x3:0x113,hex,11,1,24,2,1,1,-2,8,2,2,spatial,1,0,2,40,60,1,69,1,1112218,, 0m16.384s, 479 , 132.33 , 445.82'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/189.sh
+Processing:  ./scripts/189.sh
+++ bash ./scripts/189.sh Animation_360P-24d4.mp4
++ csvLine='190,0,16,0:0:0,0x3:0x113,hex,11,1,24,2,1,1,-2,8,2,2,spatial,1,0,2,40,60,1,69,0,1551544,, 0m26.525s, 479 , 74.18 , 621.91'
++ echo '190,0,16,0:0:0,0x3:0x113,hex,11,1,24,2,1,1,-2,8,2,2,spatial,1,0,2,40,60,1,69,0,1551544,, 0m26.525s, 479 , 74.18 , 621.91'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/19.sh
+Processing:  ./scripts/19.sh
+++ bash ./scripts/19.sh Animation_360P-24d4.mp4
++ csvLine='20,0,1,0:0:0,0:0,dia,0,0,16,0,0,1,0,0,None,None,None,None,None,0,0,10,0,69,0,3159062,, 0m0.949s, 479 , 1225.28 , 1266.26'
++ echo '20,0,1,0:0:0,0:0,dia,0,0,16,0,0,1,0,0,None,None,None,None,None,0,0,10,0,69,0,3159062,, 0m0.949s, 479 , 1225.28 , 1266.26'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/190.sh
+Processing:  ./scripts/190.sh
+++ bash ./scripts/190.sh Animation_360P-24d4.mp4
++ csvLine='191,1,16,1:0:0,0x3:0x133,tesa,11,0,24,2,1,0,-2,16,2,2,spatial,1,0,2,40,60,1,69,1,1110673,, 0m56.377s, 479 , 52.13 , 445.20'
++ echo '191,1,16,1:0:0,0x3:0x133,tesa,11,0,24,2,1,0,-2,16,2,2,spatial,1,0,2,40,60,1,69,1,1110673,, 0m56.377s, 479 , 52.13 , 445.20'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/191.sh
+Processing:  ./scripts/191.sh
+++ bash ./scripts/191.sh Animation_360P-24d4.mp4
++ csvLine='192,1,16,1:0:0,0x3:0x133,tesa,11,1,24,2,1,0,-2,16,2,2,auto,1,0,2,40,60,1,69,1,1112071,, 0m56.595s, 479 , 51.74 , 445.76'
++ echo '192,1,16,1:0:0,0x3:0x133,tesa,11,1,24,2,1,0,-2,16,2,2,auto,1,0,2,40,60,1,69,1,1112071,, 0m56.595s, 479 , 51.74 , 445.76'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/192.sh
+Processing:  ./scripts/192.sh
+++ bash ./scripts/192.sh Animation_360P-24d4.mp4
++ csvLine='193,1,16,1:0:0,0x3:0x133,tesa,11,1,24,2,1,0,-2,16,2,2,spatial,1,0,2,40,30,1,69,1,1110673,, 0m56.150s, 479 , 52.01 , 445.20'
++ echo '193,1,16,1:0:0,0x3:0x133,tesa,11,1,24,2,1,0,-2,16,2,2,spatial,1,0,2,40,30,1,69,1,1110673,, 0m56.150s, 479 , 52.01 , 445.20'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/193.sh
+Processing:  ./scripts/193.sh
+++ bash ./scripts/193.sh Animation_360P-24d4.mp4
++ csvLine='194,0,16,1:0:0,0x3:0x133,tesa,11,1,24,2,1,0,-2,16,2,2,spatial,1,0,2,40,60,1,69,1,1179231,, 1m3.334s, 479 , 44.07 , 472.68'
++ echo '194,0,16,1:0:0,0x3:0x133,tesa,11,1,24,2,1,0,-2,16,2,2,spatial,1,0,2,40,60,1,69,1,1179231,, 1m3.334s, 479 , 44.07 , 472.68'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/194.sh
+Processing:  ./scripts/194.sh
+++ bash ./scripts/194.sh Animation_360P-24d4.mp4
++ csvLine='195,1,16,1:0:0,0x3:0x133,tesa,11,1,24,2,1,0,-2,16,2,2,spatial,1,0,2,40,60,0,69,1,1059608,, 1m1.463s, 479 , 50.00 , 424.73'
++ echo '195,1,16,1:0:0,0x3:0x133,tesa,11,1,24,2,1,0,-2,16,2,2,spatial,1,0,2,40,60,0,69,1,1059608,, 1m1.463s, 479 , 50.00 , 424.73'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/195.sh
+Processing:  ./scripts/195.sh
+++ bash ./scripts/195.sh Animation_360P-24d4.mp4
++ csvLine='196,1,16,0:0:0,0x3:0x133,tesa,11,1,24,2,1,0,-2,16,2,2,spatial,1,0,2,40,60,1,69,1,1110974,, 0m56.707s, 479 , 51.45 , 445.32'
++ echo '196,1,16,0:0:0,0x3:0x133,tesa,11,1,24,2,1,0,-2,16,2,2,spatial,1,0,2,40,60,1,69,1,1110974,, 0m56.707s, 479 , 51.45 , 445.32'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/196.sh
+Processing:  ./scripts/196.sh
+++ bash ./scripts/196.sh Animation_360P-24d4.mp4
++ csvLine='197,1,16,1:0:0,0x3:0x133,tesa,7,1,24,2,1,0,-2,16,2,2,spatial,1,0,2,40,60,1,69,1,1156019,, 0m47.493s, 479 , 60.15 , 463.37'
++ echo '197,1,16,1:0:0,0x3:0x133,tesa,7,1,24,2,1,0,-2,16,2,2,spatial,1,0,2,40,60,1,69,1,1156019,, 0m47.493s, 479 , 60.15 , 463.37'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/197.sh
+Processing:  ./scripts/197.sh
+++ bash ./scripts/197.sh Animation_360P-24d4.mp4
++ csvLine='198,1,16,1:0:0,0x3:0x133,hex,11,1,24,2,1,0,-2,16,2,2,spatial,1,0,2,40,60,1,69,1,1103457,, 0m21.573s, 479 , 101.65 , 442.30'
++ echo '198,1,16,1:0:0,0x3:0x133,hex,11,1,24,2,1,0,-2,16,2,2,spatial,1,0,2,40,60,1,69,1,1103457,, 0m21.573s, 479 , 101.65 , 442.30'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/198.sh
+Processing:  ./scripts/198.sh
+++ bash ./scripts/198.sh Animation_360P-24d4.mp4
++ csvLine='199,1,16,1:0:0,0x3:0x3,tesa,11,1,24,2,1,0,-2,16,2,2,spatial,1,0,2,40,60,1,69,1,1110673,, 0m56.652s, 479 , 51.79 , 445.20'
++ echo '199,1,16,1:0:0,0x3:0x3,tesa,11,1,24,2,1,0,-2,16,2,2,spatial,1,0,2,40,60,1,69,1,1110673,, 0m56.652s, 479 , 51.79 , 445.20'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/199.sh
+Processing:  ./scripts/199.sh
+++ bash ./scripts/199.sh Animation_360P-24d4.mp4
++ csvLine='200,1,16,1:0:0,0:0,tesa,11,1,24,2,1,0,-2,16,2,2,spatial,1,0,2,40,60,1,69,1,1110673,, 0m56.551s, 479 , 51.58 , 445.20'
++ echo '200,1,16,1:0:0,0:0,tesa,11,1,24,2,1,0,-2,16,2,2,spatial,1,0,2,40,60,1,69,1,1110673,, 0m56.551s, 479 , 51.58 , 445.20'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/2.sh
+Processing:  ./scripts/2.sh
+++ bash ./scripts/2.sh Animation_360P-24d4.mp4
++ csvLine='3,1,1,1:0:0,0x3:0x113,hex,2,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,10,1,69,1,1088425,, 0m1.650s, 479 , 975.84 , 436.28'
++ echo '3,1,1,1:0:0,0x3:0x113,hex,2,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,10,1,69,1,1088425,, 0m1.650s, 479 , 975.84 , 436.28'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/20.sh
+Processing:  ./scripts/20.sh
+++ bash ./scripts/20.sh Animation_360P-24d4.mp4
++ csvLine='21,0,1,0:0:0,0:0,dia,0,0,16,0,0,1,0,0,None,None,None,None,None,0,0,None,1,69,0,3022263,, 0m1.028s, 479 , 1116.82 , 1211.43'
++ echo '21,0,1,0:0:0,0:0,dia,0,0,16,0,0,1,0,0,None,None,None,None,None,0,0,None,1,69,0,3022263,, 0m1.028s, 479 , 1116.82 , 1211.43'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/200.sh
+Processing:  ./scripts/200.sh
+++ bash ./scripts/200.sh Animation_360P-24d4.mp4
++ csvLine='201,1,16,1:0:0,0:0,tesa,11,1,16,2,1,0,-2,16,2,2,spatial,1,0,2,40,60,1,69,0,1464309,, 0m45.523s, 479 , 60.88 , 586.95'
++ echo '201,1,16,1:0:0,0:0,tesa,11,1,16,2,1,0,-2,16,2,2,spatial,1,0,2,40,60,1,69,0,1464309,, 0m45.523s, 479 , 60.88 , 586.95'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/21.sh
+Processing:  ./scripts/21.sh
+++ bash ./scripts/21.sh Animation_360P-24d4.mp4
++ csvLine='22,0,1,0:0:0,0:0,dia,0,0,16,0,0,1,0,0,None,None,None,None,None,0,0,None,0,69,1,2638908,, 0m1.054s, 479 , 1023.86 , 1057.77'
++ echo '22,0,1,0:0:0,0:0,dia,0,0,16,0,0,1,0,0,None,None,None,None,None,0,0,None,0,69,1,2638908,, 0m1.054s, 479 , 1023.86 , 1057.77'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/22.sh
+Processing:  ./scripts/22.sh
+++ bash ./scripts/22.sh Animation_360P-24d4.mp4
++ csvLine='23,0,1,0:0:0,0:0,dia,1,0,16,0,0,1,0,0,None,None,None,None,None,0,0,None,0,69,0,2394034,, 0m0.965s, 479 , 1222.27 , 959.61'
++ echo '23,0,1,0:0:0,0:0,dia,1,0,16,0,0,1,0,0,None,None,None,None,None,0,0,None,0,69,0,2394034,, 0m0.965s, 479 , 1222.27 , 959.61'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/23.sh
+Processing:  ./scripts/23.sh
+++ bash ./scripts/23.sh Animation_360P-24d4.mp4
++ csvLine='24,0,1,0:0:0,0x3:0x133,dia,0,0,16,0,0,1,0,0,None,None,None,None,None,0,0,None,0,69,0,3159062,, 0m0.976s, 479 , 1164.63 , 1266.26'
++ echo '24,0,1,0:0:0,0x3:0x133,dia,0,0,16,0,0,1,0,0,None,None,None,None,None,0,0,None,0,69,0,3159062,, 0m0.976s, 479 , 1164.63 , 1266.26'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/24.sh
+Processing:  ./scripts/24.sh
+++ bash ./scripts/24.sh Animation_360P-24d4.mp4
++ csvLine='25,0,1,0:0:0,0x3:0x3,dia,0,0,16,0,0,1,0,0,None,None,None,None,None,0,0,None,0,69,0,3159062,, 0m0.961s, 479 , 1161.43 , 1266.26'
++ echo '25,0,1,0:0:0,0x3:0x3,dia,0,0,16,0,0,1,0,0,None,None,None,None,None,0,0,None,0,69,0,3159062,, 0m0.961s, 479 , 1161.43 , 1266.26'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/25.sh
+Processing:  ./scripts/25.sh
+++ bash ./scripts/25.sh Animation_360P-24d4.mp4
++ csvLine='26,0,1,0:0:0,0:0,dia,11,0,16,0,0,1,0,0,None,None,None,None,None,0,0,None,0,69,0,2084046,, 0m2.002s, 479 , 946.64 , 835.36'
++ echo '26,0,1,0:0:0,0:0,dia,11,0,16,0,0,1,0,0,None,None,None,None,None,0,0,None,0,69,0,2084046,, 0m2.002s, 479 , 946.64 , 835.36'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/26.sh
+Processing:  ./scripts/26.sh
+++ bash ./scripts/26.sh Animation_360P-24d4.mp4
++ csvLine='27,0,1,0:0:0,0:0,dia,11,0,16,0,0,1,0,16,2,1,None,1,None,0,0,None,0,69,0,1384015,, 0m3.255s, 479 , 683.15 , 554.76'
++ echo '27,0,1,0:0:0,0:0,dia,11,0,16,0,0,1,0,16,2,1,None,1,None,0,0,None,0,69,0,1384015,, 0m3.255s, 479 , 683.15 , 554.76'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/27.sh
+Processing:  ./scripts/27.sh
+++ bash ./scripts/27.sh Animation_360P-24d4.mp4
++ csvLine='28,0,1,0:0:0,0:0,dia,0,0,16,2,0,1,0,0,None,None,None,None,None,0,0,None,0,69,0,3199497,, 0m3.026s, 479 , 758.08 , 1282.47'
++ echo '28,0,1,0:0:0,0:0,dia,0,0,16,2,0,1,0,0,None,None,None,None,None,0,0,None,0,69,0,3199497,, 0m3.026s, 479 , 758.08 , 1282.47'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/28.sh
+Processing:  ./scripts/28.sh
+++ bash ./scripts/28.sh Animation_360P-24d4.mp4
++ csvLine='29,0,1,0:0:0,0:0,dia,0,0,16,0,0,1,0,0,None,None,None,None,None,2,0,None,0,69,0,3154998,, 0m1.029s, 479 , 1104.40 , 1264.63'
++ echo '29,0,1,0:0:0,0:0,dia,0,0,16,0,0,1,0,0,None,None,None,None,None,2,0,None,0,69,0,3154998,, 0m1.029s, 479 , 1104.40 , 1264.63'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/29.sh
+Processing:  ./scripts/29.sh
+++ bash ./scripts/29.sh Animation_360P-24d4.mp4
++ csvLine='30,1,1,0:0:0,0:0,dia,0,1,16,0,0,1,0,0,None,None,None,None,None,0,0,None,0,69,0,2918077,, 0m1.175s, 479 , 1135.07 , 1169.67'
++ echo '30,1,1,0:0:0,0:0,dia,0,1,16,0,0,1,0,0,None,None,None,None,None,0,0,None,0,69,0,2918077,, 0m1.175s, 479 , 1135.07 , 1169.67'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/3.sh
+Processing:  ./scripts/3.sh
+++ bash ./scripts/3.sh Animation_360P-24d4.mp4
++ csvLine='4,1,2,1:0:0,0x3:0x113,hex,4,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,20,1,69,1,1090134,, 0m1.879s, 479 , 899.33 , 436.96'
++ echo '4,1,2,1:0:0,0x3:0x113,hex,4,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,20,1,69,1,1090134,, 0m1.879s, 479 , 899.33 , 436.96'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/30.sh
+Processing:  ./scripts/30.sh
+++ bash ./scripts/30.sh Animation_360P-24d4.mp4
++ csvLine='31,0,1,0:0:0,0:0,dia,0,1,16,0,0,1,-2,0,None,None,None,None,None,0,0,None,0,69,0,3182460,, 0m0.992s, 479 , 1131.55 , 1275.64'
++ echo '31,0,1,0:0:0,0:0,dia,0,1,16,0,0,1,-2,0,None,None,None,None,None,0,0,None,0,69,0,3182460,, 0m0.992s, 479 , 1131.55 , 1275.64'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/31.sh
+Processing:  ./scripts/31.sh
+++ bash ./scripts/31.sh Animation_360P-24d4.mp4
++ csvLine='32,0,1,0:0:0,0:0,dia,0,0,16,0,0,0,0,0,None,None,None,None,None,0,0,None,0,69,0,3191543,, 0m0.997s, 479 , 1156.64 , 1279.28'
++ echo '32,0,1,0:0:0,0:0,dia,0,0,16,0,0,0,0,0,None,None,None,None,None,0,0,None,0,69,0,3191543,, 0m0.997s, 479 , 1156.64 , 1279.28'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/32.sh
+Processing:  ./scripts/32.sh
+++ bash ./scripts/32.sh Animation_360P-24d4.mp4
++ csvLine='33,0,1,1:0:0,0x3:0x3,dia,1,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,None,0,69,1,1741498,, 0m1.217s, 479 , 1099.72 , 698.05'
++ echo '33,0,1,1:0:0,0x3:0x3,dia,1,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,None,0,69,1,1741498,, 0m1.217s, 479 , 1099.72 , 698.05'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/33.sh
+Processing:  ./scripts/33.sh
+++ bash ./scripts/33.sh Animation_360P-24d4.mp4
++ csvLine='34,1,1,1:0:0,0x3:0x3,dia,1,0,24,0,1,1,0,3,2,1,auto,1,0,1,40,None,0,69,1,1609428,, 0m1.359s, 479 , 1073.03 , 645.12'
++ echo '34,1,1,1:0:0,0x3:0x3,dia,1,0,24,0,1,1,0,3,2,1,auto,1,0,1,40,None,0,69,1,1609428,, 0m1.359s, 479 , 1073.03 , 645.12'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/34.sh
+Processing:  ./scripts/34.sh
+++ bash ./scripts/34.sh Animation_360P-24d4.mp4
++ csvLine='35,1,1,1:0:0,0x3:0x3,dia,1,0,16,0,1,0,0,3,2,1,auto,1,0,1,40,None,0,69,1,1617106,, 0m1.365s, 479 , 1051.30 , 648.19'
++ echo '35,1,1,1:0:0,0x3:0x3,dia,1,0,16,0,1,0,0,3,2,1,auto,1,0,1,40,None,0,69,1,1617106,, 0m1.365s, 479 , 1051.30 , 648.19'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/35.sh
+Processing:  ./scripts/35.sh
+++ bash ./scripts/35.sh Animation_360P-24d4.mp4
++ csvLine='36,1,1,1:0:0,0x3:0x3,dia,1,0,16,0,1,1,0,3,2,1,spatial,1,0,1,40,None,0,69,1,1609424,, 0m1.310s, 479 , 1058.27 , 645.11'
++ echo '36,1,1,1:0:0,0x3:0x3,dia,1,0,16,0,1,1,0,3,2,1,spatial,1,0,1,40,None,0,69,1,1609424,, 0m1.310s, 479 , 1058.27 , 645.11'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/36.sh
+Processing:  ./scripts/36.sh
+++ bash ./scripts/36.sh Animation_360P-24d4.mp4
++ csvLine='37,1,1,1:0:0,0x3:0x3,dia,2,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,None,0,69,1,1312922,, 0m1.570s, 479 , 988.94 , 526.27'
++ echo '37,1,1,1:0:0,0x3:0x3,dia,2,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,None,0,69,1,1312922,, 0m1.570s, 479 , 988.94 , 526.27'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/37.sh
+Processing:  ./scripts/37.sh
+++ bash ./scripts/37.sh Animation_360P-24d4.mp4
++ csvLine='38,1,1,1:0:0,0x3:0x3,dia,2,0,16,0,1,1,0,3,2,1,auto,1,0,2,40,None,0,69,1,1312922,, 0m1.533s, 479 , 994.55 , 526.27'
++ echo '38,1,1,1:0:0,0x3:0x3,dia,2,0,16,0,1,1,0,3,2,1,auto,1,0,2,40,None,0,69,1,1312922,, 0m1.533s, 479 , 994.55 , 526.27'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/38.sh
+Processing:  ./scripts/38.sh
+++ bash ./scripts/38.sh Animation_360P-24d4.mp4
++ csvLine='39,1,1,1:0:0,0x3:0x133,dia,2,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,None,0,69,1,1312922,, 0m1.511s, 479 , 999.84 , 526.27'
++ echo '39,1,1,1:0:0,0x3:0x133,dia,2,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,None,0,69,1,1312922,, 0m1.511s, 479 , 999.84 , 526.27'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/39.sh
+Processing:  ./scripts/39.sh
+++ bash ./scripts/39.sh Animation_360P-24d4.mp4
++ csvLine='40,1,1,1:0:0,0x3:0x3,dia,1,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,10,0,69,1,1609428,, 0m1.347s, 479 , 1034.37 , 645.12'
++ echo '40,1,1,1:0:0,0x3:0x3,dia,1,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,10,0,69,1,1609428,, 0m1.347s, 479 , 1034.37 , 645.12'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/4.sh
+Processing:  ./scripts/4.sh
+++ bash ./scripts/4.sh Animation_360P-24d4.mp4
++ csvLine='5,1,2,1:0:0,0x3:0x113,hex,6,1,16,1,1,1,-2,3,2,1,auto,1,0,1,40,30,1,69,1,1172776,, 0m2.446s, 479 , 712.22 , 470.09'
++ echo '5,1,2,1:0:0,0x3:0x113,hex,6,1,16,1,1,1,-2,3,2,1,auto,1,0,1,40,30,1,69,1,1172776,, 0m2.446s, 479 , 712.22 , 470.09'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/40.sh
+Processing:  ./scripts/40.sh
+++ bash ./scripts/40.sh Animation_360P-24d4.mp4
++ csvLine='41,1,1,1:0:0,0x3:0x3,dia,1,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,None,0,69,0,1925139,, 0m1.364s, 479 , 1040.81 , 771.66'
++ echo '41,1,1,1:0:0,0x3:0x3,dia,1,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,None,0,69,0,1925139,, 0m1.364s, 479 , 1040.81 , 771.66'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/41.sh
+Processing:  ./scripts/41.sh
+++ bash ./scripts/41.sh Animation_360P-24d4.mp4
++ csvLine='42,1,5,1:0:0,0x3:0x3,dia,1,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,None,0,69,1,1556260,, 0m1.514s, 479 , 1023.88 , 623.80'
++ echo '42,1,5,1:0:0,0x3:0x3,dia,1,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,None,0,69,1,1556260,, 0m1.514s, 479 , 1023.88 , 623.80'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/42.sh
+Processing:  ./scripts/42.sh
+++ bash ./scripts/42.sh Animation_360P-24d4.mp4
++ csvLine='43,1,1,1:0:0,0x3:0x3,dia,1,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,None,1,69,1,1295966,, 0m1.279s, 479 , 959.85 , 519.47'
++ echo '43,1,1,1:0:0,0x3:0x3,dia,1,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,None,1,69,1,1295966,, 0m1.279s, 479 , 959.85 , 519.47'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/43.sh
+Processing:  ./scripts/43.sh
+++ bash ./scripts/43.sh Animation_360P-24d4.mp4
++ csvLine='44,0,1,1:0:0,0x3:0x3,dia,1,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,None,1,69,1,1382044,, 0m1.180s, 479 , 1035.75 , 553.97'
++ echo '44,0,1,1:0:0,0x3:0x3,dia,1,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,None,1,69,1,1382044,, 0m1.180s, 479 , 1035.75 , 553.97'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/44.sh
+Processing:  ./scripts/44.sh
+++ bash ./scripts/44.sh Animation_360P-24d4.mp4
++ csvLine='45,0,1,1:0:0,0x3:0x3,hex,1,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,None,1,69,1,1381663,, 0m1.127s, 479 , 1062.38 , 553.82'
++ echo '45,0,1,1:0:0,0x3:0x3,hex,1,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,None,1,69,1,1381663,, 0m1.127s, 479 , 1062.38 , 553.82'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/45.sh
+Processing:  ./scripts/45.sh
+++ bash ./scripts/45.sh Animation_360P-24d4.mp4
++ csvLine='46,0,1,1:0:0,0x3:0x3,hex,1,0,16,1,1,1,0,3,2,1,auto,1,0,1,40,None,1,69,1,1423140,, 0m1.746s, 479 , 893.29 , 570.44'
++ echo '46,0,1,1:0:0,0x3:0x3,hex,1,0,16,1,1,1,0,3,2,1,auto,1,0,1,40,None,1,69,1,1423140,, 0m1.746s, 479 , 893.29 , 570.44'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/46.sh
+Processing:  ./scripts/46.sh
+++ bash ./scripts/46.sh Animation_360P-24d4.mp4
++ csvLine='47,0,1,1:0:0,0x3:0x3,umh,1,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,None,1,69,1,1380736,, 0m1.253s, 479 , 1035.87 , 553.45'
++ echo '47,0,1,1:0:0,0x3:0x3,umh,1,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,None,1,69,1,1380736,, 0m1.253s, 479 , 1035.87 , 553.45'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/47.sh
+Processing:  ./scripts/47.sh
+++ bash ./scripts/47.sh Animation_360P-24d4.mp4
++ csvLine='48,0,1,1:0:0,0x3:0x3,tesa,1,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,None,1,69,1,1380166,, 0m1.538s, 479 , 978.08 , 553.22'
++ echo '48,0,1,1:0:0,0x3:0x3,tesa,1,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,None,1,69,1,1380166,, 0m1.538s, 479 , 978.08 , 553.22'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/48.sh
+Processing:  ./scripts/48.sh
+++ bash ./scripts/48.sh Animation_360P-24d4.mp4
++ csvLine='49,0,1,0:0:0,0x3:0x3,dia,1,0,16,0,1,1,0,16,2,1,auto,1,0,1,40,None,1,69,1,1330125,, 0m1.358s, 479 , 965.86 , 533.16'
++ echo '49,0,1,0:0:0,0x3:0x3,dia,1,0,16,0,1,1,0,16,2,1,auto,1,0,1,40,None,1,69,1,1330125,, 0m1.358s, 479 , 965.86 , 533.16'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/49.sh
+Processing:  ./scripts/49.sh
+++ bash ./scripts/49.sh Animation_360P-24d4.mp4
++ csvLine='50,1,1,1:0:0,0x3:0x3,dia,1,1,16,0,1,1,0,3,2,1,auto,1,0,1,40,None,0,69,0,1925139,, 0m1.355s, 479 , 1057.74 , 771.66'
++ echo '50,1,1,1:0:0,0x3:0x3,dia,1,1,16,0,1,1,0,3,2,1,auto,1,0,1,40,None,0,69,0,1925139,, 0m1.355s, 479 , 1057.74 , 771.66'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/5.sh
+Processing:  ./scripts/5.sh
+++ bash ./scripts/5.sh Animation_360P-24d4.mp4
++ csvLine='6,1,3,1:0:0,0x3:0x113,hex,7,1,16,1,1,1,-2,3,2,1,auto,1,0,2,40,40,1,69,1,1173333,, 0m3.344s, 479 , 608.83 , 470.31'
++ echo '6,1,3,1:0:0,0x3:0x113,hex,7,1,16,1,1,1,-2,3,2,1,auto,1,0,2,40,40,1,69,1,1173333,, 0m3.344s, 479 , 608.83 , 470.31'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/50.sh
+Processing:  ./scripts/50.sh
+++ bash ./scripts/50.sh Animation_360P-24d4.mp4
++ csvLine='51,1,1,1:0:0,0x3:0x3,dia,1,1,16,0,1,0,0,3,2,1,auto,1,0,1,40,None,0,69,0,1936506,, 0m1.390s, 479 , 1011.85 , 776.22'
++ echo '51,1,1,1:0:0,0x3:0x3,dia,1,1,16,0,1,0,0,3,2,1,auto,1,0,1,40,None,0,69,0,1936506,, 0m1.390s, 479 , 1011.85 , 776.22'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/51.sh
+Processing:  ./scripts/51.sh
+++ bash ./scripts/51.sh Animation_360P-24d4.mp4
++ csvLine='52,0,1,0:0:0,0x3:0x3,dia,1,1,16,0,1,0,0,3,2,1,auto,1,0,1,0,None,0,69,0,2162640,, 0m1.217s, 479 , 1085.78 , 866.86'
++ echo '52,0,1,0:0:0,0x3:0x3,dia,1,1,16,0,1,0,0,3,2,1,auto,1,0,1,0,None,0,69,0,2162640,, 0m1.217s, 479 , 1085.78 , 866.86'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/52.sh
+Processing:  ./scripts/52.sh
+++ bash ./scripts/52.sh Animation_360P-24d4.mp4
++ csvLine='53,0,1,1:0:0,0x3:0x3,dia,1,1,16,0,1,0,0,3,2,1,auto,1,0,1,40,None,0,69,0,2091360,, 0m1.191s, 479 , 1068.72 , 838.29'
++ echo '53,0,1,1:0:0,0x3:0x3,dia,1,1,16,0,1,0,0,3,2,1,auto,1,0,1,40,None,0,69,0,2091360,, 0m1.191s, 479 , 1068.72 , 838.29'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/53.sh
+Processing:  ./scripts/53.sh
+++ bash ./scripts/53.sh Animation_360P-24d4.mp4
++ csvLine='54,1,1,1:0:0,0x3:0x3,tesa,1,1,16,0,1,0,0,3,2,1,auto,1,0,1,40,None,0,69,0,1939596,, 0m1.797s, 479 , 971.33 , 777.46'
++ echo '54,1,1,1:0:0,0x3:0x3,tesa,1,1,16,0,1,0,0,3,2,1,auto,1,0,1,40,None,0,69,0,1939596,, 0m1.797s, 479 , 971.33 , 777.46'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/54.sh
+Processing:  ./scripts/54.sh
+++ bash ./scripts/54.sh Animation_360P-24d4.mp4
++ csvLine='55,1,1,1:0:0,0x3:0x3,dia,1,1,16,0,1,0,0,3,2,2,spatial,1,0,2,40,None,0,69,0,1903537,, 0m1.504s, 479 , 993.49 , 763.00'
++ echo '55,1,1,1:0:0,0x3:0x3,dia,1,1,16,0,1,0,0,3,2,2,spatial,1,0,2,40,None,0,69,0,1903537,, 0m1.504s, 479 , 993.49 , 763.00'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/55.sh
+Processing:  ./scripts/55.sh
+++ bash ./scripts/55.sh Animation_360P-24d4.mp4
++ csvLine='56,1,16,1:0:0,0x3:0x133,dia,1,1,16,0,1,0,0,3,2,2,spatial,1,0,2,40,None,0,69,0,1851514,, 0m2.488s, 479 , 792.40 , 742.15'
++ echo '56,1,16,1:0:0,0x3:0x133,dia,1,1,16,0,1,0,0,3,2,2,spatial,1,0,2,40,None,0,69,0,1851514,, 0m2.488s, 479 , 792.40 , 742.15'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/56.sh
+Processing:  ./scripts/56.sh
+++ bash ./scripts/56.sh Animation_360P-24d4.mp4
++ csvLine='57,1,16,1:0:0,0x3:0x133,dia,1,1,16,0,1,0,0,3,2,2,spatial,1,0,2,40,60,0,69,0,1851514,, 0m2.504s, 479 , 790.84 , 742.15'
++ echo '57,1,16,1:0:0,0x3:0x133,dia,1,1,16,0,1,0,0,3,2,2,spatial,1,0,2,40,60,0,69,0,1851514,, 0m2.504s, 479 , 790.84 , 742.15'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/57.sh
+Processing:  ./scripts/57.sh
+++ bash ./scripts/57.sh Animation_360P-24d4.mp4
++ csvLine='58,0,1,1:0:0,0x3:0x113,hex,2,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,10,1,69,1,1168216,, 0m1.508s, 479 , 1025.59 , 468.26'
++ echo '58,0,1,1:0:0,0x3:0x113,hex,2,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,10,1,69,1,1168216,, 0m1.508s, 479 , 1025.59 , 468.26'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/58.sh
+Processing:  ./scripts/58.sh
+++ bash ./scripts/58.sh Animation_360P-24d4.mp4
++ csvLine='59,0,1,1:0:0,0x3:0x113,hex,2,0,16,0,1,1,0,3,2,1,spatial,1,0,1,40,10,1,69,1,1168205,, 0m1.579s, 479 , 963.97 , 468.26'
++ echo '59,0,1,1:0:0,0x3:0x113,hex,2,0,16,0,1,1,0,3,2,1,spatial,1,0,1,40,10,1,69,1,1168205,, 0m1.579s, 479 , 963.97 , 468.26'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/59.sh
+Processing:  ./scripts/59.sh
+++ bash ./scripts/59.sh Animation_360P-24d4.mp4
++ csvLine='60,0,1,1:0:0,0x3:0x113,hex,2,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,10,0,69,1,1443294,, 0m1.443s, 479 , 1053.33 , 578.52'
++ echo '60,0,1,1:0:0,0x3:0x113,hex,2,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,10,0,69,1,1443294,, 0m1.443s, 479 , 1053.33 , 578.52'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/6.sh
+Processing:  ./scripts/6.sh
+++ bash ./scripts/6.sh Animation_360P-24d4.mp4
++ csvLine='7,1,5,1:0:0,0x3:0x113,hex,8,1,16,2,1,1,-2,3,2,1,spatial,1,0,2,40,50,1,69,1,1153095,, 0m4.689s, 479 , 361.54 , 462.20'
++ echo '7,1,5,1:0:0,0x3:0x113,hex,8,1,16,2,1,1,-2,3,2,1,spatial,1,0,2,40,50,1,69,1,1153095,, 0m4.689s, 479 , 361.54 , 462.20'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/60.sh
+Processing:  ./scripts/60.sh
+++ bash ./scripts/60.sh Animation_360P-24d4.mp4
++ csvLine='61,0,1,1:0:0,0x3:0x3,hex,2,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,10,1,69,1,1168216,, 0m1.458s, 479 , 1022.65 , 468.26'
++ echo '61,0,1,1:0:0,0x3:0x3,hex,2,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,10,1,69,1,1168216,, 0m1.458s, 479 , 1022.65 , 468.26'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/61.sh
+Processing:  ./scripts/61.sh
+++ bash ./scripts/61.sh Animation_360P-24d4.mp4
++ csvLine='62,0,1,1:0:0,0:0,hex,2,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,10,1,69,1,1168216,, 0m1.485s, 479 , 1022.61 , 468.26'
++ echo '62,0,1,1:0:0,0:0,hex,2,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,10,1,69,1,1168216,, 0m1.485s, 479 , 1022.61 , 468.26'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/62.sh
+Processing:  ./scripts/62.sh
+++ bash ./scripts/62.sh Animation_360P-24d4.mp4
++ csvLine='63,1,1,1:0:0,0x3:0x113,hex,2,1,16,0,1,1,0,3,2,1,auto,1,0,1,40,10,1,69,1,1088425,, 0m1.602s, 479 , 982.36 , 436.28'
++ echo '63,1,1,1:0:0,0x3:0x113,hex,2,1,16,0,1,1,0,3,2,1,auto,1,0,1,40,10,1,69,1,1088425,, 0m1.602s, 479 , 982.36 , 436.28'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/63.sh
+Processing:  ./scripts/63.sh
+++ bash ./scripts/63.sh Animation_360P-24d4.mp4
++ csvLine='64,1,1,1:0:0,0x3:0x113,hex,2,0,16,0,0,1,0,3,2,1,auto,1,0,1,40,10,0,69,1,1323726,, 0m1.573s, 479 , 992.59 , 530.60'
++ echo '64,1,1,1:0:0,0x3:0x113,hex,2,0,16,0,0,1,0,3,2,1,auto,1,0,1,40,10,0,69,1,1323726,, 0m1.573s, 479 , 992.59 , 530.60'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/64.sh
+Processing:  ./scripts/64.sh
+++ bash ./scripts/64.sh Animation_360P-24d4.mp4
++ csvLine='65,1,1,1:0:0,0x3:0x113,hex,2,0,16,0,0,1,0,3,2,1,spatial,1,0,1,40,40,0,69,1,1323720,, 0m1.567s, 479 , 1007.21 , 530.59'
++ echo '65,1,1,1:0:0,0x3:0x113,hex,2,0,16,0,0,1,0,3,2,1,spatial,1,0,1,40,40,0,69,1,1323720,, 0m1.567s, 479 , 1007.21 , 530.59'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/65.sh
+Processing:  ./scripts/65.sh
+++ bash ./scripts/65.sh Animation_360P-24d4.mp4
++ csvLine='66,1,1,1:0:0,0x3:0x113,hex,1,0,16,0,0,1,0,3,2,1,spatial,1,0,1,40,40,0,69,1,1601152,, 0m1.300s, 479 , 984.03 , 641.80'
++ echo '66,1,1,1:0:0,0x3:0x113,hex,1,0,16,0,0,1,0,3,2,1,spatial,1,0,1,40,40,0,69,1,1601152,, 0m1.300s, 479 , 984.03 , 641.80'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/66.sh
+Processing:  ./scripts/66.sh
+++ bash ./scripts/66.sh Animation_360P-24d4.mp4
++ csvLine='67,1,1,1:0:0,0x3:0x113,hex,2,0,16,0,0,1,0,3,2,1,auto,1,0,1,40,40,0,69,1,1323726,, 0m1.575s, 479 , 1004.60 , 530.60'
++ echo '67,1,1,1:0:0,0x3:0x113,hex,2,0,16,0,0,1,0,3,2,1,auto,1,0,1,40,40,0,69,1,1323726,, 0m1.575s, 479 , 1004.60 , 530.60'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/67.sh
+Processing:  ./scripts/67.sh
+++ bash ./scripts/67.sh Animation_360P-24d4.mp4
++ csvLine='68,1,1,1:0:0,0x3:0x113,hex,2,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,20,1,69,0,1625548,, 0m1.631s, 479 , 956.96 , 651.58'
++ echo '68,1,1,1:0:0,0x3:0x113,hex,2,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,20,1,69,0,1625548,, 0m1.631s, 479 , 956.96 , 651.58'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/68.sh
+Processing:  ./scripts/68.sh
+++ bash ./scripts/68.sh Animation_360P-24d4.mp4
++ csvLine='69,1,1,0:0:0,0x113:0x113,tesa,2,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,10,1,69,1,1106614,, 0m2.221s, 479 , 807.71 , 443.57'
++ echo '69,1,1,0:0:0,0x113:0x113,tesa,2,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,10,1,69,1,1106614,, 0m2.221s, 479 , 807.71 , 443.57'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/69.sh
+Processing:  ./scripts/69.sh
+++ bash ./scripts/69.sh Animation_360P-24d4.mp4
++ csvLine='70,1,1,0:0:0,0x113:0x113,tesa,2,0,16,2,1,1,0,3,2,1,auto,1,0,1,40,10,1,69,1,1133069,, 0m2.491s, 479 , 800.85 , 454.17'
++ echo '70,1,1,0:0:0,0x113:0x113,tesa,2,0,16,2,1,1,0,3,2,1,auto,1,0,1,40,10,1,69,1,1133069,, 0m2.491s, 479 , 800.85 , 454.17'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/7.sh
+Processing:  ./scripts/7.sh
+++ bash ./scripts/7.sh Animation_360P-24d4.mp4
++ csvLine='8,1,8,1:0:0,0x3:0x113,umh,9,1,16,2,1,1,-2,3,2,2,spatial,1,0,2,40,60,1,69,1,1159799,, 0m7.759s, 479 , 264.79 , 464.89'
++ echo '8,1,8,1:0:0,0x3:0x113,umh,9,1,16,2,1,1,-2,3,2,2,spatial,1,0,2,40,60,1,69,1,1159799,, 0m7.759s, 479 , 264.79 , 464.89'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/70.sh
+Processing:  ./scripts/70.sh
+++ bash ./scripts/70.sh Animation_360P-24d4.mp4
++ csvLine='71,1,5,1:0:0,0x3:0x113,dia,2,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,10,1,69,1,1043400,, 0m1.793s, 479 , 931.48 , 418.23'
++ echo '71,1,5,1:0:0,0x3:0x113,dia,2,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,10,1,69,1,1043400,, 0m1.793s, 479 , 931.48 , 418.23'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/71.sh
+Processing:  ./scripts/71.sh
+++ bash ./scripts/71.sh Animation_360P-24d4.mp4
++ csvLine='72,1,5,1:0:0,0x3:0x113,dia,2,0,16,0,1,1,0,8,2,1,auto,1,0,1,40,10,1,69,1,1032672,, 0m1.922s, 479 , 907.29 , 413.93'
++ echo '72,1,5,1:0:0,0x3:0x113,dia,2,0,16,0,1,1,0,8,2,1,auto,1,0,1,40,10,1,69,1,1032672,, 0m1.922s, 479 , 907.29 , 413.93'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/72.sh
+Processing:  ./scripts/72.sh
+++ bash ./scripts/72.sh Animation_360P-24d4.mp4
++ csvLine='73,1,5,1:0:0,0x3:0x113,dia,8,0,16,0,1,1,0,8,2,1,auto,1,0,1,40,10,1,69,1,998753,, 0m4.103s, 479 , 538.19 , 400.34'
++ echo '73,1,5,1:0:0,0x3:0x113,dia,8,0,16,0,1,1,0,8,2,1,auto,1,0,1,40,10,1,69,1,998753,, 0m4.103s, 479 , 538.19 , 400.34'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/73.sh
+Processing:  ./scripts/73.sh
+++ bash ./scripts/73.sh Animation_360P-24d4.mp4
++ csvLine='74,1,5,1:0:0,0x3:0x113,dia,8,1,16,0,1,1,0,8,2,1,auto,1,0,2,40,10,0,69,1,1056340,, 0m4.400s, 479 , 568.22 , 423.42'
++ echo '74,1,5,1:0:0,0x3:0x113,dia,8,1,16,0,1,1,0,8,2,1,auto,1,0,2,40,10,0,69,1,1056340,, 0m4.400s, 479 , 568.22 , 423.42'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/74.sh
+Processing:  ./scripts/74.sh
+++ bash ./scripts/74.sh Animation_360P-24d4.mp4
++ csvLine='75,1,2,1:0:0,0x3:0x113,hex,4,0,16,0,1,1,0,3,2,1,auto,1,0,1,0,20,1,69,1,1083612,, 0m2.046s, 479 , 876.02 , 434.35'
++ echo '75,1,2,1:0:0,0x3:0x113,hex,4,0,16,0,1,1,0,3,2,1,auto,1,0,1,0,20,1,69,1,1083612,, 0m2.046s, 479 , 876.02 , 434.35'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/75.sh
+Processing:  ./scripts/75.sh
+++ bash ./scripts/75.sh Animation_360P-24d4.mp4
++ csvLine='76,1,2,1:0:0,0x113:0x113,hex,4,0,16,0,1,1,0,3,2,1,auto,1,0,1,0,20,1,69,1,1083612,, 0m2.033s, 479 , 864.29 , 434.35'
++ echo '76,1,2,1:0:0,0x113:0x113,hex,4,0,16,0,1,1,0,3,2,1,auto,1,0,1,0,20,1,69,1,1083612,, 0m2.033s, 479 , 864.29 , 434.35'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/76.sh
+Processing:  ./scripts/76.sh
+++ bash ./scripts/76.sh Animation_360P-24d4.mp4
++ csvLine='77,0,2,1:0:0,0x3:0x113,hex,4,0,16,0,1,1,-2,3,2,1,auto,1,0,1,0,20,1,69,1,1184029,, 0m1.925s, 479 , 879.84 , 474.60'
++ echo '77,0,2,1:0:0,0x3:0x113,hex,4,0,16,0,1,1,-2,3,2,1,auto,1,0,1,0,20,1,69,1,1184029,, 0m1.925s, 479 , 879.84 , 474.60'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/77.sh
+Processing:  ./scripts/77.sh
+++ bash ./scripts/77.sh Animation_360P-24d4.mp4
++ csvLine='78,1,2,1:0:0,0x3:0x113,hex,4,0,16,0,1,1,0,3,2,1,spatial,1,0,1,40,20,1,69,0,1481007,, 0m2.190s, 479 , 807.69 , 593.64'
++ echo '78,1,2,1:0:0,0x3:0x113,hex,4,0,16,0,1,1,0,3,2,1,spatial,1,0,1,40,20,1,69,0,1481007,, 0m2.190s, 479 , 807.69 , 593.64'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/78.sh
+Processing:  ./scripts/78.sh
+++ bash ./scripts/78.sh Animation_360P-24d4.mp4
++ csvLine='79,1,2,1:0:0,0x3:0x113,hex,4,0,16,0,1,1,0,0,None,None,None,None,None,0,0,None,0,69,1,1545927,, 0m1.890s, 479 , 938.93 , 619.66'
++ echo '79,1,2,1:0:0,0x3:0x113,hex,4,0,16,0,1,1,0,0,None,None,None,None,None,0,0,None,0,69,1,1545927,, 0m1.890s, 479 , 938.93 , 619.66'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/79.sh
+Processing:  ./scripts/79.sh
+++ bash ./scripts/79.sh Animation_360P-24d4.mp4
++ csvLine='80,1,2,1:0:0,0x3:0x113,hex,4,0,16,0,1,1,0,8,1,1,auto,1,0,1,40,20,1,69,1,1105376,, 0m2.162s, 479 , 810.62 , 443.07'
++ echo '80,1,2,1:0:0,0x3:0x113,hex,4,0,16,0,1,1,0,8,1,1,auto,1,0,1,40,20,1,69,1,1105376,, 0m2.162s, 479 , 810.62 , 443.07'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/8.sh
+Processing:  ./scripts/8.sh
+++ bash ./scripts/8.sh Animation_360P-24d4.mp4
++ csvLine='9,1,16,1:0:0,0x3:0x113,umh,10,1,24,2,1,1,-2,8,2,2,spatial,1,0,2,40,60,1,69,1,1106011,, 0m16.679s, 479 , 129.37 , 443.33'
++ echo '9,1,16,1:0:0,0x3:0x113,umh,10,1,24,2,1,1,-2,8,2,2,spatial,1,0,2,40,60,1,69,1,1106011,, 0m16.679s, 479 , 129.37 , 443.33'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/80.sh
+Processing:  ./scripts/80.sh
+++ bash ./scripts/80.sh Animation_360P-24d4.mp4
++ csvLine='81,0,2,1:0:0,0x3:0x113,hex,4,0,16,0,1,1,0,8,1,1,auto,1,0,1,40,10,1,69,1,1105052,, 0m2.056s, 479 , 859.16 , 442.94'
++ echo '81,0,2,1:0:0,0x3:0x113,hex,4,0,16,0,1,1,0,8,1,1,auto,1,0,1,40,10,1,69,1,1105052,, 0m2.056s, 479 , 859.16 , 442.94'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/81.sh
+Processing:  ./scripts/81.sh
+++ bash ./scripts/81.sh Animation_360P-24d4.mp4
++ csvLine='82,0,1,1:0:0,0x3:0x113,hex,4,0,16,1,1,1,0,8,1,1,spatial,1,0,1,40,10,1,69,1,1182141,, 0m2.768s, 479 , 693.84 , 473.84'
++ echo '82,0,1,1:0:0,0x3:0x113,hex,4,0,16,1,1,1,0,8,1,1,spatial,1,0,1,40,10,1,69,1,1182141,, 0m2.768s, 479 , 693.84 , 473.84'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/82.sh
+Processing:  ./scripts/82.sh
+++ bash ./scripts/82.sh Animation_360P-24d4.mp4
++ csvLine='83,0,2,1:0:0,0x3:0x113,hex,4,0,24,0,1,1,0,8,1,1,auto,1,0,1,40,10,1,69,1,1105052,, 0m2.033s, 479 , 861.94 , 442.94'
++ echo '83,0,2,1:0:0,0x3:0x113,hex,4,0,24,0,1,1,0,8,1,1,auto,1,0,1,40,10,1,69,1,1105052,, 0m2.033s, 479 , 861.94 , 442.94'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/83.sh
+Processing:  ./scripts/83.sh
+++ bash ./scripts/83.sh Animation_360P-24d4.mp4
++ csvLine='84,0,2,1:0:0,0x3:0x113,hex,4,0,24,1,1,1,0,8,1,1,auto,1,0,2,40,10,1,69,1,1128375,, 0m2.632s, 479 , 735.78 , 452.29'
++ echo '84,0,2,1:0:0,0x3:0x113,hex,4,0,24,1,1,1,0,8,1,1,auto,1,0,2,40,10,1,69,1,1128375,, 0m2.632s, 479 , 735.78 , 452.29'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/84.sh
+Processing:  ./scripts/84.sh
+++ bash ./scripts/84.sh Animation_360P-24d4.mp4
++ csvLine='85,0,2,1:0:0,0:0,hex,4,0,24,0,1,1,0,8,1,1,auto,1,0,1,40,10,1,69,1,1105052,, 0m2.077s, 479 , 855.84 , 442.94'
++ echo '85,0,2,1:0:0,0:0,hex,4,0,24,0,1,1,0,8,1,1,auto,1,0,1,40,10,1,69,1,1105052,, 0m2.077s, 479 , 855.84 , 442.94'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/85.sh
+Processing:  ./scripts/85.sh
+++ bash ./scripts/85.sh Animation_360P-24d4.mp4
++ csvLine='86,0,2,0:0:0,0:0,hex,4,0,24,0,1,1,0,8,1,1,auto,1,0,1,40,10,1,69,1,1106546,, 0m2.080s, 479 , 851.54 , 443.54'
++ echo '86,0,2,0:0:0,0:0,hex,4,0,24,0,1,1,0,8,1,1,auto,1,0,1,40,10,1,69,1,1106546,, 0m2.080s, 479 , 851.54 , 443.54'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/86.sh
+Processing:  ./scripts/86.sh
+++ bash ./scripts/86.sh Animation_360P-24d4.mp4
++ csvLine='87,0,2,1:0:0,0:0,hex,4,1,24,0,1,1,-2,8,1,1,spatial,None,0,1,40,10,1,69,1,1132033,, 0m2.347s, 479 , 788.25 , 453.76'
++ echo '87,0,2,1:0:0,0:0,hex,4,1,24,0,1,1,-2,8,1,1,spatial,None,0,1,40,10,1,69,1,1132033,, 0m2.347s, 479 , 788.25 , 453.76'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/87.sh
+Processing:  ./scripts/87.sh
+++ bash ./scripts/87.sh Animation_360P-24d4.mp4
++ csvLine='88,1,2,1:0:0,0x3:0x113,hex,4,0,16,0,1,1,0,0,None,None,None,None,None,0,0,None,0,69,0,1844315,, 0m1.858s, 479 , 952.14 , 739.27'
++ echo '88,1,2,1:0:0,0x3:0x113,hex,4,0,16,0,1,1,0,0,None,None,None,None,None,0,0,None,0,69,0,1844315,, 0m1.858s, 479 , 952.14 , 739.27'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/88.sh
+Processing:  ./scripts/88.sh
+++ bash ./scripts/88.sh Animation_360P-24d4.mp4
++ csvLine='89,1,2,1:0:0,0x3:0x113,umh,7,1,16,0,1,1,0,0,None,None,None,None,None,0,0,None,0,69,1,1534194,, 0m2.809s, 479 , 774.88 , 614.96'
++ echo '89,1,2,1:0:0,0x3:0x113,umh,7,1,16,0,1,1,0,0,None,None,None,None,None,0,0,None,0,69,1,1534194,, 0m2.809s, 479 , 774.88 , 614.96'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/89.sh
+Processing:  ./scripts/89.sh
+++ bash ./scripts/89.sh Animation_360P-24d4.mp4
++ csvLine='90,0,2,1:0:0,0x3:0x113,hex,4,0,16,0,1,0,-2,0,None,None,None,None,None,0,0,None,0,69,1,1771661,, 0m1.950s, 479 , 906.26 , 710.14'
++ echo '90,0,2,1:0:0,0x3:0x113,hex,4,0,16,0,1,0,-2,0,None,None,None,None,None,0,0,None,0,69,1,1771661,, 0m1.950s, 479 , 906.26 , 710.14'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/9.sh
+Processing:  ./scripts/9.sh
+++ bash ./scripts/9.sh Animation_360P-24d4.mp4
++ csvLine='10,1,16,1:0:0,0x3:0x133,tesa,11,1,24,2,1,0,-2,16,2,2,spatial,1,0,2,40,60,1,69,1,1110673,, 0m56.885s, 479 , 51.52 , 445.20'
++ echo '10,1,16,1:0:0,0x3:0x133,tesa,11,1,24,2,1,0,-2,16,2,2,spatial,1,0,2,40,60,1,69,1,1110673,, 0m56.885s, 479 , 51.52 , 445.20'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/90.sh
+Processing:  ./scripts/90.sh
+++ bash ./scripts/90.sh Animation_360P-24d4.mp4
++ csvLine='91,1,8,1:0:0,0x3:0x113,hex,4,0,16,0,1,1,0,0,None,None,None,None,None,0,0,None,0,69,1,1423527,, 0m3.398s, 479 , 688.10 , 570.60'
++ echo '91,1,8,1:0:0,0x3:0x113,hex,4,0,16,0,1,1,0,0,None,None,None,None,None,0,0,None,0,69,1,1423527,, 0m3.398s, 479 , 688.10 , 570.60'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/91.sh
+Processing:  ./scripts/91.sh
+++ bash ./scripts/91.sh Animation_360P-24d4.mp4
++ csvLine='92,0,8,0:0:0,0x3:0x113,hex,4,0,16,0,1,1,0,0,None,None,None,None,None,0,0,None,0,69,0,1867568,, 0m3.156s, 479 , 733.28 , 748.59'
++ echo '92,0,8,0:0:0,0x3:0x113,hex,4,0,16,0,1,1,0,0,None,None,None,None,None,0,0,None,0,69,0,1867568,, 0m3.156s, 479 , 733.28 , 748.59'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/92.sh
+Processing:  ./scripts/92.sh
+++ bash ./scripts/92.sh Animation_360P-24d4.mp4
++ csvLine='93,1,2,1:0:0,0x3:0x3,hex,4,0,16,1,1,1,0,3,2,1,auto,1,0,1,40,20,1,69,1,1113743,, 0m2.248s, 479 , 809.02 , 446.43'
++ echo '93,1,2,1:0:0,0x3:0x3,hex,4,0,16,1,1,1,0,3,2,1,auto,1,0,1,40,20,1,69,1,1113743,, 0m2.248s, 479 , 809.02 , 446.43'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/93.sh
+Processing:  ./scripts/93.sh
+++ bash ./scripts/93.sh Animation_360P-24d4.mp4
++ csvLine='94,1,2,0:0:0,0x3:0x113,hex,4,0,16,0,1,1,0,3,2,1,spatial,1,0,1,40,20,1,69,0,1479014,, 0m2.237s, 479 , 801.38 , 592.84'
++ echo '94,1,2,0:0:0,0x3:0x113,hex,4,0,16,0,1,1,0,3,2,1,spatial,1,0,1,40,20,1,69,0,1479014,, 0m2.237s, 479 , 801.38 , 592.84'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/94.sh
+Processing:  ./scripts/94.sh
+++ bash ./scripts/94.sh Animation_360P-24d4.mp4
++ csvLine='95,0,2,1:0:0,0x3:0x113,hex,11,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,40,0,69,1,1321275,, 0m3.975s, 479 , 627.43 , 529.61'
++ echo '95,0,2,1:0:0,0x3:0x113,hex,11,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,40,0,69,1,1321275,, 0m3.975s, 479 , 627.43 , 529.61'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/95.sh
+Processing:  ./scripts/95.sh
+++ bash ./scripts/95.sh Animation_360P-24d4.mp4
++ csvLine='96,1,2,1:0:0,0x3:0x113,hex,8,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,20,1,69,1,1108840,, 0m3.470s, 479 , 590.22 , 444.46'
++ echo '96,1,2,1:0:0,0x3:0x113,hex,8,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,20,1,69,1,1108840,, 0m3.470s, 479 , 590.22 , 444.46'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/96.sh
+Processing:  ./scripts/96.sh
+++ bash ./scripts/96.sh Animation_360P-24d4.mp4
++ csvLine='97,1,2,1:0:0,0x3:0x113,hex,4,1,16,0,1,1,0,3,2,2,auto,1,0,1,40,20,1,69,1,1095669,, 0m2.388s, 479 , 719.64 , 439.18'
++ echo '97,1,2,1:0:0,0x3:0x113,hex,4,1,16,0,1,1,0,3,2,2,auto,1,0,1,40,20,1,69,1,1095669,, 0m2.388s, 479 , 719.64 , 439.18'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/97.sh
+Processing:  ./scripts/97.sh
+++ bash ./scripts/97.sh Animation_360P-24d4.mp4
++ csvLine='98,1,2,0:0:0,0x3:0x113,hex,4,0,24,0,1,1,0,3,2,1,auto,1,0,1,40,30,1,69,1,1110268,, 0m1.958s, 479 , 858.68 , 445.03'
++ echo '98,1,2,0:0:0,0x3:0x113,hex,4,0,24,0,1,1,0,3,2,1,auto,1,0,1,40,30,1,69,1,1110268,, 0m1.958s, 479 , 858.68 , 445.03'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/98.sh
+Processing:  ./scripts/98.sh
+++ bash ./scripts/98.sh Animation_360P-24d4.mp4
++ csvLine='99,1,5,1:0:0,0x3:0x113,hex,6,1,16,1,1,0,-2,3,None,1,spatial,1,0,1,40,30,1,69,1,1168563,, 0m3.337s, 479 , 611.30 , 468.40'
++ echo '99,1,5,1:0:0,0x3:0x113,hex,6,1,16,1,1,0,-2,3,None,1,spatial,1,0,1,40,30,1,69,1,1168563,, 0m3.337s, 479 , 611.30 , 468.40'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/99.sh
+Processing:  ./scripts/99.sh
+++ bash ./scripts/99.sh Animation_360P-24d4.mp4
++ csvLine='100,0,3,0:0:0,0x113:0x113,hex,6,1,16,1,1,1,-2,3,2,1,auto,1,0,2,40,30,0,69,1,1339521,, 0m3.115s, 479 , 709.50 , 536.93'
++ echo '100,0,3,0:0:0,0x113:0x113,hex,6,1,16,1,1,1,-2,3,2,1,auto,1,0,2,40,30,0,69,1,1339521,, 0m3.115s, 479 , 709.50 , 536.93'
++ rm Animation_360P-24d4.mp4
++ read line
++ read -d, videoname extension
+echo $line
+++ echo Lecture_360P-03bc mp4
++ echo Lecture_360P-03bc
+Lecture_360P-03bc
++ echo mp4
+mp4
++ path=./videos/Lecture_360P-03bc.mp4
++ newPath=Lecture_360P-03bc.mp4
++ echo Lecture_360P-03bc.mp4
+Lecture_360P-03bc.mp4
+++ ls ./scripts/0.sh ./scripts/1.sh ./scripts/10.sh ./scripts/100.sh ./scripts/101.sh ./scripts/102.sh ./scripts/103.sh ./scripts/104.sh ./scripts/105.sh ./scripts/106.sh ./scripts/107.sh ./scripts/108.sh ./scripts/109.sh ./scripts/11.sh ./scripts/110.sh ./scripts/111.sh ./scripts/112.sh ./scripts/113.sh ./scripts/114.sh ./scripts/115.sh ./scripts/116.sh ./scripts/117.sh ./scripts/118.sh ./scripts/119.sh ./scripts/12.sh ./scripts/120.sh ./scripts/121.sh ./scripts/122.sh ./scripts/123.sh ./scripts/124.sh ./scripts/125.sh ./scripts/126.sh ./scripts/127.sh ./scripts/128.sh ./scripts/129.sh ./scripts/13.sh ./scripts/130.sh ./scripts/131.sh ./scripts/132.sh ./scripts/133.sh ./scripts/134.sh ./scripts/135.sh ./scripts/136.sh ./scripts/137.sh ./scripts/138.sh ./scripts/139.sh ./scripts/14.sh ./scripts/140.sh ./scripts/141.sh ./scripts/142.sh ./scripts/143.sh ./scripts/144.sh ./scripts/145.sh ./scripts/146.sh ./scripts/147.sh ./scripts/148.sh ./scripts/149.sh ./scripts/15.sh ./scripts/150.sh ./scripts/151.sh ./scripts/152.sh ./scripts/153.sh ./scripts/154.sh ./scripts/155.sh ./scripts/156.sh ./scripts/157.sh ./scripts/158.sh ./scripts/159.sh ./scripts/16.sh ./scripts/160.sh ./scripts/161.sh ./scripts/162.sh ./scripts/163.sh ./scripts/164.sh ./scripts/165.sh ./scripts/166.sh ./scripts/167.sh ./scripts/168.sh ./scripts/169.sh ./scripts/17.sh ./scripts/170.sh ./scripts/171.sh ./scripts/172.sh ./scripts/173.sh ./scripts/174.sh ./scripts/175.sh ./scripts/176.sh ./scripts/177.sh ./scripts/178.sh ./scripts/179.sh ./scripts/18.sh ./scripts/180.sh ./scripts/181.sh ./scripts/182.sh ./scripts/183.sh ./scripts/184.sh ./scripts/185.sh ./scripts/186.sh ./scripts/187.sh ./scripts/188.sh ./scripts/189.sh ./scripts/19.sh ./scripts/190.sh ./scripts/191.sh ./scripts/192.sh ./scripts/193.sh ./scripts/194.sh ./scripts/195.sh ./scripts/196.sh ./scripts/197.sh ./scripts/198.sh ./scripts/199.sh ./scripts/2.sh ./scripts/20.sh ./scripts/200.sh ./scripts/21.sh ./scripts/22.sh ./scripts/23.sh ./scripts/24.sh ./scripts/25.sh ./scripts/26.sh ./scripts/27.sh ./scripts/28.sh ./scripts/29.sh ./scripts/3.sh ./scripts/30.sh ./scripts/31.sh ./scripts/32.sh ./scripts/33.sh ./scripts/34.sh ./scripts/35.sh ./scripts/36.sh ./scripts/37.sh ./scripts/38.sh ./scripts/39.sh ./scripts/4.sh ./scripts/40.sh ./scripts/41.sh ./scripts/42.sh ./scripts/43.sh ./scripts/44.sh ./scripts/45.sh ./scripts/46.sh ./scripts/47.sh ./scripts/48.sh ./scripts/49.sh ./scripts/5.sh ./scripts/50.sh ./scripts/51.sh ./scripts/52.sh ./scripts/53.sh ./scripts/54.sh ./scripts/55.sh ./scripts/56.sh ./scripts/57.sh ./scripts/58.sh ./scripts/59.sh ./scripts/6.sh ./scripts/60.sh ./scripts/61.sh ./scripts/62.sh ./scripts/63.sh ./scripts/64.sh ./scripts/65.sh ./scripts/66.sh ./scripts/67.sh ./scripts/68.sh ./scripts/69.sh ./scripts/7.sh ./scripts/70.sh ./scripts/71.sh ./scripts/72.sh ./scripts/73.sh ./scripts/74.sh ./scripts/75.sh ./scripts/76.sh ./scripts/77.sh ./scripts/78.sh ./scripts/79.sh ./scripts/8.sh ./scripts/80.sh ./scripts/81.sh ./scripts/82.sh ./scripts/83.sh ./scripts/84.sh ./scripts/85.sh ./scripts/86.sh ./scripts/87.sh ./scripts/88.sh ./scripts/89.sh ./scripts/9.sh ./scripts/90.sh ./scripts/91.sh ./scripts/92.sh ./scripts/93.sh ./scripts/94.sh ./scripts/95.sh ./scripts/96.sh ./scripts/97.sh ./scripts/98.sh ./scripts/99.sh
++ x64configs='./scripts/0.sh
+./scripts/1.sh
+./scripts/10.sh
+./scripts/100.sh
+./scripts/101.sh
+./scripts/102.sh
+./scripts/103.sh
+./scripts/104.sh
+./scripts/105.sh
+./scripts/106.sh
+./scripts/107.sh
+./scripts/108.sh
+./scripts/109.sh
+./scripts/11.sh
+./scripts/110.sh
+./scripts/111.sh
+./scripts/112.sh
+./scripts/113.sh
+./scripts/114.sh
+./scripts/115.sh
+./scripts/116.sh
+./scripts/117.sh
+./scripts/118.sh
+./scripts/119.sh
+./scripts/12.sh
+./scripts/120.sh
+./scripts/121.sh
+./scripts/122.sh
+./scripts/123.sh
+./scripts/124.sh
+./scripts/125.sh
+./scripts/126.sh
+./scripts/127.sh
+./scripts/128.sh
+./scripts/129.sh
+./scripts/13.sh
+./scripts/130.sh
+./scripts/131.sh
+./scripts/132.sh
+./scripts/133.sh
+./scripts/134.sh
+./scripts/135.sh
+./scripts/136.sh
+./scripts/137.sh
+./scripts/138.sh
+./scripts/139.sh
+./scripts/14.sh
+./scripts/140.sh
+./scripts/141.sh
+./scripts/142.sh
+./scripts/143.sh
+./scripts/144.sh
+./scripts/145.sh
+./scripts/146.sh
+./scripts/147.sh
+./scripts/148.sh
+./scripts/149.sh
+./scripts/15.sh
+./scripts/150.sh
+./scripts/151.sh
+./scripts/152.sh
+./scripts/153.sh
+./scripts/154.sh
+./scripts/155.sh
+./scripts/156.sh
+./scripts/157.sh
+./scripts/158.sh
+./scripts/159.sh
+./scripts/16.sh
+./scripts/160.sh
+./scripts/161.sh
+./scripts/162.sh
+./scripts/163.sh
+./scripts/164.sh
+./scripts/165.sh
+./scripts/166.sh
+./scripts/167.sh
+./scripts/168.sh
+./scripts/169.sh
+./scripts/17.sh
+./scripts/170.sh
+./scripts/171.sh
+./scripts/172.sh
+./scripts/173.sh
+./scripts/174.sh
+./scripts/175.sh
+./scripts/176.sh
+./scripts/177.sh
+./scripts/178.sh
+./scripts/179.sh
+./scripts/18.sh
+./scripts/180.sh
+./scripts/181.sh
+./scripts/182.sh
+./scripts/183.sh
+./scripts/184.sh
+./scripts/185.sh
+./scripts/186.sh
+./scripts/187.sh
+./scripts/188.sh
+./scripts/189.sh
+./scripts/19.sh
+./scripts/190.sh
+./scripts/191.sh
+./scripts/192.sh
+./scripts/193.sh
+./scripts/194.sh
+./scripts/195.sh
+./scripts/196.sh
+./scripts/197.sh
+./scripts/198.sh
+./scripts/199.sh
+./scripts/2.sh
+./scripts/20.sh
+./scripts/200.sh
+./scripts/21.sh
+./scripts/22.sh
+./scripts/23.sh
+./scripts/24.sh
+./scripts/25.sh
+./scripts/26.sh
+./scripts/27.sh
+./scripts/28.sh
+./scripts/29.sh
+./scripts/3.sh
+./scripts/30.sh
+./scripts/31.sh
+./scripts/32.sh
+./scripts/33.sh
+./scripts/34.sh
+./scripts/35.sh
+./scripts/36.sh
+./scripts/37.sh
+./scripts/38.sh
+./scripts/39.sh
+./scripts/4.sh
+./scripts/40.sh
+./scripts/41.sh
+./scripts/42.sh
+./scripts/43.sh
+./scripts/44.sh
+./scripts/45.sh
+./scripts/46.sh
+./scripts/47.sh
+./scripts/48.sh
+./scripts/49.sh
+./scripts/5.sh
+./scripts/50.sh
+./scripts/51.sh
+./scripts/52.sh
+./scripts/53.sh
+./scripts/54.sh
+./scripts/55.sh
+./scripts/56.sh
+./scripts/57.sh
+./scripts/58.sh
+./scripts/59.sh
+./scripts/6.sh
+./scripts/60.sh
+./scripts/61.sh
+./scripts/62.sh
+./scripts/63.sh
+./scripts/64.sh
+./scripts/65.sh
+./scripts/66.sh
+./scripts/67.sh
+./scripts/68.sh
+./scripts/69.sh
+./scripts/7.sh
+./scripts/70.sh
+./scripts/71.sh
+./scripts/72.sh
+./scripts/73.sh
+./scripts/74.sh
+./scripts/75.sh
+./scripts/76.sh
+./scripts/77.sh
+./scripts/78.sh
+./scripts/79.sh
+./scripts/8.sh
+./scripts/80.sh
+./scripts/81.sh
+./scripts/82.sh
+./scripts/83.sh
+./scripts/84.sh
+./scripts/85.sh
+./scripts/86.sh
+./scripts/87.sh
+./scripts/88.sh
+./scripts/89.sh
+./scripts/9.sh
+./scripts/90.sh
+./scripts/91.sh
+./scripts/92.sh
+./scripts/93.sh
+./scripts/94.sh
+./scripts/95.sh
+./scripts/96.sh
+./scripts/97.sh
+./scripts/98.sh
+./scripts/99.sh'
++ csvOutput=./res/Lecture_360P-03bc.csv
++ cp ./videos/Lecture_360P-03bc.mp4 Lecture_360P-03bc.mp4
++ echo 'Starting to work with video: ' Lecture_360P-03bc
+Starting to work with video:  Lecture_360P-03bc
++ header=configurationID,cabac,ref,deblock,analyse,me,subme,mixed_ref,me_range,trellis,8x8dct,fast_pskip,chroma_qp_offset,bframes,b_pyramid,b_adapt,direct,weightb,open_gop,weightp,scenecut,rc_lookahead,mbtree,qpmax,aq-mode,size,usertime,systemtime,elapsedtime,cpu,frames,fps,kbs
++ touch ./res/Lecture_360P-03bc.csv
++ cat /dev/null
++ echo configurationID,cabac,ref,deblock,analyse,me,subme,mixed_ref,me_range,trellis,8x8dct,fast_pskip,chroma_qp_offset,bframes,b_pyramid,b_adapt,direct,weightb,open_gop,weightp,scenecut,rc_lookahead,mbtree,qpmax,aq-mode,size,usertime,systemtime,elapsedtime,cpu,frames,fps,kbs
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/0.sh
+Processing:  ./scripts/0.sh
+++ bash ./scripts/0.sh Lecture_360P-03bc.mp4
++ csvLine='1,0,1,0:0:0,0:0,dia,0,0,16,0,0,1,0,0,None,None,None,None,None,0,0,None,0,69,0,2832265,, 0m1.008s, 500 , 1275.97 , 1132.91'
++ echo '1,0,1,0:0:0,0:0,dia,0,0,16,0,0,1,0,0,None,None,None,None,None,0,0,None,0,69,0,2832265,, 0m1.008s, 500 , 1275.97 , 1132.91'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/1.sh
+Processing:  ./scripts/1.sh
+++ bash ./scripts/1.sh Lecture_360P-03bc.mp4
++ csvLine='2,1,1,1:0:0,0x3:0x3,dia,1,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,None,0,69,1,1260091,, 0m1.318s, 500 , 1168.14 , 504.04'
++ echo '2,1,1,1:0:0,0x3:0x3,dia,1,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,None,0,69,1,1260091,, 0m1.318s, 500 , 1168.14 , 504.04'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/10.sh
+Processing:  ./scripts/10.sh
+++ bash ./scripts/10.sh Lecture_360P-03bc.mp4
++ csvLine='11,0,1,1:0:0,0:0,dia,2,0,16,0,0,1,0,0,None,None,None,None,None,0,0,None,0,69,0,2110015,, 0m1.311s, 500 , 1178.74 , 844.01'
++ echo '11,0,1,1:0:0,0:0,dia,2,0,16,0,0,1,0,0,None,None,None,None,None,0,0,None,0,69,0,2110015,, 0m1.311s, 500 , 1178.74 , 844.01'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/100.sh
+Processing:  ./scripts/100.sh
+++ bash ./scripts/100.sh Lecture_360P-03bc.mp4
++ csvLine='101,1,2,1:0:0,0x3:0x113,hex,6,1,16,1,1,1,0,8,2,1,spatial,1,0,1,0,60,1,69,1,544265,, 0m2.899s, 500 , 673.85 , 217.71'
++ echo '101,1,2,1:0:0,0x3:0x113,hex,6,1,16,1,1,1,0,8,2,1,spatial,1,0,1,0,60,1,69,1,544265,, 0m2.899s, 500 , 673.85 , 217.71'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/101.sh
+Processing:  ./scripts/101.sh
+++ bash ./scripts/101.sh Lecture_360P-03bc.mp4
++ csvLine='102,1,2,1:0:0,0x3:0x113,hex,6,1,16,1,1,1,0,8,2,1,auto,1,0,1,0,10,1,69,0,535385,, 0m2.436s, 500 , 797.07 , 214.15'
++ echo '102,1,2,1:0:0,0x3:0x113,hex,6,1,16,1,1,1,0,8,2,1,auto,1,0,1,0,10,1,69,0,535385,, 0m2.436s, 500 , 797.07 , 214.15'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/102.sh
+Processing:  ./scripts/102.sh
+++ bash ./scripts/102.sh Lecture_360P-03bc.mp4
++ csvLine='103,1,2,0:0:0,0x3:0x3,umh,6,1,16,1,1,1,0,8,2,1,spatial,1,0,1,0,10,1,69,0,541553,, 0m2.980s, 500 , 733.42 , 216.62'
++ echo '103,1,2,0:0:0,0x3:0x3,umh,6,1,16,1,1,1,0,8,2,1,spatial,1,0,1,0,10,1,69,0,541553,, 0m2.980s, 500 , 733.42 , 216.62'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/103.sh
+Processing:  ./scripts/103.sh
+++ bash ./scripts/103.sh Lecture_360P-03bc.mp4
++ csvLine='104,1,16,1:0:0,0x3:0x113,hex,6,1,24,1,1,1,-2,3,2,1,auto,1,0,1,40,30,0,69,1,611170,, 0m4.636s, 500 , 598.89 , 244.47'
++ echo '104,1,16,1:0:0,0x3:0x113,hex,6,1,24,1,1,1,-2,3,2,1,auto,1,0,1,40,30,0,69,1,611170,, 0m4.636s, 500 , 598.89 , 244.47'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/104.sh
+Processing:  ./scripts/104.sh
+++ bash ./scripts/104.sh Lecture_360P-03bc.mp4
++ csvLine='105,1,7,1:0:0,0x3:0x113,dia,6,1,24,1,1,1,-2,3,2,1,spatial,1,0,1,40,30,0,69,1,647876,, 0m3.602s, 500 , 746.08 , 259.15'
++ echo '105,1,7,1:0:0,0x3:0x113,dia,6,1,24,1,1,1,-2,3,2,1,spatial,1,0,1,40,30,0,69,1,647876,, 0m3.602s, 500 , 746.08 , 259.15'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/105.sh
+Processing:  ./scripts/105.sh
+++ bash ./scripts/105.sh Lecture_360P-03bc.mp4
++ csvLine='106,0,5,1:0:0,0x3:0x113,tesa,0,1,16,1,1,1,-2,3,2,1,auto,1,0,1,40,30,1,69,1,734523,, 0m1.927s, 500 , 914.19 , 293.81'
++ echo '106,0,5,1:0:0,0x3:0x113,tesa,0,1,16,1,1,1,-2,3,2,1,auto,1,0,1,40,30,1,69,1,734523,, 0m1.927s, 500 , 914.19 , 293.81'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/106.sh
+Processing:  ./scripts/106.sh
+++ bash ./scripts/106.sh Lecture_360P-03bc.mp4
++ csvLine='107,0,5,1:0:0,0x3:0x3,umh,0,1,16,1,1,0,-2,3,2,1,auto,1,0,1,40,30,1,69,1,767232,, 0m1.956s, 500 , 916.75 , 306.89'
++ echo '107,0,5,1:0:0,0x3:0x3,umh,0,1,16,1,1,0,-2,3,2,1,auto,1,0,1,40,30,1,69,1,767232,, 0m1.956s, 500 , 916.75 , 306.89'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/107.sh
+Processing:  ./scripts/107.sh
+++ bash ./scripts/107.sh Lecture_360P-03bc.mp4
++ csvLine='108,1,2,0:0:0,0x113:0x113,hex,6,1,24,0,1,1,-2,3,2,1,auto,1,0,1,40,30,1,69,1,555520,, 0m2.173s, 500 , 844.90 , 222.21'
++ echo '108,1,2,0:0:0,0x113:0x113,hex,6,1,24,0,1,1,-2,3,2,1,auto,1,0,1,40,30,1,69,1,555520,, 0m2.173s, 500 , 844.90 , 222.21'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/108.sh
+Processing:  ./scripts/108.sh
+++ bash ./scripts/108.sh Lecture_360P-03bc.mp4
++ csvLine='109,1,2,0:0:0,0x113:0x113,hex,6,1,16,1,0,0,-2,3,2,1,auto,1,0,1,40,30,1,69,1,565768,, 0m2.396s, 500 , 805.44 , 226.31'
++ echo '109,1,2,0:0:0,0x113:0x113,hex,6,1,16,1,0,0,-2,3,2,1,auto,1,0,1,40,30,1,69,1,565768,, 0m2.396s, 500 , 805.44 , 226.31'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/109.sh
+Processing:  ./scripts/109.sh
+++ bash ./scripts/109.sh Lecture_360P-03bc.mp4
++ csvLine='110,1,2,0:0:0,0x113:0x113,hex,6,1,24,1,0,1,-2,3,2,1,auto,1,0,1,40,30,1,69,0,706155,, 0m2.332s, 500 , 843.14 , 282.46'
++ echo '110,1,2,0:0:0,0x113:0x113,hex,6,1,24,1,0,1,-2,3,2,1,auto,1,0,1,40,30,1,69,0,706155,, 0m2.332s, 500 , 843.14 , 282.46'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/11.sh
+Processing:  ./scripts/11.sh
+++ bash ./scripts/11.sh Lecture_360P-03bc.mp4
++ csvLine='12,0,1,1:0:0,0:0,dia,2,0,24,0,0,1,0,0,None,None,None,None,None,0,0,None,0,69,0,2110015,, 0m1.372s, 500 , 1147.49 , 844.01'
++ echo '12,0,1,1:0:0,0:0,dia,2,0,24,0,0,1,0,0,None,None,None,None,None,0,0,None,0,69,0,2110015,, 0m1.372s, 500 , 1147.49 , 844.01'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/110.sh
+Processing:  ./scripts/110.sh
+++ bash ./scripts/110.sh Lecture_360P-03bc.mp4
++ csvLine='111,1,2,0:0:0,0x113:0x113,hex,10,1,24,1,1,1,0,3,2,1,auto,1,0,2,40,30,0,69,1,745866,, 0m4.672s, 500 , 618.32 , 298.35'
++ echo '111,1,2,0:0:0,0x113:0x113,hex,10,1,24,1,1,1,0,3,2,1,auto,1,0,2,40,30,0,69,1,745866,, 0m4.672s, 500 , 618.32 , 298.35'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/111.sh
+Processing:  ./scripts/111.sh
+++ bash ./scripts/111.sh Lecture_360P-03bc.mp4
++ csvLine='112,1,3,1:0:0,0x3:0x113,hex,7,1,16,1,1,1,-2,3,2,1,auto,1,0,2,40,50,1,69,1,583291,, 0m3.834s, 500 , 623.69 , 233.32'
++ echo '112,1,3,1:0:0,0x3:0x113,hex,7,1,16,1,1,1,-2,3,2,1,auto,1,0,2,40,50,1,69,1,583291,, 0m3.834s, 500 , 623.69 , 233.32'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/112.sh
+Processing:  ./scripts/112.sh
+++ bash ./scripts/112.sh Lecture_360P-03bc.mp4
++ csvLine='113,1,3,1:0:0,0x3:0x113,umh,7,1,16,1,1,1,-2,3,2,1,auto,1,0,2,40,40,1,69,1,572326,, 0m4.050s, 500 , 627.72 , 228.93'
++ echo '113,1,3,1:0:0,0x3:0x113,umh,7,1,16,1,1,1,-2,3,2,1,auto,1,0,2,40,40,1,69,1,572326,, 0m4.050s, 500 , 627.72 , 228.93'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/113.sh
+Processing:  ./scripts/113.sh
+++ bash ./scripts/113.sh Lecture_360P-03bc.mp4
++ csvLine='114,1,3,1:0:0,0x3:0x113,hex,7,1,16,0,1,1,-2,3,2,1,spatial,1,0,2,40,40,1,69,1,550462,, 0m3.558s, 500 , 669.30 , 220.18'
++ echo '114,1,3,1:0:0,0x3:0x113,hex,7,1,16,0,1,1,-2,3,2,1,spatial,1,0,2,40,40,1,69,1,550462,, 0m3.558s, 500 , 669.30 , 220.18'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/114.sh
+Processing:  ./scripts/114.sh
+++ bash ./scripts/114.sh Lecture_360P-03bc.mp4
++ csvLine='115,1,7,1:0:0,0x3:0x113,hex,7,1,16,1,1,1,-2,3,2,1,auto,1,0,2,40,40,1,69,0,617233,, 0m4.849s, 500 , 575.69 , 246.89'
++ echo '115,1,7,1:0:0,0x3:0x113,hex,7,1,16,1,1,1,-2,3,2,1,auto,1,0,2,40,40,1,69,0,617233,, 0m4.849s, 500 , 575.69 , 246.89'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/115.sh
+Processing:  ./scripts/115.sh
+++ bash ./scripts/115.sh Lecture_360P-03bc.mp4
++ csvLine='116,1,3,1:0:0,0x3:0x113,hex,10,1,16,1,1,1,0,3,2,1,auto,1,0,1,40,40,1,69,1,566315,, 0m4.337s, 500 , 586.62 , 226.53'
++ echo '116,1,3,1:0:0,0x3:0x113,hex,10,1,16,1,1,1,0,3,2,1,auto,1,0,1,40,40,1,69,1,566315,, 0m4.337s, 500 , 586.62 , 226.53'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/116.sh
+Processing:  ./scripts/116.sh
+++ bash ./scripts/116.sh Lecture_360P-03bc.mp4
++ csvLine='117,1,3,1:0:0,0x3:0x3,hex,7,1,16,1,1,1,-2,3,2,1,auto,1,0,2,40,40,1,69,1,572840,, 0m3.872s, 500 , 643.07 , 229.14'
++ echo '117,1,3,1:0:0,0x3:0x3,hex,7,1,16,1,1,1,-2,3,2,1,auto,1,0,2,40,40,1,69,1,572840,, 0m3.872s, 500 , 643.07 , 229.14'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/117.sh
+Processing:  ./scripts/117.sh
+++ bash ./scripts/117.sh Lecture_360P-03bc.mp4
++ csvLine='118,0,3,1:0:0,0x3:0x3,hex,7,1,16,1,1,1,-2,3,2,1,auto,1,0,2,40,40,1,69,1,668057,, 0m3.980s, 500 , 635.03 , 267.22'
++ echo '118,0,3,1:0:0,0x3:0x3,hex,7,1,16,1,1,1,-2,3,2,1,auto,1,0,2,40,40,1,69,1,668057,, 0m3.980s, 500 , 635.03 , 267.22'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/118.sh
+Processing:  ./scripts/118.sh
+++ bash ./scripts/118.sh Lecture_360P-03bc.mp4
++ csvLine='119,1,3,1:0:0,0x3:0x3,hex,7,1,16,1,0,1,0,16,2,1,auto,1,0,2,40,40,1,69,1,505284,, 0m3.775s, 500 , 599.22 , 202.11'
++ echo '119,1,3,1:0:0,0x3:0x3,hex,7,1,16,1,0,1,0,16,2,1,auto,1,0,2,40,40,1,69,1,505284,, 0m3.775s, 500 , 599.22 , 202.11'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/119.sh
+Processing:  ./scripts/119.sh
+++ bash ./scripts/119.sh Lecture_360P-03bc.mp4
++ csvLine='120,1,3,1:0:0,0x3:0x3,hex,7,1,16,1,0,1,0,16,2,1,auto,1,0,2,40,30,1,69,1,487968,, 0m3.844s, 500 , 608.82 , 195.19'
++ echo '120,1,3,1:0:0,0x3:0x3,hex,7,1,16,1,0,1,0,16,2,1,auto,1,0,2,40,30,1,69,1,487968,, 0m3.844s, 500 , 608.82 , 195.19'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/12.sh
+Processing:  ./scripts/12.sh
+++ bash ./scripts/12.sh Lecture_360P-03bc.mp4
++ csvLine='13,0,1,1:0:0,0:0,dia,0,0,16,0,0,1,0,0,None,None,None,None,None,0,0,None,0,69,0,2830189,, 0m1.068s, 500 , 1231.92 , 1132.08'
++ echo '13,0,1,1:0:0,0:0,dia,0,0,16,0,0,1,0,0,None,None,None,None,None,0,0,None,0,69,0,2830189,, 0m1.068s, 500 , 1231.92 , 1132.08'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/120.sh
+Processing:  ./scripts/120.sh
+++ bash ./scripts/120.sh Lecture_360P-03bc.mp4
++ csvLine='121,1,3,1:0:0,0x3:0x3,hex,7,1,16,1,0,1,0,16,2,1,spatial,1,0,2,40,40,1,69,0,629595,, 0m3.469s, 500 , 644.74 , 251.84'
++ echo '121,1,3,1:0:0,0x3:0x3,hex,7,1,16,1,0,1,0,16,2,1,spatial,1,0,2,40,40,1,69,0,629595,, 0m3.469s, 500 , 644.74 , 251.84'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/121.sh
+Processing:  ./scripts/121.sh
+++ bash ./scripts/121.sh Lecture_360P-03bc.mp4
++ csvLine='122,1,3,1:0:0,0x3:0x3,hex,7,1,16,1,0,1,0,16,2,1,auto,1,0,1,40,40,1,69,1,503986,, 0m3.722s, 500 , 597.72 , 201.59'
++ echo '122,1,3,1:0:0,0x3:0x3,hex,7,1,16,1,0,1,0,16,2,1,auto,1,0,1,40,40,1,69,1,503986,, 0m3.722s, 500 , 597.72 , 201.59'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/122.sh
+Processing:  ./scripts/122.sh
+++ bash ./scripts/122.sh Lecture_360P-03bc.mp4
++ csvLine='123,1,3,1:0:0,0x3:0x113,hex,11,1,16,0,0,1,0,16,2,1,auto,1,0,2,40,40,1,69,1,508107,, 0m4.393s, 500 , 566.19 , 203.24'
++ echo '123,1,3,1:0:0,0x3:0x113,hex,11,1,16,0,0,1,0,16,2,1,auto,1,0,2,40,40,1,69,1,508107,, 0m4.393s, 500 , 566.19 , 203.24'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/123.sh
+Processing:  ./scripts/123.sh
+++ bash ./scripts/123.sh Lecture_360P-03bc.mp4
++ csvLine='124,1,3,1:0:0,0x3:0x3,hex,7,1,16,1,0,1,0,16,2,1,auto,1,0,2,0,50,0,69,0,820594,, 0m4.244s, 500 , 644.55 , 328.24'
++ echo '124,1,3,1:0:0,0x3:0x3,hex,7,1,16,1,0,1,0,16,2,1,auto,1,0,2,0,50,0,69,0,820594,, 0m4.244s, 500 , 644.55 , 328.24'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/124.sh
+Processing:  ./scripts/124.sh
+++ bash ./scripts/124.sh Lecture_360P-03bc.mp4
++ csvLine='125,1,3,1:0:0,0x3:0x3,hex,7,1,16,1,0,1,0,16,2,1,auto,1,0,2,40,30,0,69,0,819012,, 0m4.249s, 500 , 655.69 , 327.60'
++ echo '125,1,3,1:0:0,0x3:0x3,hex,7,1,16,1,0,1,0,16,2,1,auto,1,0,2,40,30,0,69,0,819012,, 0m4.249s, 500 , 655.69 , 327.60'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/125.sh
+Processing:  ./scripts/125.sh
+++ bash ./scripts/125.sh Lecture_360P-03bc.mp4
++ csvLine='126,1,3,0:0:0,0x3:0x3,hex,7,1,16,1,0,0,-2,16,2,1,auto,1,0,2,0,50,0,69,0,824576,, 0m4.405s, 500 , 633.84 , 329.83'
++ echo '126,1,3,0:0:0,0x3:0x3,hex,7,1,16,1,0,0,-2,16,2,1,auto,1,0,2,0,50,0,69,0,824576,, 0m4.405s, 500 , 633.84 , 329.83'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/126.sh
+Processing:  ./scripts/126.sh
+++ bash ./scripts/126.sh Lecture_360P-03bc.mp4
++ csvLine='127,1,5,1:0:0,0x3:0x113,dia,4,1,16,1,1,1,-2,3,2,1,auto,1,0,2,40,40,1,69,1,529029,, 0m2.370s, 500 , 834.87 , 211.61'
++ echo '127,1,5,1:0:0,0x3:0x113,dia,4,1,16,1,1,1,-2,3,2,1,auto,1,0,2,40,40,1,69,1,529029,, 0m2.370s, 500 , 834.87 , 211.61'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/127.sh
+Processing:  ./scripts/127.sh
+++ bash ./scripts/127.sh Lecture_360P-03bc.mp4
++ csvLine='128,1,5,0:0:0,0x3:0x113,dia,4,1,16,1,1,1,-2,3,2,1,spatial,1,0,2,40,40,1,69,1,535224,, 0m2.683s, 500 , 768.24 , 214.09'
++ echo '128,1,5,0:0:0,0x3:0x113,dia,4,1,16,1,1,1,-2,3,2,1,spatial,1,0,2,40,40,1,69,1,535224,, 0m2.683s, 500 , 768.24 , 214.09'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/128.sh
+Processing:  ./scripts/128.sh
+++ bash ./scripts/128.sh Lecture_360P-03bc.mp4
++ csvLine='129,0,5,0:0:0,0x3:0x3,dia,4,1,24,1,0,1,-2,3,2,1,spatial,1,0,2,40,40,1,69,1,618491,, 0m2.842s, 500 , 753.38 , 247.40'
++ echo '129,0,5,0:0:0,0x3:0x3,dia,4,1,24,1,0,1,-2,3,2,1,spatial,1,0,2,40,40,1,69,1,618491,, 0m2.842s, 500 , 753.38 , 247.40'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/129.sh
+Processing:  ./scripts/129.sh
+++ bash ./scripts/129.sh Lecture_360P-03bc.mp4
++ csvLine='130,1,5,0:0:0,0x3:0x113,dia,4,1,16,0,1,1,-2,3,2,1,spatial,1,0,2,40,20,0,69,1,671824,, 0m2.551s, 500 , 814.59 , 268.73'
++ echo '130,1,5,0:0:0,0x3:0x113,dia,4,1,16,0,1,1,-2,3,2,1,spatial,1,0,2,40,20,0,69,1,671824,, 0m2.551s, 500 , 814.59 , 268.73'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/13.sh
+Processing:  ./scripts/13.sh
+++ bash ./scripts/13.sh Lecture_360P-03bc.mp4
++ csvLine='14,0,1,0:0:0,0:0,dia,0,1,16,0,0,1,0,0,None,None,None,None,None,0,0,None,0,69,0,2832265,, 0m1.023s, 500 , 1273.70 , 1132.91'
++ echo '14,0,1,0:0:0,0:0,dia,0,1,16,0,0,1,0,0,None,None,None,None,None,0,0,None,0,69,0,2832265,, 0m1.023s, 500 , 1273.70 , 1132.91'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/130.sh
+Processing:  ./scripts/130.sh
+++ bash ./scripts/130.sh Lecture_360P-03bc.mp4
++ csvLine='131,1,5,0:0:0,0x3:0x3,dia,4,0,16,1,1,0,-2,3,2,1,spatial,1,0,2,40,20,0,69,1,691494,, 0m3.009s, 500 , 776.25 , 276.60'
++ echo '131,1,5,0:0:0,0x3:0x3,dia,4,0,16,1,1,0,-2,3,2,1,spatial,1,0,2,40,20,0,69,1,691494,, 0m3.009s, 500 , 776.25 , 276.60'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/131.sh
+Processing:  ./scripts/131.sh
+++ bash ./scripts/131.sh Lecture_360P-03bc.mp4
++ csvLine='132,1,7,0:0:0,0x3:0x113,dia,4,1,16,1,1,0,-2,3,2,1,spatial,1,0,2,40,20,0,69,1,657464,, 0m3.587s, 500 , 724.93 , 262.99'
++ echo '132,1,7,0:0:0,0x3:0x113,dia,4,1,16,1,1,0,-2,3,2,1,spatial,1,0,2,40,20,0,69,1,657464,, 0m3.587s, 500 , 724.93 , 262.99'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/132.sh
+Processing:  ./scripts/132.sh
+++ bash ./scripts/132.sh Lecture_360P-03bc.mp4
++ csvLine='133,1,5,0:0:0,0x3:0x113,dia,4,1,16,1,1,0,-2,3,2,1,auto,1,0,2,40,20,0,69,1,685345,, 0m2.762s, 500 , 797.59 , 274.14'
++ echo '133,1,5,0:0:0,0x3:0x113,dia,4,1,16,1,1,0,-2,3,2,1,auto,1,0,2,40,20,0,69,1,685345,, 0m2.762s, 500 , 797.59 , 274.14'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/133.sh
+Processing:  ./scripts/133.sh
+++ bash ./scripts/133.sh Lecture_360P-03bc.mp4
++ csvLine='134,1,3,1:0:0,0x3:0x113,hex,7,1,16,1,1,1,-2,3,2,1,auto,1,0,2,40,None,1,69,1,572840,, 0m3.803s, 500 , 649.50 , 229.14'
++ echo '134,1,3,1:0:0,0x3:0x113,hex,7,1,16,1,1,1,-2,3,2,1,auto,1,0,2,40,None,1,69,1,572840,, 0m3.803s, 500 , 649.50 , 229.14'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/134.sh
+Processing:  ./scripts/134.sh
+++ bash ./scripts/134.sh Lecture_360P-03bc.mp4
++ csvLine='135,1,3,1:0:0,0x3:0x113,hex,11,1,16,1,1,1,-2,0,None,None,None,None,None,0,0,None,0,69,1,921012,, 0m3.630s, 500 , 711.95 , 368.40'
++ echo '135,1,3,1:0:0,0x3:0x113,hex,11,1,16,1,1,1,-2,0,None,None,None,None,None,0,0,None,0,69,1,921012,, 0m3.630s, 500 , 711.95 , 368.40'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/135.sh
+Processing:  ./scripts/135.sh
+++ bash ./scripts/135.sh Lecture_360P-03bc.mp4
++ csvLine='136,1,5,0:0:0,0x3:0x113,hex,7,1,16,1,1,1,0,0,None,None,None,None,None,0,0,None,1,69,0,759837,, 0m2.921s, 500 , 782.88 , 303.93'
++ echo '136,1,5,0:0:0,0x3:0x113,hex,7,1,16,1,1,1,0,0,None,None,None,None,None,0,0,None,1,69,0,759837,, 0m2.921s, 500 , 782.88 , 303.93'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/136.sh
+Processing:  ./scripts/136.sh
+++ bash ./scripts/136.sh Lecture_360P-03bc.mp4
++ csvLine='137,1,3,1:0:0,0x3:0x113,hex,6,1,16,1,1,1,-2,0,None,None,None,None,None,0,0,None,0,69,1,922182,, 0m3.128s, 500 , 799.13 , 368.87'
++ echo '137,1,3,1:0:0,0x3:0x113,hex,6,1,16,1,1,1,-2,0,None,None,None,None,None,0,0,None,0,69,1,922182,, 0m3.128s, 500 , 799.13 , 368.87'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/137.sh
+Processing:  ./scripts/137.sh
+++ bash ./scripts/137.sh Lecture_360P-03bc.mp4
++ csvLine='138,0,5,0:0:0,0x113:0x113,tesa,10,0,24,2,1,0,-2,3,2,1,spatial,1,0,2,40,50,1,69,1,641579,, 0m16.312s, 500 , 148.05 , 256.63'
++ echo '138,0,5,0:0:0,0x113:0x113,tesa,10,0,24,2,1,0,-2,3,2,1,spatial,1,0,2,40,50,1,69,1,641579,, 0m16.312s, 500 , 148.05 , 256.63'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/138.sh
+Processing:  ./scripts/138.sh
+++ bash ./scripts/138.sh Lecture_360P-03bc.mp4
++ csvLine='139,1,16,0:0:0,0x113:0x113,tesa,10,1,24,2,0,1,-2,3,2,1,spatial,1,0,2,40,50,1,69,0,552838,, 0m30.753s, 500 , 111.26 , 221.14'
++ echo '139,1,16,0:0:0,0x113:0x113,tesa,10,1,24,2,0,1,-2,3,2,1,spatial,1,0,2,40,50,1,69,0,552838,, 0m30.753s, 500 , 111.26 , 221.14'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/139.sh
+Processing:  ./scripts/139.sh
+++ bash ./scripts/139.sh Lecture_360P-03bc.mp4
++ csvLine='140,1,16,1:0:0,0x113:0x113,hex,10,1,24,2,1,1,-2,8,2,1,spatial,1,0,2,40,30,1,69,0,518634,, 0m10.979s, 500 , 262.57 , 207.45'
++ echo '140,1,16,1:0:0,0x113:0x113,hex,10,1,24,2,1,1,-2,8,2,1,spatial,1,0,2,40,30,1,69,0,518634,, 0m10.979s, 500 , 262.57 , 207.45'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/14.sh
+Processing:  ./scripts/14.sh
+++ bash ./scripts/14.sh Lecture_360P-03bc.mp4
++ csvLine='15,0,1,0:0:0,0:0,dia,0,0,16,0,0,1,0,0,None,None,auto,None,None,0,0,None,0,69,0,2832265,, 0m1.103s, 500 , 1231.71 , 1132.91'
++ echo '15,0,1,0:0:0,0:0,dia,0,0,16,0,0,1,0,0,None,None,auto,None,None,0,0,None,0,69,0,2832265,, 0m1.103s, 500 , 1231.71 , 1132.91'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/140.sh
+Processing:  ./scripts/140.sh
+++ bash ./scripts/140.sh Lecture_360P-03bc.mp4
++ csvLine='141,1,16,0:0:0,0x113:0x113,hex,10,1,24,1,1,0,-2,3,2,1,spatial,1,0,2,None,50,1,69,0,607547,, 0m10.117s, 500 , 331.31 , 243.02'
++ echo '141,1,16,0:0:0,0x113:0x113,hex,10,1,24,1,1,0,-2,3,2,1,spatial,1,0,2,None,50,1,69,0,607547,, 0m10.117s, 500 , 331.31 , 243.02'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/141.sh
+Processing:  ./scripts/141.sh
+++ bash ./scripts/141.sh Lecture_360P-03bc.mp4
++ csvLine='142,1,16,0:0:0,0x113:0x113,hex,11,0,24,2,0,1,-2,0,None,None,None,None,None,0,0,None,0,69,1,635293,, 0m11.456s, 500 , 207.27 , 254.12'
++ echo '142,1,16,0:0:0,0x113:0x113,hex,11,0,24,2,0,1,-2,0,None,None,None,None,None,0,0,None,0,69,1,635293,, 0m11.456s, 500 , 207.27 , 254.12'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/142.sh
+Processing:  ./scripts/142.sh
+++ bash ./scripts/142.sh Lecture_360P-03bc.mp4
++ csvLine='143,1,16,0:0:0,0x113:0x113,hex,10,1,24,2,1,1,-2,0,None,None,None,None,None,0,0,None,1,69,0,605518,, 0m6.665s, 500 , 283.61 , 242.21'
++ echo '143,1,16,0:0:0,0x113:0x113,hex,10,1,24,2,1,1,-2,0,None,None,None,None,None,0,0,None,1,69,0,605518,, 0m6.665s, 500 , 283.61 , 242.21'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/143.sh
+Processing:  ./scripts/143.sh
+++ bash ./scripts/143.sh Lecture_360P-03bc.mp4
++ csvLine='144,0,8,0:0:0,0x113:0x113,umh,10,1,24,2,0,1,-2,0,None,None,None,None,None,0,0,None,0,69,1,775255,, 0m13.328s, 500 , 151.86 , 310.10'
++ echo '144,0,8,0:0:0,0x113:0x113,umh,10,1,24,2,0,1,-2,0,None,None,None,None,None,0,0,None,0,69,1,775255,, 0m13.328s, 500 , 151.86 , 310.10'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/144.sh
+Processing:  ./scripts/144.sh
+++ bash ./scripts/144.sh Lecture_360P-03bc.mp4
++ csvLine='145,0,5,1:0:0,0x3:0x113,hex,8,1,16,2,1,1,0,3,2,1,spatial,1,0,2,40,50,1,69,1,651868,, 0m5.930s, 500 , 375.07 , 260.75'
++ echo '145,0,5,1:0:0,0x3:0x113,hex,8,1,16,2,1,1,0,3,2,1,spatial,1,0,2,40,50,1,69,1,651868,, 0m5.930s, 500 , 375.07 , 260.75'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/145.sh
+Processing:  ./scripts/145.sh
+++ bash ./scripts/145.sh Lecture_360P-03bc.mp4
++ csvLine='146,1,5,1:0:0,0x113:0x113,hex,8,1,16,2,1,1,0,3,2,1,spatial,1,0,2,40,50,1,69,1,555333,, 0m4.987s, 500 , 505.13 , 222.13'
++ echo '146,1,5,1:0:0,0x113:0x113,hex,8,1,16,2,1,1,0,3,2,1,spatial,1,0,2,40,50,1,69,1,555333,, 0m4.987s, 500 , 505.13 , 222.13'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/146.sh
+Processing:  ./scripts/146.sh
+++ bash ./scripts/146.sh Lecture_360P-03bc.mp4
++ csvLine='147,0,1,0:0:0,0x3:0x113,hex,8,1,16,1,1,1,0,3,2,1,spatial,1,0,2,40,50,1,69,0,1104305,, 0m3.482s, 500 , 640.25 , 441.72'
++ echo '147,0,1,0:0:0,0x3:0x113,hex,8,1,16,1,1,1,0,3,2,1,spatial,1,0,2,40,50,1,69,0,1104305,, 0m3.482s, 500 , 640.25 , 441.72'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/147.sh
+Processing:  ./scripts/147.sh
+++ bash ./scripts/147.sh Lecture_360P-03bc.mp4
++ csvLine='148,0,3,0:0:0,0:0,hex,8,1,16,2,1,1,0,3,2,1,spatial,1,0,2,40,20,0,69,0,891600,, 0m6.716s, 500 , 344.54 , 356.64'
++ echo '148,0,3,0:0:0,0:0,hex,8,1,16,2,1,1,0,3,2,1,spatial,1,0,2,40,20,0,69,0,891600,, 0m6.716s, 500 , 344.54 , 356.64'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/148.sh
+Processing:  ./scripts/148.sh
+++ bash ./scripts/148.sh Lecture_360P-03bc.mp4
++ csvLine='149,0,3,1:0:0,0x3:0x113,hex,8,1,16,2,1,0,0,3,2,1,spatial,1,0,2,40,40,0,69,0,904251,, 0m7.155s, 500 , 331.26 , 361.70'
++ echo '149,0,3,1:0:0,0x3:0x113,hex,8,1,16,2,1,0,0,3,2,1,spatial,1,0,2,40,40,0,69,0,904251,, 0m7.155s, 500 , 331.26 , 361.70'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/149.sh
+Processing:  ./scripts/149.sh
+++ bash ./scripts/149.sh Lecture_360P-03bc.mp4
++ csvLine='150,1,3,1:0:0,0x3:0x113,hex,8,1,16,1,1,0,0,3,2,1,spatial,1,0,2,40,60,0,69,1,694053,, 0m4.484s, 500 , 613.92 , 277.62'
++ echo '150,1,3,1:0:0,0x3:0x113,hex,8,1,16,1,1,0,0,3,2,1,spatial,1,0,2,40,60,0,69,1,694053,, 0m4.484s, 500 , 613.92 , 277.62'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/15.sh
+Processing:  ./scripts/15.sh
+++ bash ./scripts/15.sh Lecture_360P-03bc.mp4
++ csvLine='16,0,1,0:0:0,0:0,dia,0,0,16,0,0,1,0,0,None,None,spatial,None,None,0,0,None,0,69,0,2832265,, 0m1.053s, 500 , 1240.31 , 1132.91'
++ echo '16,0,1,0:0:0,0:0,dia,0,0,16,0,0,1,0,0,None,None,spatial,None,None,0,0,None,0,69,0,2832265,, 0m1.053s, 500 , 1240.31 , 1132.91'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/150.sh
+Processing:  ./scripts/150.sh
+++ bash ./scripts/150.sh Lecture_360P-03bc.mp4
++ csvLine='151,0,3,1:0:0,0x3:0x113,umh,8,1,16,2,1,0,0,3,2,1,spatial,1,0,2,40,60,0,69,1,814599,, 0m7.524s, 500 , 335.64 , 325.84'
++ echo '151,0,3,1:0:0,0x3:0x113,umh,8,1,16,2,1,0,0,3,2,1,spatial,1,0,2,40,60,0,69,1,814599,, 0m7.524s, 500 , 335.64 , 325.84'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/151.sh
+Processing:  ./scripts/151.sh
+++ bash ./scripts/151.sh Lecture_360P-03bc.mp4
++ csvLine='152,1,3,1:0:0,0x3:0x113,hex,8,1,16,2,1,0,0,3,2,1,spatial,1,0,2,40,60,0,69,1,676723,, 0m5.791s, 500 , 488.26 , 270.69'
++ echo '152,1,3,1:0:0,0x3:0x113,hex,8,1,16,2,1,0,0,3,2,1,spatial,1,0,2,40,60,0,69,1,676723,, 0m5.791s, 500 , 488.26 , 270.69'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/152.sh
+Processing:  ./scripts/152.sh
+++ bash ./scripts/152.sh Lecture_360P-03bc.mp4
++ csvLine='153,1,3,1:0:0,0x3:0x113,hex,8,1,16,2,1,0,0,3,2,1,auto,1,0,2,40,60,0,69,1,676248,, 0m6.006s, 500 , 485.84 , 270.50'
++ echo '153,1,3,1:0:0,0x3:0x113,hex,8,1,16,2,1,0,0,3,2,1,auto,1,0,2,40,60,0,69,1,676248,, 0m6.006s, 500 , 485.84 , 270.50'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/153.sh
+Processing:  ./scripts/153.sh
+++ bash ./scripts/153.sh Lecture_360P-03bc.mp4
++ csvLine='154,1,3,0:0:0,0x3:0x113,hex,8,1,16,2,1,0,0,3,2,1,spatial,1,0,2,40,10,0,69,1,675695,, 0m5.859s, 500 , 483.09 , 270.28'
++ echo '154,1,3,0:0:0,0x3:0x113,hex,8,1,16,2,1,0,0,3,2,1,spatial,1,0,2,40,10,0,69,1,675695,, 0m5.859s, 500 , 483.09 , 270.28'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/154.sh
+Processing:  ./scripts/154.sh
+++ bash ./scripts/154.sh Lecture_360P-03bc.mp4
++ csvLine='155,1,3,1:0:0,0x3:0x113,hex,8,1,16,0,1,0,0,3,2,1,spatial,1,0,2,40,60,0,69,1,674195,, 0m4.302s, 500 , 640.59 , 269.68'
++ echo '155,1,3,1:0:0,0x3:0x113,hex,8,1,16,0,1,0,0,3,2,1,spatial,1,0,2,40,60,0,69,1,674195,, 0m4.302s, 500 , 640.59 , 269.68'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/155.sh
+Processing:  ./scripts/155.sh
+++ bash ./scripts/155.sh Lecture_360P-03bc.mp4
++ csvLine='156,1,3,1:0:0,0x3:0x113,hex,8,1,16,2,1,0,0,3,2,1,spatial,1,0,2,40,10,0,69,0,748640,, 0m5.684s, 500 , 497.37 , 299.46'
++ echo '156,1,3,1:0:0,0x3:0x113,hex,8,1,16,2,1,0,0,3,2,1,spatial,1,0,2,40,10,0,69,0,748640,, 0m5.684s, 500 , 497.37 , 299.46'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/156.sh
+Processing:  ./scripts/156.sh
+++ bash ./scripts/156.sh Lecture_360P-03bc.mp4
++ csvLine='157,1,8,1:0:0,0x3:0x113,umh,10,1,16,2,1,1,-2,3,2,2,spatial,None,0,2,40,60,1,69,1,484767,, 0m9.043s, 500 , 283.42 , 193.91'
++ echo '157,1,8,1:0:0,0x3:0x113,umh,10,1,16,2,1,1,-2,3,2,2,spatial,None,0,2,40,60,1,69,1,484767,, 0m9.043s, 500 , 283.42 , 193.91'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/157.sh
+Processing:  ./scripts/157.sh
+++ bash ./scripts/157.sh Lecture_360P-03bc.mp4
++ csvLine='158,1,8,1:0:0,0x3:0x3,umh,9,1,16,2,1,1,-2,3,2,2,spatial,1,0,2,40,60,1,69,1,505864,, 0m7.695s, 500 , 353.04 , 202.35'
++ echo '158,1,8,1:0:0,0x3:0x3,umh,9,1,16,2,1,1,-2,3,2,2,spatial,1,0,2,40,60,1,69,1,505864,, 0m7.695s, 500 , 353.04 , 202.35'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/158.sh
+Processing:  ./scripts/158.sh
+++ bash ./scripts/158.sh Lecture_360P-03bc.mp4
++ csvLine='159,1,16,1:0:0,0x3:0x3,umh,9,0,16,2,1,1,-2,3,2,2,spatial,1,0,2,40,60,1,69,1,485649,, 0m11.961s, 500 , 265.27 , 194.26'
++ echo '159,1,16,1:0:0,0x3:0x3,umh,9,0,16,2,1,1,-2,3,2,2,spatial,1,0,2,40,60,1,69,1,485649,, 0m11.961s, 500 , 265.27 , 194.26'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/159.sh
+Processing:  ./scripts/159.sh
+++ bash ./scripts/159.sh Lecture_360P-03bc.mp4
++ csvLine='160,1,16,1:0:0,0x113:0x113,umh,6,1,16,2,1,1,-2,3,2,2,spatial,1,0,2,40,30,1,69,1,440788,, 0m5.981s, 500 , 429.42 , 176.32'
++ echo '160,1,16,1:0:0,0x113:0x113,umh,6,1,16,2,1,1,-2,3,2,2,spatial,1,0,2,40,30,1,69,1,440788,, 0m5.981s, 500 , 429.42 , 176.32'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/16.sh
+Processing:  ./scripts/16.sh
+++ bash ./scripts/16.sh Lecture_360P-03bc.mp4
++ csvLine='17,0,1,0:0:0,0:0,hex,0,0,16,0,0,1,0,0,None,None,None,None,None,0,0,None,0,69,0,2824713,, 0m1.070s, 500 , 1235.12 , 1129.89'
++ echo '17,0,1,0:0:0,0:0,hex,0,0,16,0,0,1,0,0,None,None,None,None,None,0,0,None,0,69,0,2824713,, 0m1.070s, 500 , 1235.12 , 1129.89'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/160.sh
+Processing:  ./scripts/160.sh
+++ bash ./scripts/160.sh Lecture_360P-03bc.mp4
++ csvLine='161,1,3,1:0:0,0x113:0x113,umh,6,1,16,0,1,0,-2,3,2,2,auto,1,0,2,40,60,1,69,1,529647,, 0m2.855s, 500 , 571.01 , 211.86'
++ echo '161,1,3,1:0:0,0x113:0x113,umh,6,1,16,0,1,0,-2,3,2,2,auto,1,0,2,40,60,1,69,1,529647,, 0m2.855s, 500 , 571.01 , 211.86'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/161.sh
+Processing:  ./scripts/161.sh
+++ bash ./scripts/161.sh Lecture_360P-03bc.mp4
++ csvLine='162,1,16,1:0:0,0x113:0x113,umh,6,1,16,2,1,1,-2,3,2,2,spatial,1,0,2,40,None,0,69,1,745714,, 0m7.100s, 500 , 416.81 , 298.29'
++ echo '162,1,16,1:0:0,0x113:0x113,umh,6,1,16,2,1,1,-2,3,2,2,spatial,1,0,2,40,None,0,69,1,745714,, 0m7.100s, 500 , 416.81 , 298.29'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/162.sh
+Processing:  ./scripts/162.sh
+++ bash ./scripts/162.sh Lecture_360P-03bc.mp4
++ csvLine='163,1,16,1:0:0,0x113:0x113,umh,6,1,16,2,1,1,-2,0,None,None,None,None,None,0,0,60,0,69,0,763821,, 0m7.054s, 500 , 358.99 , 305.53'
++ echo '163,1,16,1:0:0,0x113:0x113,umh,6,1,16,2,1,1,-2,0,None,None,None,None,None,0,0,60,0,69,0,763821,, 0m7.054s, 500 , 358.99 , 305.53'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/163.sh
+Processing:  ./scripts/163.sh
+++ bash ./scripts/163.sh Lecture_360P-03bc.mp4
++ csvLine='164,0,5,1:0:0,0x113:0x113,umh,6,1,16,2,0,1,-2,0,None,None,None,None,None,0,0,20,1,69,0,868138,, 0m3.673s, 500 , 608.44 , 347.26'
++ echo '164,0,5,1:0:0,0x113:0x113,umh,6,1,16,2,0,1,-2,0,None,None,None,None,None,0,0,20,1,69,0,868138,, 0m3.673s, 500 , 608.44 , 347.26'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/164.sh
+Processing:  ./scripts/164.sh
+++ bash ./scripts/164.sh Lecture_360P-03bc.mp4
++ csvLine='165,0,16,1:0:0,0x113:0x113,hex,6,1,24,0,1,1,0,3,2,2,auto,1,0,2,40,10,0,69,0,976455,, 0m4.210s, 500 , 570.89 , 390.58'
++ echo '165,0,16,1:0:0,0x113:0x113,hex,6,1,24,0,1,1,0,3,2,2,auto,1,0,2,40,10,0,69,0,976455,, 0m4.210s, 500 , 570.89 , 390.58'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/165.sh
+Processing:  ./scripts/165.sh
+++ bash ./scripts/165.sh Lecture_360P-03bc.mp4
++ csvLine='166,0,16,0:0:0,0x113:0x113,hex,6,1,24,1,1,1,0,0,None,None,None,None,None,0,0,50,0,69,0,924387,, 0m5.805s, 500 , 456.63 , 369.75'
++ echo '166,0,16,0:0:0,0x113:0x113,hex,6,1,24,1,1,1,0,0,None,None,None,None,None,0,0,50,0,69,0,924387,, 0m5.805s, 500 , 456.63 , 369.75'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/166.sh
+Processing:  ./scripts/166.sh
+++ bash ./scripts/166.sh Lecture_360P-03bc.mp4
++ csvLine='167,1,8,1:0:0,0x113:0x113,dia,7,1,24,1,1,1,0,0,None,None,None,None,None,0,0,50,0,69,0,811585,, 0m3.623s, 500 , 725.78 , 324.63'
++ echo '167,1,8,1:0:0,0x113:0x113,dia,7,1,24,1,1,1,0,0,None,None,None,None,None,0,0,50,0,69,0,811585,, 0m3.623s, 500 , 725.78 , 324.63'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/167.sh
+Processing:  ./scripts/167.sh
+++ bash ./scripts/167.sh Lecture_360P-03bc.mp4
++ csvLine='168,1,8,1:0:0,0x3:0x113,umh,9,0,16,0,1,1,-2,3,2,1,spatial,1,0,2,40,30,1,69,1,490760,, 0m6.783s, 500 , 458.21 , 196.30'
++ echo '168,1,8,1:0:0,0x3:0x113,umh,9,0,16,0,1,1,-2,3,2,1,spatial,1,0,2,40,30,1,69,1,490760,, 0m6.783s, 500 , 458.21 , 196.30'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/168.sh
+Processing:  ./scripts/168.sh
+++ bash ./scripts/168.sh Lecture_360P-03bc.mp4
++ csvLine='169,1,8,0:0:0,0x3:0x113,umh,9,0,16,0,1,1,-2,3,2,2,spatial,1,0,2,40,30,1,69,1,463917,, 0m6.941s, 500 , 409.39 , 185.57'
++ echo '169,1,8,0:0:0,0x3:0x113,umh,9,0,16,0,1,1,-2,3,2,2,spatial,1,0,2,40,30,1,69,1,463917,, 0m6.941s, 500 , 409.39 , 185.57'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/169.sh
+Processing:  ./scripts/169.sh
+++ bash ./scripts/169.sh Lecture_360P-03bc.mp4
++ csvLine='170,1,8,1:0:0,0x3:0x113,umh,9,1,16,2,1,1,0,3,2,2,spatial,1,0,2,40,60,1,69,1,502142,, 0m7.669s, 500 , 354.97 , 200.86'
++ echo '170,1,8,1:0:0,0x3:0x113,umh,9,1,16,2,1,1,0,3,2,2,spatial,1,0,2,40,60,1,69,1,502142,, 0m7.669s, 500 , 354.97 , 200.86'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/17.sh
+Processing:  ./scripts/17.sh
+++ bash ./scripts/17.sh Lecture_360P-03bc.mp4
++ csvLine='18,0,1,0:0:0,0:0,dia,0,0,16,0,0,1,0,3,2,1,None,1,0,0,0,None,0,69,0,1850207,, 0m1.105s, 500 , 1217.52 , 740.08'
++ echo '18,0,1,0:0:0,0:0,dia,0,0,16,0,0,1,0,3,2,1,None,1,0,0,0,None,0,69,0,1850207,, 0m1.105s, 500 , 1217.52 , 740.08'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/170.sh
+Processing:  ./scripts/170.sh
+++ bash ./scripts/170.sh Lecture_360P-03bc.mp4
++ csvLine='171,1,8,1:0:0,0x3:0x113,umh,9,1,16,2,1,1,-2,3,2,2,spatial,1,0,2,40,50,1,69,1,499214,, 0m7.605s, 500 , 367.49 , 199.69'
++ echo '171,1,8,1:0:0,0x3:0x113,umh,9,1,16,2,1,1,-2,3,2,2,spatial,1,0,2,40,50,1,69,1,499214,, 0m7.605s, 500 , 367.49 , 199.69'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/171.sh
+Processing:  ./scripts/171.sh
+++ bash ./scripts/171.sh Lecture_360P-03bc.mp4
++ csvLine='172,1,8,1:0:0,0x3:0x113,umh,9,1,16,2,1,1,-2,3,2,2,spatial,1,0,2,40,50,1,69,0,589633,, 0m7.416s, 500 , 369.01 , 235.85'
++ echo '172,1,8,1:0:0,0x3:0x113,umh,9,1,16,2,1,1,-2,3,2,2,spatial,1,0,2,40,50,1,69,0,589633,, 0m7.416s, 500 , 369.01 , 235.85'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/172.sh
+Processing:  ./scripts/172.sh
+++ bash ./scripts/172.sh Lecture_360P-03bc.mp4
++ csvLine='173,1,2,1:0:0,0x3:0x113,umh,1,1,16,2,1,1,-2,3,2,2,spatial,1,0,2,40,50,1,69,1,615931,, 0m1.833s, 500 , 945.98 , 246.37'
++ echo '173,1,2,1:0:0,0x3:0x113,umh,1,1,16,2,1,1,-2,3,2,2,spatial,1,0,2,40,50,1,69,1,615931,, 0m1.833s, 500 , 945.98 , 246.37'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/173.sh
+Processing:  ./scripts/173.sh
+++ bash ./scripts/173.sh Lecture_360P-03bc.mp4
++ csvLine='174,1,3,1:0:0,0x3:0x113,umh,6,1,16,2,1,1,-2,3,2,2,spatial,1,0,2,40,50,0,69,1,816612,, 0m3.965s, 500 , 610.32 , 326.64'
++ echo '174,1,3,1:0:0,0x3:0x113,umh,6,1,16,2,1,1,-2,3,2,2,spatial,1,0,2,40,50,0,69,1,816612,, 0m3.965s, 500 , 610.32 , 326.64'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/174.sh
+Processing:  ./scripts/174.sh
+++ bash ./scripts/174.sh Lecture_360P-03bc.mp4
++ csvLine='175,1,2,1:0:0,0x113:0x113,umh,1,1,16,2,1,1,-2,3,2,2,spatial,1,0,2,40,50,1,69,1,615931,, 0m1.792s, 500 , 936.00 , 246.37'
++ echo '175,1,2,1:0:0,0x113:0x113,umh,1,1,16,2,1,1,-2,3,2,2,spatial,1,0,2,40,50,1,69,1,615931,, 0m1.792s, 500 , 936.00 , 246.37'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/175.sh
+Processing:  ./scripts/175.sh
+++ bash ./scripts/175.sh Lecture_360P-03bc.mp4
++ csvLine='176,1,2,1:0:0,0x3:0x113,umh,9,0,24,2,1,1,-2,16,2,2,spatial,1,0,2,40,50,1,69,1,496325,, 0m8.507s, 500 , 168.62 , 198.53'
++ echo '176,1,2,1:0:0,0x3:0x113,umh,9,0,24,2,1,1,-2,16,2,2,spatial,1,0,2,40,50,1,69,1,496325,, 0m8.507s, 500 , 168.62 , 198.53'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/176.sh
+Processing:  ./scripts/176.sh
+++ bash ./scripts/176.sh Lecture_360P-03bc.mp4
++ csvLine='177,1,2,1:0:0,0x3:0x113,umh,1,0,24,2,1,0,-2,16,2,2,auto,1,0,2,40,20,1,69,1,548054,, 0m3.876s, 500 , 307.81 , 219.22'
++ echo '177,1,2,1:0:0,0x3:0x113,umh,1,0,24,2,1,0,-2,16,2,2,auto,1,0,2,40,20,1,69,1,548054,, 0m3.876s, 500 , 307.81 , 219.22'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/177.sh
+Processing:  ./scripts/177.sh
+++ bash ./scripts/177.sh Lecture_360P-03bc.mp4
++ csvLine='178,1,8,1:0:0,0x3:0x113,umh,10,0,24,2,1,0,-2,16,2,2,auto,1,0,2,40,20,1,69,1,437958,, 0m12.674s, 500 , 143.08 , 175.18'
++ echo '178,1,8,1:0:0,0x3:0x113,umh,10,0,24,2,1,0,-2,16,2,2,auto,1,0,2,40,20,1,69,1,437958,, 0m12.674s, 500 , 143.08 , 175.18'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/178.sh
+Processing:  ./scripts/178.sh
+++ bash ./scripts/178.sh Lecture_360P-03bc.mp4
++ csvLine='179,1,8,1:0:0,0x3:0x113,umh,9,1,16,2,1,1,-2,3,2,2,spatial,1,0,2,0,60,1,69,0,593126,, 0m7.405s, 500 , 359.95 , 237.25'
++ echo '179,1,8,1:0:0,0x3:0x113,umh,9,1,16,2,1,1,-2,3,2,2,spatial,1,0,2,0,60,1,69,0,593126,, 0m7.405s, 500 , 359.95 , 237.25'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/179.sh
+Processing:  ./scripts/179.sh
+++ bash ./scripts/179.sh Lecture_360P-03bc.mp4
++ csvLine='180,1,8,1:0:0,0x3:0x113,hex,9,1,16,2,1,1,-2,3,2,2,spatial,1,0,2,40,60,1,69,1,505482,, 0m6.972s, 500 , 374.07 , 202.19'
++ echo '180,1,8,1:0:0,0x3:0x113,hex,9,1,16,2,1,1,-2,3,2,2,spatial,1,0,2,40,60,1,69,1,505482,, 0m6.972s, 500 , 374.07 , 202.19'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/18.sh
+Processing:  ./scripts/18.sh
+++ bash ./scripts/18.sh Lecture_360P-03bc.mp4
++ csvLine='19,1,1,0:0:0,0:0,dia,0,0,16,0,0,1,0,0,None,None,None,None,None,0,0,None,0,69,0,2458617,, 0m1.284s, 500 , 1190.99 , 983.45'
++ echo '19,1,1,0:0:0,0:0,dia,0,0,16,0,0,1,0,0,None,None,None,None,None,0,0,None,0,69,0,2458617,, 0m1.284s, 500 , 1190.99 , 983.45'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/180.sh
+Processing:  ./scripts/180.sh
+++ bash ./scripts/180.sh Lecture_360P-03bc.mp4
++ csvLine='181,1,8,0:0:0,0x3:0x113,umh,9,1,16,2,1,1,-2,3,2,2,spatial,1,0,2,40,10,1,69,1,409641,, 0m7.849s, 500 , 373.78 , 163.86'
++ echo '181,1,8,0:0:0,0x3:0x113,umh,9,1,16,2,1,1,-2,3,2,2,spatial,1,0,2,40,10,1,69,1,409641,, 0m7.849s, 500 , 373.78 , 163.86'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/181.sh
+Processing:  ./scripts/181.sh
+++ bash ./scripts/181.sh Lecture_360P-03bc.mp4
++ csvLine='182,1,8,0:0:0,0x3:0x113,umh,9,1,16,2,1,1,-2,3,2,2,spatial,1,0,2,40,40,1,69,1,489397,, 0m7.732s, 500 , 359.43 , 195.76'
++ echo '182,1,8,0:0:0,0x3:0x113,umh,9,1,16,2,1,1,-2,3,2,2,spatial,1,0,2,40,40,1,69,1,489397,, 0m7.732s, 500 , 359.43 , 195.76'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/182.sh
+Processing:  ./scripts/182.sh
+++ bash ./scripts/182.sh Lecture_360P-03bc.mp4
++ csvLine='183,1,16,1:0:0,0x3:0x113,umh,10,1,24,2,1,1,0,8,2,2,spatial,1,0,2,40,60,1,69,1,418724,, 0m13.715s, 500 , 176.77 , 167.49'
++ echo '183,1,16,1:0:0,0x3:0x113,umh,10,1,24,2,1,1,0,8,2,2,spatial,1,0,2,40,60,1,69,1,418724,, 0m13.715s, 500 , 176.77 , 167.49'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/183.sh
+Processing:  ./scripts/183.sh
+++ bash ./scripts/183.sh Lecture_360P-03bc.mp4
++ csvLine='184,1,16,1:0:0,0x3:0x113,umh,10,1,24,2,1,1,-2,8,2,2,spatial,1,0,0,40,60,1,69,0,485804,, 0m12.827s, 500 , 179.92 , 194.32'
++ echo '184,1,16,1:0:0,0x3:0x113,umh,10,1,24,2,1,1,-2,8,2,2,spatial,1,0,0,40,60,1,69,0,485804,, 0m12.827s, 500 , 179.92 , 194.32'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/184.sh
+Processing:  ./scripts/184.sh
+++ bash ./scripts/184.sh Lecture_360P-03bc.mp4
++ csvLine='185,1,16,0:0:0,0x3:0x113,umh,10,1,24,2,1,1,-2,8,2,2,spatial,1,0,2,40,60,1,69,1,423907,, 0m13.830s, 500 , 175.13 , 169.56'
++ echo '185,1,16,0:0:0,0x3:0x113,umh,10,1,24,2,1,1,-2,8,2,2,spatial,1,0,2,40,60,1,69,1,423907,, 0m13.830s, 500 , 175.13 , 169.56'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/185.sh
+Processing:  ./scripts/185.sh
+++ bash ./scripts/185.sh Lecture_360P-03bc.mp4
++ csvLine='186,1,8,1:0:0,0x3:0x113,umh,10,1,24,2,1,1,-2,8,2,2,spatial,1,0,2,40,50,1,69,1,423073,, 0m9.297s, 500 , 205.35 , 169.23'
++ echo '186,1,8,1:0:0,0x3:0x113,umh,10,1,24,2,1,1,-2,8,2,2,spatial,1,0,2,40,50,1,69,1,423073,, 0m9.297s, 500 , 205.35 , 169.23'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/186.sh
+Processing:  ./scripts/186.sh
+++ bash ./scripts/186.sh Lecture_360P-03bc.mp4
++ csvLine='187,0,16,1:0:0,0x3:0x113,umh,10,1,24,2,1,1,-2,8,2,2,spatial,1,0,2,40,60,1,69,1,484669,, 0m17.632s, 500 , 140.96 , 193.87'
++ echo '187,0,16,1:0:0,0x3:0x113,umh,10,1,24,2,1,1,-2,8,2,2,spatial,1,0,2,40,60,1,69,1,484669,, 0m17.632s, 500 , 140.96 , 193.87'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/187.sh
+Processing:  ./scripts/187.sh
+++ bash ./scripts/187.sh Lecture_360P-03bc.mp4
++ csvLine='188,1,16,1:0:0,0x3:0x113,umh,10,1,24,2,1,1,-2,8,2,2,auto,1,0,2,40,60,1,69,1,423722,, 0m14.047s, 500 , 174.95 , 169.49'
++ echo '188,1,16,1:0:0,0x3:0x113,umh,10,1,24,2,1,1,-2,8,2,2,auto,1,0,2,40,60,1,69,1,423722,, 0m14.047s, 500 , 174.95 , 169.49'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/188.sh
+Processing:  ./scripts/188.sh
+++ bash ./scripts/188.sh Lecture_360P-03bc.mp4
++ csvLine='189,1,16,0:0:0,0x3:0x113,hex,11,1,24,2,1,1,-2,8,2,2,spatial,1,0,2,40,60,1,69,1,423943,, 0m16.598s, 500 , 161.48 , 169.58'
++ echo '189,1,16,0:0:0,0x3:0x113,hex,11,1,24,2,1,1,-2,8,2,2,spatial,1,0,2,40,60,1,69,1,423943,, 0m16.598s, 500 , 161.48 , 169.58'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/189.sh
+Processing:  ./scripts/189.sh
+++ bash ./scripts/189.sh Lecture_360P-03bc.mp4
++ csvLine='190,0,16,0:0:0,0x3:0x113,hex,11,1,24,2,1,1,-2,8,2,2,spatial,1,0,2,40,60,1,69,0,555932,, 0m24.443s, 500 , 115.04 , 222.37'
++ echo '190,0,16,0:0:0,0x3:0x113,hex,11,1,24,2,1,1,-2,8,2,2,spatial,1,0,2,40,60,1,69,0,555932,, 0m24.443s, 500 , 115.04 , 222.37'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/19.sh
+Processing:  ./scripts/19.sh
+++ bash ./scripts/19.sh Lecture_360P-03bc.mp4
++ csvLine='20,0,1,0:0:0,0:0,dia,0,0,16,0,0,1,0,0,None,None,None,None,None,0,0,10,0,69,0,2832265,, 0m1.101s, 500 , 1213.06 , 1132.91'
++ echo '20,0,1,0:0:0,0:0,dia,0,0,16,0,0,1,0,0,None,None,None,None,None,0,0,10,0,69,0,2832265,, 0m1.101s, 500 , 1213.06 , 1132.91'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/190.sh
+Processing:  ./scripts/190.sh
+++ bash ./scripts/190.sh Lecture_360P-03bc.mp4
++ csvLine='191,1,16,1:0:0,0x3:0x133,tesa,11,0,24,2,1,0,-2,16,2,2,spatial,1,0,2,40,60,1,69,1,430227,, 0m44.824s, 500 , 68.93 , 172.09'
++ echo '191,1,16,1:0:0,0x3:0x133,tesa,11,0,24,2,1,0,-2,16,2,2,spatial,1,0,2,40,60,1,69,1,430227,, 0m44.824s, 500 , 68.93 , 172.09'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/191.sh
+Processing:  ./scripts/191.sh
+++ bash ./scripts/191.sh Lecture_360P-03bc.mp4
++ csvLine='192,1,16,1:0:0,0x3:0x133,tesa,11,1,24,2,1,0,-2,16,2,2,auto,1,0,2,40,60,1,69,1,430175,, 0m45.426s, 500 , 69.10 , 172.07'
++ echo '192,1,16,1:0:0,0x3:0x133,tesa,11,1,24,2,1,0,-2,16,2,2,auto,1,0,2,40,60,1,69,1,430175,, 0m45.426s, 500 , 69.10 , 172.07'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/192.sh
+Processing:  ./scripts/192.sh
+++ bash ./scripts/192.sh Lecture_360P-03bc.mp4
++ csvLine='193,1,16,1:0:0,0x3:0x133,tesa,11,1,24,2,1,0,-2,16,2,2,spatial,1,0,2,40,30,1,69,1,430227,, 0m44.833s, 500 , 68.90 , 172.09'
++ echo '193,1,16,1:0:0,0x3:0x133,tesa,11,1,24,2,1,0,-2,16,2,2,spatial,1,0,2,40,30,1,69,1,430227,, 0m44.833s, 500 , 68.90 , 172.09'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/193.sh
+Processing:  ./scripts/193.sh
+++ bash ./scripts/193.sh Lecture_360P-03bc.mp4
++ csvLine='194,0,16,1:0:0,0x3:0x133,tesa,11,1,24,2,1,0,-2,16,2,2,spatial,1,0,2,40,60,1,69,1,491834,, 0m52.181s, 500 , 59.91 , 196.73'
++ echo '194,0,16,1:0:0,0x3:0x133,tesa,11,1,24,2,1,0,-2,16,2,2,spatial,1,0,2,40,60,1,69,1,491834,, 0m52.181s, 500 , 59.91 , 196.73'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/194.sh
+Processing:  ./scripts/194.sh
+++ bash ./scripts/194.sh Lecture_360P-03bc.mp4
++ csvLine='195,1,16,1:0:0,0x3:0x133,tesa,11,1,24,2,1,0,-2,16,2,2,spatial,1,0,2,40,60,0,69,1,672597,, 0m51.619s, 500 , 63.85 , 269.04'
++ echo '195,1,16,1:0:0,0x3:0x133,tesa,11,1,24,2,1,0,-2,16,2,2,spatial,1,0,2,40,60,0,69,1,672597,, 0m51.619s, 500 , 63.85 , 269.04'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/195.sh
+Processing:  ./scripts/195.sh
+++ bash ./scripts/195.sh Lecture_360P-03bc.mp4
++ csvLine='196,1,16,0:0:0,0x3:0x133,tesa,11,1,24,2,1,0,-2,16,2,2,spatial,1,0,2,40,60,1,69,1,429343,, 0m44.954s, 500 , 69.51 , 171.74'
++ echo '196,1,16,0:0:0,0x3:0x133,tesa,11,1,24,2,1,0,-2,16,2,2,spatial,1,0,2,40,60,1,69,1,429343,, 0m44.954s, 500 , 69.51 , 171.74'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/196.sh
+Processing:  ./scripts/196.sh
+++ bash ./scripts/196.sh Lecture_360P-03bc.mp4
++ csvLine='197,1,16,1:0:0,0x3:0x133,tesa,7,1,24,2,1,0,-2,16,2,2,spatial,1,0,2,40,60,1,69,1,450661,, 0m35.737s, 500 , 80.09 , 180.26'
++ echo '197,1,16,1:0:0,0x3:0x133,tesa,7,1,24,2,1,0,-2,16,2,2,spatial,1,0,2,40,60,1,69,1,450661,, 0m35.737s, 500 , 80.09 , 180.26'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/197.sh
+Processing:  ./scripts/197.sh
+++ bash ./scripts/197.sh Lecture_360P-03bc.mp4
++ csvLine='198,1,16,1:0:0,0x3:0x133,hex,11,1,24,2,1,0,-2,16,2,2,spatial,1,0,2,40,60,1,69,1,424640,, 0m19.946s, 500 , 115.62 , 169.86'
++ echo '198,1,16,1:0:0,0x3:0x133,hex,11,1,24,2,1,0,-2,16,2,2,spatial,1,0,2,40,60,1,69,1,424640,, 0m19.946s, 500 , 115.62 , 169.86'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/198.sh
+Processing:  ./scripts/198.sh
+++ bash ./scripts/198.sh Lecture_360P-03bc.mp4
++ csvLine='199,1,16,1:0:0,0x3:0x3,tesa,11,1,24,2,1,0,-2,16,2,2,spatial,1,0,2,40,60,1,69,1,430227,, 0m44.788s, 500 , 68.90 , 172.09'
++ echo '199,1,16,1:0:0,0x3:0x3,tesa,11,1,24,2,1,0,-2,16,2,2,spatial,1,0,2,40,60,1,69,1,430227,, 0m44.788s, 500 , 68.90 , 172.09'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/199.sh
+Processing:  ./scripts/199.sh
+++ bash ./scripts/199.sh Lecture_360P-03bc.mp4
++ csvLine='200,1,16,1:0:0,0:0,tesa,11,1,24,2,1,0,-2,16,2,2,spatial,1,0,2,40,60,1,69,1,430227,, 0m45.249s, 500 , 69.28 , 172.09'
++ echo '200,1,16,1:0:0,0:0,tesa,11,1,24,2,1,0,-2,16,2,2,spatial,1,0,2,40,60,1,69,1,430227,, 0m45.249s, 500 , 69.28 , 172.09'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/2.sh
+Processing:  ./scripts/2.sh
+++ bash ./scripts/2.sh Lecture_360P-03bc.mp4
++ csvLine='3,1,1,1:0:0,0x3:0x113,hex,2,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,10,1,69,1,531445,, 0m1.561s, 500 , 1007.31 , 212.58'
++ echo '3,1,1,1:0:0,0x3:0x113,hex,2,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,10,1,69,1,531445,, 0m1.561s, 500 , 1007.31 , 212.58'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/20.sh
+Processing:  ./scripts/20.sh
+++ bash ./scripts/20.sh Lecture_360P-03bc.mp4
++ csvLine='21,0,1,0:0:0,0:0,dia,0,0,16,0,0,1,0,0,None,None,None,None,None,0,0,None,1,69,0,1976962,, 0m1.037s, 500 , 1210.03 , 790.78'
++ echo '21,0,1,0:0:0,0:0,dia,0,0,16,0,0,1,0,0,None,None,None,None,None,0,0,None,1,69,0,1976962,, 0m1.037s, 500 , 1210.03 , 790.78'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/200.sh
+Processing:  ./scripts/200.sh
+++ bash ./scripts/200.sh Lecture_360P-03bc.mp4
++ csvLine='201,1,16,1:0:0,0:0,tesa,11,1,16,2,1,0,-2,16,2,2,spatial,1,0,2,40,60,1,69,0,485490,, 0m35.238s, 500 , 80.69 , 194.20'
++ echo '201,1,16,1:0:0,0:0,tesa,11,1,16,2,1,0,-2,16,2,2,spatial,1,0,2,40,60,1,69,0,485490,, 0m35.238s, 500 , 80.69 , 194.20'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/21.sh
+Processing:  ./scripts/21.sh
+++ bash ./scripts/21.sh Lecture_360P-03bc.mp4
++ csvLine='22,0,1,0:0:0,0:0,dia,0,0,16,0,0,1,0,0,None,None,None,None,None,0,0,None,0,69,1,2344791,, 0m1.231s, 500 , 1069.54 , 937.92'
++ echo '22,0,1,0:0:0,0:0,dia,0,0,16,0,0,1,0,0,None,None,None,None,None,0,0,None,0,69,1,2344791,, 0m1.231s, 500 , 1069.54 , 937.92'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/22.sh
+Processing:  ./scripts/22.sh
+++ bash ./scripts/22.sh Lecture_360P-03bc.mp4
++ csvLine='23,0,1,0:0:0,0:0,dia,1,0,16,0,0,1,0,0,None,None,None,None,None,0,0,None,0,69,0,2478773,, 0m1.088s, 500 , 1261.10 , 991.51'
++ echo '23,0,1,0:0:0,0:0,dia,1,0,16,0,0,1,0,0,None,None,None,None,None,0,0,None,0,69,0,2478773,, 0m1.088s, 500 , 1261.10 , 991.51'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/23.sh
+Processing:  ./scripts/23.sh
+++ bash ./scripts/23.sh Lecture_360P-03bc.mp4
++ csvLine='24,0,1,0:0:0,0x3:0x133,dia,0,0,16,0,0,1,0,0,None,None,None,None,None,0,0,None,0,69,0,2832265,, 0m0.999s, 500 , 1302.54 , 1132.91'
++ echo '24,0,1,0:0:0,0x3:0x133,dia,0,0,16,0,0,1,0,0,None,None,None,None,None,0,0,None,0,69,0,2832265,, 0m0.999s, 500 , 1302.54 , 1132.91'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/24.sh
+Processing:  ./scripts/24.sh
+++ bash ./scripts/24.sh Lecture_360P-03bc.mp4
++ csvLine='25,0,1,0:0:0,0x3:0x3,dia,0,0,16,0,0,1,0,0,None,None,None,None,None,0,0,None,0,69,0,2832265,, 0m0.980s, 500 , 1299.93 , 1132.91'
++ echo '25,0,1,0:0:0,0x3:0x3,dia,0,0,16,0,0,1,0,0,None,None,None,None,None,0,0,None,0,69,0,2832265,, 0m0.980s, 500 , 1299.93 , 1132.91'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/25.sh
+Processing:  ./scripts/25.sh
+++ bash ./scripts/25.sh Lecture_360P-03bc.mp4
++ csvLine='26,0,1,0:0:0,0:0,dia,11,0,16,0,0,1,0,0,None,None,None,None,None,0,0,None,0,69,0,2109019,, 0m2.128s, 500 , 1025.97 , 843.61'
++ echo '26,0,1,0:0:0,0:0,dia,11,0,16,0,0,1,0,0,None,None,None,None,None,0,0,None,0,69,0,2109019,, 0m2.128s, 500 , 1025.97 , 843.61'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/26.sh
+Processing:  ./scripts/26.sh
+++ bash ./scripts/26.sh Lecture_360P-03bc.mp4
++ csvLine='27,0,1,0:0:0,0:0,dia,11,0,16,0,0,1,0,16,2,1,None,1,None,0,0,None,0,69,0,1111471,, 0m3.377s, 500 , 754.26 , 444.59'
++ echo '27,0,1,0:0:0,0:0,dia,11,0,16,0,0,1,0,16,2,1,None,1,None,0,0,None,0,69,0,1111471,, 0m3.377s, 500 , 754.26 , 444.59'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/27.sh
+Processing:  ./scripts/27.sh
+++ bash ./scripts/27.sh Lecture_360P-03bc.mp4
++ csvLine='28,0,1,0:0:0,0:0,dia,0,0,16,2,0,1,0,0,None,None,None,None,None,0,0,None,0,69,0,2740039,, 0m2.592s, 500 , 785.60 , 1096.02'
++ echo '28,0,1,0:0:0,0:0,dia,0,0,16,2,0,1,0,0,None,None,None,None,None,0,0,None,0,69,0,2740039,, 0m2.592s, 500 , 785.60 , 1096.02'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/28.sh
+Processing:  ./scripts/28.sh
+++ bash ./scripts/28.sh Lecture_360P-03bc.mp4
++ csvLine='29,0,1,0:0:0,0:0,dia,0,0,16,0,0,1,0,0,None,None,None,None,None,2,0,None,0,69,0,2833390,, 0m1.057s, 500 , 1222.36 , 1133.36'
++ echo '29,0,1,0:0:0,0:0,dia,0,0,16,0,0,1,0,0,None,None,None,None,None,2,0,None,0,69,0,2833390,, 0m1.057s, 500 , 1222.36 , 1133.36'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/29.sh
+Processing:  ./scripts/29.sh
+++ bash ./scripts/29.sh Lecture_360P-03bc.mp4
++ csvLine='30,1,1,0:0:0,0:0,dia,0,1,16,0,0,1,0,0,None,None,None,None,None,0,0,None,0,69,0,2458617,, 0m1.141s, 500 , 1288.90 , 983.45'
++ echo '30,1,1,0:0:0,0:0,dia,0,1,16,0,0,1,0,0,None,None,None,None,None,0,0,None,0,69,0,2458617,, 0m1.141s, 500 , 1288.90 , 983.45'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/3.sh
+Processing:  ./scripts/3.sh
+++ bash ./scripts/3.sh Lecture_360P-03bc.mp4
++ csvLine='4,1,2,1:0:0,0x3:0x113,hex,4,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,20,1,69,1,515721,, 0m1.904s, 500 , 964.39 , 206.29'
++ echo '4,1,2,1:0:0,0x3:0x113,hex,4,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,20,1,69,1,515721,, 0m1.904s, 500 , 964.39 , 206.29'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/30.sh
+Processing:  ./scripts/30.sh
+++ bash ./scripts/30.sh Lecture_360P-03bc.mp4
++ csvLine='31,0,1,0:0:0,0:0,dia,0,1,16,0,0,1,-2,0,None,None,None,None,None,0,0,None,0,69,0,2847419,, 0m1.038s, 500 , 1256.99 , 1138.97'
++ echo '31,0,1,0:0:0,0:0,dia,0,1,16,0,0,1,-2,0,None,None,None,None,None,0,0,None,0,69,0,2847419,, 0m1.038s, 500 , 1256.99 , 1138.97'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/31.sh
+Processing:  ./scripts/31.sh
+++ bash ./scripts/31.sh Lecture_360P-03bc.mp4
++ csvLine='32,0,1,0:0:0,0:0,dia,0,0,16,0,0,0,0,0,None,None,None,None,None,0,0,None,0,69,0,2917599,, 0m1.085s, 500 , 1264.42 , 1167.04'
++ echo '32,0,1,0:0:0,0:0,dia,0,0,16,0,0,0,0,0,None,None,None,None,None,0,0,None,0,69,0,2917599,, 0m1.085s, 500 , 1264.42 , 1167.04'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/32.sh
+Processing:  ./scripts/32.sh
+++ bash ./scripts/32.sh Lecture_360P-03bc.mp4
++ csvLine='33,0,1,1:0:0,0x3:0x3,dia,1,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,None,0,69,1,1446996,, 0m1.233s, 500 , 1174.03 , 578.80'
++ echo '33,0,1,1:0:0,0x3:0x3,dia,1,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,None,0,69,1,1446996,, 0m1.233s, 500 , 1174.03 , 578.80'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/33.sh
+Processing:  ./scripts/33.sh
+++ bash ./scripts/33.sh Lecture_360P-03bc.mp4
++ csvLine='34,1,1,1:0:0,0x3:0x3,dia,1,0,24,0,1,1,0,3,2,1,auto,1,0,1,40,None,0,69,1,1260091,, 0m1.322s, 500 , 1136.19 , 504.04'
++ echo '34,1,1,1:0:0,0x3:0x3,dia,1,0,24,0,1,1,0,3,2,1,auto,1,0,1,40,None,0,69,1,1260091,, 0m1.322s, 500 , 1136.19 , 504.04'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/34.sh
+Processing:  ./scripts/34.sh
+++ bash ./scripts/34.sh Lecture_360P-03bc.mp4
++ csvLine='35,1,1,1:0:0,0x3:0x3,dia,1,0,16,0,1,0,0,3,2,1,auto,1,0,1,40,None,0,69,1,1278733,, 0m1.338s, 500 , 1103.04 , 511.49'
++ echo '35,1,1,1:0:0,0x3:0x3,dia,1,0,16,0,1,0,0,3,2,1,auto,1,0,1,40,None,0,69,1,1278733,, 0m1.338s, 500 , 1103.04 , 511.49'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/35.sh
+Processing:  ./scripts/35.sh
+++ bash ./scripts/35.sh Lecture_360P-03bc.mp4
++ csvLine='36,1,1,1:0:0,0x3:0x3,dia,1,0,16,0,1,1,0,3,2,1,spatial,1,0,1,40,None,0,69,1,1260109,, 0m1.314s, 500 , 1116.49 , 504.04'
++ echo '36,1,1,1:0:0,0x3:0x3,dia,1,0,16,0,1,1,0,3,2,1,spatial,1,0,1,40,None,0,69,1,1260109,, 0m1.314s, 500 , 1116.49 , 504.04'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/36.sh
+Processing:  ./scripts/36.sh
+++ bash ./scripts/36.sh Lecture_360P-03bc.mp4
++ csvLine='37,1,1,1:0:0,0x3:0x3,dia,2,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,None,0,69,1,922096,, 0m1.510s, 500 , 1048.31 , 368.84'
++ echo '37,1,1,1:0:0,0x3:0x3,dia,2,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,None,0,69,1,922096,, 0m1.510s, 500 , 1048.31 , 368.84'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/37.sh
+Processing:  ./scripts/37.sh
+++ bash ./scripts/37.sh Lecture_360P-03bc.mp4
++ csvLine='38,1,1,1:0:0,0x3:0x3,dia,2,0,16,0,1,1,0,3,2,1,auto,1,0,2,40,None,0,69,1,922096,, 0m1.562s, 500 , 1063.49 , 368.84'
++ echo '38,1,1,1:0:0,0x3:0x3,dia,2,0,16,0,1,1,0,3,2,1,auto,1,0,2,40,None,0,69,1,922096,, 0m1.562s, 500 , 1063.49 , 368.84'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/38.sh
+Processing:  ./scripts/38.sh
+++ bash ./scripts/38.sh Lecture_360P-03bc.mp4
++ csvLine='39,1,1,1:0:0,0x3:0x133,dia,2,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,None,0,69,1,922096,, 0m1.586s, 500 , 1041.73 , 368.84'
++ echo '39,1,1,1:0:0,0x3:0x133,dia,2,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,None,0,69,1,922096,, 0m1.586s, 500 , 1041.73 , 368.84'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/39.sh
+Processing:  ./scripts/39.sh
+++ bash ./scripts/39.sh Lecture_360P-03bc.mp4
++ csvLine='40,1,1,1:0:0,0x3:0x3,dia,1,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,10,0,69,1,1260091,, 0m1.363s, 500 , 1107.73 , 504.04'
++ echo '40,1,1,1:0:0,0x3:0x3,dia,1,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,10,0,69,1,1260091,, 0m1.363s, 500 , 1107.73 , 504.04'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/4.sh
+Processing:  ./scripts/4.sh
+++ bash ./scripts/4.sh Lecture_360P-03bc.mp4
++ csvLine='5,1,2,1:0:0,0x3:0x113,hex,6,1,16,1,1,1,-2,3,2,1,auto,1,0,1,40,30,1,69,1,574432,, 0m2.336s, 500 , 825.46 , 229.77'
++ echo '5,1,2,1:0:0,0x3:0x113,hex,6,1,16,1,1,1,-2,3,2,1,auto,1,0,1,40,30,1,69,1,574432,, 0m2.336s, 500 , 825.46 , 229.77'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/40.sh
+Processing:  ./scripts/40.sh
+++ bash ./scripts/40.sh Lecture_360P-03bc.mp4
++ csvLine='41,1,1,1:0:0,0x3:0x3,dia,1,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,None,0,69,0,1425475,, 0m1.389s, 500 , 1119.19 , 570.19'
++ echo '41,1,1,1:0:0,0x3:0x3,dia,1,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,None,0,69,0,1425475,, 0m1.389s, 500 , 1119.19 , 570.19'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/41.sh
+Processing:  ./scripts/41.sh
+++ bash ./scripts/41.sh Lecture_360P-03bc.mp4
++ csvLine='42,1,5,1:0:0,0x3:0x3,dia,1,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,None,0,69,1,918859,, 0m1.413s, 500 , 1100.51 , 367.54'
++ echo '42,1,5,1:0:0,0x3:0x3,dia,1,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,None,0,69,1,918859,, 0m1.413s, 500 , 1100.51 , 367.54'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/42.sh
+Processing:  ./scripts/42.sh
+++ bash ./scripts/42.sh Lecture_360P-03bc.mp4
++ csvLine='43,1,1,1:0:0,0x3:0x3,dia,1,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,None,1,69,1,745873,, 0m1.297s, 500 , 1095.60 , 298.35'
++ echo '43,1,1,1:0:0,0x3:0x3,dia,1,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,None,1,69,1,745873,, 0m1.297s, 500 , 1095.60 , 298.35'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/43.sh
+Processing:  ./scripts/43.sh
+++ bash ./scripts/43.sh Lecture_360P-03bc.mp4
++ csvLine='44,0,1,1:0:0,0x3:0x3,dia,1,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,None,1,69,1,860609,, 0m1.209s, 500 , 1123.25 , 344.24'
++ echo '44,0,1,1:0:0,0x3:0x3,dia,1,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,None,1,69,1,860609,, 0m1.209s, 500 , 1123.25 , 344.24'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/44.sh
+Processing:  ./scripts/44.sh
+++ bash ./scripts/44.sh Lecture_360P-03bc.mp4
++ csvLine='45,0,1,1:0:0,0x3:0x3,hex,1,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,None,1,69,1,860439,, 0m1.197s, 500 , 1141.56 , 344.18'
++ echo '45,0,1,1:0:0,0x3:0x3,hex,1,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,None,1,69,1,860439,, 0m1.197s, 500 , 1141.56 , 344.18'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/45.sh
+Processing:  ./scripts/45.sh
+++ bash ./scripts/45.sh Lecture_360P-03bc.mp4
++ csvLine='46,0,1,1:0:0,0x3:0x3,hex,1,0,16,1,1,1,0,3,2,1,auto,1,0,1,40,None,1,69,1,882505,, 0m1.573s, 500 , 1013.60 , 353.00'
++ echo '46,0,1,1:0:0,0x3:0x3,hex,1,0,16,1,1,1,0,3,2,1,auto,1,0,1,40,None,1,69,1,882505,, 0m1.573s, 500 , 1013.60 , 353.00'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/46.sh
+Processing:  ./scripts/46.sh
+++ bash ./scripts/46.sh Lecture_360P-03bc.mp4
++ csvLine='47,0,1,1:0:0,0x3:0x3,umh,1,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,None,1,69,1,859020,, 0m1.251s, 500 , 1089.42 , 343.61'
++ echo '47,0,1,1:0:0,0x3:0x3,umh,1,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,None,1,69,1,859020,, 0m1.251s, 500 , 1089.42 , 343.61'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/47.sh
+Processing:  ./scripts/47.sh
+++ bash ./scripts/47.sh Lecture_360P-03bc.mp4
++ csvLine='48,0,1,1:0:0,0x3:0x3,tesa,1,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,None,1,69,1,860131,, 0m1.479s, 500 , 1040.55 , 344.05'
++ echo '48,0,1,1:0:0,0x3:0x3,tesa,1,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,None,1,69,1,860131,, 0m1.479s, 500 , 1040.55 , 344.05'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/48.sh
+Processing:  ./scripts/48.sh
+++ bash ./scripts/48.sh Lecture_360P-03bc.mp4
++ csvLine='49,0,1,0:0:0,0x3:0x3,dia,1,0,16,0,1,1,0,16,2,1,auto,1,0,1,40,None,1,69,1,691663,, 0m1.361s, 500 , 1127.64 , 276.67'
++ echo '49,0,1,0:0:0,0x3:0x3,dia,1,0,16,0,1,1,0,16,2,1,auto,1,0,1,40,None,1,69,1,691663,, 0m1.361s, 500 , 1127.64 , 276.67'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/49.sh
+Processing:  ./scripts/49.sh
+++ bash ./scripts/49.sh Lecture_360P-03bc.mp4
++ csvLine='50,1,1,1:0:0,0x3:0x3,dia,1,1,16,0,1,1,0,3,2,1,auto,1,0,1,40,None,0,69,0,1425475,, 0m1.363s, 500 , 1133.85 , 570.19'
++ echo '50,1,1,1:0:0,0x3:0x3,dia,1,1,16,0,1,1,0,3,2,1,auto,1,0,1,40,None,0,69,0,1425475,, 0m1.363s, 500 , 1133.85 , 570.19'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/5.sh
+Processing:  ./scripts/5.sh
+++ bash ./scripts/5.sh Lecture_360P-03bc.mp4
++ csvLine='6,1,3,1:0:0,0x3:0x113,hex,7,1,16,1,1,1,-2,3,2,1,auto,1,0,2,40,40,1,69,1,572840,, 0m3.729s, 500 , 657.76 , 229.14'
++ echo '6,1,3,1:0:0,0x3:0x113,hex,7,1,16,1,1,1,-2,3,2,1,auto,1,0,2,40,40,1,69,1,572840,, 0m3.729s, 500 , 657.76 , 229.14'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/50.sh
+Processing:  ./scripts/50.sh
+++ bash ./scripts/50.sh Lecture_360P-03bc.mp4
++ csvLine='51,1,1,1:0:0,0x3:0x3,dia,1,1,16,0,1,0,0,3,2,1,auto,1,0,1,40,None,0,69,0,1441109,, 0m1.435s, 500 , 1099.11 , 576.44'
++ echo '51,1,1,1:0:0,0x3:0x3,dia,1,1,16,0,1,0,0,3,2,1,auto,1,0,1,40,None,0,69,0,1441109,, 0m1.435s, 500 , 1099.11 , 576.44'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/51.sh
+Processing:  ./scripts/51.sh
+++ bash ./scripts/51.sh Lecture_360P-03bc.mp4
++ csvLine='52,0,1,0:0:0,0x3:0x3,dia,1,1,16,0,1,0,0,3,2,1,auto,1,0,1,0,None,0,69,0,1666792,, 0m1.215s, 500 , 1170.92 , 666.72'
++ echo '52,0,1,0:0:0,0x3:0x3,dia,1,1,16,0,1,0,0,3,2,1,auto,1,0,1,0,None,0,69,0,1666792,, 0m1.215s, 500 , 1170.92 , 666.72'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/52.sh
+Processing:  ./scripts/52.sh
+++ bash ./scripts/52.sh Lecture_360P-03bc.mp4
++ csvLine='53,0,1,1:0:0,0x3:0x3,dia,1,1,16,0,1,0,0,3,2,1,auto,1,0,1,40,None,0,69,0,1666228,, 0m1.233s, 500 , 1173.74 , 666.49'
++ echo '53,0,1,1:0:0,0x3:0x3,dia,1,1,16,0,1,0,0,3,2,1,auto,1,0,1,40,None,0,69,0,1666228,, 0m1.233s, 500 , 1173.74 , 666.49'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/53.sh
+Processing:  ./scripts/53.sh
+++ bash ./scripts/53.sh Lecture_360P-03bc.mp4
++ csvLine='54,1,1,1:0:0,0x3:0x3,tesa,1,1,16,0,1,0,0,3,2,1,auto,1,0,1,40,None,0,69,0,1446766,, 0m1.773s, 500 , 1032.62 , 578.71'
++ echo '54,1,1,1:0:0,0x3:0x3,tesa,1,1,16,0,1,0,0,3,2,1,auto,1,0,1,40,None,0,69,0,1446766,, 0m1.773s, 500 , 1032.62 , 578.71'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/54.sh
+Processing:  ./scripts/54.sh
+++ bash ./scripts/54.sh Lecture_360P-03bc.mp4
++ csvLine='55,1,1,1:0:0,0x3:0x3,dia,1,1,16,0,1,0,0,3,2,2,spatial,1,0,2,40,None,0,69,0,1529236,, 0m1.491s, 500 , 1060.44 , 611.69'
++ echo '55,1,1,1:0:0,0x3:0x3,dia,1,1,16,0,1,0,0,3,2,2,spatial,1,0,2,40,None,0,69,0,1529236,, 0m1.491s, 500 , 1060.44 , 611.69'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/55.sh
+Processing:  ./scripts/55.sh
+++ bash ./scripts/55.sh Lecture_360P-03bc.mp4
++ csvLine='56,1,16,1:0:0,0x3:0x133,dia,1,1,16,0,1,0,0,3,2,2,spatial,1,0,2,40,None,0,69,0,1203842,, 0m2.298s, 500 , 872.14 , 481.54'
++ echo '56,1,16,1:0:0,0x3:0x133,dia,1,1,16,0,1,0,0,3,2,2,spatial,1,0,2,40,None,0,69,0,1203842,, 0m2.298s, 500 , 872.14 , 481.54'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/56.sh
+Processing:  ./scripts/56.sh
+++ bash ./scripts/56.sh Lecture_360P-03bc.mp4
++ csvLine='57,1,16,1:0:0,0x3:0x133,dia,1,1,16,0,1,0,0,3,2,2,spatial,1,0,2,40,60,0,69,0,1203842,, 0m2.342s, 500 , 880.45 , 481.54'
++ echo '57,1,16,1:0:0,0x3:0x133,dia,1,1,16,0,1,0,0,3,2,2,spatial,1,0,2,40,60,0,69,0,1203842,, 0m2.342s, 500 , 880.45 , 481.54'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/57.sh
+Processing:  ./scripts/57.sh
+++ bash ./scripts/57.sh Lecture_360P-03bc.mp4
++ csvLine='58,0,1,1:0:0,0x3:0x113,hex,2,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,10,1,69,1,621033,, 0m1.504s, 500 , 1042.41 , 248.41'
++ echo '58,0,1,1:0:0,0x3:0x113,hex,2,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,10,1,69,1,621033,, 0m1.504s, 500 , 1042.41 , 248.41'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/58.sh
+Processing:  ./scripts/58.sh
+++ bash ./scripts/58.sh Lecture_360P-03bc.mp4
++ csvLine='59,0,1,1:0:0,0x3:0x113,hex,2,0,16,0,1,1,0,3,2,1,spatial,1,0,1,40,10,1,69,1,620398,, 0m1.410s, 500 , 1108.88 , 248.16'
++ echo '59,0,1,1:0:0,0x3:0x113,hex,2,0,16,0,1,1,0,3,2,1,spatial,1,0,1,40,10,1,69,1,620398,, 0m1.410s, 500 , 1108.88 , 248.16'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/59.sh
+Processing:  ./scripts/59.sh
+++ bash ./scripts/59.sh Lecture_360P-03bc.mp4
++ csvLine='60,0,1,1:0:0,0x3:0x113,hex,2,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,10,0,69,1,1072156,, 0m1.511s, 500 , 1055.97 , 428.86'
++ echo '60,0,1,1:0:0,0x3:0x113,hex,2,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,10,0,69,1,1072156,, 0m1.511s, 500 , 1055.97 , 428.86'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/6.sh
+Processing:  ./scripts/6.sh
+++ bash ./scripts/6.sh Lecture_360P-03bc.mp4
++ csvLine='7,1,5,1:0:0,0x3:0x113,hex,8,1,16,2,1,1,-2,3,2,1,spatial,1,0,2,40,50,1,69,1,560725,, 0m5.011s, 500 , 509.30 , 224.29'
++ echo '7,1,5,1:0:0,0x3:0x113,hex,8,1,16,2,1,1,-2,3,2,1,spatial,1,0,2,40,50,1,69,1,560725,, 0m5.011s, 500 , 509.30 , 224.29'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/60.sh
+Processing:  ./scripts/60.sh
+++ bash ./scripts/60.sh Lecture_360P-03bc.mp4
++ csvLine='61,0,1,1:0:0,0x3:0x3,hex,2,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,10,1,69,1,621033,, 0m1.531s, 500 , 1029.31 , 248.41'
++ echo '61,0,1,1:0:0,0x3:0x3,hex,2,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,10,1,69,1,621033,, 0m1.531s, 500 , 1029.31 , 248.41'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/61.sh
+Processing:  ./scripts/61.sh
+++ bash ./scripts/61.sh Lecture_360P-03bc.mp4
++ csvLine='62,0,1,1:0:0,0:0,hex,2,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,10,1,69,1,621033,, 0m1.442s, 500 , 1076.14 , 248.41'
++ echo '62,0,1,1:0:0,0:0,hex,2,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,10,1,69,1,621033,, 0m1.442s, 500 , 1076.14 , 248.41'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/62.sh
+Processing:  ./scripts/62.sh
+++ bash ./scripts/62.sh Lecture_360P-03bc.mp4
++ csvLine='63,1,1,1:0:0,0x3:0x113,hex,2,1,16,0,1,1,0,3,2,1,auto,1,0,1,40,10,1,69,1,531445,, 0m1.571s, 500 , 1035.27 , 212.58'
++ echo '63,1,1,1:0:0,0x3:0x113,hex,2,1,16,0,1,1,0,3,2,1,auto,1,0,1,40,10,1,69,1,531445,, 0m1.571s, 500 , 1035.27 , 212.58'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/63.sh
+Processing:  ./scripts/63.sh
+++ bash ./scripts/63.sh Lecture_360P-03bc.mp4
++ csvLine='64,1,1,1:0:0,0x3:0x113,hex,2,0,16,0,0,1,0,3,2,1,auto,1,0,1,40,10,0,69,1,918758,, 0m1.644s, 500 , 1041.95 , 367.50'
++ echo '64,1,1,1:0:0,0x3:0x113,hex,2,0,16,0,0,1,0,3,2,1,auto,1,0,1,40,10,0,69,1,918758,, 0m1.644s, 500 , 1041.95 , 367.50'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/64.sh
+Processing:  ./scripts/64.sh
+++ bash ./scripts/64.sh Lecture_360P-03bc.mp4
++ csvLine='65,1,1,1:0:0,0x3:0x113,hex,2,0,16,0,0,1,0,3,2,1,spatial,1,0,1,40,40,0,69,1,918724,, 0m1.552s, 500 , 1024.75 , 367.49'
++ echo '65,1,1,1:0:0,0x3:0x113,hex,2,0,16,0,0,1,0,3,2,1,spatial,1,0,1,40,40,0,69,1,918724,, 0m1.552s, 500 , 1024.75 , 367.49'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/65.sh
+Processing:  ./scripts/65.sh
+++ bash ./scripts/65.sh Lecture_360P-03bc.mp4
++ csvLine='66,1,1,1:0:0,0x3:0x113,hex,1,0,16,0,0,1,0,3,2,1,spatial,1,0,1,40,40,0,69,1,1261355,, 0m1.346s, 500 , 1149.00 , 504.54'
++ echo '66,1,1,1:0:0,0x3:0x113,hex,1,0,16,0,0,1,0,3,2,1,spatial,1,0,1,40,40,0,69,1,1261355,, 0m1.346s, 500 , 1149.00 , 504.54'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/66.sh
+Processing:  ./scripts/66.sh
+++ bash ./scripts/66.sh Lecture_360P-03bc.mp4
++ csvLine='67,1,1,1:0:0,0x3:0x113,hex,2,0,16,0,0,1,0,3,2,1,auto,1,0,1,40,40,0,69,1,918758,, 0m1.558s, 500 , 1030.52 , 367.50'
++ echo '67,1,1,1:0:0,0x3:0x113,hex,2,0,16,0,0,1,0,3,2,1,auto,1,0,1,40,40,0,69,1,918758,, 0m1.558s, 500 , 1030.52 , 367.50'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/67.sh
+Processing:  ./scripts/67.sh
+++ bash ./scripts/67.sh Lecture_360P-03bc.mp4
++ csvLine='68,1,1,1:0:0,0x3:0x113,hex,2,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,20,1,69,0,843258,, 0m1.556s, 500 , 1026.33 , 337.30'
++ echo '68,1,1,1:0:0,0x3:0x113,hex,2,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,20,1,69,0,843258,, 0m1.556s, 500 , 1026.33 , 337.30'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/68.sh
+Processing:  ./scripts/68.sh
+++ bash ./scripts/68.sh Lecture_360P-03bc.mp4
++ csvLine='69,1,1,0:0:0,0x113:0x113,tesa,2,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,10,1,69,1,542095,, 0m1.997s, 500 , 923.19 , 216.84'
++ echo '69,1,1,0:0:0,0x113:0x113,tesa,2,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,10,1,69,1,542095,, 0m1.997s, 500 , 923.19 , 216.84'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/69.sh
+Processing:  ./scripts/69.sh
+++ bash ./scripts/69.sh Lecture_360P-03bc.mp4
++ csvLine='70,1,1,0:0:0,0x113:0x113,tesa,2,0,16,2,1,1,0,3,2,1,auto,1,0,1,40,10,1,69,1,558341,, 0m2.174s, 500 , 895.09 , 223.34'
++ echo '70,1,1,0:0:0,0x113:0x113,tesa,2,0,16,2,1,1,0,3,2,1,auto,1,0,1,40,10,1,69,1,558341,, 0m2.174s, 500 , 895.09 , 223.34'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/7.sh
+Processing:  ./scripts/7.sh
+++ bash ./scripts/7.sh Lecture_360P-03bc.mp4
++ csvLine='8,1,8,1:0:0,0x3:0x113,umh,9,1,16,2,1,1,-2,3,2,2,spatial,1,0,2,40,60,1,69,1,505864,, 0m7.714s, 500 , 356.21 , 202.35'
++ echo '8,1,8,1:0:0,0x3:0x113,umh,9,1,16,2,1,1,-2,3,2,2,spatial,1,0,2,40,60,1,69,1,505864,, 0m7.714s, 500 , 356.21 , 202.35'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/70.sh
+Processing:  ./scripts/70.sh
+++ bash ./scripts/70.sh Lecture_360P-03bc.mp4
++ csvLine='71,1,5,1:0:0,0x3:0x113,dia,2,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,10,1,69,1,395387,, 0m1.696s, 500 , 992.39 , 158.15'
++ echo '71,1,5,1:0:0,0x3:0x113,dia,2,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,10,1,69,1,395387,, 0m1.696s, 500 , 992.39 , 158.15'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/71.sh
+Processing:  ./scripts/71.sh
+++ bash ./scripts/71.sh Lecture_360P-03bc.mp4
++ csvLine='72,1,5,1:0:0,0x3:0x113,dia,2,0,16,0,1,1,0,8,2,1,auto,1,0,1,40,10,1,69,1,357828,, 0m1.781s, 500 , 988.47 , 143.13'
++ echo '72,1,5,1:0:0,0x3:0x113,dia,2,0,16,0,1,1,0,8,2,1,auto,1,0,1,40,10,1,69,1,357828,, 0m1.781s, 500 , 988.47 , 143.13'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/72.sh
+Processing:  ./scripts/72.sh
+++ bash ./scripts/72.sh Lecture_360P-03bc.mp4
++ csvLine='73,1,5,1:0:0,0x3:0x113,dia,8,0,16,0,1,1,0,8,2,1,auto,1,0,1,40,10,1,69,1,375498,, 0m4.146s, 500 , 628.10 , 150.20'
++ echo '73,1,5,1:0:0,0x3:0x113,dia,8,0,16,0,1,1,0,8,2,1,auto,1,0,1,40,10,1,69,1,375498,, 0m4.146s, 500 , 628.10 , 150.20'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/73.sh
+Processing:  ./scripts/73.sh
+++ bash ./scripts/73.sh Lecture_360P-03bc.mp4
++ csvLine='74,1,5,1:0:0,0x3:0x113,dia,8,1,16,0,1,1,0,8,2,1,auto,1,0,2,40,10,0,69,1,712133,, 0m4.594s, 500 , 603.21 , 284.85'
++ echo '74,1,5,1:0:0,0x3:0x113,dia,8,1,16,0,1,1,0,8,2,1,auto,1,0,2,40,10,0,69,1,712133,, 0m4.594s, 500 , 603.21 , 284.85'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/74.sh
+Processing:  ./scripts/74.sh
+++ bash ./scripts/74.sh Lecture_360P-03bc.mp4
++ csvLine='75,1,2,1:0:0,0x3:0x113,hex,4,0,16,0,1,1,0,3,2,1,auto,1,0,1,0,20,1,69,1,514778,, 0m2.053s, 500 , 878.77 , 205.91'
++ echo '75,1,2,1:0:0,0x3:0x113,hex,4,0,16,0,1,1,0,3,2,1,auto,1,0,1,0,20,1,69,1,514778,, 0m2.053s, 500 , 878.77 , 205.91'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/75.sh
+Processing:  ./scripts/75.sh
+++ bash ./scripts/75.sh Lecture_360P-03bc.mp4
++ csvLine='76,1,2,1:0:0,0x113:0x113,hex,4,0,16,0,1,1,0,3,2,1,auto,1,0,1,0,20,1,69,1,514778,, 0m1.966s, 500 , 923.77 , 205.91'
++ echo '76,1,2,1:0:0,0x113:0x113,hex,4,0,16,0,1,1,0,3,2,1,auto,1,0,1,0,20,1,69,1,514778,, 0m1.966s, 500 , 923.77 , 205.91'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/76.sh
+Processing:  ./scripts/76.sh
+++ bash ./scripts/76.sh Lecture_360P-03bc.mp4
++ csvLine='77,0,2,1:0:0,0x3:0x113,hex,4,0,16,0,1,1,-2,3,2,1,auto,1,0,1,0,20,1,69,1,606139,, 0m1.913s, 500 , 930.24 , 242.46'
++ echo '77,0,2,1:0:0,0x3:0x113,hex,4,0,16,0,1,1,-2,3,2,1,auto,1,0,1,0,20,1,69,1,606139,, 0m1.913s, 500 , 930.24 , 242.46'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/77.sh
+Processing:  ./scripts/77.sh
+++ bash ./scripts/77.sh Lecture_360P-03bc.mp4
++ csvLine='78,1,2,1:0:0,0x3:0x113,hex,4,0,16,0,1,1,0,3,2,1,spatial,1,0,1,40,20,1,69,0,662763,, 0m2.302s, 500 , 837.25 , 265.11'
++ echo '78,1,2,1:0:0,0x3:0x113,hex,4,0,16,0,1,1,0,3,2,1,spatial,1,0,1,40,20,1,69,0,662763,, 0m2.302s, 500 , 837.25 , 265.11'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/78.sh
+Processing:  ./scripts/78.sh
+++ bash ./scripts/78.sh Lecture_360P-03bc.mp4
++ csvLine='79,1,2,1:0:0,0x3:0x113,hex,4,0,16,0,1,1,0,0,None,None,None,None,None,0,0,None,0,69,1,1053286,, 0m2.070s, 500 , 951.64 , 421.31'
++ echo '79,1,2,1:0:0,0x3:0x113,hex,4,0,16,0,1,1,0,0,None,None,None,None,None,0,0,None,0,69,1,1053286,, 0m2.070s, 500 , 951.64 , 421.31'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/79.sh
+Processing:  ./scripts/79.sh
+++ bash ./scripts/79.sh Lecture_360P-03bc.mp4
++ csvLine='80,1,2,1:0:0,0x3:0x113,hex,4,0,16,0,1,1,0,8,1,1,auto,1,0,1,40,20,1,69,1,456487,, 0m2.181s, 500 , 857.14 , 182.59'
++ echo '80,1,2,1:0:0,0x3:0x113,hex,4,0,16,0,1,1,0,8,1,1,auto,1,0,1,40,20,1,69,1,456487,, 0m2.181s, 500 , 857.14 , 182.59'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/8.sh
+Processing:  ./scripts/8.sh
+++ bash ./scripts/8.sh Lecture_360P-03bc.mp4
++ csvLine='9,1,16,1:0:0,0x3:0x113,umh,10,1,24,2,1,1,-2,8,2,2,spatial,1,0,2,40,60,1,69,1,424242,, 0m13.852s, 500 , 176.33 , 169.70'
++ echo '9,1,16,1:0:0,0x3:0x113,umh,10,1,24,2,1,1,-2,8,2,2,spatial,1,0,2,40,60,1,69,1,424242,, 0m13.852s, 500 , 176.33 , 169.70'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/80.sh
+Processing:  ./scripts/80.sh
+++ bash ./scripts/80.sh Lecture_360P-03bc.mp4
++ csvLine='81,0,2,1:0:0,0x3:0x113,hex,4,0,16,0,1,1,0,8,1,1,auto,1,0,1,40,10,1,69,1,454708,, 0m2.194s, 500 , 878.72 , 181.88'
++ echo '81,0,2,1:0:0,0x3:0x113,hex,4,0,16,0,1,1,0,8,1,1,auto,1,0,1,40,10,1,69,1,454708,, 0m2.194s, 500 , 878.72 , 181.88'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/81.sh
+Processing:  ./scripts/81.sh
+++ bash ./scripts/81.sh Lecture_360P-03bc.mp4
++ csvLine='82,0,1,1:0:0,0x3:0x113,hex,4,0,16,1,1,1,0,8,1,1,spatial,1,0,1,40,10,1,69,1,515332,, 0m2.700s, 500 , 770.84 , 206.13'
++ echo '82,0,1,1:0:0,0x3:0x113,hex,4,0,16,1,1,1,0,8,1,1,spatial,1,0,1,40,10,1,69,1,515332,, 0m2.700s, 500 , 770.84 , 206.13'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/82.sh
+Processing:  ./scripts/82.sh
+++ bash ./scripts/82.sh Lecture_360P-03bc.mp4
++ csvLine='83,0,2,1:0:0,0x3:0x113,hex,4,0,24,0,1,1,0,8,1,1,auto,1,0,1,40,10,1,69,1,454708,, 0m2.074s, 500 , 885.89 , 181.88'
++ echo '83,0,2,1:0:0,0x3:0x113,hex,4,0,24,0,1,1,0,8,1,1,auto,1,0,1,40,10,1,69,1,454708,, 0m2.074s, 500 , 885.89 , 181.88'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/83.sh
+Processing:  ./scripts/83.sh
+++ bash ./scripts/83.sh Lecture_360P-03bc.mp4
++ csvLine='84,0,2,1:0:0,0x3:0x113,hex,4,0,24,1,1,1,0,8,1,1,auto,1,0,2,40,10,1,69,1,468197,, 0m2.359s, 500 , 835.20 , 187.28'
++ echo '84,0,2,1:0:0,0x3:0x113,hex,4,0,24,1,1,1,0,8,1,1,auto,1,0,2,40,10,1,69,1,468197,, 0m2.359s, 500 , 835.20 , 187.28'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/84.sh
+Processing:  ./scripts/84.sh
+++ bash ./scripts/84.sh Lecture_360P-03bc.mp4
++ csvLine='85,0,2,1:0:0,0:0,hex,4,0,24,0,1,1,0,8,1,1,auto,1,0,1,40,10,1,69,1,454708,, 0m2.143s, 500 , 902.42 , 181.88'
++ echo '85,0,2,1:0:0,0:0,hex,4,0,24,0,1,1,0,8,1,1,auto,1,0,1,40,10,1,69,1,454708,, 0m2.143s, 500 , 902.42 , 181.88'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/85.sh
+Processing:  ./scripts/85.sh
+++ bash ./scripts/85.sh Lecture_360P-03bc.mp4
++ csvLine='86,0,2,0:0:0,0:0,hex,4,0,24,0,1,1,0,8,1,1,auto,1,0,1,40,10,1,69,1,454399,, 0m2.110s, 500 , 899.93 , 181.76'
++ echo '86,0,2,0:0:0,0:0,hex,4,0,24,0,1,1,0,8,1,1,auto,1,0,1,40,10,1,69,1,454399,, 0m2.110s, 500 , 899.93 , 181.76'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/86.sh
+Processing:  ./scripts/86.sh
+++ bash ./scripts/86.sh Lecture_360P-03bc.mp4
++ csvLine='87,0,2,1:0:0,0:0,hex,4,1,24,0,1,1,-2,8,1,1,spatial,None,0,1,40,10,1,69,1,468584,, 0m2.501s, 500 , 812.56 , 187.43'
++ echo '87,0,2,1:0:0,0:0,hex,4,1,24,0,1,1,-2,8,1,1,spatial,None,0,1,40,10,1,69,1,468584,, 0m2.501s, 500 , 812.56 , 187.43'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/87.sh
+Processing:  ./scripts/87.sh
+++ bash ./scripts/87.sh Lecture_360P-03bc.mp4
++ csvLine='88,1,2,1:0:0,0x3:0x113,hex,4,0,16,0,1,1,0,0,None,None,None,None,None,0,0,None,0,69,0,1236303,, 0m1.975s, 500 , 987.82 , 494.52'
++ echo '88,1,2,1:0:0,0x3:0x113,hex,4,0,16,0,1,1,0,0,None,None,None,None,None,0,0,None,0,69,0,1236303,, 0m1.975s, 500 , 987.82 , 494.52'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/88.sh
+Processing:  ./scripts/88.sh
+++ bash ./scripts/88.sh Lecture_360P-03bc.mp4
++ csvLine='89,1,2,1:0:0,0x3:0x113,umh,7,1,16,0,1,1,0,0,None,None,None,None,None,0,0,None,0,69,1,1024191,, 0m2.759s, 500 , 873.84 , 409.68'
++ echo '89,1,2,1:0:0,0x3:0x113,umh,7,1,16,0,1,1,0,0,None,None,None,None,None,0,0,None,0,69,1,1024191,, 0m2.759s, 500 , 873.84 , 409.68'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/89.sh
+Processing:  ./scripts/89.sh
+++ bash ./scripts/89.sh Lecture_360P-03bc.mp4
++ csvLine='90,0,2,1:0:0,0x3:0x113,hex,4,0,16,0,1,0,-2,0,None,None,None,None,None,0,0,None,0,69,1,1353144,, 0m2.338s, 500 , 876.82 , 541.26'
++ echo '90,0,2,1:0:0,0x3:0x113,hex,4,0,16,0,1,0,-2,0,None,None,None,None,None,0,0,None,0,69,1,1353144,, 0m2.338s, 500 , 876.82 , 541.26'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/9.sh
+Processing:  ./scripts/9.sh
+++ bash ./scripts/9.sh Lecture_360P-03bc.mp4
++ csvLine='10,1,16,1:0:0,0x3:0x133,tesa,11,1,24,2,1,0,-2,16,2,2,spatial,1,0,2,40,60,1,69,1,430227,, 0m45.363s, 500 , 69.46 , 172.09'
++ echo '10,1,16,1:0:0,0x3:0x133,tesa,11,1,24,2,1,0,-2,16,2,2,spatial,1,0,2,40,60,1,69,1,430227,, 0m45.363s, 500 , 69.46 , 172.09'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/90.sh
+Processing:  ./scripts/90.sh
+++ bash ./scripts/90.sh Lecture_360P-03bc.mp4
++ csvLine='91,1,8,1:0:0,0x3:0x113,hex,4,0,16,0,1,1,0,0,None,None,None,None,None,0,0,None,0,69,1,747256,, 0m3.054s, 500 , 785.58 , 298.90'
++ echo '91,1,8,1:0:0,0x3:0x113,hex,4,0,16,0,1,1,0,0,None,None,None,None,None,0,0,None,0,69,1,747256,, 0m3.054s, 500 , 785.58 , 298.90'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/91.sh
+Processing:  ./scripts/91.sh
+++ bash ./scripts/91.sh Lecture_360P-03bc.mp4
++ csvLine='92,0,8,0:0:0,0x3:0x113,hex,4,0,16,0,1,1,0,0,None,None,None,None,None,0,0,None,0,69,0,984922,, 0m2.809s, 500 , 845.08 , 393.97'
++ echo '92,0,8,0:0:0,0x3:0x113,hex,4,0,16,0,1,1,0,0,None,None,None,None,None,0,0,None,0,69,0,984922,, 0m2.809s, 500 , 845.08 , 393.97'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/92.sh
+Processing:  ./scripts/92.sh
+++ bash ./scripts/92.sh Lecture_360P-03bc.mp4
++ csvLine='93,1,2,1:0:0,0x3:0x3,hex,4,0,16,1,1,1,0,3,2,1,auto,1,0,1,40,20,1,69,1,527370,, 0m2.178s, 500 , 885.09 , 210.95'
++ echo '93,1,2,1:0:0,0x3:0x3,hex,4,0,16,1,1,1,0,3,2,1,auto,1,0,1,40,20,1,69,1,527370,, 0m2.178s, 500 , 885.09 , 210.95'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/93.sh
+Processing:  ./scripts/93.sh
+++ bash ./scripts/93.sh Lecture_360P-03bc.mp4
++ csvLine='94,1,2,0:0:0,0x3:0x113,hex,4,0,16,0,1,1,0,3,2,1,spatial,1,0,1,40,20,1,69,0,662354,, 0m2.299s, 500 , 836.69 , 264.94'
++ echo '94,1,2,0:0:0,0x3:0x113,hex,4,0,16,0,1,1,0,3,2,1,spatial,1,0,1,40,20,1,69,0,662354,, 0m2.299s, 500 , 836.69 , 264.94'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/94.sh
+Processing:  ./scripts/94.sh
+++ bash ./scripts/94.sh Lecture_360P-03bc.mp4
++ csvLine='95,0,2,1:0:0,0x3:0x113,hex,11,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,40,0,69,1,863521,, 0m4.205s, 500 , 667.98 , 345.41'
++ echo '95,0,2,1:0:0,0x3:0x113,hex,11,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,40,0,69,1,863521,, 0m4.205s, 500 , 667.98 , 345.41'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/95.sh
+Processing:  ./scripts/95.sh
+++ bash ./scripts/95.sh Lecture_360P-03bc.mp4
++ csvLine='96,1,2,1:0:0,0x3:0x113,hex,8,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,20,1,69,1,535490,, 0m3.764s, 500 , 646.74 , 214.20'
++ echo '96,1,2,1:0:0,0x3:0x113,hex,8,0,16,0,1,1,0,3,2,1,auto,1,0,1,40,20,1,69,1,535490,, 0m3.764s, 500 , 646.74 , 214.20'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/96.sh
+Processing:  ./scripts/96.sh
+++ bash ./scripts/96.sh Lecture_360P-03bc.mp4
++ csvLine='97,1,2,1:0:0,0x3:0x113,hex,4,1,16,0,1,1,0,3,2,2,auto,1,0,1,40,20,1,69,1,478839,, 0m2.337s, 500 , 753.47 , 191.54'
++ echo '97,1,2,1:0:0,0x3:0x113,hex,4,1,16,0,1,1,0,3,2,2,auto,1,0,1,40,20,1,69,1,478839,, 0m2.337s, 500 , 753.47 , 191.54'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/97.sh
+Processing:  ./scripts/97.sh
+++ bash ./scripts/97.sh Lecture_360P-03bc.mp4
++ csvLine='98,1,2,0:0:0,0x3:0x113,hex,4,0,24,0,1,1,0,3,2,1,auto,1,0,1,40,30,1,69,1,553880,, 0m1.990s, 500 , 897.76 , 221.55'
++ echo '98,1,2,0:0:0,0x3:0x113,hex,4,0,24,0,1,1,0,3,2,1,auto,1,0,1,40,30,1,69,1,553880,, 0m1.990s, 500 , 897.76 , 221.55'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/98.sh
+Processing:  ./scripts/98.sh
+++ bash ./scripts/98.sh Lecture_360P-03bc.mp4
++ csvLine='99,1,5,1:0:0,0x3:0x113,hex,6,1,16,1,1,0,-2,3,None,1,spatial,1,0,1,40,30,1,69,1,527654,, 0m3.402s, 500 , 694.97 , 211.06'
++ echo '99,1,5,1:0:0,0x3:0x113,hex,6,1,16,1,1,0,-2,3,None,1,spatial,1,0,1,40,30,1,69,1,527654,, 0m3.402s, 500 , 694.97 , 211.06'
++ for x264config in $x64configs
++ echo 'Processing: ' ./scripts/99.sh
+Processing:  ./scripts/99.sh
+++ bash ./scripts/99.sh Lecture_360P-03bc.mp4
++ csvLine='100,0,3,0:0:0,0x113:0x113,hex,6,1,16,1,1,1,-2,3,2,1,auto,1,0,2,40,30,0,69,1,814443,, 0m2.981s, 500 , 788.34 , 325.78'
++ echo '100,0,3,0:0:0,0x113:0x113,hex,6,1,16,1,1,1,-2,3,2,1,auto,1,0,2,40,30,0,69,1,814443,, 0m2.981s, 500 , 788.34 , 325.78'
++ rm Lecture_360P-03bc.mp4
++ read line
+
+echo "Done with videos! See the res folder!"
++ echo 'Done with videos! See the res folder!'
+Done with videos! See the res folder!
+

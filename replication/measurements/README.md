@@ -65,6 +65,8 @@ Launch the measurements
 
 The measurements are done on the videos that are in the listVideo.csv file (here Animation_360P-24d4.mp4 and Lecture_360P-03bc.mp4).
 
+The console will display the content of the outputs.txt file.
+
 For each video, we compute the 201 configurations, and store it in a csv file in the res directory.
 
 For an example, Lecture_360P-03bc.mp4 will be compressed 201 times by x264; once these compressions are finished, a Lecture_360P-03bc.csv file appears in the res folder. 
