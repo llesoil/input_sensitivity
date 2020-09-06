@@ -119,13 +119,47 @@ Other results are in the sub-directory [others](https://anonymous.4open.science/
 
 # Artifact evaluation
 
+If you don't care about paper details, just type the following commands:
 
-If you don't care about paper details, go straight to the [replication](https://anonymous.4open.science/repository/df319578-8767-47b0-919d-a8e57eb67d25/replication/) folder:
+```git https://github.com/anonymous4opens/replication```
 
-- the sub-directory [measurements](https://anonymous.4open.science/repository/df319578-8767-47b0-919d-a8e57eb67d25/replication/measurements/) provides a docker file, build it to reproduce the measurements.
+If a git error occurs, install git with the following line (linux):
 
-- the sub-directory [code](https://anonymous.4open.science/repository/df319578-8767-47b0-919d-a8e57eb67d25/replication/code/) provides a docker file, build it to run the code and get the results.
+```sudo apt-get install -y git```
 
+Go in the replication directory:
+
+```cd replication```
+
+We provide:
+
+1. a dockerfile to replicate measurements : the sub-directory [measurements](https://anonymous.4open.science/repository/df319578-8767-47b0-919d-a8e57eb67d25/replication/measurements/) contains a docker file, build it to reproduce the measurements. Go in the directory:
+
+```cd measurements```
+
+And follow the instructions of the README.md file.
+When you are done with the measurements, exit the container:
+
+```exit```
+
+And go back to replication directory:
+
+```cd ..```
+
+- a dockerfile to run the code : the sub-directory [code](https://anonymous.4open.science/repository/df319578-8767-47b0-919d-a8e57eb67d25/replication/code/) conatins a docker file, build it to run the code and get the results.
+
+Go in the directory:
+
+```cd code```
+
+And follow the instructions of the README.md file.
+When you are done with the measurements, exit the container:
+
+```exit```
+
+Don't forget to remove the two docker containers (```sudo docker ps all```, and ```sudo docker rm [replace with the container ids]```)
+
+Thanks for testing our artifact!
 
 # Acknowledgement
 
