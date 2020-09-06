@@ -57,13 +57,15 @@ This command will require to be in the docker container, in interactive mode.
 
 Go to the  directory
 
-```cd code```
+```cd experiment```
 
 Launch the measurements
 
 ```bash launchUGC.sh```
 
-The measurements are done on the videos that are in the listVideo.csv file (here Animation_360P-24d4.mp4 and Lecture_360P-03bc.mp4).
+The measurements should take about 10 minutes.
+
+It is done on the videos that are listed in the listVideo.csv file (here Animation_360P-24d4.mp4 and Lecture_360P-03bc.mp4).
 
 The console will display the content of the outputs.txt file.
 
