@@ -121,7 +121,7 @@ Other results are in the sub-directory [others](https://anonymous.4open.science/
 
 If you don't care about paper details, just type the following commands:
 
-```git https://github.com/anonymous4opens/replication```
+```git clone https://github.com/anonymous4opens/replication```
 
 If a git error occurs, install git with the following line (linux):
 
