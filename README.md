@@ -157,7 +157,7 @@ When you are done with the measurements, exit the container:
 
 ```exit```
 
-Don't forget to remove the two docker containers (```sudo docker ps all```, and ```sudo docker rm [replace with the container ids]```)
+Don't forget to remove the two docker containers (```sudo docker ps -all```, and ```sudo docker rm [replace with the container ids]```)
 
 Thanks for testing our artifact!
 
