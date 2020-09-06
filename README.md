@@ -146,7 +146,7 @@ And go back to replication directory:
 
 ```cd ..```
 
-- a dockerfile to run the code : the sub-directory [code](https://anonymous.4open.science/repository/df319578-8767-47b0-919d-a8e57eb67d25/replication/code/) conatins a docker file, build it to run the code and get the results.
+2. a dockerfile to run the code : the sub-directory [code](https://anonymous.4open.science/repository/df319578-8767-47b0-919d-a8e57eb67d25/replication/code/) conatins a docker file, build it to run the code and get the results.
 
 Go in the directory:
 
