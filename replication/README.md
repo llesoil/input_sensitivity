@@ -1,8 +1,69 @@
-## Replication
+# Replication
 
 The directory "measurements" details how to replicate the measurements (or reproduce with other videos).
 
 The directory "code" details how to run the code.
 
-The directory "information" details the configuration of the environment used to measure x264 performances. **You don't need it to replicate the measurements or the code**, but it can be useful to have information about the environment, and experiment protocol context. 
+The directory "information" details the configuration of the environment used to measure x264 performances. **You don't need it to replicate the measurements or the code**, but it can be useful to have information about the environment, and experiment protocol context.
 
+The Dokerfile builds the docker container that you can pull to replicate measurements and code.
+
+## Step-by-step instructions
+
+If you don't care about paper details, just follow the instructions:
+
+- Install [docker](https://docs.docker.com/get-docker/). You can check your docker version (use the command line ```sudo docker --version```) and you docker status (use ```sudo systemctl status docker```).
+
+- Pull our image, by typing the following line in a terminal
+
+```sudo docker pull anonymicse2021/icse2021:latest```
+
+- Run it in interactive mode
+
+```sudo docker run -it anonymicse2021/icse2021```
+
+You need to test the measurements and the code :
+
+### 1. Measurements
+
+Go in the experiment folder:
+
+```cd experiment```
+
+Launch the measurements
+
+```bash launchUGC.sh```
+
+The measurements should take about 10 minutes.
+
+It is done on the videos that are listed in the listVideo.csv file (here Animation_360P-24d4.mp4 and Lecture_360P-03bc.mp4).
+
+The console will display the content of the outputs.txt file.
+
+For each video, we compute the 201 configurations, and store it in a csv file in the res directory.
+
+For an example, Lecture_360P-03bc.mp4 will be compressed 201 times by x264; once these compressions are finished, a Lecture_360P-03bc.csv file appears in the res folder. 
+
+See the repository for the files ; https://github.com/anonymous4opens/experiment
+
+### 2. Code
+
+You will then enter in the container environement. Then, got in the script directory :
+
+```cd ../code/src/main```
+
+And launch the python script :
+
+```python3 bitrate.py```
+
+In the command line outputs, you will see the outputs (as in the [outputs.txt](https://anonymous.4open.science/r/df319578-8767-47b0-919d-a8e57eb67d25/replication/code/outputs.txt) file) printed and explained in the related [markdown](https://anonymous.4open.science/r/df319578-8767-47b0-919d-a8e57eb67d25/src/main/bitrate.md).
+
+The python script is relatively long to run entirely (at least 15 minutes if you have a good laptop). Once the run is finished, you can attest that the results directory contains the figure printed in our paper:
+
+```ls ../../results```
+
+We apply modifications to corrmatrix-ugc-dendo-Spearman-kbs.pdf (i.e. convert it to png, add explanations about the scale and highlight groups), but the content (correlogram and dendograms) is the same as corrmatrix_modif.png (i.e. figure 1).
+
+Figure 3 is just an overview of the approach, and is not an output of the code.
+
+See the repository for the files ; https://github.com/anonymous4opens/code
