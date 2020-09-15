@@ -9,7 +9,7 @@ In this repository, you can consult the code, the data and the results related t
 
 If you don't care about paper details, just follow the instructions:
 
-- Install [docker](https://docs.docker.com/get-docker/). You can check your docker version (use the command line ```sudo docker --version```) and you docker status (use ```sudo systemctl status docker```).
+- Install [docker](https://docs.docker.com/get-docker/). You can check your docker version (use the command line ```sudo docker --version```) and status (use ```sudo systemctl status docker```).
 
 - Pull our image, by typing the following line in a terminal
 
