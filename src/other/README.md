@@ -1,6 +1,8 @@
 # Other notebooks
 
-- bitrate_algorithm_comparison.ipynb and the related bitrate_algorithm_comparison.md details why we chose random forest, instead of a linear regression or a neural network.
+- bitrate_algorithm_comparison.ipynb and the related markdown bitrate_algorithm_comparison.md details why we chose random forest, instead of a linear regression or a neural network.
+
+- bitrate-random-forest-hyperparameters-optimization.ipynb and the related markdown bitrate-random-forest-hyperparameters-optimization.md details the choice of hyperparameters for the learning algorithm
 
 - cpu.ipynb, fps.ipynb, encoded_sizes.ipynb & time.ipynb are related to *other performances*.
 

@@ -77,7 +77,7 @@ RQ1. Do Input Videos Change Performances of x264 Configurations?
 
 We aim at quantifying the differences of x264's performances due to input videos, and how input videos interact with software features.
 
-Once this statement is proved, we use the properties of input videos (e.g. height, width, spatial and temporal complexities, etc.) to **find a configuration optimizing a performance** (in our case minimize the bitrate of video compressions).
+Once this statement is proved, we use the properties of an input video (e.g. height, width, spatial and temporal complexity, etc.) to **find a configuration optimizing a performance for this video** (in our case minimize the bitrate of the video compression).
 
 We propose an approach, Inputec, that finds a configuration tailored for inputs.
 
@@ -86,7 +86,7 @@ RQ2. Can we use Inputec to find configurations adapted to input videos?
 
 We detail the results of our experiment in the related paper.
 
-To fully understand the code and results, we advise to read the related submission paper.
+To fully understand the code and results, we advise to read the related paper.
 
 
 
@@ -148,7 +148,7 @@ Data about the experiment, x264 configuration knowledge (a.k.a. domain knowledge
 
 ### II- Analyze
 
-To analyze these measurements, we use **code**, that gives **results**, depicted and discussed in the submission paper.
+To analyze these measurements, we use **code**, that gives **results**, depicted and discussed in the paper attached to the submission.
 
 #### II- 1. Code
 
