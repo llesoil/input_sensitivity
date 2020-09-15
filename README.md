@@ -19,7 +19,7 @@ If you don't care about paper details, just follow the instructions:
 
 ```sudo docker run -it anonymicse2021/icse2021```
 
-You need to test the measurement process (i.e. validate that you can reproduce it with other videos) and the code (i.e. run the code) :
+You need to test the *measurement process* (i.e. validate that you can measure x264 performances with other videos) and the *code* (i.e. run our code on your laptop) :
 
 ## 1. Measurements
 
@@ -27,19 +27,15 @@ Go in the experiment folder:
 
 ```cd experiment```
 
-Launch the measurements
+Launch the measurements:
 
 ```bash launchUGC.sh```
 
-The measurements should take about 10 minutes.
+The measurement process should take about 10 minutes, you can follow the executed command lines in the console. Two videos (in the videos directory) are processed; Animation_360P-24d4.mp4 and Lecture_360P-03bc.mp4
 
-It is done on the videos that are listed in the listVideo.csv file (here Animation_360P-24d4.mp4 and Lecture_360P-03bc.mp4).
+For each video, we compute the 201 configurations, and store the results of the compression (i.e. the performances, like the encoding bitrate, time or cpu) in a csv file in the res directory.
 
-The console will display the content of the outputs.txt file.
-
-For each video, we compute the 201 configurations, and store it in a csv file in the res directory.
-
-For an example, Lecture_360P-03bc.mp4 will be compressed 201 times by x264; once these compressions are finished, a Lecture_360P-03bc.csv file appears in the res folder. 
+For an example, Lecture_360P-03bc.mp4 will be compressed 201 times by x264. Once these compressions are finished, a Lecture_360P-03bc.csv file appears in the res folder. Each line of this file contains a configuration of x264, and a set of performances (cpu, encoded size of output video, fps, average bitrate of compression, and compression duration).
 
 See the repository for the files ; https://github.com/anonymous4opens/experiment
 
@@ -142,13 +138,9 @@ You may be interested to **replicate** the measurements with other datasets of v
 
 #### I- 2. Replication
 
-We provide a **docker image to build (i.e. a Dockerfile) to replicate or reproduce the measurements**.
+We provide a **docker image to build (i.e. a Dockerfile) to replicate or reproduce the measurements** (see the Artifact Evaluation above).
 
-To use it, you can follow the steps in the "replication/measurements" directory:
-
-https://anonymous.4open.science/repository/df319578-8767-47b0-919d-a8e57eb67d25/replication/measurements
-
-The "replication" folder details the configuration of our server (hardware details, operating system distribution and version, software version) and contains a Dockerfile to build in order to replicate the measurements.
+The "replication" directory details the configuration of our server (hardware details, operating system distribution and version, software version) and contains a Dockerfile (i.e a docker image to build in order to replicate the measurements).
 
 Data about the experiment, x264 configuration knowledge (a.k.a. domain knowledge), and ideas explored during the redaction of the paper are available in the "information" sub-directory.
 
@@ -170,7 +162,7 @@ If you want to run it, we provide a runnable [python file](https://anonymous.4op
 
 This python file will require a working python environment and python libraires; see the [requirements.txt](https://anonymous.4open.science/repository/df319578-8767-47b0-919d-a8e57eb67d25/replication/code/requirements.txt) file.
 
-We provide a [docker file](https://anonymous.4open.science/repository/df319578-8767-47b0-919d-a8e57eb67d25/replication/code/), build it to run the code and get the results!
+We provide a [docker file](https://anonymous.4open.science/repository/df319578-8767-47b0-919d-a8e57eb67d25/replication/code/), build it to run the code and get the results! Or you can use our docker image, see the Artifact evaluation part above.
 
 
 #### II- 2. Results
