@@ -19,7 +19,7 @@ If you don't care about paper details, just follow the instructions:
 
 ```sudo docker run -it anonymicse2021/icse2021```
 
-You need to test the measurements and the code :
+You need to test the measurement process (i.e. validate that you can reproduce it with other videos) and the code (i.e. run the code) :
 
 ## 1. Measurements
 
@@ -45,7 +45,7 @@ See the repository for the files ; https://github.com/anonymous4opens/experiment
 
 ## 2. Code
 
-You will then enter in the container environement. Then, got in the script directory :
+Then, go in the script directory :
 
 ```cd ../code/src/main```
 
