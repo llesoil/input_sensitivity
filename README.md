@@ -1,9 +1,9 @@
-# Learning Once and for All ?
-# On the Input Sensitivity of Configurable Systems
+# Predicting Performances of Configurable Systems
+# The Issue of Input Sensitivity
 
 Dear ESEC/FSE reviewers,
 
-In this repository, you can consult the code, the data and the results related to our submission "Learning Once and for All? On the Input Sensitivity of Configurable Systems".
+In this repository, you can consult the code, the data and the results related to our submission "Predicting Performances of Configurable Systems: the Issue of Input Sensitivity".
 
 # Artifact evaluation
 
@@ -79,10 +79,7 @@ We aim at quantifying the differences of x264's performances due to input videos
 
 Once this statement is proved, we use the properties of an input video (e.g. height, width, spatial and temporal complexity, etc.) to **find a configuration optimizing a performance for this video** (in our case minimize the bitrate of the video compression).
 
-We propose an approach, Inputec, that finds a configuration tailored for inputs.
-
-The second research question is :
-RQ2. Can we use Inputec to find configurations adapted to input videos?
+We propose to compare several State-of the-art approaches finding a configuration tailored for inputs.
 
 We detail the results of our experiment in the related paper.
 
