@@ -1,6 +1,8 @@
 # Cheap inputs for x264
 
-These 4 groups represent 4 profile performance of inputs for the non-functional property bitrate of x264.
+These 4 groups represent 4 types of inputs or profile of performance for the non-functional property bitrate of x264.
+
+We advise to consider the 8 following input videos when building an experimental protocol to study the bitrate of x264.
 
 ## Group 1 : "Action video"
 Gaming_360P-56fe - [Link Youtube UGC](https://console.cloud.google.com/storage/browser/_details/ugc-dataset/original_videos/Gaming/360P/Gaming_360P-56fe.mkv)
