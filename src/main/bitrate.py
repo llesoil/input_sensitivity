@@ -10,9 +10,8 @@
 # `pip3 install -r requirements.txt`
 # #### If it worked, you should be able to launch the following cell to import libraries.
 
-# In[1]:
+# In[45]:
 
-print("Import libraries...")
 
 # for arrays
 import numpy as np
@@ -47,19 +46,35 @@ from sklearn.linear_model import LinearRegression, ElasticNet
 from sklearn.model_selection import train_test_split
 # Simple clustering (iterative steps)
 from sklearn.cluster import KMeans
+# Support vector machine - support vector regressor
+from sklearn.svm import SVR
+
+# gradient boosting trees
+from xgboost import XGBRegressor
 
 # we use it to interact with the file system
 import os
 # compute time
 from time import time
 
-print("Done!")
+# Neural network high level framework
+import keras
+# Sequential is a sequence of blocs
+# Input deals with the data fed to the network
+from keras.models import Sequential,Input,Model
+# Dense is a feedforward layer with fully connected nodes
+# Dropout allows to keep part of data, and to "drop out" a the rest
+# Flatten makes the data "flat", i.e. in one dimension
+from keras.layers import Dense, Dropout, Flatten
+# Conv -> convolution, MaxPooling is relative to Pooling
+# Activation if the function composing the data in output of a layer
+from keras.layers import Conv2D, MaxPooling2D, Activation
+
 
 # #### Now, we import data
 
 # In[2]:
 
-print("Import measurements...")
 
 #because x264 output is "m:s", where m is the number of minutes and s the number of seconds 
 # we define a function to convert this format into the number of seconds
@@ -85,12 +100,11 @@ for v in v_names:
     assert data.shape == (201,34), v
     listVideo.append(data)
 
-print("Done!")
 
 # In[3]:
 
 
-print("We consider ", len(listVideo), " videos")
+print(" We consider ", len(listVideo), " videos")
 
 
 # #### Just a few words about the time needed to compute the data; about a month is needed to fully replicate the experience
@@ -99,24 +113,28 @@ print("We consider ", len(listVideo), " videos")
 
 
 totalTime = np.sum([np.sum(vid["etime"]) for vid in listVideo])
-#print("Hours of computation needed : "+str(totalTime/(3600)))
-print("Days of computation of measurement: "+str(totalTime/(24*3600)))
+print("Hours : "+str(totalTime/(3600)))
+print("Days : "+str(totalTime/(24*3600)))
 
 
 # #### Our focus in this paper is the bitrate, in kilobits per second
 
 # In[5]:
 
+
 #our variable of interest
 predDimension = "kbs"
-
-print("Performance considered :",predDimension)
-
 
 for i in range(len(listVideo)):
     sizes = listVideo[i][predDimension]
     ind = sorted(range(len(sizes)), key=lambda k: sizes[k])
     listVideo[i]['ranking'] = ind
+
+
+# In[6]:
+
+
+v_names[1167]
 
 
 # # In the paper, here starts Section II
@@ -129,15 +147,8 @@ for i in range(len(listVideo)):
 # 
 # Other alternatives : Kullback-Leibler divergences to detect outliers, and Pearson correlation to compute only linear correlations 
 
-print("Section II in the paper")
+# In[7]:
 
-print("RQ1 - Do Input Videos Change Performances of x264 Configurations?")
-
-print("RQ1.1 - Do software performances stay consistent across inputs?")
-
-# In[6]:
-
-print("Computation of Spearman correlations... Let's start the coffee machine, it takes a while :-)")
 
 # number of videos
 nbVideos = len(listVideo)
@@ -157,19 +168,18 @@ for i in range(nbVideos):
 
 # #### Here is the distribution depicted in figure 1, on the bottom left; we removed the diagonal $i!=j$ in the following code.
 
-# In[7]:
+# In[8]:
 
 
 corrDescription = [corrSpearman[i][j] for i in range(nbVideos) for j in range(nbVideos) if i >j]
 pd.Series(corrDescription).describe()
 
-print("Done!")
 
 # #### Few statistics about input videos, mentioned in the text
 
 # #### A small detail; in the paper, when we mention the video having the id $i$,  it means the $(i+1)^{th}$ video of the list, because the first input has the index 0
 
-# In[8]:
+# In[9]:
 
 
 min_val = 1
@@ -186,19 +196,19 @@ print("Value : ", min_val)
 print("i : ", ind_i, ", j : ", ind_j)
 
 
-# In[9]:
+# In[10]:
 
 
 corrSpearman[378][1192]
 
 
-# In[10]:
+# In[11]:
 
 
 corrSpearman[314][1192]
 
 
-# In[11]:
+# In[12]:
 
 
 corrSpearman[378][314]
@@ -206,14 +216,14 @@ corrSpearman[378][314]
 
 # #### "For 95% of the videos, it is always possible to find another video having a correlation higher than 0.92" -> here is the proof 
 
-# In[12]:
+# In[13]:
 
 
 argm = [np.max([k for k in corrSpearman[i] if k <1]) for i in range(len(corrSpearman))]
 pd.Series(argm).describe()
 
 
-# In[13]:
+# In[14]:
 
 
 np.percentile(argm, 5)
@@ -223,7 +233,7 @@ np.percentile(argm, 5)
 # 
 # #### Now, let's compute figure 1!
 
-# In[14]:
+# In[15]:
 
 
 # the results directory
@@ -279,17 +289,14 @@ def plot_correlationmatrix_dendogram(corr, img_name, ticks, method= 'ward'):
     # finally we cut the dendogram to have 4 groups, and return thietr indexes
     return cut_tree(links, n_clusters = 4)
 
-print("Computation of Performance groups... Enjoy your coffee, it will last few minutes!")
-
 group_no_ordered = plot_correlationmatrix_dendogram(corrSpearman, 
                                  "corrmatrix-ugc-dendo-Spearman-" + predDimension + ".pdf",
                                  [k/5 for k in np.arange(-10,10,1)], method='ward')
 
-print("Done!")
 
 # #### To match the increasing number of groups to the order of the figure (from the left to the right), we change the ids of groups
 
-# In[15]:
+# In[16]:
 
 
 map_group = [2, 0, 3, 1]
@@ -306,13 +313,18 @@ print("Group 3 contains", sum(groups==2), "input videos.")
 print("Group 4 contains", sum(groups==3), "input videos.")
 
 
+# In[17]:
+
+
+[v_names[i] for i in np.where(groups==3)[0]]
+
+
 # ### B-] We also study rankings of configurations
 
 # #### First, we compute the rankings
 
-# In[16]:
+# In[18]:
 
-print("Rankings of configurations")
 
 # first example ; we compute the rankings of the bitrate distribution for the first input video
 bitrates = listVideo[0][predDimension]
@@ -331,7 +343,7 @@ rankings.head()
 
 # #### To get the most "unstable" ranking, we take the configuration having the highest standard deviation.
 
-# In[17]:
+# In[19]:
 
 
 # standard deviations for rankings of the 201 configurations
@@ -359,7 +371,7 @@ plt.show()
 
 # #### Some statistics (not mentioned in the text)
 
-# In[18]:
+# In[20]:
 
 
 print("For config. 200, ", int(np.sum([1  for j in range(len(rankings.loc[np.argmin(stds),:])) 
@@ -367,22 +379,10 @@ print("For config. 200, ", int(np.sum([1  for j in range(len(rankings.loc[np.arg
       /len(rankings.loc[np.argmin(stds),:])*100),"% of configurations are between 105 and 130!")
 
 
-# In[19]:
-
-
-np.where(rankings.loc[np.argmin(stds),:] == np.min(rankings.loc[np.argmin(stds),:]))
-
-
-# In[20]:
-
-
-np.max(rankings.loc[np.argmax(stds),:])
-
-
 # In[21]:
 
 
-np.where(rankings.loc[np.argmax(stds),:] == np.min(rankings.loc[np.argmax(stds),:]))
+np.where(rankings.loc[np.argmin(stds),:] == np.min(rankings.loc[np.argmin(stds),:]))
 
 
 # In[22]:
@@ -394,33 +394,41 @@ np.max(rankings.loc[np.argmax(stds),:])
 # In[23]:
 
 
-np.where(rankings.loc[np.argmin(stds),:] == np.max(rankings.loc[np.argmin(stds),:]))
+np.where(rankings.loc[np.argmax(stds),:] == np.min(rankings.loc[np.argmax(stds),:]))
 
-
-# #### Rankings distributions
 
 # In[24]:
 
 
-pd.Series(rankings.loc[np.argmax(stds),:]).describe()
+np.max(rankings.loc[np.argmax(stds),:])
 
 
 # In[25]:
 
 
+np.where(rankings.loc[np.argmin(stds),:] == np.max(rankings.loc[np.argmin(stds),:]))
+
+
+# #### Rankings distributions
+
+# In[26]:
+
+
+pd.Series(rankings.loc[np.argmax(stds),:]).describe()
+
+
+# In[27]:
+
+
 pd.Series(rankings.loc[np.argmin(stds),:]).describe()
 
-print("config... Done!")
 
 # ## RQ1-2- Are there some configuration options more sensitive to input videos?
 
 # #### A-] For RQ1-2, we compute the feature importances of configuration options for each video
 
-# In[26]:
+# In[28]:
 
-print("RQ1-2- Are there some configuration options more sensitive to input videos?")
-
-print("Computation of feature importances - You can check our repo while the code works for you, or read our paper if you're interested!")
 
 # the list of p = 24 features
 listFeatures = ["cabac", "ref", "deblock", "analyse", "me", "subme", "mixed_ref", "me_range", "trellis", 
@@ -504,18 +512,17 @@ def compute_Importances(listVid, id_short = None):
     return res
 
 
-# In[27]:
+# In[29]:
 
 
 # we compute the feature importances
 res_imp = compute_Importances(listVideo)
 
-print("Computation of feature importances - Done!")
 
 # ## Figure 2a
 # #### Then, we depict a boxplot of features importances; for each feature, there are 1397 feature importances (one per video)
 
-# In[28]:
+# In[30]:
 
 
 # we sort the features by names 
@@ -554,13 +561,11 @@ plt.yticks(range(1, len(listImp) + 1), names, size= 16)
 plt.savefig("../../results/boxplot_features_imp_rf_"+predDimension+".png")
 plt.show()
 
-print("Figure 2a generated")
 
 # #### B-] Since feature importances do not get how the predicting variables (i.e. the configuraiton options) affect the variable to predict (i.e. the bitrate), we add linear regression coefficients
 
-# In[29]:
+# In[31]:
 
-print("Computation of feature effects - Start! Btw, did you check the information subfolder (in replication/information)? It details our working environement!")
 
 # alternatively, we can only select the important features to plot the tukey diagrams
 short_features = ["mbtree", "aq-mode", "subme"]
@@ -645,12 +650,11 @@ res_coef = compute_poly(listVideo)
 # and we print them
 res_coef
 
-print("Computation of feature effects - Done!")
 
 # ## Figure 2b
 # #### Same idea for this plot, see the last cell of RQ1.2-A-]
 
-# In[30]:
+# In[32]:
 
 
 listImp = [(np.abs(np.percentile(res_coef[col],75)-np.percentile(res_coef[col],25)),res_coef[col], col) 
@@ -687,9 +691,7 @@ plt.savefig("../../results/boxplot_features_imp_linear_"+predDimension+".png")
 plt.show()
 
 
-print("Figure 2b, done!")
-
-# # In the paper, here starts Section III
+# # In the paper, construction of the figure 3
 
 # ## RQ1bis - Can we group together videos having same performance distributions?
 
@@ -697,11 +699,8 @@ print("Figure 2b, done!")
 
 # ### We load the metrics of the youtube UGC dataset, needed for RQ2
 
-# In[31]:
+# In[33]:
 
-print("In the paper, here starts Section III")
-
-print("Load the videos metadata!")
 
 # we load the file (in itself an aggregation of datasets)
 # the file is available in the data folder, then ugc_meta
@@ -741,7 +740,7 @@ meta_perf
 
 # #### We compute the count of categories per group
 
-# In[32]:
+# In[34]:
 
 
 # keep str categories, to detect which categories are more represented per performance group
@@ -755,7 +754,7 @@ group_perf
 
 # #### We define a function to depict a boxplot
 
-# In[33]:
+# In[35]:
 
 
 def boxplot_imp(res, xlim = None, criteria = 'max', name = None, xname='Feature importances'):
@@ -792,12 +791,12 @@ def boxplot_imp(res, xlim = None, criteria = 'max', name = None, xname='Feature 
     plt.show()
 
 
-# In[34]:
+# In[36]:
 
 
 input_sizes = pd.read_csv("../../data/ugc/ugc_meta/sizes.csv", delimiter=',').set_index('name')
 
-print("Finished!")
+
 # ## Figure 4
 # 
 # #### Summary for each group
@@ -809,9 +808,8 @@ print("Finished!")
 # 
 # Interestingly, groups formed by encoded sizes (with respect to the same protocol gives the same groups, except for 30 videos (going from the fourth to the third group)
 
-# In[35]:
+# In[37]:
 
-print("Group descriptions... start!")
 
 # [begin what if] they should be already defined, to remove?
 listFeatures = ["cabac", "ref", "deblock", "analyse", "me", "subme", "mixed_ref", "me_range", 
@@ -924,36 +922,35 @@ def summary_group(id_group):
     print("Correlations intra-group: \n" + str(pd.Series(corrGroup).describe())+'\n')
 
 
-# In[36]:
-
-print("Group 1")
-summary_group(0)
-
-
-# In[37]:
-
-print("Group 2")
-summary_group(1)
-
-
 # In[38]:
 
-print("Group 3")
-summary_group(2)
+
+summary_group(0)
 
 
 # In[39]:
 
-print("Group 4")
-summary_group(3)
 
+summary_group(1)
 
-print("Figure 4 is an aggregation of the previous outputs.")
-# ### Inter-group correlogram
 
 # In[40]:
 
-print("Inter-group correlations... start!")
+
+summary_group(2)
+
+
+# In[41]:
+
+
+summary_group(3)
+
+
+# ### Inter-group correlogram
+
+# In[42]:
+
+
 group_perf =groups
 id_list_0 = [i for i in range(len(listVideo)) if group_perf[i]==1]
 id_list_1 = [i for i in range(len(listVideo)) if group_perf[i]==3]
@@ -1025,427 +1022,267 @@ print(stds)
 print('MEDIAN')
 print(res_med)
 
-print("Inter-group correlations... start!")
+
 # #### In a group (correlation intra), the performances are highly or very highly correlated
 # 
-# #### Between the different (correlaiton inter), the performances of inputs are generally moderate or low (except for groups 3 and 4)
+# #### Between the different (correlation inter), the performances of inputs are generally moderate or low (except for groups 3 and 4)
 
-# ## INTUITION of Inputec : why should we use the metrics of the youtube UGC Dataset to discriminate the videos into groups?
-# 
-# Due to the lack of space, we didn't explain this experiment in the paper; but we still think it is an important milestone to understand how we've got the idea of Inputec!
-# 
-# ### We used the metrics of Youtube UGC to classify each video in its performance group.
-# 
-# ### RESULTS : in average, we classify successfully two videos over three (~66%) in the right performance group
+# # In the paper, here starts Section III
 
-# In[41]:
-
-
-if 'str_video_cat' in meta_perf.columns:
-    del meta_perf['str_video_cat']
-
-accuracy = []
-
-nbLaunches = 10
-for i in range(nbLaunches):
-    X = np.array(meta_perf[[k for k in meta_perf.columns if k !='perf_group']], float)
-    y = np.array(meta_perf['perf_group'], float)
-
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
-
-    rf = RandomForestClassifier()
-    rf.fit(X_train, y_train)
-    y_pred = rf.predict(X_test)
-
-
-    conf = pd.crosstab(y_pred, y_test)#, colnames=[1,2,3], rownames=[1,2,3])
-    val = np.sum(np.diag(conf))/len(y_test)
-    accuracy.append(val)
-    print('Test accuracy : '+ str(val))
-    conf.columns = pd.Int64Index([1,2,3,4], dtype='int64', name='Observed')
-    conf.index = pd.Int64Index([1,2,3,4], dtype='int64', name='Predicted')
-    conf
-print(np.mean(accuracy))
-conf
-
-
-# # In the paper, here starts Section IV
-
-# # RQ2 - Can we use Inputec to find configurations adapted to input videos?
-
-# ### The goal fixed in RQ2 is to generate a configuration minimizing the bitrate for a given video!
-
-# In[42]:
-
-print("Section IV in ther paper")
-
-print("Initialisation")
-
-listFeatures = ["cabac", "ref", "deblock", "analyse", "me", "subme", "mixed_ref", "me_range", "trellis", 
-                "8x8dct", "fast_pskip", "chroma_qp_offset", "bframes", "b_pyramid", 
-                "b_adapt", "direct", "weightb", "open_gop", "weightp", "scenecut", "rc_lookahead", 
-                "mbtree", "qpmax", "aq-mode"]
-categorial = ['analyse', 'me', 'direct']
-val_config = listVideo[0][listFeatures].replace(to_replace ="None",value='0')
-val_config['deblock'] =[int(val[0]) for val in val_config['deblock']]
-
-for col in val_config.columns:
-    if col not in categorial:
-        arr_col = np.array(val_config[col],int)
-        arr_col = (arr_col-np.mean(arr_col))/(np.std(arr_col)+1e-5)
-        val_config[col] = arr_col
-    else:
-        if col not in [predDimension,'ranking']:
-            val_config[col] = [np.where(k==val_config[col].unique())[0][0] for k in val_config[col]]
-            arr_col = np.array(val_config[col],int)
-            arr_col = (arr_col-np.mean(arr_col))/(np.std(arr_col)+1e-5)
-            val_config[col] = arr_col
-
-
-# #### Function to "place" a value (i.e. give a rank to a value) in an ordered list
+# ## Separation of training set of videos and test set of videos
 
 # In[43]:
 
 
-def find_rank(sorted_perfs, val):
-    # inputs : a list of sorted performances, a value 
-    # output: the ranking of value in the sorted_perf list 
-    rank = 0
-    while val > sorted_perfs[rank] and rank < len(sorted_perfs)-1:
-        rank+=1
-    return rank
+# v_names_train, v_names_test = train_test_split(v_names, train_size = 1050)
 
+# v_names_train contains the inputs' names of the training set 
+# the training set is used to learn the differences between inputs, i.e. it replaces domain knowledge
+# v_names_test -> same for the test set
+# the test set is used to evaluate the different state-of-the-art approaches
 
-# ## Method M1 - Inputec, full configurations, full properties
-# 
-# ## [1 sentence explanation] We included the properties in the set of predicting variables
-# 
-# #### [short explanation] Offline: by including the input properties, we discriminate the input videos into performance groups, thus increasing the mean absolute error of the prediction. Online: instead of measuring new configurations (as known as transfer learning), we compute the input properties, and test all the configurations. At the end, we select the one giving the minimal prediction.
+# save names of train inputs
+# np.savetxt("../../data/train_names.csv", v_names_train, fmt='%s')
+v_names_train = np.loadtxt("../../data/train_names.csv", dtype= str)
 
-# ## OFFLINE
-# 
-# #### [OFFLINE] Construct the data
-# 
-# Lines 1-12 in Algorithm 1
+# save names of test inputs
+# np.savetxt("../../data/test_names.csv", v_names_test, fmt='%s')
+v_names_test = np.loadtxt("../../data/test_names.csv", dtype= str)
+
 
 # In[44]:
 
-print("Inputec training : it takes a while, again... Sorry for the inconvenience! ")
 
-# we separate the list of videos into a training (i.e. offline) set and a test set (i.e. online)
-train_ind, test_ind = train_test_split([k for k in range(len(listVideo))], test_size = 0.25)
-# training set indexes
-train_index = [v_names[k][:-4] for k in train_ind]
-
-# we add the input properties
-name_col = list(meta_perf.columns)[1:]
-
-# we add the x264 configuration options
-for vcc in val_config.columns:
-    name_col.append(vcc)
-
-# Then, X (i.e the predicting variables) =  input properties + software configuration options
-
-# we add the variable to predict, i.e. y the bitrate performance distribution
-name_col.append("bitrate")
-
-# X length, the number of predicting variables
-nb_col = len(name_col)
-# the number of configurations
-nb_config = 201
-
-# generate the datasets = (X,y)
-def gen_dataset(inputs_names):
-    # inputs : names of videos
-    # output : aggregation of multiple (X,y) for all the videos in the list of names provided in input 
-    
-    # the final dataset
-    res = pd.DataFrame(np.zeros(nb_config*len(inputs_names)*nb_col).reshape(nb_config*len(inputs_names), nb_col))
-    res.columns = name_col
-    
-    # we add the data video per video
-    # LINES 6-10 in Algorithm 1
-    for i in range(len(inputs_names)):
-        # first, we retrieve the name of the video
-        video_name = inputs_names[i]
-        index_video = np.where(np.array([v[:-4] for v in v_names], str)==video_name)[0][0]
-        # we compute the performance, here
-        bitrates = listVideo[index_video][predDimension]
-        # get the input properties of the video
-        video_prop = np.array(meta_perf.loc[video_name][1:], float)
-        # compute the avrage value and the standard deviation for the bitrate
-        # as we said in the paper, it does not change the order of variable
-        # which is a good property
-        moy = np.mean(bitrates)
-        std = np.std(bitrates)
-        # for each configuration, we add the values of the input properties and the configuration options (=X)
-        # and the normalized values of bitrates (=y)
-        for config_id in range(nb_config):
-            val = list(tuple(video_prop) + tuple(val_config.loc[config_id]))
-            val.append((bitrates[config_id]-moy)/std)
-            res.loc[i*nb_config+config_id] = val
-    return res
-
-# training dataset
-training_data = gen_dataset(train_index)
-
-# dimensions of the different sets = a proxy to the measurement cost 
-print("Training size : ", training_data.shape[0])
-
-# OFFLINE - Training data
-X_train = np.array(training_data.drop(["bitrate"],axis=1), float)
-y_train = np.array(training_data["bitrate"], float)
+v_names_train[0:50]
 
 
-# #### [OFFLINE] We train the Learning Algorithm
+# In[62]:
+
+
+listVideoTest = [listVideo[i] for i in range(len(listVideo)) if v_names[i] in v_names_test]
+assert len(listVideoTest) == len(v_names_test)
+
+
+# #### Isolate best configurations
+
+# In[65]:
+
+
+best_perfs = [np.min(vid[predDimension]) for vid in listVideoTest]
+best_configs = [np.argmin(vid[predDimension]) for vid in listVideoTest]
+
+
+# ## State-of-the-art approaches
 # 
-# Lines 13-14 in Algorithm 1
+# ### *SImple Learning*
 
-# In[45]:
-
-
-# The hyperparameters were optimized by testing different values for parameters
-# and comparing the mean absolute error given by the model
-LA = RandomForestRegressor(n_estimators=100, criterion="mse", min_samples_leaf=2, bootstrap=True, 
-                           max_depth=None, max_features=15)
-# the default config for random forest is quite good
-# we train the model LA
-LA.fit(X_train, y_train)
-
-
-# ## ONLINE
-
-# #### [ONLINE] Add new videos
+# ### Model Reuse (MR)
 # 
-# Lines 15-17 in the Algorithm 1
-
-# In[46]:
-
-
-# test set indexes
-test_index = [v_names[k][:-4] for k in test_ind]
-
-
-# #### [ONLINE] Predict the value for each configuration, and output the configuration giving the minimal result (i.e. the argmin)
 # 
-# Lines 18-22 in the Algorithm 1
-
-# In[47]:
-
-
-# we compute the time - start
-start = time()
-
-# the performance values for the configuration chosen by Inputec, for the test set of videos
-inputec = []
-
-# the performance rankings for the configuration chosen by Inputec, for the test set of videos
-inputec_ranks = []
-
-# for each video in the test set
-for ti in test_index:
-    # we retrieve the test index
-    index_video = np.where(np.array([v[:-4] for v in v_names], str)==ti)[0][0]
-    # list of predictions for inputec
-    pred_inputec = []
-    # for each configuration
-    for i in range(nb_config):
-        # we add input properties to the configurations
-        video_prop = list(tuple(meta_perf.loc[ti][1:])+tuple(val_config.loc[i]))
-        # we predict the value associated to the configuration
-        pred_inputec.append(LA.predict(np.array(video_prop, float).reshape(1, 33)))
-    # sorted performances
-    sorted_perfs = sorted(listVideo[index_video][predDimension])
-    # the performance pof the configuration chosen by Inputec
-    perf = listVideo[index_video].loc[np.argmin(pred_inputec)][predDimension]
-    # we add it to the perf array
-    inputec.append(perf)
-    # the related ranking (between 0 and 200, hopefully close to 0)
-    inputec_ranks.append(find_rank(sorted_perfs, perf))
-
-# we compute the time - end
-end = time()
-
-print("Average time for one video prediction < ", int(100*(end-start)/len(test_index))/100, "second(s)!")
-
-print("Inputec training... Done! ")
-print("Baseline definitions... Start!")
-# ## Baselines
+# We arbitrarily choose a first video, learn a performance model on it, and select the best configuration minimizing the performance for this video. This approach represents the error made by a model trained on a  source input (i.e., a  first video) and transposed to a target input (i.e., a second video, different from the first one), without considering the difference of content between the source and the target. In theory, it corresponds to a fixed configuration, optimized for the first video. We add Model Reuse as a witness approach to measure how we can improve the standard performance model.
 # 
-# To evaluate Inputec, we compare it to different baselines. 
-# Each baseline corresponds to a concrete situation:
+# The **Model Reuse** selects a video of the training set, apply a model on it and keep a near-optimal configuration working for this video. Then, it applies this configuration to all inputs of the test set.
 
-# #### B1 - Model reuse
+# In[147]:
+
+
+MR_configs = np.loadtxt("../../results/raw_data/MR_results.csv")
+MR_ratios = [listVideoTest[i][predDimension][MR_configs[i]]/best_perfs[i] for i in range(len(listVideoTest))]
+
+
+# ### Best compromise (BC)
 # 
-# We arbitrarily choose a first video, learn a performance model on it, and select the best configuration minimizing the performance for this video. This baseline represents the error made by a model trained on a  source input (i.e., a  first video) and transposed to a target input (i.e., a second video, different from the first one), without considering the difference of content between the source and the target. In theory, it corresponds to a fixed configuration, optimized for the first video. We add B1 to measure how we can improve the standard performance model with Inputec.
+# **Best compromise (BC)** applies a performance model on all the training set, without making a difference between input videos. 
+# It selects the configuration working best for most videos in the training set. 
+# Technically, we rank the 201 configurations (1 being the optimal configuration, and 201 the worst) and select the one optimizing the sum of ranks for all input videos in the training set. 
+
+# In[148]:
+
+
+BC_configs = np.loadtxt("../../results/raw_data/BC_results.csv")
+BC_ratios = [listVideoTest[i][predDimension][BC_configs[i]]/best_perfs[i] for i in range(len(listVideoTest))]
+
+
+# ### *Learning with properties*
+
+# ### Direct Inclusion (DI)
 # 
-# B1 is fixed.
+# **Direct Inclusion (DI)** includes input properties directly in the model during the training phase. The trained model then predicts the performance of x264 based on a set of properties (i.e. information about the input video) **and** a set of configuration options (i.e. information about the configuration). We fed this model with the 201 configurations of our dataset, and the properties of the test videos. We select the configuration giving the best prediction (e.g. the lowest bitrate).
 
-# In[55]:
-
-
-# we arbitraly select an input in the training set
-# here we choose on purpose a video for which the model reuse leads to bad results
-# to see what could happen when we just reuse the model from one video to another
-chosen_input = 423
-
-# we consider the associated input video
-source_video = listVideo[np.where(np.array([v[:-4] for v in v_names], str)==
-                                  train_index[chosen_input])[0][0]]
-
-# we select the best config for this video
-b1_config = np.argmin(source_video[predDimension])
-
-print("Id of B1 configuration :", b1_config)
-
-# the rankings of the first baseline
-b1_ranks = []
-
-# for each video in the test set
-for ti in test_index:
-    # we retrieve the test index of the input video
-    index_video = np.where(np.array([v[:-4] for v in v_names], str)==ti)[0][0]
-    # sorted performances
-    sorted_perfs = sorted(listVideo[index_video][predDimension])
-    # the performance of the software configuration of B1
-    perf = listVideo[index_video].loc[b1_config][predDimension]
-    # we add it to the list
-    b1_ranks.append(find_rank(sorted_perfs, perf))
+# In[216]:
 
 
-# #### B2 - Best compromise
+DI_configs = np.loadtxt("../../results/raw_data/DI_results.csv")
+DI_ratios = [listVideoTest[i][predDimension][DI_configs[i]]/best_perfs[i] for i in range(len(listVideoTest))]
+
+
+# ### Input-aware Learning (IaL)
 # 
-# We select the configuration having the lowest sum of bitrates rankings for the training set of videos, and study this configuration's distribution on the validation set. 
-# B2 represents the best compromise we can find, working for all input videos. 
-# In terms of software engineering, it acts like a preset configuration proposed by x264 developers.
-# Beating this configuration shows that our approach chooses a custom configuration, tailored for the input characteristics.
+# **Input-aware Learning (IaL)** was first designed to overcome the input sensitivity of programs when compiling them with PetaBricks. 
 # 
-# B2 is fixed.
-
-# In[56]:
-
-
-# only keep the video of the training set (we keep the training-test phases)
-keep_vid = ['video'+str(np.where(np.array([v[:-4] for v in v_names], str)==ti)[0][0]) for ti in train_index]
-
-# select the best compromise, i.e. the configuration having the minimal sum of rankings
-b2_config = np.argmin([np.sum(np.array(rankings[keep_vid].loc[i], int)) 
-                             for i in range(rankings.shape[0])])
-
-print("Id of B2 configuration :", b2_config)
-
-# the rankings of the second baseline
-b2_ranks = []
-
-# for each video in the test set
-for ti in test_index:
-    # we retrieve the test index of the input video
-    index_video = np.where(np.array([v[:-4] for v in v_names], str)==ti)[0][0]
-    # sorted performances
-    sorted_perfs = sorted(listVideo[index_video][predDimension])
-    # the performance of the software configuration of B1
-    perf = listVideo[index_video].loc[b2_config][predDimension]
-    # we add it to the list
-    b2_ranks.append(find_rank(sorted_perfs, perf))
-
-
-# #### B3 - Average performance
+# > See the reference @inproceedings{ding2015,
+#   title={Autotuning algorithmic choice for input sensitivity},
+#   author={Ding, Yufei and Ansel, Jason and Veeramachaneni, Kalyan and Shen, Xipeng and O’Reilly, Una-May and Amarasinghe, Saman},
+#   booktitle={ACM SIGPLAN Notices},
+#   volume={50},
+#   number={6},
+#   pages={379--390},
+#   year={2015},
+#   organization={ACM},
+#   url={https://dl.acm.org/doi/pdf/10.1145/2813885.2737969},
+# }
 # 
-# This baseline computes the average performance of configurations for each video of the validation dataset. 
-# It acts as a witness group, reproducing the behavior of a non-expert user that experiments x264 for the first time, and selects uniformly one of the 201 configurations of our dataset.
+# Applied to the x264 case, it uses input properties of videos to propose a configuration working for a group of videos, sharing similar performances. 
 # 
-# B3 vary across inputs.
-
-# In[57]:
-
-
-# the average performance values for all configurations, for each input in the test set of videos
-b3_perf = []
-
-# the rankings of the third baseline
-b3_ranks = []
-
-# for each video in the test set
-for ti in test_index:
-    # we retrieve the test index
-    index_video = np.where(np.array([v[:-4] for v in v_names], str)==ti)[0][0]
-    # sorted performances
-    sorted_perfs = sorted(listVideo[index_video][predDimension])
-    # the average performance of the video
-    perf = np.mean(listVideo[index_video][predDimension])
-    # we add it to B3's performance array 
-    b3_perf.append(perf)
-    # we add it to the list
-    b3_ranks.append(find_rank(sorted_perfs, perf))
-
-
-# #### B4 - Best configuration
 # 
-# Similarly, we select the best configuration (i.e. leading to the minimal performance for the set of configurations). We consider this configuration as the upper limit of the potential gain of performance; since our approach chooses a configuration in the set of 201 possible choices, we can not beat the best one of the set; it just shows how far we are from the best performance value. 
-# Otherwise, either our method is not efficient enough to capture the characteristics of each video, or the input sensitivity does not represent a problem, showing that we can use an appropriate but fixed configuration to optimize the performances for all input videos.
+# According to Ding et al,  Input-Aware Learning can be broken down to six steps. 
 # 
-# B4 vary across inputs.
-
-# In[58]:
-
-
-# the minimal performance values, for each input in the test set of videos
-b4_perf = []
-
-# the minimal performance values rankings
-b4_ranks = np.zeros(len(test_index))
-
-# for each video in the test set
-for ti in test_index:
-    # we retrieve the test index
-    index_video = np.where(np.array([v[:-4] for v in v_names], str)==ti)[0][0]
-    # we add the minimal performance of the video
-    b4_perf.append(np.min(listVideo[index_video][predDimension]))
-
-
-# ### Ratios
 # 
-# The ratios of Inputec over the baseline performances prediction should be lower than 1 if and only if Inputec is better than the baseline (because it provides a lower bitrate than the baseline).
-# As an example, for a ratio of $0.6 = 1 - 0.4 = 1 - \frac{40}{100}$, we gain 40% of bitrate with our method compared to the baseline. 
-# Oppositely, we loose 7% of bitrate with our method compared to the baseline for a ratio of 1.07.
+# Steps 1 to 4 are applied on the training set, while Step 5 and 6 consider a new input of the test set. 
+# 
+# **Step 1. Property extraction** - To mimic the domain knowledge of the expert, we use the videos' properties provided by the dataset of inputs
+# 
+# **Step 2. Form groups of inputs** - 
+# Based on the dendogram of Figure 1, we report on videos' properties that can be used to characterize four performance groups :
+# - Group 1. Action videos (high spatial and chunk complexities, Sports and News); 
+# - Group 2. Big resolution videos (low spatial and high temporal complexities, High Dynamic Range);
+# - Group 3. Still image videos (low temporal and chunk complexities, Lectures and HowTo)
+# - Group 4. Standard videos (average properties values, various contents)
+# 
+# Similarly, we used the training set of videos to build four groups of inputs. 
+# 
+# **Step 3. Landmark creation** - For each group, we artificially build a video, being the centroid of all the input videos of its group. We then use this video to select a set of landmarks (i.e. configurations), potential candidates to optimize the performance for this group. 
+# 
+# **Step 4. Performance measurements** - For each input video, we save the performances of its landmarks (i.e. the landmarks kept in Step 3, corresponding to its group).
+# 
+# **Step 5. Classify new inputs into a performance group** - Based on its input properties (see Step 1), we attribute a group to a new input video of the test set. It becomes a k-classification problem, k being the number of performance groups of Step 2. 
+# 
+# **Step 6. Propose a configuration for the new input** - We then propose a configuration based on the input properties of the video. It becomes a n-classification problem, where n is the number of landmarks kept for the group predicted in Step 5. We keep the best configuration predicted in Step 6.
 
-# In[60]:
-
-
-# We compute the four ratios
-
-# Inputec/B1, the model reuse
-ratio_b1 = []
-# Inputec/B2, the compromise
-ratio_b2 = []
-# Inputec/B3, the average bitrate
-ratio_b3 = []
-# Inputec/B4, the best configuration
-ratio_b4 = []
-
-# for each video, we add the ratio to the list
-for i in range(len(test_index)):
-    index_video = np.where(np.array([v[:-4] for v in v_names], str)==test_index[i])[0][0]
-    
-    # for B1 and B2, we take the configuration of the current video
-    ratio_b1.append(inputec[i]/listVideo[index_video].loc[b1_config][predDimension])
-    ratio_b2.append(inputec[i]/listVideo[index_video].loc[b2_config][predDimension])
-    
-    # for B3 and B4, we take the previously computed values
-    ratio_b3.append(inputec[i]/b3_perf[i])
-    ratio_b4.append(inputec[i]/b4_perf[i])
+# In[150]:
 
 
-# ## Figure 5a - Performance ratios of configurations, baseline vs Inputec
+IaL_configs = np.loadtxt("../../results/raw_data/IaL_results.csv")
+IaL_ratios = [listVideoTest[i][predDimension][IaL_configs[i]]/best_perfs[i] for i in range(len(listVideoTest))]
 
-# In[61]:
+
+# ### *Transfer Learning*
+
+# ### Beetle
+# 
+# 
+# > @article{beetle,
+#   author    = {Rahul Krishna and
+#                Vivek Nair and
+#                Pooyan Jamshidi and
+#                Tim Menzies},
+#   title     = {Whence to Learn? Transferring Knowledge in Configurable Systems using
+#                {BEETLE}},
+#   journal   = {CoRR},
+#   volume    = {abs/1911.01817},
+#   year      = {2019},
+#   url       = {http://arxiv.org/abs/1911.01817},
+#   archivePrefix = {arXiv},
+#   eprint    = {1911.01817},
+#   timestamp = {Mon, 11 Nov 2019 18:38:09 +0100},
+#   biburl    = {https://dblp.org/rec/journals/corr/abs-1911-01817.bib},
+#   bibsource = {dblp computer science bibliography, https://dblp.org}
+# }
+# 
+# **Beetle** is a transfer learning approach defined by Krishna et al that relies on *source selection*. 
+# Given a (set of) input(s), the goal is to rank the sources by performance, in order to discover a bellwether input from which we can easily transfer performances (i.e. find the best source). 
+# Then, we transfer performances from this bellwether input to all inputs of the test set. 
+# We only apply the discovery phase (i.e. the search of bellwether) on the training set, to avoid introducing any bias in the results. 
+
+# In[237]:
+
+
+beetle_data = pd.read_csv("../../results/raw_data/Beetle_results.csv").set_index("id_video")
+beetle_data
+
+
+# ### L2S
+# 
+# >@inproceedings{jamshidi2018,
+#     title={Learning to sample: exploiting similarities across environments to learn performance models for configurable systems}, 
+#     author={Jamshidi, Pooyan and Velez, Miguel and K{\"a}stner, Christian and Siegmund, Norbert},
+#     booktitle={Proceedings of the 2018 26th ACM Joint Meeting on European Software Engineering Conference and Symposium on the Foundations of Software Engineering},
+#     pages={71--82},
+#     year={2018},
+#     organization={ACM},
+#     url={https://dl.acm.org/doi/pdf/10.1145/3236024.3236074},
+# }
+# 
+# **Learning to Sample (L2S)** is a transfer learning approach defined by Jamshidi et al. 
+# First, it exploits the source input and selects configurations that leverage influential (interactions of) features for this input. 
+# Then, it explores the similarities between the source and the target, thus adding configurations having similar performances for the source and the target. 
+# Finally, it uses the configurations selected in previous steps to efficiently train a model on the target input. 
+
+# In[238]:
+
+
+l2s_data = pd.read_csv("../../results/raw_data/L2S_results.csv").set_index("id_video")
+l2s_data
+
+
+# ### Model Shift
+# 
+# >@inproceedings{DBLP:conf/wosp/ValovPGFC17,
+#   author    = {Pavel Valov and
+#                Jean{-}Christophe Petkovich and
+#                Jianmei Guo and
+#                Sebastian Fischmeister and
+#                Krzysztof Czarnecki},
+#   title     = {Transferring Performance Prediction Models Across Different Hardware
+#                Platforms},
+#   booktitle = {Proceedings of the 8th {ACM/SPEC} on International Conference on Performance
+#                Engineering, {ICPE} 2017, L'Aquila, Italy, April 22-26, 2017},
+#   pages     = {39--50},
+#   year      = {2017},
+#   url       = {http://doi.acm.org/10.1145/3030207.3030216},
+#   doi       = {10.1145/3030207.3030216},
+#   timestamp = {Sat, 22 Apr 2017 15:59:26 +0200},
+#   biburl    = {http://dblp.uni-trier.de/rec/bib/conf/wosp/ValovPGFC17},
+#   bibsource = {dblp computer science bibliography, http://dblp.org}
+# }
+# 
+# **Model Shift (MS)** is a transfer learning defined by Valov et al. 
+# First, it trains a performance model on the source input and predicts the performance distribution of the source input. 
+# Then, it trains a *shifting function*, predicting the performances of the target input based on the performances of the source. 
+# Finally, it applies the shifting function to the predictions of the source. 
+# The original paper uses a linear function to transfer the performances between the source and the target. 
+# However, we extended this definition to any function (\eg random forest, neural network, \etc) able to learn the differences between the source and the target measurements. 
+
+# In[239]:
+
+
+ms_data = pd.read_csv("../../results/raw_data/MS_results.csv").set_index("id_video")
+ms_data
+
+
+# ### No Transfer
+# 
+# **No Transfer (NT)** is a Simple Learning approach, acting as a control approach to state whether transfer learning is suited to solve this problem. 
+# It trains a performance model directly on the target input, without using the source. 
+# We expect to outperform No Transfer with transfer learning approaches. 
+
+# In[301]:
+
+
+nt_data = pd.read_csv("../../results/raw_data/NT_results.csv").set_index("id_video")
+nt_data
+
+
+# ## First results about properties - Figure 5a
+
+# In[334]:
 
 
 # we aggregate the different ratios, sorted by increasing efficiency
-box_res = np.transpose(pd.DataFrame({"mean" : ratio_b3,
-                                     "compromise" : ratio_b2,
-                                     "model reuse" : ratio_b1,
-                                     "min" : ratio_b4}))
+box_res = np.transpose(pd.DataFrame({"MR" : MR_ratios,
+                                     "BC" : BC_ratios,
+                                     "DI" : DI_ratios,
+                                     "IaL" : IaL_ratios}))
 
 # rotation of the text in the ordered axis, to fit the figure in the paper
 degrees = 20
@@ -1453,350 +1290,239 @@ degrees = 20
 # cosmetic choices
 red_square = dict(markerfacecolor='r', marker='s')
 # figure size
-plt.figure(figsize=(16,8))
+plt.figure(figsize=(16,12))
 # add a grid
 plt.grid()
 plt.boxplot(box_res, flierprops=red_square, 
-          vert=False, patch_artist=True, #widths=0.25,
+          vert=True, patch_artist=True, widths=0.25,
           boxprops=dict(facecolor=(0,0,1,0.5),linewidth=1,edgecolor='k'),
           whiskerprops = dict(linestyle='-.',linewidth=1.0, color='black'))
 # add crosses for average values of distributions
-plt.scatter(np.array([np.mean(box_res.iloc[i]) for i in range(4)]), np.arange(1, 5, 1), 
+plt.scatter(np.arange(1, 5, 1), np.array([np.mean(box_res.iloc[i]) for i in range(4)]), 
             marker="x", color = "red", alpha = 1, s = 100)
 # Limits
-plt.ylim(0,5)
-plt.xlim(0,2)
+plt.ylim(0.9,2.5)
+plt.xlim(0.5,4.5)
 # Inputec vs Baseline
-plt.vlines(x=1, ymin=0.5, ymax=4.5, linestyle='-.', color='green', linewidth = 5)
-plt.text(s = "Inputec worse than Baseline", x = 1.2, y = 0.3, size = 20, color = 'green')
-plt.text(s = "Inputec better than Baseline", x = 0.2, y = 0.3, size = 20, color = 'green')
+plt.vlines(x=2.5, ymin=0.5, ymax=4.5, linestyle='-.', color='green', linewidth = 5)
+plt.text(s = "Simple Learning", x = 1.12, y = 2.25, size = 20, color = 'green')
+plt.text(s = "Learning", x = 3.32, y = 2.3, size = 20, color = 'green')
+plt.text(s = "with properties", x = 3.13, y = 2.2, size = 20, color = 'green')
 # Labels
-plt.xlabel("Ratio Inputec/Baseline", size = 20)
+plt.ylabel("Ratio performance/best", size = 20)
+plt.xlabel("", size = 20)
+# Arrow
+plt.arrow(x = 4.35, y = 2, dx= 0, dy = -0.3, head_width = 0.1, head_length = .1, color="orange")
+plt.text(s = "Better", x = 4.05, y = 1.82, size = 20, color = 'orange')
 # Ticks of axis
-plt.yticks([1, 2, 3, 4], 
-           ['B3 - Avg', 'B2 - Preset', 'B1 - Reuse', 'B4 - Best'],
+plt.xticks([1, 2, 3, 4], 
+           ['Model Reuse (MR)', 'Best Compromise (BC)', 
+            'Direct Inclusion (DI)', 'Input-aware Learning (IaL)'],
           size = 20,
           rotation=degrees)
-plt.xticks(size = 20)
+plt.yticks(size = 20)
 # save figure in the results folder
-plt.savefig("../../results/res_box_baseline.png")
+plt.savefig("../../results/res_box_approach.png")
 # show the figure
 plt.show()
 
-print("Baseline definitions... Done!")
-print("Figure 5a ok!")
 
-# ## Figure 5b - Rankings of configurations, baseline vs Inputec
+# ## Results about cost - Figure 5b
 
-# In[62]:
+# Aggregation of data
+
+# In[332]:
 
 
-box_res = np.transpose(pd.DataFrame({"mean" : b3_ranks,
-                                     "compromise" : b2_ranks,
-                                     "model reuse" : b1_ranks,
-                                     "inputec" : inputec_ranks,
-                                     "min" : b4_ranks}))
-red_square = dict(markerfacecolor='r', marker='s')
-plt.figure(figsize=(16,8))
+f = []
+
+cols = ["conf5", "conf10", "conf15", "conf20", "conf25", "conf30"]
+names_cols = ['05', '10', '15', '20', '25', '30']
+for i in range(len(listVideoTest)):
+    for j in range(len(cols)):
+        c = cols[j]
+        nc = names_cols[j]
+        f.append((listVideoTest[i][predDimension][beetle_data[c].iloc[i]]/best_perfs[i], nc, "Beetle"))
+        f.append((listVideoTest[i][predDimension][ms_data[c].iloc[i]]/best_perfs[i], nc, "Model Shift (MS)"))
+        f.append((listVideoTest[i][predDimension][nt_data[c].iloc[i]]/best_perfs[i], nc, "No Transfer (NT)"))
+        f.append((listVideoTest[i][predDimension][l2s_data[c].iloc[i]]/best_perfs[i], nc, "Learning to Sample (L2S)"))
+
+
+final_tl_data = pd.DataFrame(f, columns = ["ratio", "training_size", "Approach"])
+final_tl_data
+
+
+# In[333]:
+
+
+plt.figure(figsize=(16,12))
+
 plt.grid()
-plt.boxplot(box_res, flierprops = red_square, 
-          vert = False, patch_artist = True, #widths=0.25,
-          boxprops = dict(facecolor=(0,0,1,0.5),linewidth=1,edgecolor='k'),
-          whiskerprops = dict(linestyle='-.',linewidth=1.0, color='black'))
-plt.scatter(np.array([np.mean(box_res.iloc[i]) for i in range(4)]), np.arange(1, 5, 1), 
-            marker="x", color = "red", alpha = 1, s = 100)
-plt.ylim(0, 6)
-plt.xlim(-1,200)
-plt.xlabel("Ranking of configurations", size = 20)
-plt.arrow(x = 175, y = 3.5, dx= 0, dy = 1.5, head_width = 4, head_length = .15, color="orange")
-plt.text(s = "Better", x = 180, y = 4.2, size = 20, color = 'orange')
-plt.arrow(x = 154, y = 5.15, dx= -30, dy = 0, head_width = .15, head_length = 3, color="orange")
-plt.text(s = "Better", x = 130, y = 4.8, size = 20, color = 'orange')
-plt.yticks([1, 2, 3, 4, 5,], 
-           ['B3 - Avg', 'B2 - Preset', 'B1 - Reuse', 'Inputec', 'B4 - Best'], 
-           size=20,
-          rotation=degrees)
-plt.xticks(size=20)
-plt.savefig("../../results/res_box_baseline_rank.png")
+
+# Draw a nested boxplot to show bills by day and time
+sns.boxplot(x="training_size", y="ratio",
+            hue="Approach", palette=["lightgreen", "coral", "lightgray", "purple"],
+            data=final_tl_data)
+plt.ylabel("Ratio performance/best", size = 20)
+plt.xlabel("Budget - # Training target configurations", size = 20)
+plt.ylim(0.9,2.5)
+plt.legend(fontsize=20, loc = 'upper right')
+
+
+# Arrow
+plt.arrow(x = 4.5, y = 2, dx= 0, dy = -0.3, head_width = 0.15, head_length = .1, color="orange")
+plt.text(s = "Better", x = 4, y = 1.95, size = 20, color = 'orange')
+
+plt.xticks(size = 20)
+plt.yticks(size = 20)
+plt.savefig("../../results/res_box_tl_approach.png")
 plt.show()
 
-print("Figure 5b ok!")
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
 
 # #### Statistical tests - Welch t-test
 
-# In[63]:
-
-print("Statistical tests - Welch t-tests")
-print("Inputec vs b3")
-print(stats.ttest_ind(inputec_ranks, b3_ranks, equal_var = False))
+# In[57]:
 
 
-# In[64]:
-
-print("Inputec vs b2")
-print(stats.ttest_ind(inputec_ranks, b2_ranks, equal_var = False))
+stats.ttest_ind(inputec_ranks, b3_ranks, equal_var = False)
 
 
-# In[65]:
+# In[58]:
 
-print("Inputec vs b1")
-print(stats.ttest_ind(inputec_ranks, b1_ranks, equal_var = False))
+
+stats.ttest_ind(inputec_ranks, b2_ranks, equal_var = False)
+
+
+# In[59]:
+
+
+stats.ttest_ind(inputec_ranks, b1_ranks, equal_var = False)
 
 
 # Three Welch’s t-tests confirm that the rankings of Inputecare significantly different from B1, B2 and B3 rankings. 
 # 
 # We reject the null hypothesis (i.e. the equality of performances).
 
-# ## Variants of Inputec
-
-# ### M2 - Cost effective Inputec
-# 
-# #### 20 configurations per videos instead of 201 
-
-# In[66]:
-
-print("First variant of Inputec - with less configurations")
-
-nb_config_ce = 20
-
-def gen_dataset_ce(inputs_names):
-
-    res = pd.DataFrame(np.zeros(nb_config_ce*len(inputs_names)*nb_col)
-                       .reshape(nb_config_ce*len(inputs_names), nb_col))
-    res.columns = name_col
-
-    for i in range(len(inputs_names)):
-        video_name = inputs_names[i]
-        index_video = np.where(np.array([v[:-4] for v in v_names], str)==video_name)[0][0]
-        sizes = listVideo[index_video][predDimension]
-        video_prop = np.array(meta_perf.loc[video_name][1:], float)
-        moy = np.mean(sizes)
-        std = np.std(sizes)
-        for config_id in range(nb_config_ce):
-            #config_rank = sorted_config[config_id]
-            val = list(tuple(video_prop) + tuple(val_config.loc[config_id]))
-            val.append((sizes[config_id]-moy)/std)
-            res.loc[i*nb_config_ce+config_id] = val
-    return res
-
-training_data_ce = gen_dataset_ce(train_index)
-test_data_ce = gen_dataset_ce(test_index)
-
-print("Training size : ", training_data_ce.shape[0])
-print("Test size : ", test_data_ce.shape[0])
-
-test_data_ce
-
-
-# In[67]:
-
-
-X_train_ce = np.array(training_data_ce.drop(["bitrate"],axis=1), float)
-y_train_ce = np.array(training_data_ce["bitrate"], float)
-
-X_test_ce = np.array(test_data_ce.drop(["bitrate"],axis=1), float)
-y_test_ce = np.array(test_data_ce["bitrate"], float)
-
-
-# In[68]:
-
-
-LA_ce = RandomForestRegressor()
-
-LA_ce.fit(X_train_ce, y_train_ce)
-
-y_pred_ce = LA_ce.predict(X_test_ce)
-
-
-# In[69]:
-
-
-print(LA_ce.feature_importances_)
-
-
-# In[70]:
-
-
-np.mean(np.abs(y_pred_ce-y_test_ce))
-
-
-# In[71]:
-
-
-print(name_col)
-
-
-# In[72]:
-
-
-# the performance values for the configuration chosen by Inputec, for the test set of videos
-inputec_m2 = []
-
-# the performance rankings for the configuration chosen by Inputec, for the test set of videos
-inputec_m2_ranks = []
-
-# for each video in the test set
-for ti in test_index:
-    # we retrieve the test index
-    index_video = np.where(np.array([v[:-4] for v in v_names], str)==ti)[0][0]
-    # list of predictions for inputec
-    pred_inputec = []
-    # for each configuration
-    for i in range(nb_config):
-        # we add input properties to the configurations
-        video_prop = list(tuple(meta_perf.loc[ti][1:])+tuple(val_config.loc[i]))
-        # we predict the value associated to the configuration
-        pred_inputec.append(LA_ce.predict(np.array(video_prop, float).reshape(1, 33)))
-    # sorted performances
-    sorted_perfs = sorted(listVideo[index_video][predDimension])
-    # the performance of the configuration chosen by Inputec
-    perf = listVideo[index_video].loc[np.argmin(pred_inputec)][predDimension]
-    # we add it to the perf array
-    inputec_m2.append(perf)
-    # the related ranking (between 0 and 200, hopefully close to 0)
-    inputec_m2_ranks.append(find_rank(sorted_perfs, perf))
-
-
-# In[73]:
-
-
-pd.Series(inputec_m2).describe()
-
-
-# In[74]:
-
-print("First variant of Inputec - ranks distribution results")
-print(pd.Series(inputec_m2_ranks).describe())
-
-print("First variant of Inputec - Done !")
-
-print("Second variant of Inputec - drop unaffordable input properties")
-
-# ### M3 - Property selection
-# 
-# #### Only keep affordable properties in the model - drop SLEEQ MOS and Banding MOS
-
-# In[75]:
-
-
-name_col = list(meta_perf.columns)[3:]
-
-for vcc in val_config.columns:
-    name_col.append(vcc)
-
-name_col.append("bitrate")
-
-nb_col = len(name_col)
-nb_config = 201
-
-def gen_dataset(inputs_names):
-    
-    res = pd.DataFrame(np.zeros(nb_config*len(inputs_names)*nb_col).reshape(nb_config*len(inputs_names), nb_col))
-    res.columns = name_col
-
-    for i in range(len(inputs_names)):
-        video_name = inputs_names[i]
-        index_video = np.where(np.array([v[:-4] for v in v_names], str)==video_name)[0][0]
-        sizes = listVideo[index_video][predDimension]
-        sorted_config = sorted(range(len(sizes)), key=lambda k: sizes[k])
-        video_prop = np.array(meta_perf.loc[video_name][3:], float)
-        moy = np.mean(sizes)
-        std = np.std(sizes)            
-        for config_id in range(len(sorted_config)):
-            config_rank = sorted_config[config_id]
-            val = list(tuple(video_prop) + tuple(val_config.loc[config_id]))
-            val.append((sizes[config_id]-moy)/std)
-            res.loc[i*nb_config+config_id] = val
-    return res
-
-training_data_m3 = gen_dataset(train_index)
-test_data_m3 = gen_dataset(test_index)
-
-print("Training size : ", training_data_m3.shape[0])
-print("Test size : ", test_data_m3.shape[0])
-
-test_data_m3
-
-
-# In[76]:
-
-
-X_train_m3 = np.array(training_data_m3.drop(["bitrate"],axis=1), float)
-y_train_m3 = np.array(training_data_m3["bitrate"], float)
-
-X_test_m3 = np.array(test_data_m3.drop(["bitrate"],axis=1), float)
-y_test_m3 = np.array(test_data_m3["bitrate"], float)
-
-
-# In[77]:
-
-
-LA_m3 = RandomForestRegressor()
-
-LA_m3.fit(X_train_m3, y_train_m3)
-
-
-# In[78]:
-
-
-y_pred_m3 = LA_m3.predict(X_test_m3)
-
-
-# In[79]:
-
-
-print(LA_m3.feature_importances_)
-
-
-# In[80]:
-
-
-np.mean(np.abs(y_pred_m3-y_test_m3))
-
-
-# In[81]:
-
-
-# the performance values for the configuration chosen by Inputec, for the test set of videos
-inputec_m3 = []
-
-# the performance rankings for the configuration chosen by Inputec, for the test set of videos
-inputec_m3_ranks = []
-
-# for each video in the test set
-for ti in test_index:
-    # we retrieve the test index
-    index_video = np.where(np.array([v[:-4] for v in v_names], str)==ti)[0][0]
-    # list of predictions for inputec
-    pred_inputec = []
-    # for each configuration
-    for i in range(nb_config):
-        # we add input properties to the configurations
-        video_prop = list(tuple(meta_perf.loc[ti][3:])+tuple(val_config.loc[i]))
-        # we predict the value associated to the configuration
-        pred_inputec.append(LA_m3.predict(np.array(video_prop, float).reshape(1, 31)))
-    # sorted performances
-    sorted_perfs = sorted(listVideo[index_video][predDimension])
-    # the performance of the configuration chosen by Inputec
-    perf = listVideo[index_video].loc[np.argmin(pred_inputec)][predDimension]
-    # we add it to the perf array
-    inputec_m3.append(perf)
-    # the related ranking (between 0 and 200, hopefully close to 0)
-    inputec_m3_ranks.append(find_rank(sorted_perfs, perf))
-
-
-# In[82]:
-
-
-pd.Series(inputec_m3).describe()
-
-
-# In[83]:
-print("Second variant of Inputec - ranks distribution results")
-print(pd.Series(inputec_m3_ranks).describe())
-
-print("Second variant of Inputec - Done !")
-
 # In[ ]:
 
 
@@ -1806,11 +1532,10 @@ print("Second variant of Inputec - Done !")
 # In[ ]:
 
 
-print("DONE!!! Thanks for waiting, thanks for testing our artifact :-)")
-print("You can check the results directory (see code/results)")
+
+
 
 # In[ ]:
-
 
 
 

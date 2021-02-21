@@ -42,6 +42,11 @@ from sklearn.linear_model import LinearRegression, ElasticNet
 from sklearn.model_selection import train_test_split
 # Simple clustering (iterative steps)
 from sklearn.cluster import KMeans
+# Support vector machine - support vector regressor
+from sklearn.svm import SVR
+
+# gradient boosting trees
+from xgboost import XGBRegressor
 
 # we use it to interact with the file system
 import os
@@ -61,9 +66,6 @@ from keras.layers import Dense, Dropout, Flatten
 # Activation if the function composing the data in output of a layer
 from keras.layers import Conv2D, MaxPooling2D, Activation
 ```
-
-    Using TensorFlow backend.
-
 
 #### Now, we import data
 
@@ -127,6 +129,18 @@ for i in range(len(listVideo)):
     ind = sorted(range(len(sizes)), key=lambda k: sizes[k])
     listVideo[i]['ranking'] = ind
 ```
+
+
+```python
+v_names[1167]
+```
+
+
+
+
+    'VerticalVideo_1080P-2195.csv'
+
+
 
 # In the paper, here starts Section II
 
@@ -339,7 +353,9 @@ group_no_ordered = plot_correlationmatrix_dendogram(corrSpearman,
 ```
 
 
-![png](bitrate_files/bitrate_27_0.png)
+    
+![png](bitrate_files/bitrate_28_0.png)
+    
 
 
 #### To match the increasing number of groups to the order of the figure (from the left to the right), we change the ids of groups
@@ -364,6 +380,433 @@ print("Group 4 contains", sum(groups==3), "input videos.")
     Group 2 contains 219 input videos.
     Group 3 contains 292 input videos.
     Group 4 contains 416 input videos.
+
+
+
+```python
+[v_names[i] for i in np.where(groups==3)[0]]
+```
+
+
+
+
+    ['Animation_1080P-0c4f.csv',
+     'Animation_1080P-3dbf.csv',
+     'Animation_1080P-3e01.csv',
+     'Animation_1080P-646f.csv',
+     'Animation_360P-08c9.csv',
+     'Animation_360P-188f.csv',
+     'Animation_360P-24d4.csv',
+     'Animation_360P-47cc.csv',
+     'Animation_360P-4b4c.csv',
+     'Animation_360P-4edc.csv',
+     'Animation_360P-5712.csv',
+     'Animation_360P-5de0.csv',
+     'Animation_360P-631c.csv',
+     'Animation_360P-69e0.csv',
+     'Animation_360P-794f.csv',
+     'Animation_480P-046c.csv',
+     'Animation_480P-0529.csv',
+     'Animation_480P-35ee.csv',
+     'Animation_480P-4b80.csv',
+     'Animation_480P-6e23.csv',
+     'Animation_720P-0116.csv',
+     'Animation_720P-1a6d.csv',
+     'Animation_720P-4268.csv',
+     'Animation_720P-57d9.csv',
+     'Animation_720P-79ee.csv',
+     'Animation_720P-7b29.csv',
+     'CoverSong_1080P-3409.csv',
+     'CoverSong_1080P-3aac.csv',
+     'CoverSong_1080P-5430.csv',
+     'CoverSong_360P-11f9.csv',
+     'CoverSong_360P-1b2b.csv',
+     'CoverSong_360P-2b4d.csv',
+     'CoverSong_360P-53a6.csv',
+     'CoverSong_480P-1019.csv',
+     'CoverSong_480P-4d34.csv',
+     'CoverSong_480P-53f4.csv',
+     'CoverSong_480P-5b62.csv',
+     'CoverSong_480P-60a6.csv',
+     'CoverSong_480P-64d0.csv',
+     'CoverSong_480P-6c3e.csv',
+     'CoverSong_720P-449f.csv',
+     'Gaming_1080P-0a5b.csv',
+     'Gaming_1080P-13e3.csv',
+     'Gaming_1080P-277c.csv',
+     'Gaming_1080P-2927.csv',
+     'Gaming_1080P-2e97.csv',
+     'Gaming_1080P-3a9d.csv',
+     'Gaming_1080P-51fc.csv',
+     'Gaming_1080P-6578.csv',
+     'Gaming_1080P-698a.csv',
+     'Gaming_1080P-6d53.csv',
+     'Gaming_1080P-6db2.csv',
+     'Gaming_1080P-7a1e.csv',
+     'Gaming_2160P-31f6.csv',
+     'Gaming_2160P-348d.csv',
+     'Gaming_2160P-3aec.csv',
+     'Gaming_360P-043e.csv',
+     'Gaming_360P-187a.csv',
+     'Gaming_360P-21d2.csv',
+     'Gaming_360P-2330.csv',
+     'Gaming_360P-3794.csv',
+     'Gaming_360P-3eb6.csv',
+     'Gaming_360P-48b0.csv',
+     'Gaming_360P-586d.csv',
+     'Gaming_360P-5e0f.csv',
+     'Gaming_360P-7007.csv',
+     'Gaming_360P-7975.csv',
+     'Gaming_360P-7acb.csv',
+     'Gaming_480P-0a30.csv',
+     'Gaming_480P-445b.csv',
+     'Gaming_480P-4560.csv',
+     'Gaming_480P-5a5a.csv',
+     'Gaming_480P-61ee.csv',
+     'Gaming_480P-626a.csv',
+     'Gaming_480P-6a5a.csv',
+     'Gaming_480P-6c92.csv',
+     'Gaming_480P-6d1e.csv',
+     'Gaming_480P-6f4b.csv',
+     'Gaming_480P-75f7.csv',
+     'Gaming_480P-7a08.csv',
+     'Gaming_480P-7ccb.csv',
+     'Gaming_720P-0fba.csv',
+     'Gaming_720P-221d.csv',
+     'Gaming_720P-25aa.csv',
+     'Gaming_720P-2dbe.csv',
+     'Gaming_720P-312f.csv',
+     'Gaming_720P-3524.csv',
+     'Gaming_720P-493e.csv',
+     'Gaming_720P-4cda.csv',
+     'Gaming_720P-6403.csv',
+     'Gaming_720P-6625.csv',
+     'Gaming_720P-6658.csv',
+     'Gaming_720P-6a45.csv',
+     'HDR_1080P-2d32.csv',
+     'HDR_1080P-4f4a.csv',
+     'HDR_1080P-69de.csv',
+     'HDR_1080P-7825.csv',
+     'HDR_2160P-1743.csv',
+     'HDR_2160P-2a72.csv',
+     'HDR_2160P-382f.csv',
+     'HDR_2160P-3bf1.csv',
+     'HDR_2160P-5e25.csv',
+     'HDR_2160P-6fab.csv',
+     'HDR_2160P-70ca.csv',
+     'HowTo_1080P-0267.csv',
+     'HowTo_1080P-13aa.csv',
+     'HowTo_1080P-52bb.csv',
+     'HowTo_1080P-55d1.csv',
+     'HowTo_1080P-63e4.csv',
+     'HowTo_1080P-64f7.csv',
+     'HowTo_1080P-7cf2.csv',
+     'HowTo_360P-041c.csv',
+     'HowTo_360P-1823.csv',
+     'HowTo_360P-3aa6.csv',
+     'HowTo_360P-6a0e.csv',
+     'HowTo_480P-0eb3.csv',
+     'HowTo_480P-4332.csv',
+     'HowTo_480P-470b.csv',
+     'HowTo_480P-4a28.csv',
+     'HowTo_480P-4c99.csv',
+     'HowTo_480P-63a2.csv',
+     'HowTo_480P-7579.csv',
+     'HowTo_480P-7c11.csv',
+     'HowTo_720P-269e.csv',
+     'HowTo_720P-3a5d.csv',
+     'HowTo_720P-6323.csv',
+     'HowTo_720P-6791.csv',
+     'HowTo_720P-7878.csv',
+     'HowTo_720P-7c38.csv',
+     'Lecture_1080P-1709.csv',
+     'Lecture_1080P-238b.csv',
+     'Lecture_1080P-3ce0.csv',
+     'Lecture_1080P-3cf3.csv',
+     'Lecture_1080P-4991.csv',
+     'Lecture_1080P-6089.csv',
+     'Lecture_1080P-73d5.csv',
+     'Lecture_360P-20c3.csv',
+     'Lecture_360P-27db.csv',
+     'Lecture_360P-30eb.csv',
+     'Lecture_360P-311d.csv',
+     'Lecture_360P-4f00.csv',
+     'Lecture_360P-7550.csv',
+     'Lecture_360P-7f7e.csv',
+     'Lecture_480P-2513.csv',
+     'Lecture_480P-2655.csv',
+     'Lecture_480P-369f.csv',
+     'Lecture_480P-41b7.csv',
+     'Lecture_480P-5cd7.csv',
+     'Lecture_480P-5f3a.csv',
+     'Lecture_480P-71c0.csv',
+     'Lecture_480P-71d6.csv',
+     'Lecture_480P-7d77.csv',
+     'Lecture_720P-003a.csv',
+     'Lecture_720P-07e0.csv',
+     'Lecture_720P-10bc.csv',
+     'Lecture_720P-1f22.csv',
+     'Lecture_720P-2f38.csv',
+     'Lecture_720P-50b9.csv',
+     'Lecture_720P-5120.csv',
+     'Lecture_720P-5725.csv',
+     'LiveMusic_1080P-14af.csv',
+     'LiveMusic_1080P-157b.csv',
+     'LiveMusic_1080P-2b7a.csv',
+     'LiveMusic_1080P-2f7f.csv',
+     'LiveMusic_1080P-3f95.csv',
+     'LiveMusic_1080P-51f6.csv',
+     'LiveMusic_1080P-6b1c.csv',
+     'LiveMusic_1080P-6bbe.csv',
+     'LiveMusic_1080P-7948.csv',
+     'LiveMusic_360P-1d94.csv',
+     'LiveMusic_360P-22c5.csv',
+     'LiveMusic_360P-405c.csv',
+     'LiveMusic_360P-6266.csv',
+     'LiveMusic_360P-6640.csv',
+     'LiveMusic_360P-7483.csv',
+     'LiveMusic_480P-2019.csv',
+     'LiveMusic_480P-331a.csv',
+     'LiveMusic_480P-34be.csv',
+     'LiveMusic_480P-4c3a.csv',
+     'LiveMusic_480P-559d.csv',
+     'LiveMusic_480P-58fb.csv',
+     'LiveMusic_480P-61ef.csv',
+     'LiveMusic_480P-636e.csv',
+     'LiveMusic_480P-65ca.csv',
+     'LiveMusic_720P-3320.csv',
+     'LiveMusic_720P-6343.csv',
+     'LiveMusic_720P-6452.csv',
+     'LiveMusic_720P-66df.csv',
+     'LiveMusic_720P-71c5.csv',
+     'LyricVideo_1080P-0625.csv',
+     'LyricVideo_1080P-12af.csv',
+     'LyricVideo_1080P-16b6.csv',
+     'LyricVideo_1080P-584f.csv',
+     'LyricVideo_360P-5e87.csv',
+     'LyricVideo_480P-0722.csv',
+     'LyricVideo_480P-2c50.csv',
+     'LyricVideo_480P-3ccf.csv',
+     'LyricVideo_480P-4346.csv',
+     'LyricVideo_480P-5c17.csv',
+     'LyricVideo_480P-6385.csv',
+     'LyricVideo_720P-068d.csv',
+     'LyricVideo_720P-0940.csv',
+     'LyricVideo_720P-2d24.csv',
+     'LyricVideo_720P-47a9.csv',
+     'LyricVideo_720P-59ed.csv',
+     'LyricVideo_720P-6f0c.csv',
+     'LyricVideo_720P-74a0.csv',
+     'MusicVideo_1080P-04b6.csv',
+     'MusicVideo_1080P-0706.csv',
+     'MusicVideo_1080P-106d.csv',
+     'MusicVideo_1080P-16e6.csv',
+     'MusicVideo_1080P-453f.csv',
+     'MusicVideo_1080P-4671.csv',
+     'MusicVideo_1080P-55af.csv',
+     'MusicVideo_1080P-7f2e.csv',
+     'MusicVideo_360P-17e4.csv',
+     'MusicVideo_360P-2fcb.csv',
+     'MusicVideo_360P-5578.csv',
+     'MusicVideo_360P-5f07.csv',
+     'MusicVideo_360P-7b94.csv',
+     'MusicVideo_480P-001f.csv',
+     'MusicVideo_480P-184c.csv',
+     'MusicVideo_480P-1eee.csv',
+     'MusicVideo_480P-2de0.csv',
+     'MusicVideo_480P-41ce.csv',
+     'MusicVideo_480P-4802.csv',
+     'MusicVideo_480P-483b.csv',
+     'MusicVideo_480P-4cc8.csv',
+     'MusicVideo_480P-6026.csv',
+     'MusicVideo_480P-61ba.csv',
+     'MusicVideo_480P-6fb6.csv',
+     'MusicVideo_720P-2d7d.csv',
+     'MusicVideo_720P-3698.csv',
+     'MusicVideo_720P-44c1.csv',
+     'MusicVideo_720P-62df.csv',
+     'MusicVideo_720P-7501.csv',
+     'NewsClip_1080P-06df.csv',
+     'NewsClip_1080P-1db0.csv',
+     'NewsClip_1080P-22b3.csv',
+     'NewsClip_1080P-2eb0.csv',
+     'NewsClip_1080P-3427.csv',
+     'NewsClip_1080P-3c7c.csv',
+     'NewsClip_1080P-5be1.csv',
+     'NewsClip_360P-0376.csv',
+     'NewsClip_360P-0ff8.csv',
+     'NewsClip_360P-1093.csv',
+     'NewsClip_360P-12fc.csv',
+     'NewsClip_360P-1e1c.csv',
+     'NewsClip_360P-2986.csv',
+     'NewsClip_360P-311a.csv',
+     'NewsClip_360P-439a.csv',
+     'NewsClip_360P-5bcc.csv',
+     'NewsClip_360P-67ce.csv',
+     'NewsClip_480P-0269.csv',
+     'NewsClip_480P-0ce5.csv',
+     'NewsClip_480P-28eb.csv',
+     'NewsClip_480P-41b1.csv',
+     'NewsClip_480P-4a9f.csv',
+     'NewsClip_480P-4e77.csv',
+     'NewsClip_480P-543f.csv',
+     'NewsClip_480P-696e.csv',
+     'NewsClip_480P-7a0d.csv',
+     'NewsClip_720P-04ba.csv',
+     'NewsClip_720P-0c81.csv',
+     'NewsClip_720P-5787.csv',
+     'NewsClip_720P-6a19.csv',
+     'NewsClip_720P-6aa6.csv',
+     'NewsClip_720P-739b.csv',
+     'Sports_1080P-28a6.csv',
+     'Sports_1080P-2a21.csv',
+     'Sports_1080P-3db7.csv',
+     'Sports_1080P-43e2.csv',
+     'Sports_1080P-4978.csv',
+     'Sports_1080P-6571.csv',
+     'Sports_1080P-6710.csv',
+     'Sports_1080P-7203.csv',
+     'Sports_1080P-76a2.csv',
+     'Sports_2160P-1b70.csv',
+     'Sports_2160P-2626.csv',
+     'Sports_2160P-279f.csv',
+     'Sports_2160P-2a83.csv',
+     'Sports_2160P-2e1d.csv',
+     'Sports_2160P-300d.csv',
+     'Sports_2160P-3a9a.csv',
+     'Sports_2160P-7165.csv',
+     'Sports_360P-0dda.csv',
+     'Sports_360P-11b7.csv',
+     'Sports_360P-2ace.csv',
+     'Sports_360P-3960.csv',
+     'Sports_360P-3e68.csv',
+     'Sports_360P-4ad7.csv',
+     'Sports_360P-5252.csv',
+     'Sports_360P-5ded.csv',
+     'Sports_360P-61f6.csv',
+     'Sports_360P-6f62.csv',
+     'Sports_480P-1019.csv',
+     'Sports_480P-2dfe.csv',
+     'Sports_480P-3404.csv',
+     'Sports_480P-6e41.csv',
+     'Sports_480P-7f7e.csv',
+     'Sports_720P-2191.csv',
+     'Sports_720P-2632.csv',
+     'Sports_720P-33c6.csv',
+     'Sports_720P-531c.csv',
+     'Sports_720P-5ae1.csv',
+     'Sports_720P-5e39.csv',
+     'Sports_720P-69a0.csv',
+     'Sports_720P-6bb7.csv',
+     'TelevisionClip_1080P-401e.csv',
+     'TelevisionClip_1080P-5278.csv',
+     'TelevisionClip_1080P-63e6.csv',
+     'TelevisionClip_1080P-64e2.csv',
+     'TelevisionClip_1080P-7eff.csv',
+     'TelevisionClip_480P-09d8.csv',
+     'TelevisionClip_480P-0e46.csv',
+     'TelevisionClip_480P-27ca.csv',
+     'TelevisionClip_480P-2ead.csv',
+     'TelevisionClip_480P-3617.csv',
+     'TelevisionClip_480P-373d.csv',
+     'TelevisionClip_480P-436c.csv',
+     'TelevisionClip_480P-59f0.csv',
+     'TelevisionClip_480P-723e.csv',
+     'TelevisionClip_720P-31ce.csv',
+     'TelevisionClip_720P-4af1.csv',
+     'VR_1080P-0427.csv',
+     'VR_1080P-08f0.csv',
+     'VR_1080P-1a9c.csv',
+     'VR_1080P-1d16.csv',
+     'VR_1080P-2831.csv',
+     'VR_1080P-2f02.csv',
+     'VR_1080P-38d6.csv',
+     'VR_1080P-3f81.csv',
+     'VR_1080P-6261.csv',
+     'VR_1080P-6501.csv',
+     'VR_1080P-7067.csv',
+     'VR_1080P-76a2.csv',
+     'VR_2160P-1422.csv',
+     'VR_2160P-1456.csv',
+     'VR_2160P-29c3.csv',
+     'VR_2160P-40af.csv',
+     'VR_2160P-5c23.csv',
+     'VR_720P-00d2.csv',
+     'VR_720P-063e.csv',
+     'VR_720P-1b9a.csv',
+     'VR_720P-1dd7.csv',
+     'VR_720P-32ed.csv',
+     'VR_720P-3386.csv',
+     'VR_720P-339f.csv',
+     'VR_720P-364f.csv',
+     'VR_720P-403e.csv',
+     'VR_720P-557f.csv',
+     'VerticalVideo_1080P-04d4.csv',
+     'VerticalVideo_1080P-1105.csv',
+     'VerticalVideo_1080P-1ac1.csv',
+     'VerticalVideo_1080P-34ba.csv',
+     'VerticalVideo_1080P-3709.csv',
+     'VerticalVideo_1080P-3a9b.csv',
+     'VerticalVideo_360P-2fa3.csv',
+     'VerticalVideo_360P-3936.csv',
+     'VerticalVideo_360P-54f7.csv',
+     'VerticalVideo_360P-579c.csv',
+     'VerticalVideo_360P-634f.csv',
+     'VerticalVideo_360P-6490.csv',
+     'VerticalVideo_360P-694d.csv',
+     'VerticalVideo_360P-7ec3.csv',
+     'VerticalVideo_480P-2aa1.csv',
+     'VerticalVideo_480P-419c.csv',
+     'VerticalVideo_480P-51b7.csv',
+     'VerticalVideo_720P-0750.csv',
+     'VerticalVideo_720P-2efc.csv',
+     'VerticalVideo_720P-44de.csv',
+     'VerticalVideo_720P-4730.csv',
+     'VerticalVideo_720P-4ca7.csv',
+     'VerticalVideo_720P-57eb.csv',
+     'VerticalVideo_720P-7517.csv',
+     'VerticalVideo_720P-7859.csv',
+     'VerticalVideo_720P-7c1d.csv',
+     'Vlog_1080P-04fe.csv',
+     'Vlog_1080P-21f5.csv',
+     'Vlog_1080P-37cf.csv',
+     'Vlog_1080P-4ba9.csv',
+     'Vlog_1080P-4f26.csv',
+     'Vlog_1080P-52fe.csv',
+     'Vlog_1080P-5904.csv',
+     'Vlog_1080P-5a19.csv',
+     'Vlog_1080P-634b.csv',
+     'Vlog_1080P-6686.csv',
+     'Vlog_1080P-7e8c.csv',
+     'Vlog_2160P-0289.csv',
+     'Vlog_2160P-030a.csv',
+     'Vlog_2160P-1021.csv',
+     'Vlog_2160P-19f9.csv',
+     'Vlog_2160P-217c.csv',
+     'Vlog_2160P-255c.csv',
+     'Vlog_2160P-2b2d.csv',
+     'Vlog_2160P-408f.csv',
+     'Vlog_2160P-4362.csv',
+     'Vlog_2160P-4655.csv',
+     'Vlog_2160P-62b2.csv',
+     'Vlog_2160P-7b10.csv',
+     'Vlog_2160P-7bfb.csv',
+     'Vlog_360P-2973.csv',
+     'Vlog_360P-2e9d.csv',
+     'Vlog_360P-433e.csv',
+     'Vlog_360P-4ad1.csv',
+     'Vlog_360P-4d71.csv',
+     'Vlog_360P-7334.csv',
+     'Vlog_360P-76ae.csv',
+     'Vlog_360P-7efe.csv',
+     'Vlog_480P-08c7.csv',
+     'Vlog_480P-1b39.csv',
+     'Vlog_480P-59dc.csv',
+     'Vlog_480P-5dfe.csv',
+     'Vlog_480P-7754.csv',
+     'Vlog_720P-561e.csv',
+     'Vlog_720P-6d56.csv']
+
 
 
 ### B-] We also study rankings of configurations
@@ -616,11 +1059,15 @@ plt.show()
 
 
 
-![png](bitrate_files/bitrate_34_1.png)
+    
+![png](bitrate_files/bitrate_36_1.png)
+    
 
 
 
-![png](bitrate_files/bitrate_34_2.png)
+    
+![png](bitrate_files/bitrate_36_2.png)
+    
 
 
 #### Some statistics (not mentioned in the text)
@@ -877,7 +1324,9 @@ plt.show()
 ```
 
 
-![png](bitrate_files/bitrate_50_0.png)
+    
+![png](bitrate_files/bitrate_52_0.png)
+    
 
 
 #### B-] Since feature importances do not get how the predicting variables (i.e. the configuraiton options) affect the variable to predict (i.e. the bitrate), we add linear regression coefficients
@@ -1324,10 +1773,12 @@ plt.show()
 ```
 
 
-![png](bitrate_files/bitrate_54_0.png)
+    
+![png](bitrate_files/bitrate_56_0.png)
+    
 
 
-# In the paper, here starts Section III
+# In the paper, construction of the figure 3
 
 ## RQ1bis - Can we group together videos having same performance distributions?
 
@@ -1771,16 +2222,18 @@ summary_group(0)
     
     
     
-    Imp mbtree: 0.09019148936170213
-    Imp std mbtree: 0.09448722491559315
-    Imp aq-mode: 0.27551063829787237
-    Imp std aq-mode: 0.1938382054364583
-    Imp subme: 0.48546808510638295
-    Imp std subme: 0.24501778928589235
+    Imp mbtree: 0.09008510638297873
+    Imp std mbtree: 0.09464375079958642
+    Imp aq-mode: 0.27580851063829787
+    Imp std aq-mode: 0.19465978376883794
+    Imp subme: 0.4858085106382979
+    Imp std subme: 0.24548970930443814
 
 
 
-![png](bitrate_files/bitrate_67_1.png)
+    
+![png](bitrate_files/bitrate_69_1.png)
+    
 
 
     
@@ -1794,7 +2247,9 @@ summary_group(0)
 
 
 
-![png](bitrate_files/bitrate_67_3.png)
+    
+![png](bitrate_files/bitrate_69_3.png)
+    
 
 
     
@@ -1886,16 +2341,18 @@ summary_group(1)
     
     
     
-    Imp mbtree: 0.47360730593607303
-    Imp std mbtree: 0.19580591252669888
-    Imp aq-mode: 0.1341095890410959
-    Imp std aq-mode: 0.12764286238959544
-    Imp subme: 0.144703196347032
-    Imp std subme: 0.14399479486664607
+    Imp mbtree: 0.4740639269406393
+    Imp std mbtree: 0.19484314151292265
+    Imp aq-mode: 0.13442922374429225
+    Imp std aq-mode: 0.12723622823751793
+    Imp subme: 0.14442922374429226
+    Imp std subme: 0.14327231874821023
 
 
 
-![png](bitrate_files/bitrate_68_1.png)
+    
+![png](bitrate_files/bitrate_70_1.png)
+    
 
 
     
@@ -1909,7 +2366,9 @@ summary_group(1)
 
 
 
-![png](bitrate_files/bitrate_68_3.png)
+    
+![png](bitrate_files/bitrate_70_3.png)
+    
 
 
     
@@ -2001,16 +2460,18 @@ summary_group(2)
     
     
     
-    Imp mbtree: 0.34243150684931506
-    Imp std mbtree: 0.22422143554531843
-    Imp aq-mode: 0.045239726027397266
-    Imp std aq-mode: 0.07295812317289446
-    Imp subme: 0.3575684931506849
-    Imp std subme: 0.24423751654234144
+    Imp mbtree: 0.3424315068493151
+    Imp std mbtree: 0.2245892264805996
+    Imp aq-mode: 0.045102739726027394
+    Imp std aq-mode: 0.07311786595122306
+    Imp subme: 0.35705479452054795
+    Imp std subme: 0.24373005449331428
 
 
 
-![png](bitrate_files/bitrate_69_1.png)
+    
+![png](bitrate_files/bitrate_71_1.png)
+    
 
 
     
@@ -2024,7 +2485,9 @@ summary_group(2)
 
 
 
-![png](bitrate_files/bitrate_69_3.png)
+    
+![png](bitrate_files/bitrate_71_3.png)
+    
 
 
     
@@ -2116,16 +2579,18 @@ summary_group(3)
     
     
     
-    Imp mbtree: 0.05466346153846154
-    Imp std mbtree: 0.06788623268393786
-    Imp aq-mode: 0.1535576923076923
-    Imp std aq-mode: 0.18341796672559502
-    Imp subme: 0.5147596153846153
-    Imp std subme: 0.2424622093945105
+    Imp mbtree: 0.05497596153846155
+    Imp std mbtree: 0.06928896709155005
+    Imp aq-mode: 0.15295673076923075
+    Imp std aq-mode: 0.18326934270064787
+    Imp subme: 0.5141346153846154
+    Imp std subme: 0.24268177396986318
 
 
 
-![png](bitrate_files/bitrate_70_1.png)
+    
+![png](bitrate_files/bitrate_72_1.png)
+    
 
 
     
@@ -2139,7 +2604,9 @@ summary_group(3)
 
 
 
-![png](bitrate_files/bitrate_70_3.png)
+    
+![png](bitrate_files/bitrate_72_3.png)
+    
 
 
     
@@ -2312,58 +2779,203 @@ print(res_med)
 
 #### In a group (correlation intra), the performances are highly or very highly correlated
 
-#### Between the different (correlaiton inter), the performances of inputs are generally moderate or low (except for groups 3 and 4)
+#### Between the different (correlation inter), the performances of inputs are generally moderate or low (except for groups 3 and 4)
 
-## INTUITION of Inputec : why should we use the metrics of the youtube UGC Dataset to discriminate the videos into groups?
+# In the paper, here starts Section III
 
-Due to the lack of space, we didn't explain this experiment in the paper; but we still think it is an important milestone to understand how we've got the idea of Inputec!
-
-### We used the metrics of Youtube UGC to classify each video in its performance group.
-
-### RESULTS : in average, we classify successfully two videos over three (~66%) in the right performance group
+## Separation of training set of videos and test set of videos
 
 
 ```python
-if 'str_video_cat' in meta_perf.columns:
-    del meta_perf['str_video_cat']
+# v_names_train, v_names_test = train_test_split(v_names, train_size = 1050)
 
-accuracy = []
+# v_names_train contains the inputs' names of the training set 
+# the training set is used to learn the differences between inputs, i.e. it replaces domain knowledge
+# v_names_test -> same for the test set
+# the test set is used to evaluate the different state-of-the-art approaches
 
-nbLaunches = 10
-for i in range(nbLaunches):
-    X = np.array(meta_perf[[k for k in meta_perf.columns if k !='perf_group']], float)
-    y = np.array(meta_perf['perf_group'], float)
+# save names of train inputs
+# np.savetxt("../../data/train_names.csv", v_names_train, fmt='%s')
+v_names_train = np.loadtxt("../../data/train_names.csv", dtype= str)
 
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
+# save names of test inputs
+# np.savetxt("../../data/test_names.csv", v_names_test, fmt='%s')
+v_names_test = np.loadtxt("../../data/test_names.csv", dtype= str)
 
-    rf = RandomForestClassifier()
-    rf.fit(X_train, y_train)
-    y_pred = rf.predict(X_test)
-
-
-    conf = pd.crosstab(y_pred, y_test)#, colnames=[1,2,3], rownames=[1,2,3])
-    val = np.sum(np.diag(conf))/len(y_test)
-    accuracy.append(val)
-    print('Test accuracy : '+ str(val))
-    conf.columns = pd.Int64Index([1,2,3,4], dtype='int64', name='Observed')
-    conf.index = pd.Int64Index([1,2,3,4], dtype='int64', name='Predicted')
-    conf
-print(np.mean(accuracy))
-conf
 ```
 
-    Test accuracy : 0.6857142857142857
-    Test accuracy : 0.6595238095238095
-    Test accuracy : 0.638095238095238
-    Test accuracy : 0.6785714285714286
-    Test accuracy : 0.6880952380952381
-    Test accuracy : 0.65
-    Test accuracy : 0.6619047619047619
-    Test accuracy : 0.6642857142857143
-    Test accuracy : 0.6785714285714286
-    Test accuracy : 0.6595238095238095
-    0.6664285714285716
 
+```python
+v_names_train[0:50]
+```
+
+
+
+
+    array(['MusicVideo_480P-4cc8.csv', 'CoverSong_720P-6ae4.csv',
+           'Sports_2160P-3d85.csv', 'HowTo_360P-18e7.csv',
+           'TelevisionClip_360P-11d5.csv', 'TelevisionClip_360P-29f1.csv',
+           'HowTo_720P-37d0.csv', 'HowTo_480P-7579.csv', 'VR_2160P-674b.csv',
+           'Sports_480P-6508.csv', 'Gaming_2160P-28de.csv',
+           'Gaming_1080P-55ac.csv', 'NewsClip_720P-2182.csv',
+           'HDR_2160P-70ca.csv', 'HowTo_1080P-63ec.csv',
+           'CoverSong_720P-7360.csv', 'Animation_1080P-6a33.csv',
+           'HowTo_720P-479b.csv', 'Gaming_1080P-0ef8.csv',
+           'Gaming_480P-5a5a.csv', 'Lecture_480P-2655.csv',
+           'Sports_720P-6365.csv', 'Vlog_1080P-4a91.csv',
+           'Vlog_1080P-4921.csv', 'HowTo_480P-3435.csv',
+           'VerticalVideo_1080P-3a9b.csv', 'Gaming_360P-3eb6.csv',
+           'HowTo_360P-7dcd.csv', 'CoverSong_720P-3dca.csv',
+           'VR_1080P-5667.csv', 'NewsClip_720P-0c81.csv',
+           'TelevisionClip_1080P-4c24.csv', 'VR_2160P-613e.csv',
+           'Sports_480P-1019.csv', 'VR_2160P-097e.csv',
+           'LyricVideo_360P-5b54.csv', 'Vlog_1080P-52fe.csv',
+           'VerticalVideo_720P-44de.csv', 'Animation_720P-06a6.csv',
+           'Sports_1080P-0640.csv', 'VR_2160P-7eab.csv',
+           'TelevisionClip_480P-280f.csv', 'Gaming_1080P-3d58.csv',
+           'NewsClip_720P-672c.csv', 'Gaming_1080P-6db2.csv',
+           'HowTo_720P-7782.csv', 'Sports_360P-1803.csv', 'VR_1080P-0519.csv',
+           'LyricVideo_1080P-28e8.csv', 'Gaming_360P-63e6.csv'], dtype='<U29')
+
+
+
+
+```python
+listVideoTest = [listVideo[i] for i in range(len(listVideo)) if v_names[i] in v_names_test]
+assert len(listVideoTest) == len(v_names_test)
+```
+
+#### Isolate best configurations
+
+
+```python
+best_perfs = [np.min(vid[predDimension]) for vid in listVideoTest]
+best_configs = [np.argmin(vid[predDimension]) for vid in listVideoTest]
+```
+
+## State-of-the-art approaches
+
+### *SImple Learning*
+
+### Model Reuse (MR)
+
+
+We arbitrarily choose a first video, learn a performance model on it, and select the best configuration minimizing the performance for this video. This approach represents the error made by a model trained on a  source input (i.e., a  first video) and transposed to a target input (i.e., a second video, different from the first one), without considering the difference of content between the source and the target. In theory, it corresponds to a fixed configuration, optimized for the first video. We add Model Reuse as a witness approach to measure how we can improve the standard performance model.
+
+The **Model Reuse** selects a video of the training set, apply a model on it and keep a near-optimal configuration working for this video. Then, it applies this configuration to all inputs of the test set.
+
+
+```python
+MR_configs = np.loadtxt("../../results/raw_data/MR_results.csv")
+MR_ratios = [listVideoTest[i][predDimension][MR_configs[i]]/best_perfs[i] for i in range(len(listVideoTest))]
+```
+
+### Best compromise (BC)
+
+**Best compromise (BC)** applies a performance model on all the training set, without making a difference between input videos. 
+It selects the configuration working best for most videos in the training set. 
+Technically, we rank the 201 configurations (1 being the optimal configuration, and 201 the worst) and select the one optimizing the sum of ranks for all input videos in the training set. 
+
+
+```python
+BC_configs = np.loadtxt("../../results/raw_data/BC_results.csv")
+BC_ratios = [listVideoTest[i][predDimension][BC_configs[i]]/best_perfs[i] for i in range(len(listVideoTest))]
+```
+
+### *Learning with properties*
+
+### Direct Inclusion (DI)
+
+**Direct Inclusion (DI)** includes input properties directly in the model during the training phase. The trained model then predicts the performance of x264 based on a set of properties (i.e. information about the input video) **and** a set of configuration options (i.e. information about the configuration). We fed this model with the 201 configurations of our dataset, and the properties of the test videos. We select the configuration giving the best prediction (e.g. the lowest bitrate).
+
+
+```python
+DI_configs = np.loadtxt("../../results/raw_data/DI_results.csv")
+DI_ratios = [listVideoTest[i][predDimension][DI_configs[i]]/best_perfs[i] for i in range(len(listVideoTest))]
+```
+
+### Input-aware Learning (IaL)
+
+**Input-aware Learning (IaL)** was first designed to overcome the input sensitivity of programs when compiling them with PetaBricks. 
+
+> See the reference @inproceedings{ding2015,
+  title={Autotuning algorithmic choice for input sensitivity},
+  author={Ding, Yufei and Ansel, Jason and Veeramachaneni, Kalyan and Shen, Xipeng and O’Reilly, Una-May and Amarasinghe, Saman},
+  booktitle={ACM SIGPLAN Notices},
+  volume={50},
+  number={6},
+  pages={379--390},
+  year={2015},
+  organization={ACM},
+  url={https://dl.acm.org/doi/pdf/10.1145/2813885.2737969},
+}
+
+Applied to the x264 case, it uses input properties of videos to propose a configuration working for a group of videos, sharing similar performances. 
+
+
+According to Ding et al,  Input-Aware Learning can be broken down to six steps. 
+
+
+Steps 1 to 4 are applied on the training set, while Step 5 and 6 consider a new input of the test set. 
+
+**Step 1. Property extraction** - To mimic the domain knowledge of the expert, we use the videos' properties provided by the dataset of inputs
+
+**Step 2. Form groups of inputs** - 
+Based on the dendogram of Figure 1, we report on videos' properties that can be used to characterize four performance groups :
+- Group 1. Action videos (high spatial and chunk complexities, Sports and News); 
+- Group 2. Big resolution videos (low spatial and high temporal complexities, High Dynamic Range);
+- Group 3. Still image videos (low temporal and chunk complexities, Lectures and HowTo)
+- Group 4. Standard videos (average properties values, various contents)
+
+Similarly, we used the training set of videos to build four groups of inputs. 
+
+**Step 3. Landmark creation** - For each group, we artificially build a video, being the centroid of all the input videos of its group. We then use this video to select a set of landmarks (i.e. configurations), potential candidates to optimize the performance for this group. 
+
+**Step 4. Performance measurements** - For each input video, we save the performances of its landmarks (i.e. the landmarks kept in Step 3, corresponding to its group).
+
+**Step 5. Classify new inputs into a performance group** - Based on its input properties (see Step 1), we attribute a group to a new input video of the test set. It becomes a k-classification problem, k being the number of performance groups of Step 2. 
+
+**Step 6. Propose a configuration for the new input** - We then propose a configuration based on the input properties of the video. It becomes a n-classification problem, where n is the number of landmarks kept for the group predicted in Step 5. We keep the best configuration predicted in Step 6.
+
+
+```python
+IaL_configs = np.loadtxt("../../results/raw_data/IaL_results.csv")
+IaL_ratios = [listVideoTest[i][predDimension][IaL_configs[i]]/best_perfs[i] for i in range(len(listVideoTest))]
+```
+
+### *Transfer Learning*
+
+### Beetle
+
+
+> @article{beetle,
+  author    = {Rahul Krishna and
+               Vivek Nair and
+               Pooyan Jamshidi and
+               Tim Menzies},
+  title     = {Whence to Learn? Transferring Knowledge in Configurable Systems using
+               {BEETLE}},
+  journal   = {CoRR},
+  volume    = {abs/1911.01817},
+  year      = {2019},
+  url       = {http://arxiv.org/abs/1911.01817},
+  archivePrefix = {arXiv},
+  eprint    = {1911.01817},
+  timestamp = {Mon, 11 Nov 2019 18:38:09 +0100},
+  biburl    = {https://dblp.org/rec/journals/corr/abs-1911-01817.bib},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
+**Beetle** is a transfer learning approach defined by Krishna et al that relies on *source selection*. 
+Given a (set of) input(s), the goal is to rank the sources by performance, in order to discover a bellwether input from which we can easily transfer performances (i.e. find the best source). 
+Then, we transfer performances from this bellwether input to all inputs of the test set. 
+We only apply the discovery phase (i.e. the search of bellwether) on the training set, to avoid introducing any bias in the results. 
+
+
+```python
+beetle_data = pd.read_csv("../../results/raw_data/Beetle_results.csv").set_index("id_video")
+beetle_data
+```
 
 
 
@@ -2385,14 +2997,18 @@ conf
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
-      <th>Observed</th>
-      <th>1</th>
-      <th>2</th>
-      <th>3</th>
-      <th>4</th>
+      <th></th>
+      <th>conf5</th>
+      <th>conf10</th>
+      <th>conf15</th>
+      <th>conf20</th>
+      <th>conf25</th>
+      <th>conf30</th>
     </tr>
     <tr>
-      <th>Predicted</th>
+      <th>id_video</th>
+      <th></th>
+      <th></th>
       <th></th>
       <th></th>
       <th></th>
@@ -2401,424 +3017,624 @@ conf
   </thead>
   <tbody>
     <tr>
+      <th>0</th>
+      <td>196</td>
+      <td>169</td>
+      <td>195</td>
+      <td>85</td>
+      <td>91</td>
+      <td>91</td>
+    </tr>
+    <tr>
       <th>1</th>
-      <td>118</td>
-      <td>1</td>
-      <td>3</td>
-      <td>29</td>
+      <td>108</td>
+      <td>168</td>
+      <td>62</td>
+      <td>108</td>
+      <td>195</td>
+      <td>169</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>0</td>
-      <td>33</td>
-      <td>11</td>
-      <td>10</td>
+      <td>96</td>
+      <td>107</td>
+      <td>101</td>
+      <td>173</td>
+      <td>96</td>
+      <td>169</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>1</td>
-      <td>21</td>
-      <td>48</td>
-      <td>17</td>
+      <td>153</td>
+      <td>94</td>
+      <td>96</td>
+      <td>169</td>
+      <td>168</td>
+      <td>173</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>20</td>
-      <td>7</td>
-      <td>23</td>
-      <td>78</td>
+      <td>123</td>
+      <td>87</td>
+      <td>91</td>
+      <td>101</td>
+      <td>107</td>
+      <td>200</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>342</th>
+      <td>198</td>
+      <td>91</td>
+      <td>169</td>
+      <td>169</td>
+      <td>134</td>
+      <td>169</td>
+    </tr>
+    <tr>
+      <th>343</th>
+      <td>179</td>
+      <td>169</td>
+      <td>168</td>
+      <td>107</td>
+      <td>159</td>
+      <td>91</td>
+    </tr>
+    <tr>
+      <th>344</th>
+      <td>74</td>
+      <td>101</td>
+      <td>170</td>
+      <td>169</td>
+      <td>172</td>
+      <td>85</td>
+    </tr>
+    <tr>
+      <th>345</th>
+      <td>173</td>
+      <td>87</td>
+      <td>85</td>
+      <td>165</td>
+      <td>169</td>
+      <td>159</td>
+    </tr>
+    <tr>
+      <th>346</th>
+      <td>37</td>
+      <td>96</td>
+      <td>100</td>
+      <td>123</td>
+      <td>169</td>
+      <td>170</td>
     </tr>
   </tbody>
 </table>
+<p>347 rows × 6 columns</p>
 </div>
 
 
 
-# In the paper, here starts Section IV
+### L2S
 
-# RQ2 - Can we use Inputec to find configurations adapted to input videos?
+>@inproceedings{jamshidi2018,
+    title={Learning to sample: exploiting similarities across environments to learn performance models for configurable systems}, 
+    author={Jamshidi, Pooyan and Velez, Miguel and K{\"a}stner, Christian and Siegmund, Norbert},
+    booktitle={Proceedings of the 2018 26th ACM Joint Meeting on European Software Engineering Conference and Symposium on the Foundations of Software Engineering},
+    pages={71--82},
+    year={2018},
+    organization={ACM},
+    url={https://dl.acm.org/doi/pdf/10.1145/3236024.3236074},
+}
 
-### The goal fixed in RQ2 is to generate a configuration minimizing the bitrate for a given video!
-
-
-```python
-listFeatures = ["cabac", "ref", "deblock", "analyse", "me", "subme", "mixed_ref", "me_range", "trellis", 
-                "8x8dct", "fast_pskip", "chroma_qp_offset", "bframes", "b_pyramid", 
-                "b_adapt", "direct", "weightb", "open_gop", "weightp", "scenecut", "rc_lookahead", 
-                "mbtree", "qpmax", "aq-mode"]
-categorial = ['analyse', 'me', 'direct']
-val_config = listVideo[0][listFeatures].replace(to_replace ="None",value='0')
-val_config['deblock'] =[int(val[0]) for val in val_config['deblock']]
-
-for col in val_config.columns:
-    if col not in categorial:
-        arr_col = np.array(val_config[col],int)
-        arr_col = (arr_col-np.mean(arr_col))/(np.std(arr_col)+1e-5)
-        val_config[col] = arr_col
-    else:
-        if col not in [predDimension,'ranking']:
-            val_config[col] = [np.where(k==val_config[col].unique())[0][0] for k in val_config[col]]
-            arr_col = np.array(val_config[col],int)
-            arr_col = (arr_col-np.mean(arr_col))/(np.std(arr_col)+1e-5)
-            val_config[col] = arr_col
-```
-
-#### Function to "place" a value (i.e. give a rank to a value) in an ordered list
+**Learning to Sample (L2S)** is a transfer learning approach defined by Jamshidi et al. 
+First, it exploits the source input and selects configurations that leverage influential (interactions of) features for this input. 
+Then, it explores the similarities between the source and the target, thus adding configurations having similar performances for the source and the target. 
+Finally, it uses the configurations selected in previous steps to efficiently train a model on the target input. 
 
 
 ```python
-def find_rank(sorted_perfs, val):
-    # inputs : a list of sorted performances, a value 
-    # output: the ranking of value in the sorted_perf list 
-    rank = 0
-    while val > sorted_perfs[rank] and rank < len(sorted_perfs)-1:
-        rank+=1
-    return rank
-```
-
-## Method M1 - Inputec, full configurations, full properties
-
-## [1 sentence explanation] We included the properties in the set of predicting variables
-
-#### [short explanation] Offline: by including the input properties, we discriminate the input videos into performance groups, thus increasing the mean absolute error of the prediction. Online: instead of measuring new configurations (as known as transfer learning), we compute the input properties, and test all the configurations. At the end, we select the one giving the minimal prediction.
-
-## OFFLINE
-
-#### [OFFLINE] Construct the data
-
-Lines 1-12 in Algorithm 1
-
-
-```python
-# we separate the list of videos into a training (i.e. offline) set and a test set (i.e. online)
-train_ind, test_ind = train_test_split([k for k in range(len(listVideo))], test_size = 0.25)
-# training set indexes
-train_index = [v_names[k][:-4] for k in train_ind]
-
-# we add the input properties
-name_col = list(meta_perf.columns)[1:]
-
-# we add the x264 configuration options
-for vcc in val_config.columns:
-    name_col.append(vcc)
-
-# Then, X (i.e the predicting variables) =  input properties + software configuration options
-
-# we add the variable to predict, i.e. y the bitrate performance distribution
-name_col.append("bitrate")
-
-# X length, the number of predicting variables
-nb_col = len(name_col)
-# the number of configurations
-nb_config = 201
-
-# generate the datasets = (X,y)
-def gen_dataset(inputs_names):
-    # inputs : names of videos
-    # output : aggregation of multiple (X,y) for all the videos in the list of names provided in input 
-    
-    # the final dataset
-    res = pd.DataFrame(np.zeros(nb_config*len(inputs_names)*nb_col).reshape(nb_config*len(inputs_names), nb_col))
-    res.columns = name_col
-    
-    # we add the data video per video
-    # LINES 6-10 in Algorithm 1
-    for i in range(len(inputs_names)):
-        # first, we retrieve the name of the video
-        video_name = inputs_names[i]
-        index_video = np.where(np.array([v[:-4] for v in v_names], str)==video_name)[0][0]
-        # we compute the performance, here
-        bitrates = listVideo[index_video][predDimension]
-        # get the input properties of the video
-        video_prop = np.array(meta_perf.loc[video_name][1:], float)
-        # compute the avrage value and the standard deviation for the bitrate
-        # as we said in the paper, it does not change the order of variable
-        # which is a good property
-        moy = np.mean(bitrates)
-        std = np.std(bitrates)
-        # for each configuration, we add the values of the input properties and the configuration options (=X)
-        # and the normalized values of bitrates (=y)
-        for config_id in range(nb_config):
-            val = list(tuple(video_prop) + tuple(val_config.loc[config_id]))
-            val.append((bitrates[config_id]-moy)/std)
-            res.loc[i*nb_config+config_id] = val
-    return res
-
-# training dataset
-training_data = gen_dataset(train_index)
-
-# dimensions of the different sets = a proxy to the measurement cost 
-print("Training size : ", training_data.shape[0])
-
-# OFFLINE - Training data
-X_train = np.array(training_data.drop(["bitrate"],axis=1), float)
-y_train = np.array(training_data["bitrate"], float)
-```
-
-    Training size :  210447
-
-
-#### [OFFLINE] We train the Learning Algorithm
-
-Lines 13-14 in Algorithm 1
-
-
-```python
-# The hyperparameters were optimized by testing different values for parameters
-# and comparing the mean absolute error given by the model
-LA = RandomForestRegressor(n_estimators=100, criterion="mse", min_samples_leaf=2, bootstrap=True, 
-                           max_depth=None, max_features=15)
-# the default config for random forest is quite good
-# we train the model LA
-LA.fit(X_train, y_train)
+l2s_data = pd.read_csv("../../results/raw_data/L2S_results.csv").set_index("id_video")
+l2s_data
 ```
 
 
 
 
-    RandomForestRegressor(bootstrap=True, ccp_alpha=0.0, criterion='mse',
-                          max_depth=None, max_features=15, max_leaf_nodes=None,
-                          max_samples=None, min_impurity_decrease=0.0,
-                          min_impurity_split=None, min_samples_leaf=2,
-                          min_samples_split=2, min_weight_fraction_leaf=0.0,
-                          n_estimators=100, n_jobs=None, oob_score=False,
-                          random_state=None, verbose=0, warm_start=False)
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>conf5</th>
+      <th>conf10</th>
+      <th>conf15</th>
+      <th>conf20</th>
+      <th>conf25</th>
+      <th>conf30</th>
+    </tr>
+    <tr>
+      <th>id_video</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>34</td>
+      <td>153</td>
+      <td>123</td>
+      <td>166</td>
+      <td>123</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>57</td>
+      <td>169</td>
+      <td>93</td>
+      <td>189</td>
+      <td>100</td>
+      <td>89</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>111</td>
+      <td>163</td>
+      <td>176</td>
+      <td>190</td>
+      <td>190</td>
+      <td>161</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>85</td>
+      <td>4</td>
+      <td>32</td>
+      <td>161</td>
+      <td>194</td>
+      <td>155</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>76</td>
+      <td>91</td>
+      <td>10</td>
+      <td>175</td>
+      <td>42</td>
+      <td>79</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>342</th>
+      <td>153</td>
+      <td>181</td>
+      <td>169</td>
+      <td>179</td>
+      <td>161</td>
+      <td>160</td>
+    </tr>
+    <tr>
+      <th>343</th>
+      <td>85</td>
+      <td>105</td>
+      <td>67</td>
+      <td>100</td>
+      <td>197</td>
+      <td>62</td>
+    </tr>
+    <tr>
+      <th>344</th>
+      <td>3</td>
+      <td>8</td>
+      <td>182</td>
+      <td>170</td>
+      <td>180</td>
+      <td>169</td>
+    </tr>
+    <tr>
+      <th>345</th>
+      <td>169</td>
+      <td>181</td>
+      <td>68</td>
+      <td>182</td>
+      <td>4</td>
+      <td>171</td>
+    </tr>
+    <tr>
+      <th>346</th>
+      <td>8</td>
+      <td>112</td>
+      <td>10</td>
+      <td>164</td>
+      <td>164</td>
+      <td>92</td>
+    </tr>
+  </tbody>
+</table>
+<p>347 rows × 6 columns</p>
+</div>
 
 
 
-## ONLINE
+### Model Shift
 
-#### [ONLINE] Add new videos
+>@inproceedings{DBLP:conf/wosp/ValovPGFC17,
+  author    = {Pavel Valov and
+               Jean{-}Christophe Petkovich and
+               Jianmei Guo and
+               Sebastian Fischmeister and
+               Krzysztof Czarnecki},
+  title     = {Transferring Performance Prediction Models Across Different Hardware
+               Platforms},
+  booktitle = {Proceedings of the 8th {ACM/SPEC} on International Conference on Performance
+               Engineering, {ICPE} 2017, L'Aquila, Italy, April 22-26, 2017},
+  pages     = {39--50},
+  year      = {2017},
+  url       = {http://doi.acm.org/10.1145/3030207.3030216},
+  doi       = {10.1145/3030207.3030216},
+  timestamp = {Sat, 22 Apr 2017 15:59:26 +0200},
+  biburl    = {http://dblp.uni-trier.de/rec/bib/conf/wosp/ValovPGFC17},
+  bibsource = {dblp computer science bibliography, http://dblp.org}
+}
 
-Lines 15-17 in the Algorithm 1
-
-
-```python
-# test set indexes
-test_index = [v_names[k][:-4] for k in test_ind]
-```
-
-#### [ONLINE] Predict the value for each configuration, and output the configuration giving the minimal result (i.e. the argmin)
-
-Lines 18-22 in the Algorithm 1
-
-
-```python
-# we compute the time - start
-start = time()
-
-# the performance values for the configuration chosen by Inputec, for the test set of videos
-inputec = []
-
-# the performance rankings for the configuration chosen by Inputec, for the test set of videos
-inputec_ranks = []
-
-# for each video in the test set
-for ti in test_index:
-    # we retrieve the test index
-    index_video = np.where(np.array([v[:-4] for v in v_names], str)==ti)[0][0]
-    # list of predictions for inputec
-    pred_inputec = []
-    # for each configuration
-    for i in range(nb_config):
-        # we add input properties to the configurations
-        video_prop = list(tuple(meta_perf.loc[ti][1:])+tuple(val_config.loc[i]))
-        # we predict the value associated to the configuration
-        pred_inputec.append(LA.predict(np.array(video_prop, float).reshape(1, 33)))
-    # sorted performances
-    sorted_perfs = sorted(listVideo[index_video][predDimension])
-    # the performance pof the configuration chosen by Inputec
-    perf = listVideo[index_video].loc[np.argmin(pred_inputec)][predDimension]
-    # we add it to the perf array
-    inputec.append(perf)
-    # the related ranking (between 0 and 200, hopefully close to 0)
-    inputec_ranks.append(find_rank(sorted_perfs, perf))
-
-# we compute the time - end
-end = time()
-
-print("Average time for one video prediction < ", int(100*(end-start)/len(test_index))/100, "second(s)!")
-```
-
-    Average time for one video prediction <  0.99 second(s)!
-
-
-## Baselines
-
-To evaluate Inputec, we compare it to different baselines. 
-Each baseline corresponds to a concrete situation:
-
-#### B1 - Model reuse
-
-We arbitrarily choose a first video, learn a performance model on it, and select the best configuration minimizing the performance for this video. This baseline represents the error made by a model trained on a  source input (i.e., a  first video) and transposed to a target input (i.e., a second video, different from the first one), without considering the difference of content between the source and the target. In theory, it corresponds to a fixed configuration, optimized for the first video. We add B1 to measure how we can improve the standard performance model with Inputec.
-
-B1 is fixed.
-
-
-```python
-# we arbitraly select an input in the training set
-# here we choose on purpose a video for which the model reuse leads to bad results
-# to see what could happen when we just reuse the model from one video to another
-chosen_input = 423
-
-# we consider the associated input video
-source_video = listVideo[np.where(np.array([v[:-4] for v in v_names], str)==
-                                  train_index[chosen_input])[0][0]]
-
-# we select the best config for this video
-b1_config = np.argmin(source_video[predDimension])
-
-print("Id of B1 configuration :", b1_config)
-
-# the rankings of the first baseline
-b1_ranks = []
-
-# for each video in the test set
-for ti in test_index:
-    # we retrieve the test index of the input video
-    index_video = np.where(np.array([v[:-4] for v in v_names], str)==ti)[0][0]
-    # sorted performances
-    sorted_perfs = sorted(listVideo[index_video][predDimension])
-    # the performance of the software configuration of B1
-    perf = listVideo[index_video].loc[b1_config][predDimension]
-    # we add it to the list
-    b1_ranks.append(find_rank(sorted_perfs, perf))
-```
-
-    Id of B1 configuration : 161
-
-
-#### B2 - Best compromise
-
-We select the configuration having the lowest sum of bitrates rankings for the training set of videos, and study this configuration's distribution on the validation set. 
-B2 represents the best compromise we can find, working for all input videos. 
-In terms of software engineering, it acts like a preset configuration proposed by x264 developers.
-Beating this configuration shows that our approach chooses a custom configuration, tailored for the input characteristics.
-
-B2 is fixed.
-
-
-```python
-# only keep the video of the training set (we keep the training-test phases)
-keep_vid = ['video'+str(np.where(np.array([v[:-4] for v in v_names], str)==ti)[0][0]) for ti in train_index]
-
-# select the best compromise, i.e. the configuration having the minimal sum of rankings
-b2_config = np.argmin([np.sum(np.array(rankings[keep_vid].loc[i], int)) 
-                             for i in range(rankings.shape[0])])
-
-print("Id of B2 configuration :", b2_config)
-
-# the rankings of the second baseline
-b2_ranks = []
-
-# for each video in the test set
-for ti in test_index:
-    # we retrieve the test index of the input video
-    index_video = np.where(np.array([v[:-4] for v in v_names], str)==ti)[0][0]
-    # sorted performances
-    sorted_perfs = sorted(listVideo[index_video][predDimension])
-    # the performance of the software configuration of B1
-    perf = listVideo[index_video].loc[b2_config][predDimension]
-    # we add it to the list
-    b2_ranks.append(find_rank(sorted_perfs, perf))
-```
-
-    Id of B2 configuration : 190
-
-
-#### B3 - Average performance
-
-This baseline computes the average performance of configurations for each video of the validation dataset. 
-It acts as a witness group, reproducing the behavior of a non-expert user that experiments x264 for the first time, and selects uniformly one of the 201 configurations of our dataset.
-
-B3 vary across inputs.
-
-
-```python
-# the average performance values for all configurations, for each input in the test set of videos
-b3_perf = []
-
-# the rankings of the third baseline
-b3_ranks = []
-
-# for each video in the test set
-for ti in test_index:
-    # we retrieve the test index
-    index_video = np.where(np.array([v[:-4] for v in v_names], str)==ti)[0][0]
-    # sorted performances
-    sorted_perfs = sorted(listVideo[index_video][predDimension])
-    # the average performance of the video
-    perf = np.mean(listVideo[index_video][predDimension])
-    # we add it to B3's performance array 
-    b3_perf.append(perf)
-    # we add it to the list
-    b3_ranks.append(find_rank(sorted_perfs, perf))
-```
-
-#### B4 - Best configuration
-
-Similarly, we select the best configuration (i.e. leading to the minimal performance for the set of configurations). We consider this configuration as the upper limit of the potential gain of performance; since our approach chooses a configuration in the set of 201 possible choices, we can not beat the best one of the set; it just shows how far we are from the best performance value. 
-Otherwise, either our method is not efficient enough to capture the characteristics of each video, or the input sensitivity does not represent a problem, showing that we can use an appropriate but fixed configuration to optimize the performances for all input videos.
-
-B4 vary across inputs.
+**Model Shift (MS)** is a transfer learning defined by Valov et al. 
+First, it trains a performance model on the source input and predicts the performance distribution of the source input. 
+Then, it trains a *shifting function*, predicting the performances of the target input based on the performances of the source. 
+Finally, it applies the shifting function to the predictions of the source. 
+The original paper uses a linear function to transfer the performances between the source and the target. 
+However, we extended this definition to any function (\eg random forest, neural network, \etc) able to learn the differences between the source and the target measurements. 
 
 
 ```python
-# the minimal performance values, for each input in the test set of videos
-b4_perf = []
-
-# the minimal performance values rankings
-b4_ranks = np.zeros(len(test_index))
-
-# for each video in the test set
-for ti in test_index:
-    # we retrieve the test index
-    index_video = np.where(np.array([v[:-4] for v in v_names], str)==ti)[0][0]
-    # we add the minimal performance of the video
-    b4_perf.append(np.min(listVideo[index_video][predDimension]))
+ms_data = pd.read_csv("../../results/raw_data/MS_results.csv").set_index("id_video")
+ms_data
 ```
 
-### Ratios
 
-The ratios of Inputec over the baseline performances prediction should be lower than 1 if and only if Inputec is better than the baseline (because it provides a lower bitrate than the baseline).
-As an example, for a ratio of $0.6 = 1 - 0.4 = 1 - \frac{40}{100}$, we gain 40% of bitrate with our method compared to the baseline. 
-Oppositely, we loose 7% of bitrate with our method compared to the baseline for a ratio of 1.07.
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>conf5</th>
+      <th>conf10</th>
+      <th>conf15</th>
+      <th>conf20</th>
+      <th>conf25</th>
+      <th>conf30</th>
+    </tr>
+    <tr>
+      <th>id_video</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>8</td>
+      <td>8</td>
+      <td>8</td>
+      <td>67</td>
+      <td>177</td>
+      <td>104</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>8</td>
+      <td>41</td>
+      <td>123</td>
+      <td>168</td>
+      <td>168</td>
+      <td>168</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>4</td>
+      <td>106</td>
+      <td>4</td>
+      <td>32</td>
+      <td>32</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1</td>
+      <td>60</td>
+      <td>19</td>
+      <td>104</td>
+      <td>4</td>
+      <td>91</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0</td>
+      <td>99</td>
+      <td>2</td>
+      <td>6</td>
+      <td>6</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>342</th>
+      <td>89</td>
+      <td>32</td>
+      <td>74</td>
+      <td>32</td>
+      <td>59</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>343</th>
+      <td>41</td>
+      <td>123</td>
+      <td>63</td>
+      <td>7</td>
+      <td>100</td>
+      <td>85</td>
+    </tr>
+    <tr>
+      <th>344</th>
+      <td>70</td>
+      <td>2</td>
+      <td>63</td>
+      <td>141</td>
+      <td>91</td>
+      <td>12</td>
+    </tr>
+    <tr>
+      <th>345</th>
+      <td>91</td>
+      <td>6</td>
+      <td>41</td>
+      <td>87</td>
+      <td>143</td>
+      <td>195</td>
+    </tr>
+    <tr>
+      <th>346</th>
+      <td>1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>137</td>
+      <td>2</td>
+      <td>10</td>
+    </tr>
+  </tbody>
+</table>
+<p>347 rows × 6 columns</p>
+</div>
+
+
+
+### No Transfer
+
+**No Transfer (NT)** is a Simple Learning approach, acting as a control approach to state whether transfer learning is suited to solve this problem. 
+It trains a performance model directly on the target input, without using the source. 
+We expect to outperform No Transfer with transfer learning approaches. 
 
 
 ```python
-# We compute the four ratios
-
-# Inputec/B1, the model reuse
-ratio_b1 = []
-# Inputec/B2, the compromise
-ratio_b2 = []
-# Inputec/B3, the average bitrate
-ratio_b3 = []
-# Inputec/B4, the best configuration
-ratio_b4 = []
-
-# for each video, we add the ratio to the list
-for i in range(len(test_index)):
-    index_video = np.where(np.array([v[:-4] for v in v_names], str)==test_index[i])[0][0]
-    
-    # for B1 and B2, we take the configuration of the current video
-    ratio_b1.append(inputec[i]/listVideo[index_video].loc[b1_config][predDimension])
-    ratio_b2.append(inputec[i]/listVideo[index_video].loc[b2_config][predDimension])
-    
-    # for B3 and B4, we take the previously computed values
-    ratio_b3.append(inputec[i]/b3_perf[i])
-    ratio_b4.append(inputec[i]/b4_perf[i])
+nt_data = pd.read_csv("../../results/raw_data/NT_results.csv").set_index("id_video")
+nt_data
 ```
 
-## Figure 5a - Performance ratios of configurations, baseline vs Inputec
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>conf5</th>
+      <th>conf10</th>
+      <th>conf15</th>
+      <th>conf20</th>
+      <th>conf25</th>
+      <th>conf30</th>
+    </tr>
+    <tr>
+      <th>id_video</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>5</td>
+      <td>89</td>
+      <td>68</td>
+      <td>196</td>
+      <td>104</td>
+      <td>196</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>41</td>
+      <td>21</td>
+      <td>93</td>
+      <td>89</td>
+      <td>21</td>
+      <td>65</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>8</td>
+      <td>123</td>
+      <td>8</td>
+      <td>190</td>
+      <td>12</td>
+      <td>111</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>7</td>
+      <td>5</td>
+      <td>38</td>
+      <td>60</td>
+      <td>4</td>
+      <td>68</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>39</td>
+      <td>10</td>
+      <td>16</td>
+      <td>16</td>
+      <td>42</td>
+      <td>86</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>342</th>
+      <td>4</td>
+      <td>65</td>
+      <td>8</td>
+      <td>4</td>
+      <td>4</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>343</th>
+      <td>62</td>
+      <td>134</td>
+      <td>62</td>
+      <td>62</td>
+      <td>85</td>
+      <td>62</td>
+    </tr>
+    <tr>
+      <th>344</th>
+      <td>4</td>
+      <td>1</td>
+      <td>2</td>
+      <td>165</td>
+      <td>165</td>
+      <td>165</td>
+    </tr>
+    <tr>
+      <th>345</th>
+      <td>1</td>
+      <td>41</td>
+      <td>4</td>
+      <td>170</td>
+      <td>169</td>
+      <td>169</td>
+    </tr>
+    <tr>
+      <th>346</th>
+      <td>1</td>
+      <td>8</td>
+      <td>11</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+<p>347 rows × 6 columns</p>
+</div>
+
+
+
+## First results about properties - Figure 5a
 
 
 ```python
 # we aggregate the different ratios, sorted by increasing efficiency
-box_res = np.transpose(pd.DataFrame({"mean" : ratio_b3,
-                                     "compromise" : ratio_b2,
-                                     "model reuse" : ratio_b1,
-                                     "min" : ratio_b4}))
+box_res = np.transpose(pd.DataFrame({"MR" : MR_ratios,
+                                     "BC" : BC_ratios,
+                                     "DI" : DI_ratios,
+                                     "IaL" : IaL_ratios}))
 
 # rotation of the text in the ordered axis, to fit the figure in the paper
 degrees = 20
@@ -2826,78 +3642,304 @@ degrees = 20
 # cosmetic choices
 red_square = dict(markerfacecolor='r', marker='s')
 # figure size
-plt.figure(figsize=(16,8))
+plt.figure(figsize=(16,12))
 # add a grid
 plt.grid()
 plt.boxplot(box_res, flierprops=red_square, 
-          vert=False, patch_artist=True, #widths=0.25,
+          vert=True, patch_artist=True, widths=0.25,
           boxprops=dict(facecolor=(0,0,1,0.5),linewidth=1,edgecolor='k'),
           whiskerprops = dict(linestyle='-.',linewidth=1.0, color='black'))
 # add crosses for average values of distributions
-plt.scatter(np.array([np.mean(box_res.iloc[i]) for i in range(4)]), np.arange(1, 5, 1), 
+plt.scatter(np.arange(1, 5, 1), np.array([np.mean(box_res.iloc[i]) for i in range(4)]), 
             marker="x", color = "red", alpha = 1, s = 100)
 # Limits
-plt.ylim(0,5)
-plt.xlim(0,2)
+plt.ylim(0.9,2.5)
+plt.xlim(0.5,4.5)
 # Inputec vs Baseline
-plt.vlines(x=1, ymin=0.5, ymax=4.5, linestyle='-.', color='green', linewidth = 5)
-plt.text(s = "Inputec worse than Baseline", x = 1.2, y = 0.3, size = 20, color = 'green')
-plt.text(s = "Inputec better than Baseline", x = 0.2, y = 0.3, size = 20, color = 'green')
+plt.vlines(x=2.5, ymin=0.5, ymax=4.5, linestyle='-.', color='green', linewidth = 5)
+plt.text(s = "Simple Learning", x = 1.12, y = 2.25, size = 20, color = 'green')
+plt.text(s = "Learning", x = 3.32, y = 2.3, size = 20, color = 'green')
+plt.text(s = "with properties", x = 3.13, y = 2.2, size = 20, color = 'green')
 # Labels
-plt.xlabel("Ratio Inputec/Baseline", size = 20)
+plt.ylabel("Ratio performance/best", size = 20)
+plt.xlabel("", size = 20)
+# Arrow
+plt.arrow(x = 4.35, y = 2, dx= 0, dy = -0.3, head_width = 0.1, head_length = .1, color="orange")
+plt.text(s = "Better", x = 4.05, y = 1.82, size = 20, color = 'orange')
 # Ticks of axis
-plt.yticks([1, 2, 3, 4], 
-           ['B3 - Avg', 'B2 - Preset', 'B1 - Reuse', 'B4 - Best'],
+plt.xticks([1, 2, 3, 4], 
+           ['Model Reuse (MR)', 'Best Compromise (BC)', 
+            'Direct Inclusion (DI)', 'Input-aware Learning (IaL)'],
           size = 20,
           rotation=degrees)
-plt.xticks(size = 20)
+plt.yticks(size = 20)
 # save figure in the results folder
-plt.savefig("../../results/res_box_baseline.png")
+plt.savefig("../../results/res_box_approach.png")
 # show the figure
 plt.show()
 ```
 
 
-![png](bitrate_files/bitrate_104_0.png)
+    
+![png](bitrate_files/bitrate_103_0.png)
+    
 
 
-## Figure 5b - Rankings of configurations, baseline vs Inputec
+## Results about cost - Figure 5b
+
+Aggregation of data
 
 
 ```python
-box_res = np.transpose(pd.DataFrame({"mean" : b3_ranks,
-                                     "compromise" : b2_ranks,
-                                     "model reuse" : b1_ranks,
-                                     "inputec" : inputec_ranks,
-                                     "min" : b4_ranks}))
-red_square = dict(markerfacecolor='r', marker='s')
-plt.figure(figsize=(16,8))
+f = []
+
+cols = ["conf5", "conf10", "conf15", "conf20", "conf25", "conf30"]
+names_cols = ['05', '10', '15', '20', '25', '30']
+for i in range(len(listVideoTest)):
+    for j in range(len(cols)):
+        c = cols[j]
+        nc = names_cols[j]
+        f.append((listVideoTest[i][predDimension][beetle_data[c].iloc[i]]/best_perfs[i], nc, "Beetle"))
+        f.append((listVideoTest[i][predDimension][ms_data[c].iloc[i]]/best_perfs[i], nc, "Model Shift (MS)"))
+        f.append((listVideoTest[i][predDimension][nt_data[c].iloc[i]]/best_perfs[i], nc, "No Transfer (NT)"))
+        f.append((listVideoTest[i][predDimension][l2s_data[c].iloc[i]]/best_perfs[i], nc, "Learning to Sample (L2S)"))
+
+
+final_tl_data = pd.DataFrame(f, columns = ["ratio", "training_size", "Approach"])
+final_tl_data
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ratio</th>
+      <th>training_size</th>
+      <th>Approach</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1.227948</td>
+      <td>05</td>
+      <td>Beetle</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1.541668</td>
+      <td>05</td>
+      <td>Model Shift (MS)</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1.371479</td>
+      <td>05</td>
+      <td>No Transfer (NT)</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1.632913</td>
+      <td>05</td>
+      <td>Learning to Sample (L2S)</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1.000000</td>
+      <td>10</td>
+      <td>Beetle</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>8323</th>
+      <td>1.003281</td>
+      <td>25</td>
+      <td>Learning to Sample (L2S)</td>
+    </tr>
+    <tr>
+      <th>8324</th>
+      <td>1.364961</td>
+      <td>30</td>
+      <td>Beetle</td>
+    </tr>
+    <tr>
+      <th>8325</th>
+      <td>1.053132</td>
+      <td>30</td>
+      <td>Model Shift (MS)</td>
+    </tr>
+    <tr>
+      <th>8326</th>
+      <td>1.028455</td>
+      <td>30</td>
+      <td>No Transfer (NT)</td>
+    </tr>
+    <tr>
+      <th>8327</th>
+      <td>1.028415</td>
+      <td>30</td>
+      <td>Learning to Sample (L2S)</td>
+    </tr>
+  </tbody>
+</table>
+<p>8328 rows × 3 columns</p>
+</div>
+
+
+
+
+```python
+plt.figure(figsize=(16,12))
+
 plt.grid()
-plt.boxplot(box_res, flierprops = red_square, 
-          vert = False, patch_artist = True, #widths=0.25,
-          boxprops = dict(facecolor=(0,0,1,0.5),linewidth=1,edgecolor='k'),
-          whiskerprops = dict(linestyle='-.',linewidth=1.0, color='black'))
-plt.scatter(np.array([np.mean(box_res.iloc[i]) for i in range(4)]), np.arange(1, 5, 1), 
-            marker="x", color = "red", alpha = 1, s = 100)
-plt.ylim(0, 6)
-plt.xlim(-1,200)
-plt.xlabel("Ranking of configurations", size = 20)
-plt.arrow(x = 175, y = 3.5, dx= 0, dy = 1.5, head_width = 4, head_length = .15, color="orange")
-plt.text(s = "Better", x = 180, y = 4.2, size = 20, color = 'orange')
-plt.arrow(x = 154, y = 5.15, dx= -30, dy = 0, head_width = .15, head_length = 3, color="orange")
-plt.text(s = "Better", x = 130, y = 4.8, size = 20, color = 'orange')
-plt.yticks([1, 2, 3, 4, 5,], 
-           ['B3 - Avg', 'B2 - Preset', 'B1 - Reuse', 'Inputec', 'B4 - Best'], 
-           size=20,
-          rotation=degrees)
-plt.xticks(size=20)
-plt.savefig("../../results/res_box_baseline_rank.png")
+
+# Draw a nested boxplot to show bills by day and time
+sns.boxplot(x="training_size", y="ratio",
+            hue="Approach", palette=["lightgreen", "coral", "lightgray", "purple"],
+            data=final_tl_data)
+plt.ylabel("Ratio performance/best", size = 20)
+plt.xlabel("Budget - # Training target configurations", size = 20)
+plt.ylim(0.9,2.5)
+plt.legend(fontsize=20, loc = 'upper right')
+
+
+# Arrow
+plt.arrow(x = 4.5, y = 2, dx= 0, dy = -0.3, head_width = 0.15, head_length = .1, color="orange")
+plt.text(s = "Better", x = 4, y = 1.95, size = 20, color = 'orange')
+
+plt.xticks(size = 20)
+plt.yticks(size = 20)
+plt.savefig("../../results/res_box_tl_approach.png")
 plt.show()
 ```
 
 
-![png](bitrate_files/bitrate_106_0.png)
+    
+![png](bitrate_files/bitrate_107_0.png)
+    
 
+
+
+```python
+
+```
+
+
+```python
+
+```
+
+
+```python
+
+```
+
+
+```python
+
+```
+
+
+```python
+
+```
+
+
+```python
+
+```
+
+
+```python
+
+```
+
+
+```python
+
+```
+
+
+```python
+
+```
+
+
+```python
+
+```
+
+
+```python
+
+```
+
+
+```python
+
+```
+
+
+```python
+
+```
+
+
+```python
+
+```
+
+
+```python
+
+```
+
+
+```python
+
+```
+
+
+```python
+
+```
+
+
+```python
+
+```
+
+
+```python
+
+```
+
+
+```python
+
+```
 
 #### Statistical tests - Welch t-test
 
@@ -2909,7 +3951,7 @@ stats.ttest_ind(inputec_ranks, b3_ranks, equal_var = False)
 
 
 
-    Ttest_indResult(statistic=-98.33378880835407, pvalue=0.0)
+    Ttest_indResult(statistic=-95.91425870051047, pvalue=0.0)
 
 
 
@@ -2921,7 +3963,7 @@ stats.ttest_ind(inputec_ranks, b2_ranks, equal_var = False)
 
 
 
-    Ttest_indResult(statistic=-23.142523311285814, pvalue=1.5717544825159734e-77)
+    Ttest_indResult(statistic=-22.78053410433707, pvalue=2.9826134877061904e-76)
 
 
 
@@ -2933,992 +3975,13 @@ stats.ttest_ind(inputec_ranks, b1_ranks, equal_var = False)
 
 
 
-    Ttest_indResult(statistic=-20.136258521891495, pvalue=3.75942856751269e-64)
+    Ttest_indResult(statistic=-30.291019413386437, pvalue=4.973197221060355e-109)
 
 
 
 Three Welch’s t-tests confirm that the rankings of Inputecare significantly different from B1, B2 and B3 rankings. 
 
 We reject the null hypothesis (i.e. the equality of performances).
-
-## Variants of Inputec
-
-### M2 - Cost effective Inputec
-
-#### 20 configurations per videos instead of 201 
-
-
-```python
-nb_config_ce = 20
-
-def gen_dataset_ce(inputs_names):
-
-    res = pd.DataFrame(np.zeros(nb_config_ce*len(inputs_names)*nb_col)
-                       .reshape(nb_config_ce*len(inputs_names), nb_col))
-    res.columns = name_col
-
-    for i in range(len(inputs_names)):
-        video_name = inputs_names[i]
-        index_video = np.where(np.array([v[:-4] for v in v_names], str)==video_name)[0][0]
-        sizes = listVideo[index_video][predDimension]
-        video_prop = np.array(meta_perf.loc[video_name][1:], float)
-        moy = np.mean(sizes)
-        std = np.std(sizes)
-        for config_id in range(nb_config_ce):
-            #config_rank = sorted_config[config_id]
-            val = list(tuple(video_prop) + tuple(val_config.loc[config_id]))
-            val.append((sizes[config_id]-moy)/std)
-            res.loc[i*nb_config_ce+config_id] = val
-    return res
-
-training_data_ce = gen_dataset_ce(train_index)
-test_data_ce = gen_dataset_ce(test_index)
-
-print("Training size : ", training_data_ce.shape[0])
-print("Test size : ", test_data_ce.shape[0])
-
-test_data_ce
-```
-
-    Training size :  20940
-    Test size :  7000
-
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>SLEEQ_DMOS</th>
-      <th>BANDING_DMOS</th>
-      <th>WIDTH</th>
-      <th>HEIGHT</th>
-      <th>SPATIAL_COMPLEXITY</th>
-      <th>TEMPORAL_COMPLEXITY</th>
-      <th>CHUNK_COMPLEXITY_VARIATION</th>
-      <th>COLOR_COMPLEXITY</th>
-      <th>video_category</th>
-      <th>cabac</th>
-      <th>...</th>
-      <th>direct</th>
-      <th>weightb</th>
-      <th>open_gop</th>
-      <th>weightp</th>
-      <th>scenecut</th>
-      <th>rc_lookahead</th>
-      <th>mbtree</th>
-      <th>qpmax</th>
-      <th>aq-mode</th>
-      <th>bitrate</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>-0.678859</td>
-      <td>-0.318559</td>
-      <td>-0.862625</td>
-      <td>-0.999133</td>
-      <td>0.405878</td>
-      <td>-1.237567</td>
-      <td>-0.637153</td>
-      <td>-1.232460</td>
-      <td>1.494379</td>
-      <td>-1.463056</td>
-      <td>...</td>
-      <td>-1.676144</td>
-      <td>-2.038047</td>
-      <td>0.0</td>
-      <td>-1.652973</td>
-      <td>-1.737814</td>
-      <td>-1.112186</td>
-      <td>-1.168183</td>
-      <td>0.0</td>
-      <td>-1.479994</td>
-      <td>3.312123</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>-0.678859</td>
-      <td>-0.318559</td>
-      <td>-0.862625</td>
-      <td>-0.999133</td>
-      <td>0.405878</td>
-      <td>-1.237567</td>
-      <td>-0.637153</td>
-      <td>-1.232460</td>
-      <td>1.494379</td>
-      <td>0.683471</td>
-      <td>...</td>
-      <td>-0.333893</td>
-      <td>0.490641</td>
-      <td>0.0</td>
-      <td>-0.339741</td>
-      <td>-1.737814</td>
-      <td>1.522974</td>
-      <td>0.855996</td>
-      <td>0.0</td>
-      <td>0.675649</td>
-      <td>-0.451564</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>-0.678859</td>
-      <td>-0.318559</td>
-      <td>-0.862625</td>
-      <td>-0.999133</td>
-      <td>0.405878</td>
-      <td>-1.237567</td>
-      <td>-0.637153</td>
-      <td>-1.232460</td>
-      <td>1.494379</td>
-      <td>0.683471</td>
-      <td>...</td>
-      <td>1.008358</td>
-      <td>0.490641</td>
-      <td>0.0</td>
-      <td>-0.339741</td>
-      <td>-1.737814</td>
-      <td>-0.672993</td>
-      <td>0.855996</td>
-      <td>0.0</td>
-      <td>-1.479994</td>
-      <td>-0.263172</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>-0.678859</td>
-      <td>-0.318559</td>
-      <td>-0.862625</td>
-      <td>-0.999133</td>
-      <td>0.405878</td>
-      <td>-1.237567</td>
-      <td>-0.637153</td>
-      <td>-1.232460</td>
-      <td>1.494379</td>
-      <td>0.683471</td>
-      <td>...</td>
-      <td>-0.333893</td>
-      <td>0.490641</td>
-      <td>0.0</td>
-      <td>-0.339741</td>
-      <td>-1.737814</td>
-      <td>-0.672993</td>
-      <td>0.855996</td>
-      <td>0.0</td>
-      <td>-1.479994</td>
-      <td>-0.248645</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>-0.678859</td>
-      <td>-0.318559</td>
-      <td>-0.862625</td>
-      <td>-0.999133</td>
-      <td>0.405878</td>
-      <td>-1.237567</td>
-      <td>-0.637153</td>
-      <td>-1.232460</td>
-      <td>1.494379</td>
-      <td>0.683471</td>
-      <td>...</td>
-      <td>1.008358</td>
-      <td>0.490641</td>
-      <td>0.0</td>
-      <td>-0.339741</td>
-      <td>0.575435</td>
-      <td>0.205394</td>
-      <td>-1.168183</td>
-      <td>0.0</td>
-      <td>0.675649</td>
-      <td>-0.505683</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>6995</th>
-      <td>-0.678859</td>
-      <td>3.192173</td>
-      <td>-0.765307</td>
-      <td>0.783781</td>
-      <td>-1.022175</td>
-      <td>-0.471972</td>
-      <td>0.051558</td>
-      <td>0.084609</td>
-      <td>1.272052</td>
-      <td>0.683471</td>
-      <td>...</td>
-      <td>-0.333893</td>
-      <td>0.490641</td>
-      <td>0.0</td>
-      <td>0.973490</td>
-      <td>0.575435</td>
-      <td>0.644587</td>
-      <td>0.855996</td>
-      <td>0.0</td>
-      <td>0.675649</td>
-      <td>-0.478344</td>
-    </tr>
-    <tr>
-      <th>6996</th>
-      <td>-0.678859</td>
-      <td>3.192173</td>
-      <td>-0.765307</td>
-      <td>0.783781</td>
-      <td>-1.022175</td>
-      <td>-0.471972</td>
-      <td>0.051558</td>
-      <td>0.084609</td>
-      <td>1.272052</td>
-      <td>0.683471</td>
-      <td>...</td>
-      <td>1.008358</td>
-      <td>0.490641</td>
-      <td>0.0</td>
-      <td>0.973490</td>
-      <td>0.575435</td>
-      <td>0.644587</td>
-      <td>0.855996</td>
-      <td>0.0</td>
-      <td>-1.479994</td>
-      <td>0.129613</td>
-    </tr>
-    <tr>
-      <th>6997</th>
-      <td>-0.678859</td>
-      <td>3.192173</td>
-      <td>-0.765307</td>
-      <td>0.783781</td>
-      <td>-1.022175</td>
-      <td>-0.471972</td>
-      <td>0.051558</td>
-      <td>0.084609</td>
-      <td>1.272052</td>
-      <td>0.683471</td>
-      <td>...</td>
-      <td>1.008358</td>
-      <td>0.490641</td>
-      <td>0.0</td>
-      <td>-0.339741</td>
-      <td>0.575435</td>
-      <td>0.644587</td>
-      <td>0.855996</td>
-      <td>0.0</td>
-      <td>0.675649</td>
-      <td>-0.455590</td>
-    </tr>
-    <tr>
-      <th>6998</th>
-      <td>-0.678859</td>
-      <td>3.192173</td>
-      <td>-0.765307</td>
-      <td>0.783781</td>
-      <td>-1.022175</td>
-      <td>-0.471972</td>
-      <td>0.051558</td>
-      <td>0.084609</td>
-      <td>1.272052</td>
-      <td>0.683471</td>
-      <td>...</td>
-      <td>1.008358</td>
-      <td>0.490641</td>
-      <td>0.0</td>
-      <td>0.973490</td>
-      <td>0.575435</td>
-      <td>0.644587</td>
-      <td>0.855996</td>
-      <td>0.0</td>
-      <td>0.675649</td>
-      <td>-0.465430</td>
-    </tr>
-    <tr>
-      <th>6999</th>
-      <td>-0.678859</td>
-      <td>3.192173</td>
-      <td>-0.765307</td>
-      <td>0.783781</td>
-      <td>-1.022175</td>
-      <td>-0.471972</td>
-      <td>0.051558</td>
-      <td>0.084609</td>
-      <td>1.272052</td>
-      <td>-1.463056</td>
-      <td>...</td>
-      <td>1.008358</td>
-      <td>0.490641</td>
-      <td>0.0</td>
-      <td>0.973490</td>
-      <td>0.575435</td>
-      <td>0.644587</td>
-      <td>0.855996</td>
-      <td>0.0</td>
-      <td>0.675649</td>
-      <td>0.090160</td>
-    </tr>
-  </tbody>
-</table>
-<p>7000 rows × 34 columns</p>
-</div>
-
-
-
-
-```python
-X_train_ce = np.array(training_data_ce.drop(["bitrate"],axis=1), float)
-y_train_ce = np.array(training_data_ce["bitrate"], float)
-
-X_test_ce = np.array(test_data_ce.drop(["bitrate"],axis=1), float)
-y_test_ce = np.array(test_data_ce["bitrate"], float)
-```
-
-
-```python
-LA_ce = RandomForestRegressor()
-
-LA_ce.fit(X_train_ce, y_train_ce)
-
-y_pred_ce = LA_ce.predict(X_test_ce)
-```
-
-
-```python
-print(LA_ce.feature_importances_)
-```
-
-    [2.58104138e-02 1.35293465e-02 8.85210472e-03 7.71580050e-03
-     1.56298774e-01 8.43570731e-02 4.42156427e-02 4.01466326e-02
-     1.83962025e-02 1.48927494e-02 1.86220438e-03 1.72920926e-01
-     5.36078564e-03 1.74794866e-03 3.45086998e-01 1.93489169e-04
-     6.55001699e-03 5.72254647e-03 3.87280816e-04 8.16225410e-04
-     4.10620441e-03 2.88451723e-03 1.81092608e-04 2.44466929e-04
-     5.75989869e-04 2.72102964e-04 0.00000000e+00 1.61334658e-03
-     2.96307753e-03 6.76941922e-03 1.05046271e-02 0.00000000e+00
-     1.50219944e-02]
-
-
-
-```python
-np.mean(np.abs(y_pred_ce-y_test_ce))
-```
-
-
-
-
-    0.2587928911994988
-
-
-
-
-```python
-print(name_col)
-```
-
-    ['SLEEQ_DMOS', 'BANDING_DMOS', 'WIDTH', 'HEIGHT', 'SPATIAL_COMPLEXITY', 'TEMPORAL_COMPLEXITY', 'CHUNK_COMPLEXITY_VARIATION', 'COLOR_COMPLEXITY', 'video_category', 'cabac', 'ref', 'deblock', 'analyse', 'me', 'subme', 'mixed_ref', 'me_range', 'trellis', '8x8dct', 'fast_pskip', 'chroma_qp_offset', 'bframes', 'b_pyramid', 'b_adapt', 'direct', 'weightb', 'open_gop', 'weightp', 'scenecut', 'rc_lookahead', 'mbtree', 'qpmax', 'aq-mode', 'bitrate']
-
-
-
-```python
-# the performance values for the configuration chosen by Inputec, for the test set of videos
-inputec_m2 = []
-
-# the performance rankings for the configuration chosen by Inputec, for the test set of videos
-inputec_m2_ranks = []
-
-# for each video in the test set
-for ti in test_index:
-    # we retrieve the test index
-    index_video = np.where(np.array([v[:-4] for v in v_names], str)==ti)[0][0]
-    # list of predictions for inputec
-    pred_inputec = []
-    # for each configuration
-    for i in range(nb_config):
-        # we add input properties to the configurations
-        video_prop = list(tuple(meta_perf.loc[ti][1:])+tuple(val_config.loc[i]))
-        # we predict the value associated to the configuration
-        pred_inputec.append(LA_ce.predict(np.array(video_prop, float).reshape(1, 33)))
-    # sorted performances
-    sorted_perfs = sorted(listVideo[index_video][predDimension])
-    # the performance of the configuration chosen by Inputec
-    perf = listVideo[index_video].loc[np.argmin(pred_inputec)][predDimension]
-    # we add it to the perf array
-    inputec_m2.append(perf)
-    # the related ranking (between 0 and 200, hopefully close to 0)
-    inputec_m2_ranks.append(find_rank(sorted_perfs, perf))
-```
-
-
-```python
-pd.Series(inputec_m2).describe()
-```
-
-
-
-
-    count      350.000000
-    mean      7505.176486
-    std      12451.631532
-    min         17.470000
-    25%        948.537500
-    50%       2397.540000
-    75%       8396.222500
-    max      94019.600000
-    dtype: float64
-
-
-
-
-```python
-pd.Series(inputec_m2_ranks).describe()
-```
-
-
-
-
-    count    350.000000
-    mean      34.762857
-    std       28.776250
-    min        0.000000
-    25%       11.000000
-    50%       28.000000
-    75%       53.000000
-    max      145.000000
-    dtype: float64
-
-
-
-### M3 - Property selection
-
-#### Only keep affordable properties in the model - drop SLEEQ MOS and Banding MOS
-
-
-```python
-name_col = list(meta_perf.columns)[3:]
-
-for vcc in val_config.columns:
-    name_col.append(vcc)
-
-name_col.append("bitrate")
-
-nb_col = len(name_col)
-nb_config = 201
-
-def gen_dataset(inputs_names):
-    
-    res = pd.DataFrame(np.zeros(nb_config*len(inputs_names)*nb_col).reshape(nb_config*len(inputs_names), nb_col))
-    res.columns = name_col
-
-    for i in range(len(inputs_names)):
-        video_name = inputs_names[i]
-        index_video = np.where(np.array([v[:-4] for v in v_names], str)==video_name)[0][0]
-        sizes = listVideo[index_video][predDimension]
-        sorted_config = sorted(range(len(sizes)), key=lambda k: sizes[k])
-        video_prop = np.array(meta_perf.loc[video_name][3:], float)
-        moy = np.mean(sizes)
-        std = np.std(sizes)            
-        for config_id in range(len(sorted_config)):
-            config_rank = sorted_config[config_id]
-            val = list(tuple(video_prop) + tuple(val_config.loc[config_id]))
-            val.append((sizes[config_id]-moy)/std)
-            res.loc[i*nb_config+config_id] = val
-    return res
-
-training_data_m3 = gen_dataset(train_index)
-test_data_m3 = gen_dataset(test_index)
-
-print("Training size : ", training_data_m3.shape[0])
-print("Test size : ", test_data_m3.shape[0])
-
-test_data_m3
-```
-
-    Training size :  210447
-    Test size :  70350
-
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>WIDTH</th>
-      <th>HEIGHT</th>
-      <th>SPATIAL_COMPLEXITY</th>
-      <th>TEMPORAL_COMPLEXITY</th>
-      <th>CHUNK_COMPLEXITY_VARIATION</th>
-      <th>COLOR_COMPLEXITY</th>
-      <th>video_category</th>
-      <th>cabac</th>
-      <th>ref</th>
-      <th>deblock</th>
-      <th>...</th>
-      <th>direct</th>
-      <th>weightb</th>
-      <th>open_gop</th>
-      <th>weightp</th>
-      <th>scenecut</th>
-      <th>rc_lookahead</th>
-      <th>mbtree</th>
-      <th>qpmax</th>
-      <th>aq-mode</th>
-      <th>bitrate</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>-0.862625</td>
-      <td>-0.999133</td>
-      <td>0.405878</td>
-      <td>-1.237567</td>
-      <td>-0.637153</td>
-      <td>-1.232460</td>
-      <td>1.494379</td>
-      <td>-1.463056</td>
-      <td>-0.773348</td>
-      <td>-1.551346</td>
-      <td>...</td>
-      <td>-1.676144</td>
-      <td>-2.038047</td>
-      <td>0.0</td>
-      <td>-1.652973</td>
-      <td>-1.737814</td>
-      <td>-1.112186</td>
-      <td>-1.168183</td>
-      <td>0.0</td>
-      <td>-1.479994</td>
-      <td>3.312123</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>-0.862625</td>
-      <td>-0.999133</td>
-      <td>0.405878</td>
-      <td>-1.237567</td>
-      <td>-0.637153</td>
-      <td>-1.232460</td>
-      <td>1.494379</td>
-      <td>0.683471</td>
-      <td>-0.585615</td>
-      <td>0.644573</td>
-      <td>...</td>
-      <td>-0.333893</td>
-      <td>0.490641</td>
-      <td>0.0</td>
-      <td>-0.339741</td>
-      <td>-1.737814</td>
-      <td>1.522974</td>
-      <td>0.855996</td>
-      <td>0.0</td>
-      <td>0.675649</td>
-      <td>-0.451564</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>-0.862625</td>
-      <td>-0.999133</td>
-      <td>0.405878</td>
-      <td>-1.237567</td>
-      <td>-0.637153</td>
-      <td>-1.232460</td>
-      <td>1.494379</td>
-      <td>0.683471</td>
-      <td>-0.585615</td>
-      <td>0.644573</td>
-      <td>...</td>
-      <td>1.008358</td>
-      <td>0.490641</td>
-      <td>0.0</td>
-      <td>-0.339741</td>
-      <td>-1.737814</td>
-      <td>-0.672993</td>
-      <td>0.855996</td>
-      <td>0.0</td>
-      <td>-1.479994</td>
-      <td>-0.263172</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>-0.862625</td>
-      <td>-0.999133</td>
-      <td>0.405878</td>
-      <td>-1.237567</td>
-      <td>-0.637153</td>
-      <td>-1.232460</td>
-      <td>1.494379</td>
-      <td>0.683471</td>
-      <td>-0.585615</td>
-      <td>-1.551346</td>
-      <td>...</td>
-      <td>-0.333893</td>
-      <td>0.490641</td>
-      <td>0.0</td>
-      <td>-0.339741</td>
-      <td>-1.737814</td>
-      <td>-0.672993</td>
-      <td>0.855996</td>
-      <td>0.0</td>
-      <td>-1.479994</td>
-      <td>-0.248645</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>-0.862625</td>
-      <td>-0.999133</td>
-      <td>0.405878</td>
-      <td>-1.237567</td>
-      <td>-0.637153</td>
-      <td>-1.232460</td>
-      <td>1.494379</td>
-      <td>0.683471</td>
-      <td>2.042646</td>
-      <td>0.644573</td>
-      <td>...</td>
-      <td>1.008358</td>
-      <td>0.490641</td>
-      <td>0.0</td>
-      <td>-0.339741</td>
-      <td>0.575435</td>
-      <td>0.205394</td>
-      <td>-1.168183</td>
-      <td>0.0</td>
-      <td>0.675649</td>
-      <td>-0.505683</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>70345</th>
-      <td>-0.765307</td>
-      <td>0.783781</td>
-      <td>-1.022175</td>
-      <td>-0.471972</td>
-      <td>0.051558</td>
-      <td>0.084609</td>
-      <td>1.272052</td>
-      <td>0.683471</td>
-      <td>-0.585615</td>
-      <td>0.644573</td>
-      <td>...</td>
-      <td>1.008358</td>
-      <td>0.490641</td>
-      <td>0.0</td>
-      <td>-0.339741</td>
-      <td>0.575435</td>
-      <td>-0.233799</td>
-      <td>0.855996</td>
-      <td>0.0</td>
-      <td>0.675649</td>
-      <td>-0.837034</td>
-    </tr>
-    <tr>
-      <th>70346</th>
-      <td>-0.765307</td>
-      <td>0.783781</td>
-      <td>-1.022175</td>
-      <td>-0.471972</td>
-      <td>0.051558</td>
-      <td>0.084609</td>
-      <td>1.272052</td>
-      <td>0.683471</td>
-      <td>-0.585615</td>
-      <td>-1.551346</td>
-      <td>...</td>
-      <td>1.008358</td>
-      <td>0.490641</td>
-      <td>0.0</td>
-      <td>-0.339741</td>
-      <td>0.575435</td>
-      <td>0.205394</td>
-      <td>0.855996</td>
-      <td>0.0</td>
-      <td>0.675649</td>
-      <td>-0.765739</td>
-    </tr>
-    <tr>
-      <th>70347</th>
-      <td>-0.765307</td>
-      <td>0.783781</td>
-      <td>-1.022175</td>
-      <td>-0.471972</td>
-      <td>0.051558</td>
-      <td>0.084609</td>
-      <td>1.272052</td>
-      <td>0.683471</td>
-      <td>-0.022416</td>
-      <td>0.644573</td>
-      <td>...</td>
-      <td>-0.333893</td>
-      <td>0.490641</td>
-      <td>0.0</td>
-      <td>-0.339741</td>
-      <td>0.575435</td>
-      <td>0.205394</td>
-      <td>0.855996</td>
-      <td>0.0</td>
-      <td>0.675649</td>
-      <td>-0.507644</td>
-    </tr>
-    <tr>
-      <th>70348</th>
-      <td>-0.765307</td>
-      <td>0.783781</td>
-      <td>-1.022175</td>
-      <td>-0.471972</td>
-      <td>0.051558</td>
-      <td>0.084609</td>
-      <td>1.272052</td>
-      <td>-1.463056</td>
-      <td>-0.397882</td>
-      <td>-1.551346</td>
-      <td>...</td>
-      <td>1.008358</td>
-      <td>0.490641</td>
-      <td>0.0</td>
-      <td>0.973490</td>
-      <td>0.575435</td>
-      <td>0.205394</td>
-      <td>-1.168183</td>
-      <td>0.0</td>
-      <td>0.675649</td>
-      <td>0.836881</td>
-    </tr>
-    <tr>
-      <th>70349</th>
-      <td>-0.765307</td>
-      <td>0.783781</td>
-      <td>-1.022175</td>
-      <td>-0.471972</td>
-      <td>0.051558</td>
-      <td>0.084609</td>
-      <td>1.272052</td>
-      <td>0.683471</td>
-      <td>2.042646</td>
-      <td>0.644573</td>
-      <td>...</td>
-      <td>-0.333893</td>
-      <td>0.490641</td>
-      <td>0.0</td>
-      <td>0.973490</td>
-      <td>0.575435</td>
-      <td>1.522974</td>
-      <td>0.855996</td>
-      <td>0.0</td>
-      <td>0.675649</td>
-      <td>-1.337769</td>
-    </tr>
-  </tbody>
-</table>
-<p>70350 rows × 32 columns</p>
-</div>
-
-
-
-
-```python
-X_train_m3 = np.array(training_data_m3.drop(["bitrate"],axis=1), float)
-y_train_m3 = np.array(training_data_m3["bitrate"], float)
-
-X_test_m3 = np.array(test_data_m3.drop(["bitrate"],axis=1), float)
-y_test_m3 = np.array(test_data_m3["bitrate"], float)
-```
-
-
-```python
-LA_m3 = RandomForestRegressor()
-
-LA_m3.fit(X_train_m3, y_train_m3)
-```
-
-
-
-
-    RandomForestRegressor(bootstrap=True, ccp_alpha=0.0, criterion='mse',
-                          max_depth=None, max_features='auto', max_leaf_nodes=None,
-                          max_samples=None, min_impurity_decrease=0.0,
-                          min_impurity_split=None, min_samples_leaf=1,
-                          min_samples_split=2, min_weight_fraction_leaf=0.0,
-                          n_estimators=100, n_jobs=None, oob_score=False,
-                          random_state=None, verbose=0, warm_start=False)
-
-
-
-
-```python
-y_pred_m3 = LA_m3.predict(X_test_m3)
-```
-
-
-```python
-print(LA_m3.feature_importances_)
-```
-
-    [8.75669981e-03 7.00535957e-03 1.04071041e-01 7.49649653e-02
-     3.45982799e-02 3.19968676e-02 1.64322537e-02 4.27870461e-02
-     2.81592001e-03 6.70882563e-04 3.00687591e-03 2.30621608e-03
-     5.02930843e-01 7.74346302e-04 4.47336832e-04 6.93324820e-03
-     7.34575799e-04 2.92913570e-03 3.23047550e-03 1.26097616e-02
-     9.92219784e-03 8.04224890e-03 2.65946478e-03 6.62996864e-03
-     0.00000000e+00 1.44786159e-03 9.93448018e-04 4.67711998e-03
-     4.03809753e-02 0.00000000e+00 6.52445839e-02]
-
-
-
-```python
-np.mean(np.abs(y_pred_m3-y_test_m3))
-```
-
-
-
-
-    0.2803430612686696
-
-
-
-
-```python
-# the performance values for the configuration chosen by Inputec, for the test set of videos
-inputec_m3 = []
-
-# the performance rankings for the configuration chosen by Inputec, for the test set of videos
-inputec_m3_ranks = []
-
-# for each video in the test set
-for ti in test_index:
-    # we retrieve the test index
-    index_video = np.where(np.array([v[:-4] for v in v_names], str)==ti)[0][0]
-    # list of predictions for inputec
-    pred_inputec = []
-    # for each configuration
-    for i in range(nb_config):
-        # we add input properties to the configurations
-        video_prop = list(tuple(meta_perf.loc[ti][3:])+tuple(val_config.loc[i]))
-        # we predict the value associated to the configuration
-        pred_inputec.append(LA_m3.predict(np.array(video_prop, float).reshape(1, 31)))
-    # sorted performances
-    sorted_perfs = sorted(listVideo[index_video][predDimension])
-    # the performance of the configuration chosen by Inputec
-    perf = listVideo[index_video].loc[np.argmin(pred_inputec)][predDimension]
-    # we add it to the perf array
-    inputec_m3.append(perf)
-    # the related ranking (between 0 and 200, hopefully close to 0)
-    inputec_m3_ranks.append(find_rank(sorted_perfs, perf))
-```
-
-
-```python
-pd.Series(inputec_m3).describe()
-```
-
-
-
-
-    count      350.000000
-    mean      7160.058743
-    std      12262.420770
-    min         19.080000
-    25%        829.852500
-    50%       2181.430000
-    75%       7712.815000
-    max      88511.370000
-    dtype: float64
-
-
-
-
-```python
-pd.Series(inputec_m3_ranks).describe()
-```
-
-
-
-
-    count    350.000000
-    mean      11.611429
-    std       21.840209
-    min        0.000000
-    25%        0.000000
-    50%        3.000000
-    75%       11.000000
-    max      142.000000
-    dtype: float64
-
-
 
 
 ```python
