@@ -1,7 +1,7 @@
 # Learning Once and for All ?
 # On the Input Sensitivity of Configurable Systems
 
-Dear ICSE reviewers,
+Dear ESEC/FSE reviewers,
 
 In this repository, you can consult the code, the data and the results related to our submission "Learning Once and for All? On the Input Sensitivity of Configurable Systems".
 
