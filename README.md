@@ -13,11 +13,11 @@ If you don't care about paper details, just follow the instructions:
 
 - Pull our image, by typing the following line in a terminal
 
-```sudo docker pull anonymicse2021/icse2021:latest```
+```sudo docker pull anonymicse2021/fse21:latest```
 
 - Run it in interactive mode
 
-```sudo docker run -it anonymicse2021/icse2021```
+```sudo docker run -it anonymicse2021/fse21:latest```
 
 You need to test the *measurement process* (i.e. validate that you can measure x264 performances with other videos) and the *code* (i.e. run our code on your laptop) :
 
@@ -49,7 +49,7 @@ And launch the python script :
 
 In the command line outputs, you will see the outputs (as in the [outputs.txt](https://anonymous.4open.science/r/df319578-8767-47b0-919d-a8e57eb67d25/replication/code/outputs.txt) file) printed and explained in the related [markdown](https://anonymous.4open.science/r/df319578-8767-47b0-919d-a8e57eb67d25/src/main/bitrate.md).
 
-The python script is relatively long to run entirely (at least 15 minutes). Once the run is finished, you can attest that the results directory contains the figure printed in our paper:
+The python script is relatively long to run entirely (about 30 minutes). Once the run is finished, you can attest that the results directory contains the figure printed in our paper:
 
 ```ls ../../results```
 
@@ -172,6 +172,6 @@ Other results are in the sub-directory [others](https://anonymous.4open.science/
 
 # Acknowledgement
 
-We would like to thank Yilin Wang for the explanations about input properties.
+We would like to thank Yilin Wang for his explanations about input properties.
 
 
