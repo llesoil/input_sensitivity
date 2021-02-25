@@ -2,6 +2,8 @@
 
 ## *Simple Learning*
 
+Simple learning applies machine learning algorithms, without making any difference between the input videos.
+
 ### Best Compromise
 
 **Best compromise (BC)** applies a performance model on all the training set, without making a difference between input videos. 

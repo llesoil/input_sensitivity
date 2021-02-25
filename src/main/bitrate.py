@@ -1,16 +1,16 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # Learning Once and for All - On the Input Sensitivity of Configurable Systems
+# # Predicting Performances of Configurable Systems:the Issue of Input Sensitivity
 # 
-# ### This notebook details the main results presented in the paper submitted to the International Conference of Software Engineering.
+# ### This notebook details the main results presented in the paper submitted to ESEC/FSE.
 
 # #### Warning; Before launching the notebook, make sure you have installed all the packages in your python environment
 # #### To do that,  open a terminal in the replication folder, and use the requirements.txt file to download the libraries needed for this script :
 # `pip3 install -r requirements.txt`
 # #### If it worked, you should be able to launch the following cell to import libraries.
 
-# In[45]:
+# In[1]:
 
 
 # for arrays
@@ -147,7 +147,7 @@ v_names[1167]
 # 
 # Other alternatives : Kullback-Leibler divergences to detect outliers, and Pearson correlation to compute only linear correlations 
 
-# In[7]:
+# In[52]:
 
 
 # number of videos
@@ -168,7 +168,7 @@ for i in range(nbVideos):
 
 # #### Here is the distribution depicted in figure 1, on the bottom left; we removed the diagonal $i!=j$ in the following code.
 
-# In[8]:
+# In[53]:
 
 
 corrDescription = [corrSpearman[i][j] for i in range(nbVideos) for j in range(nbVideos) if i >j]
@@ -179,7 +179,7 @@ pd.Series(corrDescription).describe()
 
 # #### A small detail; in the paper, when we mention the video having the id $i$,  it means the $(i+1)^{th}$ video of the list, because the first input has the index 0
 
-# In[9]:
+# In[54]:
 
 
 min_val = 1
@@ -196,19 +196,19 @@ print("Value : ", min_val)
 print("i : ", ind_i, ", j : ", ind_j)
 
 
-# In[10]:
+# In[55]:
 
 
 corrSpearman[378][1192]
 
 
-# In[11]:
+# In[56]:
 
 
 corrSpearman[314][1192]
 
 
-# In[12]:
+# In[57]:
 
 
 corrSpearman[378][314]
@@ -216,14 +216,14 @@ corrSpearman[378][314]
 
 # #### "For 95% of the videos, it is always possible to find another video having a correlation higher than 0.92" -> here is the proof 
 
-# In[13]:
+# In[58]:
 
 
 argm = [np.max([k for k in corrSpearman[i] if k <1]) for i in range(len(corrSpearman))]
 pd.Series(argm).describe()
 
 
-# In[14]:
+# In[59]:
 
 
 np.percentile(argm, 5)
@@ -233,7 +233,7 @@ np.percentile(argm, 5)
 # 
 # #### Now, let's compute figure 1!
 
-# In[15]:
+# In[60]:
 
 
 # the results directory
@@ -427,7 +427,7 @@ pd.Series(rankings.loc[np.argmin(stds),:]).describe()
 
 # #### A-] For RQ1-2, we compute the feature importances of configuration options for each video
 
-# In[28]:
+# In[62]:
 
 
 # the list of p = 24 features
@@ -512,7 +512,7 @@ def compute_Importances(listVid, id_short = None):
     return res
 
 
-# In[29]:
+# In[63]:
 
 
 # we compute the feature importances
@@ -522,7 +522,7 @@ res_imp = compute_Importances(listVideo)
 # ## Figure 2a
 # #### Then, we depict a boxplot of features importances; for each feature, there are 1397 feature importances (one per video)
 
-# In[30]:
+# In[82]:
 
 
 # we sort the features by names 
@@ -548,6 +548,8 @@ for n in range(len(to_replace_b4)):
 red_square = dict(markerfacecolor='r', marker='s')
 plt.figure(figsize=(15,8))
 plt.grid()
+plt.scatter([np.mean(l[1]) for l in listImp], range(1, 1+len(listImp)),
+           marker="x", color = "black", alpha = 1, s = 20)
 plt.boxplot([l[1] for l in listImp], flierprops=red_square, 
           vert=False, patch_artist=True, #widths=0.25,
           boxprops=dict(facecolor=(0,0,1,0.5),linewidth=1,edgecolor='k'),
@@ -564,7 +566,7 @@ plt.show()
 
 # #### B-] Since feature importances do not get how the predicting variables (i.e. the configuraiton options) affect the variable to predict (i.e. the bitrate), we add linear regression coefficients
 
-# In[31]:
+# In[66]:
 
 
 # alternatively, we can only select the important features to plot the tukey diagrams
@@ -654,7 +656,7 @@ res_coef
 # ## Figure 2b
 # #### Same idea for this plot, see the last cell of RQ1.2-A-]
 
-# In[32]:
+# In[81]:
 
 
 listImp = [(np.abs(np.percentile(res_coef[col],75)-np.percentile(res_coef[col],25)),res_coef[col], col) 
@@ -674,6 +676,8 @@ for n in range(len(to_replace_b4)):
 red_square = dict(markerfacecolor='r', marker='s')
 plt.figure(figsize=(15,8))
 plt.grid()
+plt.scatter([np.mean(l[1]) for l in listImp], range(1, 1+len(listImp)),
+           marker="x", color = "black", alpha = 1, s = 20)
 plt.boxplot([l[1] for l in listImp], flierprops=red_square, 
           vert=False, patch_artist=True, #widths=0.25,
           boxprops=dict(facecolor=(0,0,1,0.5),linewidth=1,edgecolor='k'),
@@ -1028,10 +1032,12 @@ print(res_med)
 # #### Between the different (correlation inter), the performances of inputs are generally moderate or low (except for groups 3 and 4)
 
 # # In the paper, here starts Section III
+# 
+# # RQ2. What could be a good tradeoff between the accuracy and the cost of the prediction? 
 
 # ## Separation of training set of videos and test set of videos
 
-# In[43]:
+# In[7]:
 
 
 # v_names_train, v_names_test = train_test_split(v_names, train_size = 1050)
@@ -1043,20 +1049,20 @@ print(res_med)
 
 # save names of train inputs
 # np.savetxt("../../data/train_names.csv", v_names_train, fmt='%s')
-v_names_train = np.loadtxt("../../data/train_names.csv", dtype= str)
+v_names_train = np.loadtxt("../../results/raw_data/train_names.csv", dtype= str)
 
 # save names of test inputs
 # np.savetxt("../../data/test_names.csv", v_names_test, fmt='%s')
-v_names_test = np.loadtxt("../../data/test_names.csv", dtype= str)
+v_names_test = np.loadtxt("../../results/raw_data/test_names.csv", dtype= str)
 
 
-# In[44]:
+# In[8]:
 
 
 v_names_train[0:50]
 
 
-# In[62]:
+# In[9]:
 
 
 listVideoTest = [listVideo[i] for i in range(len(listVideo)) if v_names[i] in v_names_test]
@@ -1065,7 +1071,7 @@ assert len(listVideoTest) == len(v_names_test)
 
 # #### Isolate best configurations
 
-# In[65]:
+# In[10]:
 
 
 best_perfs = [np.min(vid[predDimension]) for vid in listVideoTest]
@@ -1083,7 +1089,7 @@ best_configs = [np.argmin(vid[predDimension]) for vid in listVideoTest]
 # 
 # The **Model Reuse** selects a video of the training set, apply a model on it and keep a near-optimal configuration working for this video. Then, it applies this configuration to all inputs of the test set.
 
-# In[147]:
+# In[11]:
 
 
 MR_configs = np.loadtxt("../../results/raw_data/MR_results.csv")
@@ -1096,7 +1102,7 @@ MR_ratios = [listVideoTest[i][predDimension][MR_configs[i]]/best_perfs[i] for i 
 # It selects the configuration working best for most videos in the training set. 
 # Technically, we rank the 201 configurations (1 being the optimal configuration, and 201 the worst) and select the one optimizing the sum of ranks for all input videos in the training set. 
 
-# In[148]:
+# In[12]:
 
 
 BC_configs = np.loadtxt("../../results/raw_data/BC_results.csv")
@@ -1109,7 +1115,7 @@ BC_ratios = [listVideoTest[i][predDimension][BC_configs[i]]/best_perfs[i] for i 
 # 
 # **Direct Inclusion (DI)** includes input properties directly in the model during the training phase. The trained model then predicts the performance of x264 based on a set of properties (i.e. information about the input video) **and** a set of configuration options (i.e. information about the configuration). We fed this model with the 201 configurations of our dataset, and the properties of the test videos. We select the configuration giving the best prediction (e.g. the lowest bitrate).
 
-# In[216]:
+# In[13]:
 
 
 DI_configs = np.loadtxt("../../results/raw_data/DI_results.csv")
@@ -1159,7 +1165,7 @@ DI_ratios = [listVideoTest[i][predDimension][DI_configs[i]]/best_perfs[i] for i 
 # 
 # **Step 6. Propose a configuration for the new input** - We then propose a configuration based on the input properties of the video. It becomes a n-classification problem, where n is the number of landmarks kept for the group predicted in Step 5. We keep the best configuration predicted in Step 6.
 
-# In[150]:
+# In[14]:
 
 
 IaL_configs = np.loadtxt("../../results/raw_data/IaL_results.csv")
@@ -1194,7 +1200,7 @@ IaL_ratios = [listVideoTest[i][predDimension][IaL_configs[i]]/best_perfs[i] for 
 # Then, we transfer performances from this bellwether input to all inputs of the test set. 
 # We only apply the discovery phase (i.e. the search of bellwether) on the training set, to avoid introducing any bias in the results. 
 
-# In[237]:
+# In[15]:
 
 
 beetle_data = pd.read_csv("../../results/raw_data/Beetle_results.csv").set_index("id_video")
@@ -1218,7 +1224,7 @@ beetle_data
 # Then, it explores the similarities between the source and the target, thus adding configurations having similar performances for the source and the target. 
 # Finally, it uses the configurations selected in previous steps to efficiently train a model on the target input. 
 
-# In[238]:
+# In[16]:
 
 
 l2s_data = pd.read_csv("../../results/raw_data/L2S_results.csv").set_index("id_video")
@@ -1253,7 +1259,7 @@ l2s_data
 # The original paper uses a linear function to transfer the performances between the source and the target. 
 # However, we extended this definition to any function (\eg random forest, neural network, \etc) able to learn the differences between the source and the target measurements. 
 
-# In[239]:
+# In[17]:
 
 
 ms_data = pd.read_csv("../../results/raw_data/MS_results.csv").set_index("id_video")
@@ -1266,7 +1272,7 @@ ms_data
 # It trains a performance model directly on the target input, without using the source. 
 # We expect to outperform No Transfer with transfer learning approaches. 
 
-# In[301]:
+# In[18]:
 
 
 nt_data = pd.read_csv("../../results/raw_data/NT_results.csv").set_index("id_video")
@@ -1275,7 +1281,7 @@ nt_data
 
 # ## First results about properties - Figure 5a
 
-# In[334]:
+# In[48]:
 
 
 # we aggregate the different ratios, sorted by increasing efficiency
@@ -1292,14 +1298,14 @@ red_square = dict(markerfacecolor='r', marker='s')
 # figure size
 plt.figure(figsize=(16,12))
 # add a grid
-plt.grid()
+plt.grid(alpha =0.5)
 plt.boxplot(box_res, flierprops=red_square, 
           vert=True, patch_artist=True, widths=0.25,
           boxprops=dict(facecolor=(0,0,1,0.5),linewidth=1,edgecolor='k'),
           whiskerprops = dict(linestyle='-.',linewidth=1.0, color='black'))
 # add crosses for average values of distributions
 plt.scatter(np.arange(1, 5, 1), np.array([np.mean(box_res.iloc[i]) for i in range(4)]), 
-            marker="x", color = "red", alpha = 1, s = 100)
+            marker="x", color = "black", alpha = 1, s = 100)
 # Limits
 plt.ylim(0.9,2.5)
 plt.xlim(0.5,4.5)
@@ -1327,11 +1333,142 @@ plt.savefig("../../results/res_box_approach.png")
 plt.show()
 
 
+# #### Description of the results
+
+# ##### Average results
+
+# In[20]:
+
+
+np.mean(BC_ratios)
+
+
+# In[21]:
+
+
+np.mean(MR_ratios)
+
+
+# In[22]:
+
+
+np.mean(IaL_ratios)
+
+
+# In[23]:
+
+
+np.mean(DI_ratios)
+
+
+# ##### Median results
+
+# In[24]:
+
+
+np.median(BC_ratios)
+
+
+# In[25]:
+
+
+np.median(MR_ratios)
+
+
+# In[26]:
+
+
+np.median(IaL_ratios)
+
+
+# In[27]:
+
+
+np.median(DI_ratios)
+
+
+# ##### IQR
+
+# In[28]:
+
+
+def iqr(distrib):
+    return np.percentile(distrib, 75) - np.percentile(distrib, 25)
+
+
+# In[29]:
+
+
+iqr(MR_ratios)
+
+
+# In[30]:
+
+
+iqr(BC_ratios)
+
+
+# In[31]:
+
+
+iqr(IaL_ratios)
+
+
+# In[32]:
+
+
+iqr(DI_ratios)
+
+
+# #### Statistical tests - Welch t-test
+
+# In[33]:
+
+
+stats.wilcoxon(IaL_ratios, BC_ratios)
+
+
+# In[34]:
+
+
+stats.wilcoxon(IaL_ratios, MR_ratios)
+
+
+# In[35]:
+
+
+stats.wilcoxon(DI_ratios, BC_ratios)
+
+
+# In[36]:
+
+
+stats.wilcoxon(DI_ratios, MR_ratios)
+
+
+# DI and MR, DI and BC, IaL and MR, IaL and BC are significantly different
+
+# In[37]:
+
+
+stats.wilcoxon(DI_ratios, IaL_ratios)
+
+
+# IaL and DI are significantly different
+
+# In[38]:
+
+
+stats.wilcoxon(BC_ratios, MR_ratios)
+
+
+# MR and BC are not significantly different
+
 # ## Results about cost - Figure 5b
 
 # Aggregation of data
 
-# In[332]:
+# In[39]:
 
 
 f = []
@@ -1352,19 +1489,21 @@ final_tl_data = pd.DataFrame(f, columns = ["ratio", "training_size", "Approach"]
 final_tl_data
 
 
-# In[333]:
+# In[49]:
 
 
 plt.figure(figsize=(16,12))
 
-plt.grid()
+plt.grid(alpha=0.5)
 
 # Draw a nested boxplot to show bills by day and time
 sns.boxplot(x="training_size", y="ratio",
             hue="Approach", palette=["lightgreen", "coral", "lightgray", "purple"],
-            data=final_tl_data)
+            data=final_tl_data, 
+            showmeans=True, 
+            meanprops={"marker":"x", "markeredgecolor":"black"})
 plt.ylabel("Ratio performance/best", size = 20)
-plt.xlabel("Budget - # Training target configurations", size = 20)
+plt.xlabel("Budget - # Training configurations - Target", size = 20)
 plt.ylim(0.9,2.5)
 plt.legend(fontsize=20, loc = 'upper right')
 
@@ -1379,6 +1518,121 @@ plt.savefig("../../results/res_box_tl_approach.png")
 plt.show()
 
 
+# In[66]:
+
+
+approaches = ["Beetle", "Learning to Sample (L2S)", "Model Shift (MS)", "No Transfer (NT)"]
+budgets = np.arange(5, 31, 5)
+
+def get_ratio(approach, training_size):
+    if training_size < 10:
+        training_size= '0'+str(training_size)
+    return final_tl_data.query("Approach=='"+approach
+                               +"' and training_size=='"+str(training_size)+"'")['ratio']
+
+
+# In[72]:
+
+
+np.mean(get_ratio("Model Shift (MS)", 10))
+
+
+# In[76]:
+
+
+np.median(get_ratio("Model Shift (MS)", 10))
+
+
+# In[77]:
+
+
+iqr(get_ratio("Model Shift (MS)", 10))
+
+
+# In[74]:
+
+
+np.mean(get_ratio("Beetle", 10))
+
+
+# In[75]:
+
+
+np.median(get_ratio("Beetle", 10))
+
+
+# In[78]:
+
+
+iqr(get_ratio("Beetle", 10))
+
+
+# In[82]:
+
+
+np.median(get_ratio("Learning to Sample (L2S)", 10))
+
+
+# In[83]:
+
+
+stats.wilcoxon(DI_ratios, get_ratio("Learning to Sample (L2S)", 30))
+
+
+# In[84]:
+
+
+np.mean(get_ratio("Learning to Sample (L2S)", 30))
+
+
+# In[85]:
+
+
+np.median(get_ratio("Learning to Sample (L2S)", 30))
+
+
+# In[86]:
+
+
+np.mean(get_ratio("Learning to Sample (L2S)", 30)==1)
+
+
+# In[94]:
+
+
+iqr(get_ratio("Learning to Sample (L2S)", 10))
+
+
+# In[89]:
+
+
+iqr(get_ratio("Learning to Sample (L2S)", 30))
+
+
+# In[91]:
+
+
+iqr(get_ratio("Beetle", 5))
+
+
+# In[90]:
+
+
+iqr(get_ratio("Beetle", 30))
+
+
+# In[95]:
+
+
+iqr(get_ratio("Model Shift (MS)", 10))
+
+
+# In[96]:
+
+
+iqr(get_ratio("Model Shift (MS)", 30))
+
+
 # In[ ]:
 
 
@@ -1414,114 +1668,6 @@ plt.show()
 
 
 
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# #### Statistical tests - Welch t-test
-
-# In[57]:
-
-
-stats.ttest_ind(inputec_ranks, b3_ranks, equal_var = False)
-
-
-# In[58]:
-
-
-stats.ttest_ind(inputec_ranks, b2_ranks, equal_var = False)
-
-
-# In[59]:
-
-
-stats.ttest_ind(inputec_ranks, b1_ranks, equal_var = False)
-
-
-# Three Welch’s t-tests confirm that the rankings of Inputecare significantly different from B1, B2 and B3 rankings. 
-# 
-# We reject the null hypothesis (i.e. the equality of performances).
 
 # In[ ]:
 

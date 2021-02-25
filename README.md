@@ -37,8 +37,6 @@ For each video, we compute the 201 configurations, and store the results of the 
 
 For an example, Lecture_360P-03bc.mp4 will be compressed 201 times by x264. Once these compressions are finished, a Lecture_360P-03bc.csv file appears in the res folder. Each line of this file contains a configuration of x264, and a set of performances (cpu, encoded size of output video, fps, average bitrate of compression, and compression duration).
 
-See the repository for the files ; https://github.com/anonymous4opens/experiment
-
 ## 2. Code
 
 Then, go in the script directory :
@@ -51,15 +49,13 @@ And launch the python script :
 
 In the command line outputs, you will see the outputs (as in the [outputs.txt](https://anonymous.4open.science/r/df319578-8767-47b0-919d-a8e57eb67d25/replication/code/outputs.txt) file) printed and explained in the related [markdown](https://anonymous.4open.science/r/df319578-8767-47b0-919d-a8e57eb67d25/src/main/bitrate.md).
 
-The python script is relatively long to run entirely (at least 15 minutes if you have a good laptop). Once the run is finished, you can attest that the results directory contains the figure printed in our paper:
+The python script is relatively long to run entirely (at least 15 minutes). Once the run is finished, you can attest that the results directory contains the figure printed in our paper:
 
 ```ls ../../results```
 
 We apply modifications to corrmatrix-ugc-dendo-Spearman-kbs.pdf (i.e. convert it to png, add explanations about the scale and highlight groups), but the content (correlogram and dendograms) is the same as corrmatrix_modif.png (i.e. figure 1).
 
-Figure 3 is just an overview of the approach, and is not an output of the code.
-
-See the repository for the files ; https://github.com/anonymous4opens/code
+Figure 3 is just an overview of the state-of-the-art comparison, and is not an output of the code. The same applies to Figure 6.
 
 You're done with the replication process, you can ```exit``` the container. 
 
@@ -79,7 +75,10 @@ We aim at quantifying the differences of x264's performances due to input videos
 
 Once this statement is proved, we use the properties of an input video (e.g. height, width, spatial and temporal complexity, etc.) to **find a configuration optimizing a performance for this video** (in our case minimize the bitrate of the video compression).
 
-We propose to compare several State-of the-art approaches finding a configuration tailored for inputs.
+We propose to compare several state-of-the-art approaches finding a configuration tailored for inputs.
+
+The second research question is:
+RQ2. What could be a good tradeoff between the prediction and the cost of the prediction?
 
 We detail the results of our experiment in the related paper.
 

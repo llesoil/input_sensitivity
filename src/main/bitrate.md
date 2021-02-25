@@ -1,6 +1,6 @@
-# Learning Once and for All - On the Input Sensitivity of Configurable Systems
+# Predicting Performances of Configurable Systems:the Issue of Input Sensitivity
 
-### This notebook details the main results presented in the paper submitted to the International Conference of Software Engineering.
+### This notebook details the main results presented in the paper submitted to ESEC/FSE.
 
 #### Warning; Before launching the notebook, make sure you have installed all the packages in your python environment
 #### To do that,  open a terminal in the replication folder, and use the requirements.txt file to download the libraries needed for this script :
@@ -66,6 +66,9 @@ from keras.layers import Dense, Dropout, Flatten
 # Activation if the function composing the data in output of a layer
 from keras.layers import Conv2D, MaxPooling2D, Activation
 ```
+
+    Using TensorFlow backend.
+
 
 #### Now, we import data
 
@@ -1309,6 +1312,8 @@ for n in range(len(to_replace_b4)):
 red_square = dict(markerfacecolor='r', marker='s')
 plt.figure(figsize=(15,8))
 plt.grid()
+plt.scatter([np.mean(l[1]) for l in listImp], range(1, 1+len(listImp)),
+           marker="x", color = "black", alpha = 1, s = 20)
 plt.boxplot([l[1] for l in listImp], flierprops=red_square, 
           vert=False, patch_artist=True, #widths=0.25,
           boxprops=dict(facecolor=(0,0,1,0.5),linewidth=1,edgecolor='k'),
@@ -1755,6 +1760,8 @@ for n in range(len(to_replace_b4)):
 red_square = dict(markerfacecolor='r', marker='s')
 plt.figure(figsize=(15,8))
 plt.grid()
+plt.scatter([np.mean(l[1]) for l in listImp], range(1, 1+len(listImp)),
+           marker="x", color = "black", alpha = 1, s = 20)
 plt.boxplot([l[1] for l in listImp], flierprops=red_square, 
           vert=False, patch_artist=True, #widths=0.25,
           boxprops=dict(facecolor=(0,0,1,0.5),linewidth=1,edgecolor='k'),
@@ -2222,12 +2229,12 @@ summary_group(0)
     
     
     
-    Imp mbtree: 0.09008510638297873
-    Imp std mbtree: 0.09464375079958642
-    Imp aq-mode: 0.27580851063829787
-    Imp std aq-mode: 0.19465978376883794
-    Imp subme: 0.4858085106382979
-    Imp std subme: 0.24548970930443814
+    Imp mbtree: 0.09000000000000001
+    Imp std mbtree: 0.09457182343189774
+    Imp aq-mode: 0.2752978723404255
+    Imp std aq-mode: 0.19423778089596258
+    Imp subme: 0.48614893617021276
+    Imp std subme: 0.24549268557144638
 
 
 
@@ -2266,6 +2273,15 @@ summary_group(0)
     Std dev : size in the group: 49629655.1
     
     
+
+
+    /home/llesoil/anaconda3/envs/x264/lib/python3.7/site-packages/ipykernel_launcher.py:90: SettingWithCopyWarning: 
+    A value is trying to be set on a copy of a slice from a DataFrame.
+    Try using .loc[row_indexer,col_indexer] = value instead
+    
+    See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+
+
     str_video_cat
     Animation         0.252874
     CoverSong         0.277108
@@ -2305,15 +2321,6 @@ summary_group(0)
     std COLOR_COMPLEXITY : 0.7750806293391255
     
     
-
-
-    /home/llesoil/anaconda3/envs/x264/lib/python3.7/site-packages/ipykernel_launcher.py:90: SettingWithCopyWarning: 
-    A value is trying to be set on a copy of a slice from a DataFrame.
-    Try using .loc[row_indexer,col_indexer] = value instead
-    
-    See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-
-
     Correlations intra-group: 
     count    220900.000000
     mean          0.817473
@@ -2341,12 +2348,12 @@ summary_group(1)
     
     
     
-    Imp mbtree: 0.4740639269406393
-    Imp std mbtree: 0.19484314151292265
-    Imp aq-mode: 0.13442922374429225
-    Imp std aq-mode: 0.12723622823751793
-    Imp subme: 0.14442922374429226
-    Imp std subme: 0.14327231874821023
+    Imp mbtree: 0.47328767123287674
+    Imp std mbtree: 0.19559805114202589
+    Imp aq-mode: 0.13479452054794522
+    Imp std aq-mode: 0.12739514899806997
+    Imp subme: 0.14465753424657535
+    Imp std subme: 0.14405176192767655
 
 
 
@@ -2460,12 +2467,12 @@ summary_group(2)
     
     
     
-    Imp mbtree: 0.3424315068493151
-    Imp std mbtree: 0.2245892264805996
+    Imp mbtree: 0.34270547945205476
+    Imp std mbtree: 0.22400436235381055
     Imp aq-mode: 0.045102739726027394
-    Imp std aq-mode: 0.07311786595122306
-    Imp subme: 0.35705479452054795
-    Imp std subme: 0.24373005449331428
+    Imp std aq-mode: 0.07372888408662025
+    Imp subme: 0.3580821917808219
+    Imp std subme: 0.2448519683302466
 
 
 
@@ -2579,12 +2586,12 @@ summary_group(3)
     
     
     
-    Imp mbtree: 0.05497596153846155
-    Imp std mbtree: 0.06928896709155005
-    Imp aq-mode: 0.15295673076923075
-    Imp std aq-mode: 0.18326934270064787
-    Imp subme: 0.5141346153846154
-    Imp std subme: 0.24268177396986318
+    Imp mbtree: 0.05492788461538462
+    Imp std mbtree: 0.0681732422084901
+    Imp aq-mode: 0.15274038461538464
+    Imp std aq-mode: 0.18270323221385695
+    Imp subme: 0.5140865384615384
+    Imp std subme: 0.24168803837945735
 
 
 
@@ -2783,6 +2790,8 @@ print(res_med)
 
 # In the paper, here starts Section III
 
+# RQ2. What could be a good tradeoff between the accuracy and the cost of the prediction? 
+
 ## Separation of training set of videos and test set of videos
 
 
@@ -2796,11 +2805,11 @@ print(res_med)
 
 # save names of train inputs
 # np.savetxt("../../data/train_names.csv", v_names_train, fmt='%s')
-v_names_train = np.loadtxt("../../data/train_names.csv", dtype= str)
+v_names_train = np.loadtxt("../../results/raw_data/train_names.csv", dtype= str)
 
 # save names of test inputs
 # np.savetxt("../../data/test_names.csv", v_names_test, fmt='%s')
-v_names_test = np.loadtxt("../../data/test_names.csv", dtype= str)
+v_names_test = np.loadtxt("../../results/raw_data/test_names.csv", dtype= str)
 
 ```
 
@@ -3365,48 +3374,48 @@ ms_data
   <tbody>
     <tr>
       <th>0</th>
-      <td>8</td>
-      <td>8</td>
-      <td>8</td>
+      <td>1</td>
       <td>67</td>
-      <td>177</td>
-      <td>104</td>
+      <td>4</td>
+      <td>67</td>
+      <td>107</td>
+      <td>165</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>8</td>
-      <td>41</td>
-      <td>123</td>
-      <td>168</td>
-      <td>168</td>
-      <td>168</td>
+      <td>15</td>
+      <td>1</td>
+      <td>63</td>
+      <td>56</td>
+      <td>4</td>
+      <td>56</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>4</td>
-      <td>106</td>
-      <td>4</td>
-      <td>32</td>
-      <td>32</td>
-      <td>4</td>
+      <td>1</td>
+      <td>166</td>
+      <td>160</td>
+      <td>12</td>
+      <td>165</td>
+      <td>36</td>
     </tr>
     <tr>
       <th>3</th>
       <td>1</td>
-      <td>60</td>
-      <td>19</td>
-      <td>104</td>
-      <td>4</td>
-      <td>91</td>
+      <td>0</td>
+      <td>89</td>
+      <td>34</td>
+      <td>62</td>
+      <td>34</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>0</td>
-      <td>99</td>
-      <td>2</td>
-      <td>6</td>
-      <td>6</td>
       <td>10</td>
+      <td>2</td>
+      <td>2</td>
+      <td>45</td>
+      <td>2</td>
+      <td>96</td>
     </tr>
     <tr>
       <th>...</th>
@@ -3419,48 +3428,48 @@ ms_data
     </tr>
     <tr>
       <th>342</th>
-      <td>89</td>
-      <td>32</td>
-      <td>74</td>
-      <td>32</td>
-      <td>59</td>
-      <td>4</td>
+      <td>1</td>
+      <td>2</td>
+      <td>20</td>
+      <td>2</td>
+      <td>52</td>
+      <td>9</td>
     </tr>
     <tr>
       <th>343</th>
-      <td>41</td>
-      <td>123</td>
-      <td>63</td>
-      <td>7</td>
-      <td>100</td>
-      <td>85</td>
+      <td>104</td>
+      <td>40</td>
+      <td>1</td>
+      <td>20</td>
+      <td>78</td>
+      <td>8</td>
     </tr>
     <tr>
       <th>344</th>
-      <td>70</td>
-      <td>2</td>
-      <td>63</td>
-      <td>141</td>
-      <td>91</td>
-      <td>12</td>
+      <td>89</td>
+      <td>89</td>
+      <td>165</td>
+      <td>89</td>
+      <td>3</td>
+      <td>165</td>
     </tr>
     <tr>
       <th>345</th>
-      <td>91</td>
-      <td>6</td>
-      <td>41</td>
-      <td>87</td>
-      <td>143</td>
-      <td>195</td>
+      <td>135</td>
+      <td>36</td>
+      <td>54</td>
+      <td>94</td>
+      <td>8</td>
+      <td>97</td>
     </tr>
     <tr>
       <th>346</th>
-      <td>1</td>
-      <td>2</td>
-      <td>2</td>
-      <td>137</td>
-      <td>2</td>
-      <td>10</td>
+      <td>26</td>
+      <td>123</td>
+      <td>89</td>
+      <td>39</td>
+      <td>71</td>
+      <td>39</td>
     </tr>
   </tbody>
 </table>
@@ -3644,14 +3653,14 @@ red_square = dict(markerfacecolor='r', marker='s')
 # figure size
 plt.figure(figsize=(16,12))
 # add a grid
-plt.grid()
+plt.grid(alpha =0.5)
 plt.boxplot(box_res, flierprops=red_square, 
           vert=True, patch_artist=True, widths=0.25,
           boxprops=dict(facecolor=(0,0,1,0.5),linewidth=1,edgecolor='k'),
           whiskerprops = dict(linestyle='-.',linewidth=1.0, color='black'))
 # add crosses for average values of distributions
 plt.scatter(np.arange(1, 5, 1), np.array([np.mean(box_res.iloc[i]) for i in range(4)]), 
-            marker="x", color = "red", alpha = 1, s = 100)
+            marker="x", color = "black", alpha = 1, s = 100)
 # Limits
 plt.ylim(0.9,2.5)
 plt.xlim(0.5,4.5)
@@ -3684,6 +3693,244 @@ plt.show()
 ![png](bitrate_files/bitrate_103_0.png)
     
 
+
+#### Description of the results
+
+##### Average results
+
+
+```python
+np.mean(BC_ratios)
+```
+
+
+
+
+    1.5878532690812999
+
+
+
+
+```python
+np.mean(MR_ratios)
+```
+
+
+
+
+    1.5338250517791177
+
+
+
+
+```python
+np.mean(IaL_ratios)
+```
+
+
+
+
+    1.3819721112249355
+
+
+
+
+```python
+np.mean(DI_ratios)
+```
+
+
+
+
+    1.3432134710170054
+
+
+
+##### Median results
+
+
+```python
+np.median(BC_ratios)
+```
+
+
+
+
+    1.2650843010672737
+
+
+
+
+```python
+np.median(MR_ratios)
+```
+
+
+
+
+    1.4182618625776506
+
+
+
+
+```python
+np.median(IaL_ratios)
+```
+
+
+
+
+    1.188449240607514
+
+
+
+
+```python
+np.median(DI_ratios)
+```
+
+
+
+
+    1.165332252223243
+
+
+
+##### IQR
+
+
+```python
+def iqr(distrib):
+    return np.percentile(distrib, 75) - np.percentile(distrib, 25)
+```
+
+
+```python
+iqr(MR_ratios)
+```
+
+
+
+
+    0.5058154915340025
+
+
+
+
+```python
+iqr(BC_ratios)
+```
+
+
+
+
+    0.597401963046789
+
+
+
+
+```python
+iqr(IaL_ratios)
+```
+
+
+
+
+    0.40449735815674304
+
+
+
+
+```python
+iqr(DI_ratios)
+```
+
+
+
+
+    0.39238071296606725
+
+
+
+#### Statistical tests - Welch t-test
+
+
+```python
+stats.wilcoxon(IaL_ratios, BC_ratios)
+```
+
+
+
+
+    WilcoxonResult(statistic=19757.0, pvalue=2.4244032249764796e-08)
+
+
+
+
+```python
+stats.wilcoxon(IaL_ratios, MR_ratios)
+```
+
+
+
+
+    WilcoxonResult(statistic=16291.0, pvalue=4.049374221238256e-12)
+
+
+
+
+```python
+stats.wilcoxon(DI_ratios, BC_ratios)
+```
+
+
+
+
+    WilcoxonResult(statistic=17896.0, pvalue=1.786129899733095e-10)
+
+
+
+
+```python
+stats.wilcoxon(DI_ratios, MR_ratios)
+```
+
+
+
+
+    WilcoxonResult(statistic=15310.0, pvalue=1.8928547762923748e-13)
+
+
+
+DI and MR, DI and BC, IaL and MR, IaL and BC are significantly different
+
+
+```python
+stats.wilcoxon(DI_ratios, IaL_ratios)
+```
+
+
+
+
+    WilcoxonResult(statistic=19500.0, pvalue=0.0035680667593205534)
+
+
+
+IaL and DI are significantly different
+
+
+```python
+stats.wilcoxon(BC_ratios, MR_ratios)
+```
+
+
+
+
+    WilcoxonResult(statistic=27176.0, pvalue=0.10712923653200541)
+
+
+
+MR and BC are not significantly different
 
 ## Results about cost - Figure 5b
 
@@ -3744,7 +3991,7 @@ final_tl_data
     </tr>
     <tr>
       <th>1</th>
-      <td>1.541668</td>
+      <td>1.632913</td>
       <td>05</td>
       <td>Model Shift (MS)</td>
     </tr>
@@ -3786,7 +4033,7 @@ final_tl_data
     </tr>
     <tr>
       <th>8325</th>
-      <td>1.053132</td>
+      <td>1.015102</td>
       <td>30</td>
       <td>Model Shift (MS)</td>
     </tr>
@@ -3813,14 +4060,16 @@ final_tl_data
 ```python
 plt.figure(figsize=(16,12))
 
-plt.grid()
+plt.grid(alpha=0.5)
 
 # Draw a nested boxplot to show bills by day and time
 sns.boxplot(x="training_size", y="ratio",
             hue="Approach", palette=["lightgreen", "coral", "lightgray", "purple"],
-            data=final_tl_data)
+            data=final_tl_data, 
+            showmeans=True, 
+            meanprops={"marker":"x", "markeredgecolor":"black"})
 plt.ylabel("Ratio performance/best", size = 20)
-plt.xlabel("Budget - # Training target configurations", size = 20)
+plt.xlabel("Budget - # Training configurations - Target", size = 20)
 plt.ylim(0.9,2.5)
 plt.legend(fontsize=20, loc = 'upper right')
 
@@ -3837,14 +4086,225 @@ plt.show()
 
 
     
-![png](bitrate_files/bitrate_107_0.png)
+![png](bitrate_files/bitrate_134_0.png)
     
 
 
 
 ```python
+approaches = ["Beetle", "Learning to Sample (L2S)", "Model Shift (MS)", "No Transfer (NT)"]
+budgets = np.arange(5, 31, 5)
 
+def get_ratio(approach, training_size):
+    if training_size < 10:
+        training_size= '0'+str(training_size)
+    return final_tl_data.query("Approach=='"+approach
+                               +"' and training_size=='"+str(training_size)+"'")['ratio']
 ```
+
+
+```python
+np.mean(get_ratio("Model Shift (MS)", 10))
+```
+
+
+
+
+    1.3984852225974307
+
+
+
+
+```python
+np.median(get_ratio("Model Shift (MS)", 10))
+```
+
+
+
+
+    1.2256133917657932
+
+
+
+
+```python
+iqr(get_ratio("Model Shift (MS)", 10))
+```
+
+
+
+
+    0.34719517870548877
+
+
+
+
+```python
+np.mean(get_ratio("Beetle", 10))
+```
+
+
+
+
+    1.31754753764068
+
+
+
+
+```python
+np.median(get_ratio("Beetle", 10))
+```
+
+
+
+
+    1.2054127305222224
+
+
+
+
+```python
+iqr(get_ratio("Beetle", 10))
+```
+
+
+
+
+    0.3205639626214869
+
+
+
+
+```python
+np.median(get_ratio("Learning to Sample (L2S)", 10))
+```
+
+
+
+
+    1.1252486332987228
+
+
+
+
+```python
+stats.wilcoxon(DI_ratios, get_ratio("Learning to Sample (L2S)", 30))
+```
+
+
+
+
+    WilcoxonResult(statistic=8153.0, pvalue=1.4265413739719205e-28)
+
+
+
+
+```python
+np.mean(get_ratio("Learning to Sample (L2S)", 30))
+```
+
+
+
+
+    1.0806446796805704
+
+
+
+
+```python
+np.median(get_ratio("Learning to Sample (L2S)", 30))
+```
+
+
+
+
+    1.0486277760809808
+
+
+
+
+```python
+np.mean(get_ratio("Learning to Sample (L2S)", 30)==1)
+```
+
+
+
+
+    0.11815561959654179
+
+
+
+
+```python
+iqr(get_ratio("Learning to Sample (L2S)", 10))
+```
+
+
+
+
+    0.19611284237585913
+
+
+
+
+```python
+iqr(get_ratio("Learning to Sample (L2S)", 30))
+```
+
+
+
+
+    0.09220961521870241
+
+
+
+
+```python
+iqr(get_ratio("Beetle", 5))
+```
+
+
+
+
+    0.3665782595812104
+
+
+
+
+```python
+iqr(get_ratio("Beetle", 30))
+```
+
+
+
+
+    0.2711995010640156
+
+
+
+
+```python
+iqr(get_ratio("Model Shift (MS)", 10))
+```
+
+
+
+
+    0.34719517870548877
+
+
+
+
+```python
+iqr(get_ratio("Model Shift (MS)", 30))
+```
+
+
+
+
+    0.2864866258391219
+
+
 
 
 ```python
@@ -3875,113 +4335,6 @@ plt.show()
 ```python
 
 ```
-
-
-```python
-
-```
-
-
-```python
-
-```
-
-
-```python
-
-```
-
-
-```python
-
-```
-
-
-```python
-
-```
-
-
-```python
-
-```
-
-
-```python
-
-```
-
-
-```python
-
-```
-
-
-```python
-
-```
-
-
-```python
-
-```
-
-
-```python
-
-```
-
-
-```python
-
-```
-
-
-```python
-
-```
-
-#### Statistical tests - Welch t-test
-
-
-```python
-stats.ttest_ind(inputec_ranks, b3_ranks, equal_var = False)
-```
-
-
-
-
-    Ttest_indResult(statistic=-95.91425870051047, pvalue=0.0)
-
-
-
-
-```python
-stats.ttest_ind(inputec_ranks, b2_ranks, equal_var = False)
-```
-
-
-
-
-    Ttest_indResult(statistic=-22.78053410433707, pvalue=2.9826134877061904e-76)
-
-
-
-
-```python
-stats.ttest_ind(inputec_ranks, b1_ranks, equal_var = False)
-```
-
-
-
-
-    Ttest_indResult(statistic=-30.291019413386437, pvalue=4.973197221060355e-109)
-
-
-
-Three Welch’s t-tests confirm that the rankings of Inputecare significantly different from B1, B2 and B3 rankings. 
-
-We reject the null hypothesis (i.e. the equality of performances).
 
 
 ```python

@@ -6,3 +6,5 @@ Two folders are available :
 
 - ugc_meta lists of meta information about videos
 
+-res_ugc-tiny gather a cheap set of videos to use in your experiments!
+
