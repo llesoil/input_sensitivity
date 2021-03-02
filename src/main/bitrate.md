@@ -2229,12 +2229,12 @@ summary_group(0)
     
     
     
-    Imp mbtree: 0.09000000000000001
-    Imp std mbtree: 0.09457182343189774
-    Imp aq-mode: 0.2752978723404255
-    Imp std aq-mode: 0.19423778089596258
-    Imp subme: 0.48614893617021276
-    Imp std subme: 0.24549268557144638
+    Imp mbtree: 0.08997872340425533
+    Imp std mbtree: 0.09443335809857954
+    Imp aq-mode: 0.2751063829787234
+    Imp std aq-mode: 0.19430697735444108
+    Imp subme: 0.4861702127659575
+    Imp std subme: 0.2455792387743231
 
 
 
@@ -2273,15 +2273,6 @@ summary_group(0)
     Std dev : size in the group: 49629655.1
     
     
-
-
-    /home/llesoil/anaconda3/envs/x264/lib/python3.7/site-packages/ipykernel_launcher.py:90: SettingWithCopyWarning: 
-    A value is trying to be set on a copy of a slice from a DataFrame.
-    Try using .loc[row_indexer,col_indexer] = value instead
-    
-    See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-
-
     str_video_cat
     Animation         0.252874
     CoverSong         0.277108
@@ -2321,6 +2312,15 @@ summary_group(0)
     std COLOR_COMPLEXITY : 0.7750806293391255
     
     
+
+
+    /home/llesoil/anaconda3/envs/x264/lib/python3.7/site-packages/ipykernel_launcher.py:90: SettingWithCopyWarning: 
+    A value is trying to be set on a copy of a slice from a DataFrame.
+    Try using .loc[row_indexer,col_indexer] = value instead
+    
+    See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+
+
     Correlations intra-group: 
     count    220900.000000
     mean          0.817473
@@ -2348,12 +2348,12 @@ summary_group(1)
     
     
     
-    Imp mbtree: 0.47328767123287674
-    Imp std mbtree: 0.19559805114202589
-    Imp aq-mode: 0.13479452054794522
-    Imp std aq-mode: 0.12739514899806997
-    Imp subme: 0.14465753424657535
-    Imp std subme: 0.14405176192767655
+    Imp mbtree: 0.47424657534246567
+    Imp std mbtree: 0.1950313250209137
+    Imp aq-mode: 0.13415525114155252
+    Imp std aq-mode: 0.127327979066847
+    Imp subme: 0.14525114155251143
+    Imp std subme: 0.14444447491791887
 
 
 
@@ -2467,12 +2467,12 @@ summary_group(2)
     
     
     
-    Imp mbtree: 0.34270547945205476
-    Imp std mbtree: 0.22400436235381055
-    Imp aq-mode: 0.045102739726027394
-    Imp std aq-mode: 0.07372888408662025
-    Imp subme: 0.3580821917808219
-    Imp std subme: 0.2448519683302466
+    Imp mbtree: 0.34239726027397255
+    Imp std mbtree: 0.2239719429423485
+    Imp aq-mode: 0.044965753424657535
+    Imp std aq-mode: 0.07310856202163128
+    Imp subme: 0.35726027397260274
+    Imp std subme: 0.24458665312644548
 
 
 
@@ -2586,12 +2586,12 @@ summary_group(3)
     
     
     
-    Imp mbtree: 0.05492788461538462
-    Imp std mbtree: 0.0681732422084901
-    Imp aq-mode: 0.15274038461538464
-    Imp std aq-mode: 0.18270323221385695
-    Imp subme: 0.5140865384615384
-    Imp std subme: 0.24168803837945735
+    Imp mbtree: 0.05447115384615386
+    Imp std mbtree: 0.06775740900884357
+    Imp aq-mode: 0.1530048076923077
+    Imp std aq-mode: 0.1828680692360393
+    Imp subme: 0.5147596153846153
+    Imp std subme: 0.24273172890093433
 
 
 
@@ -2866,6 +2866,11 @@ best_configs = [np.argmin(vid[predDimension]) for vid in listVideoTest]
 
 ### *SImple Learning*
 
+
+```python
+res_dir = "../../results/raw_data/"+predDimension+"/"
+```
+
 ### Model Reuse (MR)
 
 
@@ -2875,7 +2880,7 @@ The **Model Reuse** selects a video of the training set, apply a model on it and
 
 
 ```python
-MR_configs = np.loadtxt("../../results/raw_data/MR_results.csv")
+MR_configs = np.loadtxt(res_dir+"MR_results.csv")
 MR_ratios = [listVideoTest[i][predDimension][MR_configs[i]]/best_perfs[i] for i in range(len(listVideoTest))]
 ```
 
@@ -2887,7 +2892,7 @@ Technically, we rank the 201 configurations (1 being the optimal configuration, 
 
 
 ```python
-BC_configs = np.loadtxt("../../results/raw_data/BC_results.csv")
+BC_configs = np.loadtxt(res_dir+"BC_results.csv")
 BC_ratios = [listVideoTest[i][predDimension][BC_configs[i]]/best_perfs[i] for i in range(len(listVideoTest))]
 ```
 
@@ -2899,7 +2904,7 @@ BC_ratios = [listVideoTest[i][predDimension][BC_configs[i]]/best_perfs[i] for i 
 
 
 ```python
-DI_configs = np.loadtxt("../../results/raw_data/DI_results.csv")
+DI_configs = np.loadtxt(res_dir+"DI_results.csv")
 DI_ratios = [listVideoTest[i][predDimension][DI_configs[i]]/best_perfs[i] for i in range(len(listVideoTest))]
 ```
 
@@ -2948,7 +2953,7 @@ Similarly, we used the training set of videos to build four groups of inputs.
 
 
 ```python
-IaL_configs = np.loadtxt("../../results/raw_data/IaL_results.csv")
+IaL_configs = np.loadtxt(res_dir+"IaL_results.csv")
 IaL_ratios = [listVideoTest[i][predDimension][IaL_configs[i]]/best_perfs[i] for i in range(len(listVideoTest))]
 ```
 
@@ -2982,7 +2987,7 @@ We only apply the discovery phase (i.e. the search of bellwether) on the trainin
 
 
 ```python
-beetle_data = pd.read_csv("../../results/raw_data/Beetle_results.csv").set_index("id_video")
+beetle_data = pd.read_csv(res_dir+"Beetle_results.csv").set_index("id_video")
 beetle_data
 ```
 
@@ -3150,7 +3155,7 @@ Finally, it uses the configurations selected in previous steps to efficiently tr
 
 
 ```python
-l2s_data = pd.read_csv("../../results/raw_data/L2S_results.csv").set_index("id_video")
+l2s_data = pd.read_csv(res_dir+"L2S_results.csv").set_index("id_video")
 l2s_data
 ```
 
@@ -3329,7 +3334,7 @@ However, we extended this definition to any function (\eg random forest, neural 
 
 
 ```python
-ms_data = pd.read_csv("../../results/raw_data/MS_results.csv").set_index("id_video")
+ms_data = pd.read_csv(res_dir+"MS_results.csv").set_index("id_video")
 ms_data
 ```
 
@@ -3486,7 +3491,7 @@ We expect to outperform No Transfer with transfer learning approaches.
 
 
 ```python
-nt_data = pd.read_csv("../../results/raw_data/NT_results.csv").set_index("id_video")
+nt_data = pd.read_csv(res_dir+"NT_results.csv").set_index("id_video")
 nt_data
 ```
 
@@ -3690,7 +3695,7 @@ plt.show()
 
 
     
-![png](bitrate_files/bitrate_103_0.png)
+![png](bitrate_files/bitrate_104_0.png)
     
 
 
@@ -4071,7 +4076,7 @@ sns.boxplot(x="training_size", y="ratio",
 plt.ylabel("Ratio performance/best", size = 20)
 plt.xlabel("Budget - # Training configurations - Target", size = 20)
 plt.ylim(0.9,2.5)
-plt.legend(fontsize=20, loc = 'upper right')
+plt.legend(fontsize=20, loc = 'upper right', framealpha=1)
 
 
 # Arrow
@@ -4086,7 +4091,7 @@ plt.show()
 
 
     
-![png](bitrate_files/bitrate_134_0.png)
+![png](bitrate_files/bitrate_135_0.png)
     
 
 
