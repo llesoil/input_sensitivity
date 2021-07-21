@@ -91,7 +91,7 @@
             <polyline points="378.15822388993126,231.00304878048814 378.15822388993126,266.5884146341466 " stroke="black" stroke-width="2.1" fill="none" latexdraw:rotationAngle="0.0" marker-end="url(#arrow1-1254189565)"/>
         </g>
         <g latexdraw:type="arc" id="id761263940" transform="rotate(1.9078721507847132 0.0 0.0) translate(7.545582098056457 -12.32930231189576)">
-            <path d="M 378.0487804878055 232.7469512195128 A 11.591463414634092 11.591463414634092 0.0 0 0 364.4444805747273 221.33158818002377" latexdraw:borderPos="outer" stroke="black" stroke-width="2.1" fill="none" latexdraw:rotationAngle="0.03329865073829896"/>
+            <path d="M 378.04878048780586 232.74695121951285 A 11.591463414634092 11.591463414634092 0.0 0 0 364.44448057472766 221.33158818002383" latexdraw:borderPos="outer" stroke="black" stroke-width="2.1" fill="none" latexdraw:rotationAngle="0.03329865073829896"/>
         </g>
         <g latexdraw:type="joinedLines" id="id262793584">
             <polyline points="238.88993120700442,221.0060975609755 142.31371169480926,221.0060975609755 " stroke="black" stroke-width="2.1" fill="none" latexdraw:rotationAngle="0.0"/>
@@ -100,7 +100,7 @@
             <polyline points="132.60670731707327,230.7591463414636 132.60670731707327,242.1120689655238 " stroke="black" stroke-width="2.1" fill="none" latexdraw:rotationAngle="0.0" marker-end="url(#arrow1-726369983)"/>
         </g>
         <g latexdraw:type="arc" id="id46934327" transform="rotate(1.9078721507847132 0.0 0.0) translate(7.660635586117479 -4.931736565451956)">
-            <path d="M 144.2621951219515 220.91158536585448 A 11.591463414634035 11.591463414634035 0.0 0 0 132.84683208246253 234.51588527893261" latexdraw:borderPos="outer" stroke="black" stroke-width="2.1" fill="none" latexdraw:rotationAngle="0.03329865073829896"/>
+            <path d="M 144.2621951219515 220.91158536585456 A 11.591463414634035 11.591463414634035 0.0 0 0 132.84683208246253 234.5158852789327" latexdraw:borderPos="outer" stroke="black" stroke-width="2.1" fill="none" latexdraw:rotationAngle="0.03329865073829896"/>
         </g>
         <g latexdraw:type="joinedLines" id="id1327928097">
             <polyline points="133.78048780487813,292.79962153069823 133.7804878048781,313.19817073170776 " stroke="black" stroke-width="2.1" fill="none" latexdraw:rotationAngle="0.0" marker-end="url(#arrow1-1327928097)"/>
@@ -118,7 +118,7 @@
             <polyline points="256.7073170731705,399.6036585365855 256.70731707317054,411.684782608698 " stroke="black" stroke-width="2.1" fill="none" latexdraw:rotationAngle="0.0" marker-end="url(#arrow1-1911593213)"/>
         </g>
         <g latexdraw:type="arc" id="id1839909971" transform="rotate(0.3096197916571216 0.0 0.0) translate(2.018427894175261 -1.9879292362045362)">
-            <path d="M 363.86019482793864 385.70378443871675 A 11.591463414634063 11.591463414634063 0.0 1 1 378.4517497348891 374.5072905620368" latexdraw:borderPos="outer" stroke="black" stroke-width="2.1" fill="none" latexdraw:rotationAngle="0.005403884793755642"/>
+            <path d="M 363.86019482793864 385.7037844387166 A 11.591463414634063 11.591463414634063 0.0 1 1 378.4517497348891 374.50729056203664" latexdraw:borderPos="outer" stroke="black" stroke-width="2.1" fill="none" latexdraw:rotationAngle="0.005403884793755642"/>
         </g>
         <g latexdraw:type="joinedLines" id="id57807094">
             <polyline points="369.15005302226973,386.1570121951222 274.1521739130451,386.1570121951222 " stroke="black" stroke-width="2.1" fill="none" latexdraw:rotationAngle="1.5707963267948966" marker-end="url(#arrow1-57807094)"/>
@@ -145,17 +145,17 @@
             <text x="59.786324786329594" y="99.48717948718372">x264</text>
         </g>
         <g latexdraw:type="rectangle" id="id221607219" transform="rotate(-0.35880087499180674 0.0 0.0) translate(-1.0434450928879784 0.48286215957082845)">
-            <rect x="35.6282051282098" y="149.43162393162834" width="84.00000000000001" height="33.901709401705915" latexdraw:borderPos="outer" stroke="black" stroke-width="1.0" fill="#ffe6cc" rx="5.580341880341184"/>
+            <rect x="35.6282051282098" y="149.43162393162842" width="84.00000000000001" height="33.901709401705915" latexdraw:borderPos="outer" stroke="black" stroke-width="1.0" fill="#ffe6cc" rx="5.580341880341184"/>
         </g>
         <g latexdraw:type="text" id="id364470318" fill="black" latexdraw:position="bl" transform="rotate(-0.4774844109771058 0.0 0.0) translate(-1.3652206194233116 0.3472480589854854)">
-            <text x="42.350427350432" y="163.64518364518776">git commit 
+            <text x="42.350427350432" y="163.64518364518767">git commit 
   e9a5903</text>
         </g>
         <g latexdraw:type="rectangle" id="id1546745844" transform="rotate(0.2132076707909341 0.0 0.0) translate(1.4389968283070544 -0.2871406574926141)">
-            <rect x="26.000000000005578" y="373.3971411730073" width="100.88874152667171" height="26.901709401705887" latexdraw:borderPos="outer" stroke="black" stroke-width="1.0" fill="#ffe6cc" rx="4.180341880341177"/>
+            <rect x="26.00000000000562" y="373.3971411730073" width="100.88874152667165" height="26.901709401705887" latexdraw:borderPos="outer" stroke="black" stroke-width="1.0" fill="#ffe6cc" rx="4.180341880341177"/>
         </g>
         <g latexdraw:type="rectangle" id="id1188344882" transform="rotate(0.11805940044433044 0.0 0.0) translate(0.6920972709546618 -0.6640483085104165)">
-            <rect x="268.0555555555568" y="322.76495726496154" width="107.7393162393198" height="26.901709401705887" latexdraw:borderPos="outer" stroke="black" stroke-width="1.0" fill="#ffe6cc" rx="4.180341880341177"/>
+            <rect x="268.05555555555696" y="322.76495726496154" width="107.7393162393198" height="26.901709401705887" latexdraw:borderPos="outer" stroke="black" stroke-width="1.0" fill="#ffe6cc" rx="4.180341880341177"/>
         </g>
         <g latexdraw:type="text" id="id1390217961" fill="black" latexdraw:position="bl">
             <text x="28.352490421456892" y="391.3984674329511">C=201 configs</text>
@@ -170,7 +170,7 @@
             <text x="34.13793103448821" y="308.0948275862135">ref, me, etc.</text>
         </g>
         <g latexdraw:type="rectangle" id="id1813906319" transform="rotate(0.2132076707909341 0.0 0.0) translate(1.6412734264214919 -0.2977823358459659)">
-            <rect x="31.517241379315635" y="419.94886531093834" width="95.37150014736169" height="42.525272620102896" latexdraw:borderPos="outer" stroke="black" stroke-width="1.0" fill="#ffe6cc" rx="7.30505452402058"/>
+            <rect x="31.517241379315593" y="419.94886531093834" width="95.37150014736173" height="42.525272620102896" latexdraw:borderPos="outer" stroke="black" stroke-width="1.0" fill="#ffe6cc" rx="7.30505452402058"/>
         </g>
         <g latexdraw:type="text" id="id1384489855" fill="black" latexdraw:position="bl">
             <text x="97.00000000001587" y="1268.4750000000174">M = 280787
@@ -227,8 +227,8 @@ fps, bitrate</text>
     </g>
     <defs>
         <linearGradient id="linearGradient425457520" gradientTransform="rotate(90.0 0.5 0.5)">
-            <stop offset="0" stop-color="#ffb3b3"/>
-            <stop offset="1" stop-color="#ffcccc"/>
+            <stop offset="0" stop-color="#ea9999"/>
+            <stop offset="1" stop-color="#f4cccc"/>
         </linearGradient>
         <linearGradient id="linearGradient8645143" gradientTransform="rotate(90.0 0.5 0.5)">
             <stop offset="0" stop-color="#cccccc"/>
@@ -286,9 +286,9 @@ fps, bitrate</text>
         <latexdraw:metadata>
             <latexdraw:centreHoriz>false</latexdraw:centreHoriz>
             <latexdraw:positionVert/>
-            <latexdraw:zoom>1.9000000000000001</latexdraw:zoom>
-            <latexdraw:vpx>0.354</latexdraw:vpx>
-            <latexdraw:vpy>0.398</latexdraw:vpy>
+            <latexdraw:zoom>1.85</latexdraw:zoom>
+            <latexdraw:vpx>0.41</latexdraw:vpx>
+            <latexdraw:vpy>0.4</latexdraw:vpy>
         </latexdraw:metadata>
     </metadata>
 </svg>
