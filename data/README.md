@@ -8,4 +8,4 @@ In this file, there is a dataset of configuration with their measurement (see th
 
 All the other experiments for the software systems mysoft are in the `mysoft/others` directory e.g. the analysis of commits for x264 is in `./x264/others/commits_x264`.
 
-
+If you want to download one of the dataset of measurement individually, you can follow the zenodo links in table 1.
