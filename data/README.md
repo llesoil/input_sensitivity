@@ -1,8 +1,11 @@
 ## Data
 
-Two folders are available :
+For each software system, there is a directory with the name of the system containing its measurements.
 
-- ugc contains new measurements (res_ugc) for the Youtube UGC dataset, and ugc_meta, a list of meta information about videos. The res_ugc matches with the zip file in the zenodo repository : https://zenodo.org/record/3928253
+Each file in this directory is related to an input fed to this system e.g. `Animation_360P-3e40.csv` is related to the input video `Animation_360P-3e40.mkv` fed to x264.
 
-- commits_x264 is a **directory of extra-data that are not directly linked to the experiment presented in the paper**. They are associated to a study we've done on x264 commits to complement our understanding of the documentation. It leads to the commits_input_sensitivity timeline of interesting commits. We choose keywords to obtain the commits associated to the encoding sizes (and performances in general) of videos.
+In this file, there is a dataset of configuration with their measurement (see the files for more details, or the table 1 for the performance measured).
+
+All the other experiments for the software systems mysoft are in the `mysoft/others` directory e.g. the analysis of commits for x264 is in `./x264/others/commits_x264`.
+
 
