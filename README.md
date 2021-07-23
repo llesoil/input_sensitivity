@@ -7,7 +7,7 @@ This is the companion repository of our ICSE submission.
 
 ## Organization
 
-Measurements and details about the performances can be consulted in the **data** folder.
+Measurements and details about data can be consulted in the **data** folder.
 
 Source code can be found in the **src** directory.
 
@@ -23,6 +23,7 @@ The article (pdf file) can be consulted directly in the root directory.
 This paper **investigates, demonstrates and quantifies what effects configurable system inputs can have on performances.**
 
 ![Introduction picture](results/figures/input_sensitivity_intro.png)
+
 
 ## Artifact evaluation
 

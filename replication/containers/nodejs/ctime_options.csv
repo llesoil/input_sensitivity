@@ -1,0 +1,2 @@
+,--cross-compiling,--fully-static,--enable-lto,--openssl-no-asm,--openssl-is-fips,--experimental-enable-pointer-compression,--without-intl,--without-node-snapshot,--without-node-code-cache,--enable-static,--v8-lite-mode
+,--no-cross-compiling,--partly-static,,,,,--with-intl=none,,,,

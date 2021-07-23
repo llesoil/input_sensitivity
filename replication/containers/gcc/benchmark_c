@@ -1,0 +1,25 @@
+Linpack benchmark :
+https://people.sc.fsu.edu/~jburkardt/c_src/linpack_bench/linpack_bench.html
+
+small scripts:
+https://github.com/glasgowm148/C-Scripts
+
+verif:
+https://github.com/cverified/cbench/
+
+The PARSEC suite benchmark
+Dhrystone
+CoreMark
+
+1000+ prgms, mais compliqués à retrouver
+https://www.quora.com/Where-can-I-get-a-collection-of-C-programs
+
+
+https://github.com/steven-schronk/C-Programming-Examples
+https://github.com/developerinsider/C-Programming-Example
+
+Pas mal de prgms
+https://github.com/gouravthakur39/beginners-C-program-examples
+
+Run test suite:
+https://stackoverflow.com/questions/14700394/run-only-gcc-tests-in-dejagnu-regression-testsuite

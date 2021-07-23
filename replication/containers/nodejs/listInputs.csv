@@ -1,0 +1,10 @@
+buffer1,buffers/buffer-base64-decode.js size=8388608 n=32
+buffer2,buffers/buffer-base64-decode-wrapped.js n=32 linesCount=524288 charsPerLine=76
+dgram1,dgram/array-vs-concat.js dur=5 type=multi chunks=1 num=100 len=64
+dgram2,dgram/multi-buffer.js dur=5 type=recv chunks=4 num=100 len=1024
+diagnostic,diagnostics_channel/publish.js n=100000000 subscribers=0
+domain,domain/domain-fn-args.js args=1 n=10
+fsfile,fs/readfile.js concurrent=1 len=16777216 duration=5
+net,net/net-c2s-cork.js len=4 type=buf dur=5
+process1,process/memoryUsage.js n=1000
+process2,process/resourceUsage.js n=100

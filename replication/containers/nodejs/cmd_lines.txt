@@ -1,0 +1,50 @@
+./configure  --cross-compiling --openssl-no-asm --experimental-enable-pointer-compression --without-node-code-cache
+./configure  --cross-compiling --openssl-is-fips --without-intl --without-node-snapshot --v8-lite-mode
+./configure  --cross-compiling --openssl-no-asm
+./configure  --cross-compiling --openssl-no-asm --without-intl --without-node-snapshot --without-node-code-cache --enable-static
+./configure  --fully-static --openssl-no-asm --openssl-is-fips --without-intl --v8-lite-mode
+./configure  --fully-static --openssl-no-asm --openssl-is-fips --without-intl
+./configure  --cross-compiling --enable-lto --openssl-is-fips --experimental-enable-pointer-compression --without-intl --without-node-snapshot --without-node-code-cache --enable-static
+./configure  --enable-lto --openssl-no-asm --openssl-is-fips --without-node-snapshot --enable-static --v8-lite-mode
+./configure  --cross-compiling --enable-lto --experimental-enable-pointer-compression --without-node-code-cache --enable-static --v8-lite-mode
+./configure  --fully-static --openssl-no-asm --without-node-snapshot --enable-static --v8-lite-mode
+./configure  --cross-compiling --fully-static --enable-lto --openssl-is-fips --without-intl --enable-static
+./configure  --enable-lto --experimental-enable-pointer-compression --enable-static --v8-lite-mode
+./configure  --enable-lto --openssl-no-asm --openssl-is-fips --without-node-code-cache --v8-lite-mode
+./configure  --fully-static --openssl-no-asm --experimental-enable-pointer-compression --without-intl --without-node-code-cache --enable-static --v8-lite-mode
+./configure  --fully-static --openssl-no-asm --enable-static --v8-lite-mode
+./configure  --openssl-no-asm --openssl-is-fips --experimental-enable-pointer-compression --without-intl --without-node-snapshot --enable-static
+./configure  --cross-compiling --fully-static --enable-lto --without-intl --without-node-snapshot --without-node-code-cache --enable-static --v8-lite-mode
+./configure  --fully-static --experimental-enable-pointer-compression --without-intl --without-node-code-cache --enable-static --v8-lite-mode
+./configure  --without-intl --v8-lite-mode
+./configure  --fully-static --openssl-no-asm --openssl-is-fips --experimental-enable-pointer-compression --without-intl --without-node-code-cache --v8-lite-mode
+./configure  --cross-compiling --experimental-enable-pointer-compression --without-intl --without-node-code-cache --v8-lite-mode
+./configure  --enable-lto --without-node-snapshot
+./configure  --fully-static --openssl-no-asm --experimental-enable-pointer-compression --without-intl --without-node-snapshot --without-node-code-cache
+./configure  --openssl-is-fips --without-node-code-cache
+./configure  --enable-lto --openssl-no-asm --without-intl --without-node-snapshot --enable-static
+./configure  --cross-compiling --enable-lto --experimental-enable-pointer-compression --without-intl --without-node-snapshot --without-node-code-cache --v8-lite-mode
+./configure  --cross-compiling --fully-static --enable-lto --openssl-no-asm --openssl-is-fips --experimental-enable-pointer-compression
+./configure  --cross-compiling --fully-static --without-node-snapshot --without-node-code-cache
+./configure  --enable-lto --openssl-is-fips --without-intl --without-node-snapshot --without-node-code-cache
+./configure  --enable-lto --openssl-is-fips --experimental-enable-pointer-compression --without-node-snapshot
+./configure  --fully-static --enable-lto --openssl-no-asm --openssl-is-fips --without-intl --without-node-code-cache --enable-static --v8-lite-mode
+./configure  --fully-static --enable-lto --openssl-no-asm --openssl-is-fips --without-node-snapshot --without-node-code-cache --v8-lite-mode
+./configure  --fully-static --openssl-is-fips --enable-static --v8-lite-mode
+./configure  --enable-lto --openssl-no-asm --openssl-is-fips --without-intl --without-node-snapshot --without-node-code-cache --enable-static
+./configure  --fully-static --enable-lto --openssl-no-asm --openssl-is-fips --experimental-enable-pointer-compression --without-node-snapshot --enable-static --v8-lite-mode
+./configure  --enable-lto --openssl-no-asm --openssl-is-fips --experimental-enable-pointer-compression --without-node-code-cache --enable-static --v8-lite-mode
+./configure  --cross-compiling --fully-static --without-intl --v8-lite-mode
+./configure  --cross-compiling --fully-static --enable-lto --without-node-code-cache --v8-lite-mode
+./configure  --openssl-no-asm --experimental-enable-pointer-compression --without-intl --without-node-snapshot --enable-static
+./configure  --cross-compiling --fully-static --enable-lto --openssl-is-fips --without-node-code-cache --enable-static --v8-lite-mode
+./configure 
+./configure  --cross-compiling --enable-lto --openssl-no-asm --experimental-enable-pointer-compression --without-intl --without-node-snapshot --v8-lite-mode
+./configure  --enable-lto --openssl-no-asm --experimental-enable-pointer-compression --enable-static --v8-lite-mode
+./configure  --openssl-is-fips --without-intl --enable-static
+./configure  --cross-compiling --enable-lto --openssl-no-asm --openssl-is-fips --without-intl --without-node-code-cache --enable-static --v8-lite-mode
+./configure  --cross-compiling --fully-static --enable-lto --openssl-no-asm --openssl-is-fips --without-node-snapshot --without-node-code-cache --enable-static --v8-lite-mode
+./configure  --cross-compiling --fully-static --openssl-is-fips --without-intl --without-node-snapshot
+./configure  --openssl-no-asm --experimental-enable-pointer-compression --without-intl --without-node-code-cache --v8-lite-mode
+./configure  --experimental-enable-pointer-compression --without-intl --without-node-code-cache --enable-static --v8-lite-mode
+./configure  --fully-static --enable-lto --openssl-is-fips --without-intl --without-node-snapshot

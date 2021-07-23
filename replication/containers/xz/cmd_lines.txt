@@ -1,0 +1,30 @@
+./configure --disable-decoders --disable-doc
+./configure --disable-decoders --enable-small --disable-threads
+./configure --disable-scripts
+./configure --disable-scripts --disable-threads --disable-doc
+./configure --disable-scripts --enable-small
+./configure --disable-decoders --disable-doc --enable-debug
+./configure --disable-decoders --disable-threads --enable-debug
+./configure --disable-scripts --enable-small --disable-doc
+./configure --disable-scripts --disable-decoders --enable-small --disable-threads --disable-doc --enable-debug
+./configure --disable-decoders --enable-small --enable-debug
+./configure --enable-small --disable-threads --disable-doc
+./configure --disable-scripts --disable-decoders --enable-small --disable-threads
+./configure --enable-small --enable-debug
+./configure --disable-decoders --enable-small --disable-doc
+./configure --enable-small --disable-doc
+./configure --enable-small --disable-doc --enable-debug
+./configure --disable-scripts --disable-decoders --enable-debug
+./configure --disable-scripts --enable-small --disable-threads
+./configure --disable-scripts --disable-decoders --disable-doc
+./configure --disable-decoders --enable-small
+./configure --disable-doc
+./configure --disable-decoders --disable-threads
+./configure --disable-scripts --disable-decoders --enable-small --disable-threads --enable-debug
+./configure --disable-decoders --enable-small --disable-threads --disable-doc --enable-debug
+./configure --disable-scripts --disable-decoders --enable-small --disable-doc
+./configure --disable-threads --disable-doc --enable-debug
+./configure --enable-small --disable-threads --enable-debug
+./configure --disable-scripts --disable-decoders --enable-small --enable-debug
+./configure --disable-scripts --disable-decoders --enable-small --disable-threads --disable-doc
+./configure --disable-scripts --disable-decoders --disable-threads --disable-doc --enable-debug

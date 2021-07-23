@@ -1,0 +1,15 @@
+async1,async_hooks/gc-tracking.js method=trackingDisabled n=1000000
+async2,async_hooks/async-resource-vs-destroy.js n=1000000 duration=5 connections=500 path=/ asyncMethod=callbacks type=async-resource benchmarker=test-double-http
+buffer1,buffers/buffer-base64-decode.js size=8388608 n=32
+buffer2,buffers/buffer-base64-decode-wrapped.js n=32 linesCount=524288 charsPerLine=76
+buffer3,buffers/buffer-hex.js n=1000000 len=64
+child,child_process/child-process-read.js dur=5 len=4096
+crypto1,crypto/aes-gcm-throughput.js len=1024 cipher=aes-128-gcm n=500
+crypto2,crypto/hash-stream-creation.js api=legacy len=2 out=hex type=buf algo=sha256 writes=500
+dgram1,dgram/array-vs-concat.js dur=5 type=multi chunks=1 num=100 len=64
+dgram2,dgram/multi-buffer.js dur=5 type=recv chunks=4 num=100 len=1024
+fsstream,fs/read-stream-throughput.js n=1024 highWaterMark=1024 filesize=1024000 encodingType=buf
+fswrite,fs/write-stream-throughput.js size=2 encodingType=utf dur=5
+fsfile,fs/readfile.js concurrent=1 len=16777216 duration=5
+misc,misc/print.js code=1
+

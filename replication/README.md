@@ -105,7 +105,7 @@ Run the container as above:
 
 Create a "mySoft" folder in the results directory, as in the following picture : this directory aims at gathering the results for the new software system mySoft.
 
-![Rep4](results/others/replication4.png)
+![Rep4](replication4.png)
 
 Open the main notebook.
 
