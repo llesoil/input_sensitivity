@@ -170,7 +170,7 @@ The laptop is running over Linux Ubuntu 20.04.2 LTS focal.
 
 Here is the outcome of the command `uname -a`
 
-Linux varyvary 5.4.0-80-generic #90-Ubuntu SMP Fri Jul 9 22:49:44 UTC 2021 x86_64 x86_64 x86_64 GNU/Linux
+Linux *** 5.4.0-80-generic #90-Ubuntu SMP Fri Jul 9 22:49:44 UTC 2021 x86_64 x86_64 x86_64 GNU/Linux
 
 
 
