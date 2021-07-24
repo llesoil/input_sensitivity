@@ -356,6 +356,10 @@ boxplot_imp("gcc", "time", xlim =[-1,1], xname='Coefficients')
     
 
 
+Overall, for gcc, there is one influential options, namely `optim` i.e., the flag -Og -O1 -O2 -O3 -Ofast
+
+Apart from one single value, this option is always negatively related to the time; without much surprise, activating -Ofast decreases the compile time of the program.
+
 #### size
 
 
@@ -366,15 +370,19 @@ boxplot_imp("gcc", "size", xlim =[-1,1], xname='Coefficients')
 
 
     
-![png](RQ2_files/RQ2_17_0.png)
+![png](RQ2_files/RQ2_18_0.png)
     
 
 
 
     
-![png](RQ2_files/RQ2_17_1.png)
+![png](RQ2_files/RQ2_18_1.png)
     
 
+
+For the binary size, it is a very interesting result; there is nothing wrong with the boxplots of the upper charts, there is only one value for each, so we are not able to see them.
+
+As presented in the paper, this is our textbook case of a stable software system (in our experiment) w.r.t. the input sensitivity.
 
 ### Lingeling
 
@@ -384,26 +392,6 @@ boxplot_imp("gcc", "size", xlim =[-1,1], xname='Coefficients')
 ```python
 boxplot_imp("lingeling", "conflicts", xlim =[0,1], xname='Importances')
 boxplot_imp("lingeling", "conflicts", xlim =[-1,1], xname='Coefficients')
-```
-
-
-    
-![png](RQ2_files/RQ2_20_0.png)
-    
-
-
-
-    
-![png](RQ2_files/RQ2_20_1.png)
-    
-
-
-#### conflicts per second
-
-
-```python
-boxplot_imp("lingeling", "cps", xlim =[0,1], xname='Importances')
-boxplot_imp("lingeling", "cps", xlim =[-1,1], xname='Coefficients')
 ```
 
 
@@ -418,6 +406,34 @@ boxplot_imp("lingeling", "cps", xlim =[-1,1], xname='Coefficients')
     
 
 
+For lingeling, to contrast with gcc, there are lots of variations depending on the SAT formula processed by the software. 
+
+There are many corner cases, for which an option becomes suddently influential.
+
+Most options can have positive and negative effects depending on inputs.
+
+#### conflicts per second
+
+
+```python
+boxplot_imp("lingeling", "cps", xlim =[0,1], xname='Importances')
+boxplot_imp("lingeling", "cps", xlim =[-1,1], xname='Coefficients')
+```
+
+
+    
+![png](RQ2_files/RQ2_25_0.png)
+    
+
+
+
+    
+![png](RQ2_files/RQ2_25_1.png)
+    
+
+
+Same conclusion as for the conflicts performance property.
+
 #### reductions
 
 
@@ -428,15 +444,19 @@ boxplot_imp("lingeling", "reductions", xlim =[-1,1], xname='Coefficients')
 
 
     
-![png](RQ2_files/RQ2_24_0.png)
+![png](RQ2_files/RQ2_28_0.png)
     
 
 
 
     
-![png](RQ2_files/RQ2_24_1.png)
+![png](RQ2_files/RQ2_28_1.png)
     
 
+
+Again, all the options might be influential at some point, for few inputs.
+
+An expertise of the domain could help to understand the link between the content of these formulae and the way it is processed by the software i.e. how it interacts with configuration options. 
 
 ### NodeJS
 
@@ -446,48 +466,6 @@ boxplot_imp("lingeling", "reductions", xlim =[-1,1], xname='Coefficients')
 ```python
 boxplot_imp("nodejs", "ops", xlim =[0,1], xname='Importances')
 boxplot_imp("nodejs", "ops", xlim =[-1,1], xname='Coefficients')
-```
-
-
-    
-![png](RQ2_files/RQ2_27_0.png)
-    
-
-
-
-    
-![png](RQ2_files/RQ2_27_1.png)
-    
-
-
-### Poppler
-
-#### size
-
-
-```python
-boxplot_imp("poppler", "size", xlim =[0,1], xname='Importances')
-boxplot_imp("poppler", "size", xlim =[-1,1], xname='Coefficients')
-```
-
-
-    
-![png](RQ2_files/RQ2_30_0.png)
-    
-
-
-
-    
-![png](RQ2_files/RQ2_30_1.png)
-    
-
-
-#### time
-
-
-```python
-boxplot_imp("poppler", "time", xlim =[0,1], xname='Importances')
-boxplot_imp("poppler", "time", xlim =[-1,1], xname='Coefficients')
 ```
 
 
@@ -502,6 +480,66 @@ boxplot_imp("poppler", "time", xlim =[-1,1], xname='Coefficients')
     
 
 
+For nodeJS, the `jitless` option is definitely the most influential across inputs.
+
+In general, activating it will reduce the number of operations computed by the input (java)scripts. But there are few exceptions.
+
+The other configuration option to watch is the `node-memory-debug` feature; for few inputs, it can have a greater influence than `jitless`.
+
+### Poppler
+
+#### size
+
+
+```python
+boxplot_imp("poppler", "size", xlim =[0,1], xname='Importances')
+boxplot_imp("poppler", "size", xlim =[-1,1], xname='Coefficients')
+```
+
+
+    
+![png](RQ2_files/RQ2_36_0.png)
+    
+
+
+
+    
+![png](RQ2_files/RQ2_36_1.png)
+    
+
+
+The size of the output directory containing the images extracted from the pdfs is naturally highly dependent of the format of the output image (e.g. jpg, png, etc.).
+
+But using a library to handle jpegs files can interact with the influential options for few inputs.
+
+Again, this is a case where : (1) there is a general trend for the influential options but (2) for some inputs, it does not respect the rule.
+
+It can be interesting to detect a priori the second cases (2) thanks to machine learning, so we can predict performances whatever the input. 
+
+#### time
+
+
+```python
+boxplot_imp("poppler", "time", xlim =[0,1], xname='Importances')
+boxplot_imp("poppler", "time", xlim =[-1,1], xname='Coefficients')
+```
+
+
+    
+![png](RQ2_files/RQ2_39_0.png)
+    
+
+
+
+    
+![png](RQ2_files/RQ2_39_1.png)
+    
+
+
+Here, there is a compromise to find for the value of `format` between the time and the size, since activating `format` decreases the size, but increases the time.
+
+And this value may depend on input data; we have to adapt the predictive model.
+
 ### xz
 
 #### size
@@ -514,15 +552,19 @@ boxplot_imp("xz", "size", xlim =[-1,1], xname='Coefficients')
 
 
     
-![png](RQ2_files/RQ2_35_0.png)
+![png](RQ2_files/RQ2_43_0.png)
     
 
 
 
     
-![png](RQ2_files/RQ2_35_1.png)
+![png](RQ2_files/RQ2_43_1.png)
     
 
+
+Like gcc, another case of stability w.r.t. input sensitivity
+
+The influential options remain the same, with the same effect.
 
 #### time
 
@@ -530,88 +572,6 @@ boxplot_imp("xz", "size", xlim =[-1,1], xname='Coefficients')
 ```python
 boxplot_imp("xz", "time", xlim =[0,1], xname='Importances')
 boxplot_imp("xz", "time", xlim =[-1,1], xname='Coefficients')
-```
-
-
-    
-![png](RQ2_files/RQ2_37_0.png)
-    
-
-
-
-    
-![png](RQ2_files/RQ2_37_1.png)
-    
-
-
-### x264
-
-#### bitrate
-
-
-```python
-boxplot_imp("x264", "kbs", xlim =[0,1], xname='Importances')
-boxplot_imp("x264", "kbs", xlim =[-1,1], xname='Coefficients')
-```
-
-
-    
-![png](RQ2_files/RQ2_40_0.png)
-    
-
-
-
-    
-![png](RQ2_files/RQ2_40_1.png)
-    
-
-
-#### frame encoded per second
-
-
-```python
-boxplot_imp("x264", "fps", xlim =[0,1], xname='Importances')
-boxplot_imp("x264", "fps", xlim =[-1,1], xname='Coefficients')
-```
-
-
-    
-![png](RQ2_files/RQ2_42_0.png)
-    
-
-
-
-    
-![png](RQ2_files/RQ2_42_1.png)
-    
-
-
-#### CPU usage
-
-
-```python
-boxplot_imp("x264", "cpu", xlim =[0,1], xname='Importances')
-boxplot_imp("x264", "cpu", xlim =[-1,1], xname='Coefficients')
-```
-
-
-    
-![png](RQ2_files/RQ2_44_0.png)
-    
-
-
-
-    
-![png](RQ2_files/RQ2_44_1.png)
-    
-
-
-#### Encoded size of video
-
-
-```python
-boxplot_imp("x264", "size", xlim =[0,1], xname='Importances')
-boxplot_imp("x264", "size", xlim =[-1,1], xname='Coefficients')
 ```
 
 
@@ -626,6 +586,109 @@ boxplot_imp("x264", "size", xlim =[-1,1], xname='Coefficients')
     
 
 
+Globally similar conclusion as for the size. 
+
+The more stable the effect of options in RQ2, the more stable the distribution of performances in RQ1.
+
+### x264
+
+#### bitrate
+
+
+```python
+boxplot_imp("x264", "kbs", xlim =[0,1], xname='Importances')
+boxplot_imp("x264", "kbs", xlim =[-1,1], xname='Coefficients')
+```
+
+
+    
+![png](RQ2_files/RQ2_50_0.png)
+    
+
+
+
+    
+![png](RQ2_files/RQ2_50_1.png)
+    
+
+
+x264 can encode different kinds of videos, such as an animation movie with many details, or a soccer game with large and monochromatic areas of grass. 
+When encoding the soccer game, x264 can use those fixed green areas to reduce the amount of data encoded per second i.e. the bitrate. 
+In other words, configuration options aggregating pixels (e.g. macro-block tree estimation `mbtree`) could: reduce the bitrate for the soccer game; increase the bitrate for the animation movie since nothing can be aggregated. 
+
+
+This figures report on respectively the boxplots of configuration options' importances and effects when predicting x264's bitrate for all input videos. 
+
+Three options are strongly influential for a majority of videos: 
+`subme`, `mbtree` and `aq-mode`, but their importance can differ depending on input videos: for instance, the importance of subme is 0.83 for video 1365 and only 0.01 for 40. 
+Because influential features vary with input videos for x264, performance models and approaches based on *feature selection* may not generalize well to all input videos. 
+
+
+Most of the options have positive and negative coefficients; thus, the specific effects of options heavily depend on input videos. 
+It is also true for influential options: mbtree can have positive and negative (influential) effects on the bitrate i.e. activating mbtree may be worth only for few input videos. 
+The consequence is that one cannot reliably provide end-users with a unique x264 performance prediction model or a x264 default configuration whatever the input is.
+
+
+#### frame encoded per second
+
+
+```python
+boxplot_imp("x264", "fps", xlim =[0,1], xname='Importances')
+boxplot_imp("x264", "fps", xlim =[-1,1], xname='Coefficients')
+```
+
+
+    
+![png](RQ2_files/RQ2_53_0.png)
+    
+
+
+
+    
+![png](RQ2_files/RQ2_53_1.png)
+    
+
+
+#### CPU usage
+
+
+```python
+boxplot_imp("x264", "cpu", xlim =[0,1], xname='Importances')
+boxplot_imp("x264", "cpu", xlim =[-1,1], xname='Coefficients')
+```
+
+
+    
+![png](RQ2_files/RQ2_55_0.png)
+    
+
+
+
+    
+![png](RQ2_files/RQ2_55_1.png)
+    
+
+
+#### Encoded size of video
+
+
+```python
+boxplot_imp("x264", "size", xlim =[0,1], xname='Importances')
+boxplot_imp("x264", "size", xlim =[-1,1], xname='Coefficients')
+```
+
+
+    
+![png](RQ2_files/RQ2_57_0.png)
+    
+
+
+
+    
+![png](RQ2_files/RQ2_57_1.png)
+    
+
+
 #### Encoding time
 
 
@@ -636,13 +699,13 @@ boxplot_imp("x264", "etime", xlim =[-1,1], xname='Coefficients')
 
 
     
-![png](RQ2_files/RQ2_48_0.png)
+![png](RQ2_files/RQ2_59_0.png)
     
 
 
 
     
-![png](RQ2_files/RQ2_48_1.png)
+![png](RQ2_files/RQ2_59_1.png)
     
 
 

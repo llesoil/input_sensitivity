@@ -145,7 +145,7 @@ def plot_correlationmatrix_dendogram(ns, dim):
     # dim : dimension
     # output : a plot of an ordered correlogram of the different compile-time options
     
-    # number of videos
+    # number of inputs
     inputs_nb = inputs_count[ns]
 
     corr = [[0 for x in range(inputs_nb)] for y in range(inputs_nb)]
@@ -162,6 +162,7 @@ def plot_correlationmatrix_dendogram(ns, dim):
 
     # we transform our matrix into a dataframe
     df = pd.DataFrame(corr)
+    # we replace nan correlations (with a distribution whose values are all equal to 0)
     df = df.fillna(0)
 
     # group the videos, we choose the ward method 
@@ -179,7 +180,8 @@ def plot_correlationmatrix_dendogram(ns, dim):
         for j in range(inputs_nb):    
             if i>j:
                 mask[order[i]][order[j]] = True
-
+    
+    # compute the actual clustermap
     g = sns.clustermap(df, cmap="vlag", mask=mask, method="ward",
                    linewidths=0, figsize=(13, 13), 
                    cbar_kws={"ticks":[k/5 for k in np.arange(-10,10,1)]}, 
@@ -234,6 +236,32 @@ corr = plot_correlationmatrix_dendogram("gcc", "time")
 describe(corr)
 ```
 
+
+
+
+    count    5886.00
+    mean        0.21
+    std         0.21
+    min        -0.34
+    25%         0.07
+    50%         0.18
+    75%         0.33
+    max         0.93
+    dtype: float64
+
+
+
+These distribution of compilation times are mostly uncorrelated with each other.
+
+The minimal value, fixed at -0.34, is not even a moderate correlations, and 75% of the correlations are under the value of 0.4 (i.e. not moderate either)
+
+We observe very low values of times, sometimes in miliseconds.
+This can explain the poor correlogram.
+
+Practictally, it might be caused by the sample of scripts used for this experiment.
+Maybe we have to consider bigger programs or software systems, compile it, and include it in the study.
+Here there is only one class.
+
 #### size
 
 
@@ -243,7 +271,7 @@ corr = plot_correlationmatrix_dendogram("gcc", "size")
 
 
     
-![png](RQ1_files/RQ1_16_0.png)
+![png](RQ1_files/RQ1_17_0.png)
     
 
 
@@ -251,6 +279,27 @@ corr = plot_correlationmatrix_dendogram("gcc", "size")
 ```python
 describe(corr)
 ```
+
+
+
+
+    count    5886.00
+    mean        0.99
+    std         0.05
+    min         0.79
+    25%         1.00
+    50%         1.00
+    75%         1.00
+    max         1.00
+    dtype: float64
+
+
+
+The size of the compioled programs do not change at all, which is a good news.
+
+All correlations are positive and very high.
+
+We can reuse a model from one input to another for the binary size of gcc.
 
 ### Lingeling
 
@@ -263,7 +312,7 @@ corr = plot_correlationmatrix_dendogram("lingeling", "conflicts")
 
 
     
-![png](RQ1_files/RQ1_20_0.png)
+![png](RQ1_files/RQ1_22_0.png)
     
 
 
@@ -271,30 +320,33 @@ corr = plot_correlationmatrix_dendogram("lingeling", "conflicts")
 ```python
 describe(corr)
 ```
+
+
+
+
+    count    43365.00
+    mean         0.02
+    std          0.20
+    min         -0.90
+    25%         -0.09
+    50%          0.02
+    75%          0.12
+    max          0.92
+    dtype: float64
+
+
+
+For lingeling and the number of conflicts in total, we got lots of tiny classes of SAT formulae.
+
+These are gloablly uncorrelated (very low, low, or moderate) with each other, apart from one or groups (e.g. top-left of the chart), with a few cases of very high negative correlations.
+
+Training a performance model on this performance property and for this software system would be a nightmare, we cannot reuse anything.
 
 #### conflicts per second
 
 
 ```python
 corr = plot_correlationmatrix_dendogram("lingeling", "cps")
-```
-
-
-    
-![png](RQ1_files/RQ1_23_0.png)
-    
-
-
-
-```python
-describe(corr)
-```
-
-#### reductions
-
-
-```python
-corr = plot_correlationmatrix_dendogram("lingeling", "reductions")
 ```
 
 
@@ -309,22 +361,38 @@ describe(corr)
 ```
 
 
+
+
+    count    43365.00
+    mean         0.02
+    std          0.20
+    min         -0.89
+    25%         -0.09
+    50%          0.02
+    75%          0.12
+    max          0.93
+    dtype: float64
+
+
+
+For lingeling and the number of conflicts per second in total, we can draw the same conclusions as conflicts:
+
+These are gloablly uncorrelated (very low, low, or moderate) with each other, apart from one or groups (e.g. top-left of the chart), with a few cases of very high negative correlations.
+
+Training a performance model on this performance property and for this software system would be a nightmare, we cannot reuse anything.
+
+There might be some tiny differences explaining the different clusters between conflicts and cps.
+
+#### reductions
+
+
 ```python
-
-```
-
-### NodeJS
-
-#### number of operations per second
-
-
-```python
-corr = plot_correlationmatrix_dendogram("nodejs", "ops")
+corr = plot_correlationmatrix_dendogram("lingeling", "reductions")
 ```
 
 
     
-![png](RQ1_files/RQ1_31_0.png)
+![png](RQ1_files/RQ1_30_0.png)
     
 
 
@@ -333,13 +401,32 @@ corr = plot_correlationmatrix_dendogram("nodejs", "ops")
 describe(corr)
 ```
 
-### Poppler
 
-#### size
+
+
+    count    34453.00
+    mean         0.01
+    std          0.18
+    min         -0.99
+    25%         -0.10
+    50%          0.01
+    75%          0.11
+    max          1.00
+    dtype: float64
+
+
+
+For many SAT formulae, lingeling does not find any reduction. In this figure, this is represented by the white group in the middle of the correlogram.
+
+Apart from it, it is a bit like conflicts; a lot of uncorrelated values, a few "more than moderate" correlations, either positive or negative.
+
+### NodeJS
+
+#### number of operations per second
 
 
 ```python
-corr = plot_correlationmatrix_dendogram("poppler", "size")
+corr = plot_correlationmatrix_dendogram("nodejs", "ops")
 ```
 
 
@@ -353,6 +440,70 @@ corr = plot_correlationmatrix_dendogram("poppler", "size")
 describe(corr)
 ```
 
+
+
+
+    count    1863415.00
+    mean           0.22
+    std            0.44
+    min           -0.87
+    25%           -0.14
+    50%            0.09
+    75%            0.72
+    max            0.95
+    dtype: float64
+
+
+
+NodeJs is an interesting case, where we can observe one big highly-correlated group of inputs, and after that lots of uncorrelated scripts in terms of operations per second.
+
+The first group has in general low or moderate correlations, all positive.
+
+There are mostly high negative correlations between this big group and the rest of the scripts.
+
+### Poppler
+
+#### size
+
+
+```python
+corr = plot_correlationmatrix_dendogram("poppler", "size")
+```
+
+
+    
+![png](RQ1_files/RQ1_40_0.png)
+    
+
+
+
+```python
+describe(corr)
+```
+
+
+
+
+    count    540280.00
+    mean          0.17
+    std           0.57
+    min          -1.00
+    25%          -0.29
+    50%           0.25
+    75%           0.72
+    max           1.00
+    dtype: float64
+
+
+
+Again, and like for lingeling, we cannot avoid to have few input pdfs for which there is no image in it.
+ 
+Their size is 0, and to show their presence, we color that in white.
+ 
+Apart from these outliers, there are different groups of pdfs, that are mostly highly and positively correlated between each other (i.e. high intra correlations) and highly but negatively correlated to the other groups.
+ 
+We highlight few profiles of pdf when extracting their images. 
+
 #### time
 
 
@@ -362,7 +513,7 @@ corr = plot_correlationmatrix_dendogram("poppler", "time")
 
 
     
-![png](RQ1_files/RQ1_38_0.png)
+![png](RQ1_files/RQ1_44_0.png)
     
 
 
@@ -386,6 +537,24 @@ describe(corr)
 
 
 
+The example of the paper.
+
+The content of input pdfs fed to poppler may vary e.g. the pdf can be a 2-page report with a simple figure or a 300-page picture book. 
+Depending on this content, extracting the images embedded in those files can be quick or slow. 
+Moreover, a user can adapt different configurations for the report and not for the book (or inversely), leading to different rankings in terms of extraction time. 
+
+In this correlaogram, we depict the Spearman rank-order correlations, in terms of extraction time, between pairs of input pdfs fed to poppler. 
+We also perform hierarchical clustering on poppler data to gather inputs having similar times distributions and visually group correlated pdfs together.
+Each square$_{(i,j)}$ represents the Spearman correlation between the time needed to extract the images of pdfs $i$ and $j$. The color of this square respects the top-left scale: high positive correlations are red; low in white; negative in blue. Because we cannot describe each correlation individually, we added a table describing their distribution. The diagonals are excluded.
+Results suggest a positive correlation (see dark red cells), though there are pairs of inputs with lower (see white cells) and even negative (see dark blue cells) correlations. 
+More than a quarter of the correlations between input pdfs are positive and at least moderate (third quartile Q3 greater than \num{0.52}).
+
+On the top-left part of the correlogram (see triangle 1 in the article), we even observe a first group of input pdfs that are highly correlated (positively, strong or very strong) with each others. 
+In this first group, the input pdfs have similar time rankings; their performance react the same way to the same configurations. 
+
+However, this group of pdfs is uncorrelated (very low, low) or negatively correlated (moderate, strong and very strong) with the second group of pdfs (see the triangle 2, in the middle). 
+In this case, a performance model trained on a pdf chosen in the first group should not be reused directly on a pdf of the second group. 
+
 ### xz
 
 #### size
@@ -393,44 +562,6 @@ describe(corr)
 
 ```python
 corr = plot_correlationmatrix_dendogram("xz", "size")
-```
-
-
-    
-![png](RQ1_files/RQ1_42_0.png)
-    
-
-
-
-```python
-describe(corr)
-```
-
-#### time
-
-
-```python
-corr = plot_correlationmatrix_dendogram("xz", "time")
-```
-
-
-    
-![png](RQ1_files/RQ1_45_0.png)
-    
-
-
-
-```python
-describe(corr)
-```
-
-### x264
-
-#### bitrate
-
-
-```python
-corr = plot_correlationmatrix_dendogram("x264", "kbs")
 ```
 
 
@@ -444,16 +575,38 @@ corr = plot_correlationmatrix_dendogram("x264", "kbs")
 describe(corr)
 ```
 
-#### frame encoded per second
+
+
+
+    count    1128.00
+    mean        0.89
+    std         0.19
+    min         0.14
+    25%         0.82
+    50%         1.00
+    75%         1.00
+    max         1.00
+    dtype: float64
+
+
+
+As for gcc, xz is not so concerned by input sensitivity.
+
+In particular, the sizes of the output file in bytes, are very highly correlated for a vast majority of inputs, with a first quartile at 0.82.
+
+Few files are a bit different, but all correlations stay negative for this performance property!
+
+
+#### time
 
 
 ```python
-corr = plot_correlationmatrix_dendogram("x264", "fps")
+corr = plot_correlationmatrix_dendogram("xz", "time")
 ```
 
 
     
-![png](RQ1_files/RQ1_52_0.png)
+![png](RQ1_files/RQ1_53_0.png)
     
 
 
@@ -462,29 +615,36 @@ corr = plot_correlationmatrix_dendogram("x264", "fps")
 describe(corr)
 ```
 
-#### CPU usage
+
+
+
+    count    1128.00
+    mean        0.76
+    std         0.18
+    min        -0.03
+    25%         0.72
+    50%         0.82
+    75%         0.88
+    max         0.97
+    dtype: float64
+
+
+
+For time, it is less obvious.
+
+Overall, it is quite the same, with lower correlation values.
+
+But one input uncorrelated with all the others suggest that we could improve the dataset of input we use (the tiniest of all the experiments).
+
+Maybe by adding big files, it would be like the other software systems.
+
+### x264
+
+#### bitrate
 
 
 ```python
-corr = plot_correlationmatrix_dendogram("x264", "cpu")
-```
-
-
-    
-![png](RQ1_files/RQ1_55_0.png)
-    
-
-
-
-```python
-describe(corr)
-```
-
-#### Encoded size of video
-
-
-```python
-corr = plot_correlationmatrix_dendogram("x264", "size")
+corr = plot_correlationmatrix_dendogram("x264", "kbs")
 ```
 
 
@@ -498,6 +658,148 @@ corr = plot_correlationmatrix_dendogram("x264", "size")
 describe(corr)
 ```
 
+
+
+
+    count    975106.00
+    mean          0.57
+    std           0.29
+    min          -0.69
+    25%           0.39
+    50%           0.63
+    75%           0.79
+    max           1.00
+    dtype: float64
+
+
+
+for bitrate, the input sensitivity is high with moderate correlation on average (0.57), low correlation for first quartile (0.39), and some negative correlations (up to -0.69)
+
+On the positive side, half of the videos have strong positive correlations between their bitrates distributions (i.e. 0.63), and a quarter of the videos have very strong positive correlations (Q3 = 0.79).
+
+There are, however, less favorable cases with lower and negative coefficients: the worst case being -0.69, between videos 9 and 503; those negative results suggest that some videos have very different performance distributions. This may lead to negative transfer.
+    
+We can observe four groups of video, similar to what has been observed for poppler and extraction time. We detail that in results/x264_groups
+
+
+#### frame encoded per second
+
+
+```python
+corr = plot_correlationmatrix_dendogram("x264", "fps")
+```
+
+
+    
+![png](RQ1_files/RQ1_62_0.png)
+    
+
+
+
+```python
+describe(corr)
+```
+
+
+
+
+    count    975106.00
+    mean          0.93
+    std           0.08
+    min           0.01
+    25%           0.93
+    50%           0.96
+    75%           0.97
+    max           1.00
+    dtype: float64
+
+
+
+for fps, we observe again very strong correlations (0.93 on average and for first quartile). Even extreme cases exhibit moderate correlations 0.50: we can conclude that the input sensitivity is low
+
+#### CPU usage
+
+
+```python
+corr = plot_correlationmatrix_dendogram("x264", "cpu")
+```
+
+
+    
+![png](RQ1_files/RQ1_66_0.png)
+    
+
+
+
+```python
+describe(corr)
+```
+
+
+
+
+    count    975106.00
+    mean          0.79
+    std           0.13
+    min          -0.31
+    25%           0.74
+    50%           0.82
+    75%           0.88
+    max           1.00
+    dtype: float64
+
+
+
+for cpu, correlations are moderate (0.79 on average, first quartile 0.74) while there are negative correlations. Hence the input sensitivity is more important than for encoding time or fps 
+
+#### Encoded size of video
+
+
+```python
+corr = plot_correlationmatrix_dendogram("x264", "size")
+```
+
+
+    
+![png](RQ1_files/RQ1_70_0.png)
+    
+
+
+
+```python
+describe(corr)
+```
+
+
+
+
+    count    975106.00
+    mean          0.57
+    std           0.29
+    min          -0.69
+    25%           0.39
+    50%           0.63
+    75%           0.79
+    max           1.00
+    dtype: float64
+
+
+
+For encoding size, the input sensitivity is also high and quite similar to bitrate. 
+
+We conducted an additional study for encoding size: we investigate the performances of two extreme configurations: the most and least sensitive to input videos.
+
+Since it is not possible to directly compare two input performance distributions, for all the videos, we sort the n configurations of our dataset w.r.t. their increasing performances and assign a rank to each configuration (i.e. 1 being the smallest and n the largest values) so we can compare their rank between videos.
+
+The rankings of sizes for the configuration 200 are stable, whatever the video; 92.5% of them are between 105 and 130. 
+
+Oppositely, configuration 16's rankings strongly vary across inputs. They are chaotic configurations in terms of performances.
+
+There is no global trend for this configuration (Q1: 54, Q2:103, Q3: \num{171}). It can be both one of the best configurations for minimizing the size (e.g. for video 147 or 551) or one of the worst (e.g. for 109 or 1281).
+
+It then seems very difficult to apply any learning method to rank algorithms on such a configuration.
+This would also prevent an \xdeux user to know whether the configuration 16 would be optimal to get the minimal size of video.
+
 #### Encoding time
 
 
@@ -507,7 +809,7 @@ corr = plot_correlationmatrix_dendogram("x264", "etime")
 
 
     
-![png](RQ1_files/RQ1_61_0.png)
+![png](RQ1_files/RQ1_74_0.png)
     
 
 
@@ -530,6 +832,10 @@ describe(corr)
     dtype: float64
 
 
+
+for encoding time, we observe very strong correlations (0.93 on average and for first quartile). 
+
+Though there are some exceptions among pairs of videos with very low correlations (0.15), the input sensitivity is low for this property.
 
 
 ```python
