@@ -1,10 +1,11 @@
-# First research question results
+# RQ1 additional results
 
 A common assertion in the transfer learning community is that the more the source and the target environment are similar in terms of software performances, the more the transfer will outperform the simple machine learning (i.e. directly on the target environment, without transfer). 
 However, inputs have different properties that may change the software behavior and thus alter software performances.
 To reuse a performance model on multiple inputs (\ie trained on one input and tested on another input), the performance of software systems must be consistent across inputs.
 
-## $RQ_{1}$ - Do software performances stay consistent across inputs?
+## RQ1 - Do software performances stay consistent across inputs?
+
 Are the performance distributions stable from one input to another? 
 Are the rankings of performance the same for all inputs? 
 
@@ -94,7 +95,7 @@ inputs_perf["x264"] = ["size", "kbs", "fps", "etime", "cpu"]
 inputs_perf["xz"] = ["size", "time"]
 inputs_perf["poppler"] = ["size", "time"]
 inputs_perf["nodejs"] = ["ops"]
-inputs_perf["gcc"] = ["size", "time"]
+inputs_perf["gcc"] = ["size", "ctime", "exec"]
 inputs_perf["lingeling"] = ["conflicts", "cps", "reductions"]
 
 inputs_feat = dict()
@@ -218,11 +219,11 @@ def describe(corr):
 
 ### GCC
 
-#### time
+#### compile time
 
 
 ```python
-corr = plot_correlationmatrix_dendogram("gcc", "time")
+corr = plot_correlationmatrix_dendogram("gcc", "ctime")
 ```
 
 
@@ -239,34 +240,34 @@ describe(corr)
 
 
 
-    count    5886.00
-    mean        0.21
-    std         0.21
-    min        -0.34
-    25%         0.07
-    50%         0.18
-    75%         0.33
-    max         0.93
+    count    435.00
+    mean       0.91
+    std        0.05
+    min        0.72
+    25%        0.89
+    50%        0.92
+    75%        0.94
+    max        0.97
     dtype: float64
 
 
 
-These distribution of compilation times are mostly uncorrelated with each other.
+These distribution of compilation times are mostly highly correlated with each other.
 
-The minimal value, fixed at -0.34, is not even a moderate correlations, and 75% of the correlations are under the value of 0.4 (i.e. not moderate either)
+The minimal value, fixed at 0.72, is not even a moderate correlations, and 75% of the correlations are above the value of 0.9
 
-We observe very low values of times, sometimes in miliseconds.
+We observe very low values of compile times, sometimes in miliseconds.
 This can explain the poor correlogram.
 
 Practictally, it might be caused by the sample of scripts used for this experiment.
 Maybe we have to consider bigger programs or software systems, compile it, and include it in the study.
 Here there is only one class.
 
-#### size
+#### execution time
 
 
 ```python
-corr = plot_correlationmatrix_dendogram("gcc", "size")
+corr = plot_correlationmatrix_dendogram("gcc", "exec")
 ```
 
 
@@ -283,21 +284,58 @@ describe(corr)
 
 
 
-    count    5886.00
-    mean        0.99
-    std         0.05
-    min         0.79
-    25%         1.00
-    50%         1.00
-    75%         1.00
-    max         1.00
+    count    406.00
+    mean       0.56
+    std        0.51
+    min       -0.69
+    25%        0.22
+    50%        0.84
+    75%        0.92
+    max        1.00
     dtype: float64
 
 
 
-The size of the compioled programs do not change at all, which is a good news.
+These distribution of execution times are mostly correlated with each other.
 
-All correlations are positive and very high.
+But there are some negative correlations for a set of scripts. There are 2 groups of scripts, uncorrelated with each other.
+
+#### size
+
+
+```python
+corr = plot_correlationmatrix_dendogram("gcc", "size")
+```
+
+
+    
+![png](RQ1_files/RQ1_21_0.png)
+    
+
+
+
+```python
+describe(corr)
+```
+
+
+
+
+    count    406.00
+    mean       0.77
+    std        0.17
+    min        0.48
+    25%        0.65
+    50%        0.71
+    75%        0.96
+    max        1.00
+    dtype: float64
+
+
+
+The binary size of the compiled programs do not change at all, which is a good news.
+
+All correlations are positive and at least moderate.
 
 We can reuse a model from one input to another for the binary size of gcc.
 
@@ -312,7 +350,7 @@ corr = plot_correlationmatrix_dendogram("lingeling", "conflicts")
 
 
     
-![png](RQ1_files/RQ1_22_0.png)
+![png](RQ1_files/RQ1_26_0.png)
     
 
 
@@ -351,7 +389,7 @@ corr = plot_correlationmatrix_dendogram("lingeling", "cps")
 
 
     
-![png](RQ1_files/RQ1_26_0.png)
+![png](RQ1_files/RQ1_30_0.png)
     
 
 
@@ -392,7 +430,7 @@ corr = plot_correlationmatrix_dendogram("lingeling", "reductions")
 
 
     
-![png](RQ1_files/RQ1_30_0.png)
+![png](RQ1_files/RQ1_34_0.png)
     
 
 
@@ -431,7 +469,7 @@ corr = plot_correlationmatrix_dendogram("nodejs", "ops")
 
 
     
-![png](RQ1_files/RQ1_35_0.png)
+![png](RQ1_files/RQ1_39_0.png)
     
 
 
@@ -472,7 +510,7 @@ corr = plot_correlationmatrix_dendogram("poppler", "size")
 
 
     
-![png](RQ1_files/RQ1_40_0.png)
+![png](RQ1_files/RQ1_44_0.png)
     
 
 
@@ -513,7 +551,7 @@ corr = plot_correlationmatrix_dendogram("poppler", "time")
 
 
     
-![png](RQ1_files/RQ1_44_0.png)
+![png](RQ1_files/RQ1_48_0.png)
     
 
 
@@ -566,7 +604,7 @@ corr = plot_correlationmatrix_dendogram("xz", "size")
 
 
     
-![png](RQ1_files/RQ1_49_0.png)
+![png](RQ1_files/RQ1_53_0.png)
     
 
 
@@ -606,7 +644,7 @@ corr = plot_correlationmatrix_dendogram("xz", "time")
 
 
     
-![png](RQ1_files/RQ1_53_0.png)
+![png](RQ1_files/RQ1_57_0.png)
     
 
 
@@ -649,7 +687,7 @@ corr = plot_correlationmatrix_dendogram("x264", "kbs")
 
 
     
-![png](RQ1_files/RQ1_58_0.png)
+![png](RQ1_files/RQ1_62_0.png)
     
 
 
@@ -691,7 +729,7 @@ corr = plot_correlationmatrix_dendogram("x264", "fps")
 
 
     
-![png](RQ1_files/RQ1_62_0.png)
+![png](RQ1_files/RQ1_66_0.png)
     
 
 
@@ -726,7 +764,7 @@ corr = plot_correlationmatrix_dendogram("x264", "cpu")
 
 
     
-![png](RQ1_files/RQ1_66_0.png)
+![png](RQ1_files/RQ1_70_0.png)
     
 
 
@@ -761,7 +799,7 @@ corr = plot_correlationmatrix_dendogram("x264", "size")
 
 
     
-![png](RQ1_files/RQ1_70_0.png)
+![png](RQ1_files/RQ1_74_0.png)
     
 
 
@@ -809,7 +847,7 @@ corr = plot_correlationmatrix_dendogram("x264", "etime")
 
 
     
-![png](RQ1_files/RQ1_74_0.png)
+![png](RQ1_files/RQ1_78_0.png)
     
 
 

@@ -5,7 +5,7 @@ Due to time constraints and to distribute the different computations, we used tw
 Since the measurements can be affected by the hardware it is executed on, we only used one environment per system.
 
 For measuring the different systems' performances, we used:
-- for gcc, environment 1
+- for gcc, environment 3
 - for the image software, environment 1
 - for lingeling, environment 1
 - for nodeJS, environment 1

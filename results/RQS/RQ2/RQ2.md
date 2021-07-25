@@ -1,4 +1,4 @@
-# Second research question results
+# RQ2 additional results
 
 But software performances are influenced by the configuration options e.g. the energy consumption. 
 An option is called influential for a performance when its values have a strong effect on this performance. 
@@ -10,7 +10,7 @@ If so, users may wonder which options to enable to improve software performances
 
 In order to understand how a performance model can change based on a given input, we next study how input data interact with configuration options. 
 
-## $RQ_{2}$ - Do configuration option’s effects change with in-put data?
+## RQ2 - Do configuration option’s effects change with input data?
 
 
 To assess the relative importances and effects of options, we use two well-known statistical methods. 
@@ -105,7 +105,7 @@ inputs_perf = dict()
 
 inputs_perf["x264"] = ["size", "kbs", "fps", "etime", "cpu"]
 inputs_perf["xz"] = ["size", "time"]
-inputs_perf["poppler"] = ["size", "time"]
+inputs_perf["poppler"] = ["size", "ctime", "exec"]
 inputs_perf["nodejs"] = ["ops"]
 inputs_perf["gcc"] = ["size", "time"]
 inputs_perf["lingeling"] = ["conflicts", "cps", "reductions"]
@@ -336,12 +336,12 @@ def boxplot_imp(ns, dim, xlim = None, xname='Importances'):
 
 ### GCC
 
-#### time
+#### compilation time
 
 
 ```python
-boxplot_imp("gcc", "time", xlim =[0,1], xname='Importances')
-boxplot_imp("gcc", "time", xlim =[-1,1], xname='Coefficients')
+boxplot_imp("gcc", "ctime", xlim =[0,1], xname='Importances')
+boxplot_imp("gcc", "ctime", xlim =[-1,1], xname='Coefficients')
 ```
 
 
@@ -356,16 +356,16 @@ boxplot_imp("gcc", "time", xlim =[-1,1], xname='Coefficients')
     
 
 
-Overall, for gcc, there is one influential options, namely `optim` i.e., the flag -Og -O1 -O2 -O3 -Ofast
+Overall, for the compilation time of gcc, there is one influential options, namely `optim` i.e., the flag -Og -O1 -O2 -O3 -Ofast
 
 Apart from one single value, this option is always negatively related to the time; without much surprise, activating -Ofast decreases the compile time of the program.
 
-#### size
+#### execution time
 
 
 ```python
-boxplot_imp("gcc", "size", xlim =[0,1], xname='Importances')
-boxplot_imp("gcc", "size", xlim =[-1,1], xname='Coefficients')
+boxplot_imp("gcc", "exec", xlim =[0,1], xname='Importances')
+boxplot_imp("gcc", "exec", xlim =[-1,1], xname='Coefficients')
 ```
 
 
@@ -377,6 +377,28 @@ boxplot_imp("gcc", "size", xlim =[-1,1], xname='Coefficients')
 
     
 ![png](RQ2_files/RQ2_18_1.png)
+    
+
+
+Overall, for the execution time of gcc, there is two influential options, namely `optim` i.e., the flag -Og -O1 -O2 -O3 -Ofast and `-ffloat-store`
+
+#### size
+
+
+```python
+boxplot_imp("gcc", "size", xlim =[0,1], xname='Importances')
+boxplot_imp("gcc", "size", xlim =[-1,1], xname='Coefficients')
+```
+
+
+    
+![png](RQ2_files/RQ2_21_0.png)
+    
+
+
+
+    
+![png](RQ2_files/RQ2_21_1.png)
     
 
 
@@ -396,13 +418,13 @@ boxplot_imp("lingeling", "conflicts", xlim =[-1,1], xname='Coefficients')
 
 
     
-![png](RQ2_files/RQ2_22_0.png)
+![png](RQ2_files/RQ2_25_0.png)
     
 
 
 
     
-![png](RQ2_files/RQ2_22_1.png)
+![png](RQ2_files/RQ2_25_1.png)
     
 
 
@@ -422,13 +444,13 @@ boxplot_imp("lingeling", "cps", xlim =[-1,1], xname='Coefficients')
 
 
     
-![png](RQ2_files/RQ2_25_0.png)
+![png](RQ2_files/RQ2_28_0.png)
     
 
 
 
     
-![png](RQ2_files/RQ2_25_1.png)
+![png](RQ2_files/RQ2_28_1.png)
     
 
 
@@ -444,13 +466,13 @@ boxplot_imp("lingeling", "reductions", xlim =[-1,1], xname='Coefficients')
 
 
     
-![png](RQ2_files/RQ2_28_0.png)
+![png](RQ2_files/RQ2_31_0.png)
     
 
 
 
     
-![png](RQ2_files/RQ2_28_1.png)
+![png](RQ2_files/RQ2_31_1.png)
     
 
 
@@ -470,13 +492,13 @@ boxplot_imp("nodejs", "ops", xlim =[-1,1], xname='Coefficients')
 
 
     
-![png](RQ2_files/RQ2_32_0.png)
+![png](RQ2_files/RQ2_35_0.png)
     
 
 
 
     
-![png](RQ2_files/RQ2_32_1.png)
+![png](RQ2_files/RQ2_35_1.png)
     
 
 
@@ -498,13 +520,13 @@ boxplot_imp("poppler", "size", xlim =[-1,1], xname='Coefficients')
 
 
     
-![png](RQ2_files/RQ2_36_0.png)
+![png](RQ2_files/RQ2_39_0.png)
     
 
 
 
     
-![png](RQ2_files/RQ2_36_1.png)
+![png](RQ2_files/RQ2_39_1.png)
     
 
 
@@ -526,13 +548,13 @@ boxplot_imp("poppler", "time", xlim =[-1,1], xname='Coefficients')
 
 
     
-![png](RQ2_files/RQ2_39_0.png)
+![png](RQ2_files/RQ2_42_0.png)
     
 
 
 
     
-![png](RQ2_files/RQ2_39_1.png)
+![png](RQ2_files/RQ2_42_1.png)
     
 
 
@@ -552,13 +574,13 @@ boxplot_imp("xz", "size", xlim =[-1,1], xname='Coefficients')
 
 
     
-![png](RQ2_files/RQ2_43_0.png)
+![png](RQ2_files/RQ2_46_0.png)
     
 
 
 
     
-![png](RQ2_files/RQ2_43_1.png)
+![png](RQ2_files/RQ2_46_1.png)
     
 
 
@@ -576,13 +598,13 @@ boxplot_imp("xz", "time", xlim =[-1,1], xname='Coefficients')
 
 
     
-![png](RQ2_files/RQ2_46_0.png)
+![png](RQ2_files/RQ2_49_0.png)
     
 
 
 
     
-![png](RQ2_files/RQ2_46_1.png)
+![png](RQ2_files/RQ2_49_1.png)
     
 
 
@@ -602,13 +624,13 @@ boxplot_imp("x264", "kbs", xlim =[-1,1], xname='Coefficients')
 
 
     
-![png](RQ2_files/RQ2_50_0.png)
+![png](RQ2_files/RQ2_53_0.png)
     
 
 
 
     
-![png](RQ2_files/RQ2_50_1.png)
+![png](RQ2_files/RQ2_53_1.png)
     
 
 
@@ -639,13 +661,13 @@ boxplot_imp("x264", "fps", xlim =[-1,1], xname='Coefficients')
 
 
     
-![png](RQ2_files/RQ2_53_0.png)
+![png](RQ2_files/RQ2_56_0.png)
     
 
 
 
     
-![png](RQ2_files/RQ2_53_1.png)
+![png](RQ2_files/RQ2_56_1.png)
     
 
 
@@ -659,13 +681,13 @@ boxplot_imp("x264", "cpu", xlim =[-1,1], xname='Coefficients')
 
 
     
-![png](RQ2_files/RQ2_55_0.png)
+![png](RQ2_files/RQ2_58_0.png)
     
 
 
 
     
-![png](RQ2_files/RQ2_55_1.png)
+![png](RQ2_files/RQ2_58_1.png)
     
 
 
@@ -679,13 +701,13 @@ boxplot_imp("x264", "size", xlim =[-1,1], xname='Coefficients')
 
 
     
-![png](RQ2_files/RQ2_57_0.png)
+![png](RQ2_files/RQ2_60_0.png)
     
 
 
 
     
-![png](RQ2_files/RQ2_57_1.png)
+![png](RQ2_files/RQ2_60_1.png)
     
 
 
@@ -699,13 +721,13 @@ boxplot_imp("x264", "etime", xlim =[-1,1], xname='Coefficients')
 
 
     
-![png](RQ2_files/RQ2_59_0.png)
+![png](RQ2_files/RQ2_62_0.png)
     
 
 
 
     
-![png](RQ2_files/RQ2_59_1.png)
+![png](RQ2_files/RQ2_62_1.png)
     
 
 

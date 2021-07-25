@@ -2,12 +2,11 @@
 
 set -xv
 
-mkdir 'data'
+#mkdir 'data'
 # for each input (here a c program)
 cat listInputs.csv | while read line
 do
-  read -d, inputname < <(echo $line)
-  path="./inputs/$inputname.c"
+  read -d, path inputname < <(echo $line)
   # list the runtime configs
   configs=`ls ./scripts/*.sh`
   # a csv per input
@@ -18,15 +17,15 @@ do
   else
     echo "Starting to work with input: $inputname"
     # columns names
-    header="configurationID,optim,-floop-interchange,-fprefetch-loop-arrays,-ffloat-store,-fno-asm,size,usertime,systemtime,elapsedtime,cpu"
+    header="configurationID,optim,-floop-interchange,-fprefetch-loop-arrays,-ffloat-store,-fno-asm,size,usertime,systemtime,elapsedtime,cpu,exec"
     touch $csvOutput
     cat /dev/null > $csvOutput
     echo "$header" > $csvOutput
     # we execute all the runtime configs
     for config in $configs
     do
-      echo "Processing: $config"
-      csvLine=`bash $config $path`
+      echo "Processing: $config with $path and $inputname"
+      csvLine=`bash $config $path $inputname`
       # and store them in the csv
       echo "$csvLine" >> $csvOutput
     done

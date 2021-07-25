@@ -1,129 +1,30 @@
-Addition
-AllTempScalesConv
-Anagram-Program-in-C
-AreaAndCircumference
-Area_of_Circle
-Area_of_Square
-Area_of_Triangle
-ArmstrongNumber
-array1d
-Automorphic_number
-BackgroundThreadSorter
-BasicArithmatic
-BasicGame
-BinarySearch
-bin_to_dec
-BitwiseAndOperator
-BitwiseComplementOperator
-BitwiseLeftshiftOperator
-BitwiseOddOrEven
-BubbleSort
-CalcUsingSwitchCase
-CelciusToKelvinConv
-Changingbase
-CheckCharacterType
-combine_calculator
-CommonElementsInTwoArrays
-counting_sort
-DailyWageCalc
-DayNameUsingSwitchCase
-DecimalToBaseN
-Decimal_to_Binary
-DecimalToBinary
-DecimalToHexadecimalViceVersa
-DecrementOperator
-Diagonal-Difference
-DiceRoll
-DigitalRoot
-DisplayLinuxEnvirmentVariables
-Division
-dynamicMemoryAllocation
-DynamicTwoDArrayUsingArrayOfPointer
-DynamicTwoDArrayUsingOnePointer
-EmployeeGrade
-EncryptDecryptXOR
-endian
-Even_Fibonacci_numbers
-Factorial
-FahrenheitToCelciusConv
-FibonacciGeneration
-FindAsciiValue
-FindRemainder
-gcd
-GotoStatementEvenOrOdd
-Gross_Salary
-HaystackAndNeedle_SubString
-heapsort
-HelloWorld
-increment_number
-IncrementOperator
-Insertionsort
-isInputLeapYear
-large_factorial
-Largest
-last-digit-fibonacci
-lcm
-LeapYearTernaryOperator
-Linked_List_Creation
-LowercaseToUppercase
-MagicNumbers
-Mergesort
-MirrorNumber
-nCrCalculatorLargeNumbers
-NestedifGreatestInteger
-NestedIfLeapYear
-NumberPattern
-oddandeven
-Palindrome
-PalindromeNumber
-PascalTriangle
-Pattern1
-pattern_combos
-PerfectNumber
-Pointers
-Polynomial_linklist
-position_without_sorting
-position_without_sorting2
-Prime
-PrimeByEratosthenes
-priority_queue
-Quicksort
-Recursion
-RecursiveFactorial
-RelationalOperators
-ReverseNumber
-ReverseNumber2
-RussianPeasantMultiplication
-SegmentationFaultorBusErrorDemo
-SelectionSort
-Separate
-SimpleArithmeticAverage
-SimpleEMICalculator
-Simple_Interest
-SimpleInterestCalculator
-SimpleMultiplicationTable
-SizeofOperator
-SparseMatrix_017
-SquareRoot
-StackLinkedList
-Star_Pattern
-StringLength
-Structure
-StudentMarksPercentage
-Subtraction
-SumUsingThreads
-Swap_1
-Swap_2
-SwapByRefandCopy
-SwapIntegers
-SwapIntegersWithout3rdVariable(Arithmatic)
-swappingwithoutthirdvariable
-SwapValueUsingThirdVariable
-SwapValueWithoutUsingThirdVariable
-Temperature
-TemperatureSwitch
-TernaryOperator
-transposeOfMatrix
-Trif
-UppercaseToLowercase
-VowelorConsonant
+linear-algebra/kernels/2mm 2mm
+linear-algebra/kernels/3mm 3mm
+linear-algebra/kernels/atax atax
+linear-algebra/kernels/bicg bicg
+linear-algebra/kernels/cholesky cholesky
+linear-algebra/kernels/doitgen doigtgen
+linear-algebra/kernels/gemm gemm
+linear-algebra/kernels/gemver gemver
+linear-algebra/kernels/gesummv gesummv
+linear-algebra/kernels/mvt mvt
+linear-algebra/kernels/symm symm
+linear-algebra/kernels/syr2k syr2k
+linear-algebra/kernels/syrk syrk
+linear-algebra/kernels/trisolv trisolv
+linear-algebra/kernels/trmm trmm
+linear-algebra/solvers/durbin durbin
+linear-algebra/solvers/dynprog dynprog
+linear-algebra/solvers/gramschmidt gramschmidt
+linear-algebra/solvers/lu lu
+linear-algebra/solvers/ludcmp ludcmp
+datamining/correlation correlation
+datamining/covariance covariance
+medley/floyd-warshall floyd-warshall
+medley/reg_detect reg_detect
+stencils/adi adi
+stencils/fdtd-2d fdtd-2d
+stencils/fdtd-apml fdtd-apml
+stencils/jacobi-1d-imper jacobi-1d-imper
+stencils/jacobi-2d-imper jacobi-2d-imper
+stencils/seidel-2d seidel-2d
