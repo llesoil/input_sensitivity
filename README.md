@@ -3,7 +3,7 @@
 
 Dear reviewers,
 
-This is the companion repository of our ICSE submission.
+This is the companion repository related to our ICSE submission.
 
 ## Organization
 
@@ -22,7 +22,7 @@ The article (pdf file) can be consulted directly in the root directory.
 
 This paper **investigates, demonstrates and quantifies what effects configurable system inputs can have on performances.**
 
-![Introduction picture](results/figures/input_sensitivity_intro.png)
+![Introduction picture](results/figures/figure1.png)
 
 
 ## Artifact evaluation
