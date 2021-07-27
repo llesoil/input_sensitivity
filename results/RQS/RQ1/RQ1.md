@@ -83,7 +83,7 @@ warnings.filterwarnings("ignore")
 
 ```python
 data_dir = "../../../data/"
-name_systems = ["nodejs", "poppler", "xz", "x264", "gcc", "lingeling"]
+name_systems = ["nodejs", "poppler", "xz", "x264", "gcc", "lingeling", "sqlite"]
 
 data = dict()
 inputs_name = dict()
@@ -91,34 +91,40 @@ inputs_count = dict()
 
 inputs_perf = dict()
 
-inputs_perf["x264"] = ["size", "kbs", "fps", "etime", "cpu"]
-inputs_perf["xz"] = ["size", "time"]
-inputs_perf["poppler"] = ["size", "time"]
-inputs_perf["nodejs"] = ["ops"]
 inputs_perf["gcc"] = ["size", "ctime", "exec"]
 inputs_perf["lingeling"] = ["conflicts", "cps", "reductions"]
+inputs_perf["nodejs"] = ["ops"]
+inputs_perf["poppler"] = ["size", "time"]
+inputs_perf["sqlite"] = ["q"+str(i+1) for i in range(15)]
+inputs_perf["x264"] = ["size", "kbs", "fps", "etime", "cpu"]
+inputs_perf["xz"] = ["size", "time"]
+
 
 inputs_feat = dict()
 
+inputs_feat["gcc"] = ["optim","-floop-interchange","-fprefetch-loop-arrays","-ffloat-store","-fno-asm"]
+inputs_feat["lingeling"] = ["--boost", "--carduse", "--decompose", "--gluescale", "--lkhd", "--memlim", 
+"--minimize", "--prbsimple", "--sweepirr", "--sweepred"]
+inputs_feat["nodejs"] = ["--jitless", "--experimental-wasm-modules", "--experimental-vm-modules",
+                         "--preserve-symlinks-main","--no-warnings","--node-memory-debug"]
+inputs_feat["poppler"] = ["format","j","jp2","jbig2","ccitt"]
+inputs_feat["sqlite"] = ["-deserialize", "-memtrace", "-maxsize", "-append", "-output"]
 inputs_feat["x264"] = ["cabac", "ref", "deblock", "analyse", "me", "subme", "mixed_ref", "me_range", "trellis", 
                 "8x8dct", "fast_pskip", "chroma_qp_offset", "bframes", "b_pyramid", "b_adapt", "direct", 
                 "weightb", "open_gop", "weightp", "scenecut", "rc_lookahead", "mbtree", "qpmax", "aq-mode"]
 inputs_feat["xz"] = ["memory","format","level","depth"]
-inputs_feat["poppler"] = ["format","j","jp2","jbig2","ccitt"]
-inputs_feat["nodejs"] = ["--jitless", "--experimental-wasm-modules", "--experimental-vm-modules",
-                         "--preserve-symlinks-main","--no-warnings","--node-memory-debug"]
-inputs_feat["gcc"] = ["optim","-floop-interchange","-fprefetch-loop-arrays","-ffloat-store","-fno-asm"]
-inputs_feat["lingeling"] = ["--boost", "--carduse", "--decompose", "--gluescale", "--lkhd", "--memlim", 
-"--minimize", "--prbsimple", "--sweepirr", "--sweepred"]
+
 
 inputs_categ = dict()
 
-inputs_categ["x264"] = ['analyse', 'me', 'direct', 'deblock']
-inputs_categ["xz"] = ['memory', 'format']
-inputs_categ["nodejs"] = []
-inputs_categ["poppler"] = ["format"]
 inputs_categ["gcc"] = ["optim"]
 inputs_categ["lingeling"] = []
+inputs_categ["nodejs"] = []
+inputs_categ["poppler"] = ["format"]
+inputs_categ["sqlite"] = []
+inputs_categ["x264"] = ['analyse', 'me', 'direct', 'deblock']
+inputs_categ["xz"] = ['memory', 'format']
+
 
 for ns in name_systems:
     
@@ -593,6 +599,505 @@ In this first group, the input pdfs have similar time rankings; their performanc
 However, this group of pdfs is uncorrelated (very low, low) or negatively correlated (moderate, strong and very strong) with the second group of pdfs (see the triangle 2, in the middle). 
 In this case, a performance model trained on a pdf chosen in the first group should not be reused directly on a pdf of the second group. 
 
+### SQLite
+
+#### q1
+
+
+```python
+corr = plot_correlationmatrix_dendogram("sqlite", "q1")
+```
+
+
+    
+![png](RQ1_files/RQ1_53_0.png)
+    
+
+
+
+```python
+describe(corr)
+```
+
+
+
+
+    count    11175.00
+    mean         0.15
+    std          0.52
+    min         -0.78
+    25%         -0.46
+    50%          0.48
+    75%          0.60
+    max          0.87
+    dtype: float64
+
+
+
+#### q2
+
+
+```python
+corr = plot_correlationmatrix_dendogram("sqlite", "q2")
+```
+
+
+    
+![png](RQ1_files/RQ1_56_0.png)
+    
+
+
+
+```python
+describe(corr)
+```
+
+
+
+
+    count    11175.00
+    mean         0.32
+    std          0.52
+    min         -0.58
+    25%         -0.29
+    50%          0.66
+    75%          0.75
+    max          0.94
+    dtype: float64
+
+
+
+#### q3
+
+
+```python
+corr = plot_correlationmatrix_dendogram("sqlite", "q3")
+```
+
+
+    
+![png](RQ1_files/RQ1_59_0.png)
+    
+
+
+
+```python
+describe(corr)
+```
+
+
+
+
+    count    11175.00
+    mean         0.16
+    std          0.54
+    min         -0.78
+    25%         -0.47
+    50%          0.52
+    75%          0.62
+    max          0.84
+    dtype: float64
+
+
+
+#### q4
+
+
+```python
+corr = plot_correlationmatrix_dendogram("sqlite", "q4")
+```
+
+
+    
+![png](RQ1_files/RQ1_62_0.png)
+    
+
+
+
+```python
+describe(corr)
+```
+
+
+
+
+    count    11175.00
+    mean         0.17
+    std          0.54
+    min         -0.77
+    25%         -0.47
+    50%          0.54
+    75%          0.62
+    max          0.84
+    dtype: float64
+
+
+
+#### q5
+
+
+```python
+corr = plot_correlationmatrix_dendogram("sqlite", "q5")
+```
+
+
+    
+![png](RQ1_files/RQ1_65_0.png)
+    
+
+
+
+```python
+describe(corr)
+```
+
+
+
+
+    count    11175.00
+    mean         0.05
+    std          0.51
+    min         -0.80
+    25%         -0.47
+    50%          0.11
+    75%          0.55
+    max          0.81
+    dtype: float64
+
+
+
+#### q6
+
+
+```python
+corr = plot_correlationmatrix_dendogram("sqlite", "q6")
+```
+
+
+    
+![png](RQ1_files/RQ1_68_0.png)
+    
+
+
+
+```python
+describe(corr)
+```
+
+
+
+
+    count    11175.00
+    mean         0.15
+    std          0.54
+    min         -0.80
+    25%         -0.48
+    50%          0.52
+    75%          0.61
+    max          0.86
+    dtype: float64
+
+
+
+#### q7
+
+
+```python
+corr = plot_correlationmatrix_dendogram("sqlite", "q7")
+```
+
+
+    
+![png](RQ1_files/RQ1_71_0.png)
+    
+
+
+
+```python
+describe(corr)
+```
+
+
+
+
+    count    11175.00
+    mean         0.20
+    std          0.50
+    min         -0.71
+    25%         -0.38
+    50%          0.52
+    75%          0.64
+    max          0.92
+    dtype: float64
+
+
+
+#### q8
+
+
+```python
+corr = plot_correlationmatrix_dendogram("sqlite", "q8")
+```
+
+
+    
+![png](RQ1_files/RQ1_74_0.png)
+    
+
+
+
+```python
+describe(corr)
+```
+
+
+
+
+    count    11175.00
+    mean         0.59
+    std          0.37
+    min          0.03
+    25%          0.15
+    50%          0.86
+    75%          0.90
+    max          0.96
+    dtype: float64
+
+
+
+#### q9
+
+
+```python
+corr = plot_correlationmatrix_dendogram("sqlite", "q9")
+```
+
+
+    
+![png](RQ1_files/RQ1_77_0.png)
+    
+
+
+
+```python
+describe(corr)
+```
+
+
+
+
+    count    11175.00
+    mean         0.24
+    std          0.53
+    min         -0.67
+    25%         -0.38
+    50%          0.60
+    75%          0.69
+    max          0.89
+    dtype: float64
+
+
+
+#### q10
+
+
+```python
+corr = plot_correlationmatrix_dendogram("sqlite", "q10")
+```
+
+
+    
+![png](RQ1_files/RQ1_80_0.png)
+    
+
+
+
+```python
+describe(corr)
+```
+
+
+
+
+    count    11175.00
+    mean         0.56
+    std          0.37
+    min          0.00
+    25%          0.11
+    50%          0.84
+    75%          0.87
+    max          0.96
+    dtype: float64
+
+
+
+#### q11
+
+
+```python
+corr = plot_correlationmatrix_dendogram("sqlite", "q11")
+```
+
+
+    
+![png](RQ1_files/RQ1_83_0.png)
+    
+
+
+
+```python
+describe(corr)
+```
+
+
+
+
+    count    11175.00
+    mean         0.47
+    std          0.53
+    min         -0.25
+    25%         -0.18
+    50%          0.87
+    75%          0.90
+    max          0.97
+    dtype: float64
+
+
+
+#### q12
+
+
+```python
+corr = plot_correlationmatrix_dendogram("sqlite", "q12")
+```
+
+
+    
+![png](RQ1_files/RQ1_86_0.png)
+    
+
+
+
+```python
+describe(corr)
+```
+
+
+
+
+    count    11175.00
+    mean         0.17
+    std          0.55
+    min         -0.74
+    25%         -0.47
+    50%          0.54
+    75%          0.63
+    max          0.85
+    dtype: float64
+
+
+
+#### q13
+
+
+```python
+corr = plot_correlationmatrix_dendogram("sqlite", "q13")
+```
+
+
+    
+![png](RQ1_files/RQ1_89_0.png)
+    
+
+
+
+```python
+describe(corr)
+```
+
+
+
+
+    count    11175.00
+    mean         0.49
+    std          0.45
+    min         -0.27
+    25%          0.06
+    50%          0.81
+    75%          0.87
+    max          0.95
+    dtype: float64
+
+
+
+ #### q14
+
+
+```python
+corr = plot_correlationmatrix_dendogram("sqlite", "q14")
+```
+
+
+    
+![png](RQ1_files/RQ1_92_0.png)
+    
+
+
+
+```python
+describe(corr)
+```
+
+
+
+
+    count    11175.00
+    mean         0.16
+    std          0.56
+    min         -0.81
+    25%         -0.50
+    50%          0.53
+    75%          0.63
+    max          0.87
+    dtype: float64
+
+
+
+#### q15
+
+
+```python
+corr = plot_correlationmatrix_dendogram("sqlite", "q15")
+```
+
+
+    
+![png](RQ1_files/RQ1_95_0.png)
+    
+
+
+
+```python
+describe(corr)
+```
+
+
+
+
+    count    11175.00
+    mean         0.51
+    std          0.26
+    min         -0.30
+    25%          0.29
+    50%          0.59
+    75%          0.72
+    max          0.94
+    dtype: float64
+
+
+
+Overall, two groups of databases appears; these two groups are highly-correlated (i.e. inside the groups) but uncorrelated or negatively correlated with each others
+
 ### xz
 
 #### size
@@ -604,7 +1109,7 @@ corr = plot_correlationmatrix_dendogram("xz", "size")
 
 
     
-![png](RQ1_files/RQ1_53_0.png)
+![png](RQ1_files/RQ1_100_0.png)
     
 
 
@@ -644,7 +1149,7 @@ corr = plot_correlationmatrix_dendogram("xz", "time")
 
 
     
-![png](RQ1_files/RQ1_57_0.png)
+![png](RQ1_files/RQ1_104_0.png)
     
 
 
@@ -687,7 +1192,7 @@ corr = plot_correlationmatrix_dendogram("x264", "kbs")
 
 
     
-![png](RQ1_files/RQ1_62_0.png)
+![png](RQ1_files/RQ1_109_0.png)
     
 
 
@@ -729,7 +1234,7 @@ corr = plot_correlationmatrix_dendogram("x264", "fps")
 
 
     
-![png](RQ1_files/RQ1_66_0.png)
+![png](RQ1_files/RQ1_113_0.png)
     
 
 
@@ -764,7 +1269,7 @@ corr = plot_correlationmatrix_dendogram("x264", "cpu")
 
 
     
-![png](RQ1_files/RQ1_70_0.png)
+![png](RQ1_files/RQ1_117_0.png)
     
 
 
@@ -799,7 +1304,7 @@ corr = plot_correlationmatrix_dendogram("x264", "size")
 
 
     
-![png](RQ1_files/RQ1_74_0.png)
+![png](RQ1_files/RQ1_121_0.png)
     
 
 
@@ -847,7 +1352,7 @@ corr = plot_correlationmatrix_dendogram("x264", "etime")
 
 
     
-![png](RQ1_files/RQ1_78_0.png)
+![png](RQ1_files/RQ1_125_0.png)
     
 
 

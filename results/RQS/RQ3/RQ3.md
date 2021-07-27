@@ -95,7 +95,7 @@ warnings.filterwarnings("ignore")
 
 ```python
 data_dir = "../../../data/"
-name_systems = ["nodejs", "poppler", "xz", "x264", "gcc", "lingeling"]
+name_systems = ["nodejs", "poppler", "xz", "x264", "gcc", "lingeling", "sqlite"]
 
 data = dict()
 inputs_name = dict()
@@ -103,34 +103,40 @@ inputs_count = dict()
 
 inputs_perf = dict()
 
-inputs_perf["x264"] = ["size", "kbs", "fps", "etime", "cpu"]
-inputs_perf["xz"] = ["size", "time"]
-inputs_perf["poppler"] = ["size", "time"]
-inputs_perf["nodejs"] = ["ops"]
 inputs_perf["gcc"] = ["size", "ctime", "exec"]
 inputs_perf["lingeling"] = ["conflicts", "cps", "reductions"]
+inputs_perf["nodejs"] = ["ops"]
+inputs_perf["poppler"] = ["size", "time"]
+inputs_perf["sqlite"] = ["q"+str(i+1) for i in range(15)]
+inputs_perf["x264"] = ["size", "kbs", "fps", "etime", "cpu"]
+inputs_perf["xz"] = ["size", "time"]
+
 
 inputs_feat = dict()
 
+inputs_feat["gcc"] = ["optim","-floop-interchange","-fprefetch-loop-arrays","-ffloat-store","-fno-asm"]
+inputs_feat["lingeling"] = ["--boost", "--carduse", "--decompose", "--gluescale", "--lkhd", "--memlim", 
+"--minimize", "--prbsimple", "--sweepirr", "--sweepred"]
+inputs_feat["nodejs"] = ["--jitless", "--experimental-wasm-modules", "--experimental-vm-modules",
+                         "--preserve-symlinks-main","--no-warnings","--node-memory-debug"]
+inputs_feat["poppler"] = ["format","j","jp2","jbig2","ccitt"]
+inputs_feat["sqlite"] = ["-deserialize", "-memtrace", "-maxsize", "-append", "-output"]
 inputs_feat["x264"] = ["cabac", "ref", "deblock", "analyse", "me", "subme", "mixed_ref", "me_range", "trellis", 
                 "8x8dct", "fast_pskip", "chroma_qp_offset", "bframes", "b_pyramid", "b_adapt", "direct", 
                 "weightb", "open_gop", "weightp", "scenecut", "rc_lookahead", "mbtree", "qpmax", "aq-mode"]
 inputs_feat["xz"] = ["memory","format","level","depth"]
-inputs_feat["poppler"] = ["format","j","jp2","jbig2","ccitt"]
-inputs_feat["nodejs"] = ["--jitless", "--experimental-wasm-modules", "--experimental-vm-modules",
-                         "--preserve-symlinks-main","--no-warnings","--node-memory-debug"]
-inputs_feat["gcc"] = ["optim","-floop-interchange","-fprefetch-loop-arrays","-ffloat-store","-fno-asm"]
-inputs_feat["lingeling"] = ["--boost", "--carduse", "--decompose", "--gluescale", "--lkhd", "--memlim", 
-"--minimize", "--prbsimple", "--sweepirr", "--sweepred"]
+
 
 inputs_categ = dict()
 
-inputs_categ["x264"] = ['analyse', 'me', 'direct', 'deblock']
-inputs_categ["xz"] = ['memory', 'format']
-inputs_categ["nodejs"] = []
-inputs_categ["poppler"] = ["format"]
 inputs_categ["gcc"] = ["optim"]
 inputs_categ["lingeling"] = []
+inputs_categ["nodejs"] = []
+inputs_categ["poppler"] = ["format"]
+inputs_categ["sqlite"] = []
+inputs_categ["x264"] = ['analyse', 'me', 'direct', 'deblock']
+inputs_categ["xz"] = ['memory', 'format']
+
 
 for ns in name_systems:
     
@@ -185,6 +191,8 @@ def get_ratios(ns, perf):
             np.nanpercentile(ratios,95))
 ```
 
+## Compute the table of ratios
+
 
 ```python
 fontsize = "\\footnotesize "
@@ -193,10 +201,19 @@ fontsize_number = ""
 perfs = []
 for ns in sorted(name_systems):
     for perf in sorted(inputs_perf[ns]):
-        perfs.append(perf)
+        perfs.append(perf[0:5])
 
 print("\\begin{table*}")
-print("\\caption{Performance ratios, for different software systems and different performance properties.}")
+print("""\\caption{Performance ratio distributions across inputs, 
+      for different software systems and different performance properties. 
+      In lines, \\textit{Avg} the avegrae performance ratio. 
+      \\textit{Std} the standard deviation. 
+      \\textit{$5^{th}$} the $5^{th}$ percentile.
+      \\textit{Q1} the first quartile.
+      \\textit{Q2} the median.
+      \\textit{Q3} the third quartile.
+      \\textit{$95^{th}$} the $95^{th}$ percentile.}""")
+print("\\label{tab:ratios}")
 print("\\vspace*{-0.4cm}")
 print("\\begin{tabular}{|"+"c|"*(len(perfs)+1)+"}")
 print("\hline")
@@ -218,7 +235,7 @@ for ns in sorted(name_systems):
         for i in range(len(numbers)):
             ratio[ns, perf, i] = numbers[i] 
 
-header = ["avg", "std", "pc\pc{5}", "Q1", "Q2", "Q3", "pc\pc{95}"]
+header = ["Avg", "Std", "$5^{th}$", "Q1", "Q2", "Q3", "$95^{th}$"]
 
 for i in range(len(header)):
     #if i >=1:
@@ -238,15 +255,25 @@ print("\\end{table*}")
 ```
 
     \begin{table*}
-    \caption{Performance ratios, for different software systems and different performance properties.}
+    \caption{Performance ratio distributions across inputs, 
+          for different software systems and different performance properties. 
+          In lines, \textit{Avg} the avegrae performance ratio. 
+          \textit{Std} the standard deviation. 
+          \textit{$5^{th}$} the $5^{th}$ percentile.
+          \textit{Q1} the first quartile.
+          \textit{Q2} the median.
+          \textit{Q3} the third quartile.
+          \textit{$95^{th}$} the $95^{th}$ percentile.}
+    \label{tab:ratios}
     \vspace*{-0.4cm}
-    \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+    \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
     \hline
     \textbf{\textit{System}}
      & \multicolumn{3}{|c|}{\cellcolor[HTML]{e8e8e8}{\textbf{\textit{gcc}}}}
      & \multicolumn{3}{|c|}{\cellcolor[HTML]{e8e8e8}{\textbf{\textit{lingeling}}}}
      & \multicolumn{1}{|c|}{\cellcolor[HTML]{e8e8e8}{\textbf{\textit{nodejs}}}}
      & \multicolumn{2}{|c|}{\cellcolor[HTML]{e8e8e8}{\textbf{\textit{poppler}}}}
+     & \multicolumn{15}{|c|}{\cellcolor[HTML]{e8e8e8}{\textbf{\textit{sqlite}}}}
      & \multicolumn{5}{|c|}{\cellcolor[HTML]{e8e8e8}{\textbf{\textit{x264}}}}
      & \multicolumn{2}{|c|}{\cellcolor[HTML]{e8e8e8}{\textbf{\textit{xz}}}}
      \tabularnewline \hline
@@ -254,12 +281,27 @@ print("\\end{table*}")
      & \footnotesize ctime
      & \footnotesize exec
      & \footnotesize size
-     & \footnotesize conflicts
+     & \footnotesize confl
      & \footnotesize cps
-     & \footnotesize reductions
+     & \footnotesize reduc
      & \footnotesize ops
      & \footnotesize size
      & \footnotesize time
+     & \footnotesize q1
+     & \footnotesize q10
+     & \footnotesize q11
+     & \footnotesize q12
+     & \footnotesize q13
+     & \footnotesize q14
+     & \footnotesize q15
+     & \footnotesize q2
+     & \footnotesize q3
+     & \footnotesize q4
+     & \footnotesize q5
+     & \footnotesize q6
+     & \footnotesize q7
+     & \footnotesize q8
+     & \footnotesize q9
      & \footnotesize cpu
      & \footnotesize etime
      & \footnotesize fps
@@ -268,52 +310,97 @@ print("\\end{table*}")
      & \footnotesize size
      & \footnotesize time
      \tabularnewline \hline
-    avg
-     & 1.07
+    Avg
+     & 1.08
      & 1.11
-     & 1.42
-     & 2.11
-     & 1.87
-     & 1.39
-     & 1.76
+     & 1.33
+     & 2.09
+     & 1.67
+     & 1.36
+     & 1.75
      & 1.6
-     & 2.62
-     & 1.44
+     & 2.7
+     & 1.04
+     & 1.31
+     & 1.05
+     & 1.1
+     & 1.04
+     & 1.08
+     & 1.02
+     & 1.05
+     & 1.04
+     & 1.03
+     & 1.11
+     & 1.08
+     & 1.12
+     & 1.07
+     & 1.1
+     & 1.45
      & 1.44
      & 1.1
      & 1.11
      & 1.11
      & 1.0
-     & 1.07
+     & 1.08
      \tabularnewline \hline
-    std
+    Std
+     & 0.09
      & 0.05
+     & 0.62
+     & 2.49
+     & 1.36
+     & 0.65
+     & 1.86
+     & 1.46
+     & 3.68
+     & 0.02
+     & 0.24
+     & 0.04
+     & 0.08
+     & 0.04
+     & 0.06
+     & 0.02
+     & 0.02
+     & 0.03
+     & 0.02
+     & 0.09
      & 0.05
-     & 0.61
-     & 2.63
-     & 3.02
-     & 0.79
-     & 1.9
-     & 1.37
-     & 3.36
-     & 1.4
-     & 1.53
+     & 0.09
+     & 0.05
+     & 0.17
+     & 1.5
+     & 1.49
      & 0.13
+     & 0.14
      & 0.13
-     & 0.16
      & 0.0
-     & 0.07
+     & 0.09
      \tabularnewline \hline
-    pc\pc{5}
+    $5^{th}$
      & 1.0
-     & 1.05
+     & 1.04
+     & 1.02
+     & 1.02
+     & 1.02
+     & 1.0
+     & 1.01
+     & 1.0
+     & 1.03
+     & 1.01
+     & 1.01
+     & 1.0
+     & 1.01
+     & 1.01
+     & 1.01
      & 1.01
      & 1.02
-     & 1.02
-     & 1.0
      & 1.01
-     & 1.0
+     & 1.01
+     & 1.01
      & 1.02
+     & 1.01
+     & 1.01
+     & 1.01
      & 1.05
      & 1.05
      & 1.02
@@ -323,76 +410,136 @@ print("\\end{table*}")
      & 1.01
      \tabularnewline \hline
     Q1
-     & 1.03
+     & 1.01
      & 1.07
      & 1.09
      & 1.05
-     & 1.06
+     & 1.05
      & 1.04
      & 1.09
      & 1.0
      & 1.13
+     & 1.02
+     & 1.03
+     & 1.01
+     & 1.03
+     & 1.02
+     & 1.03
+     & 1.01
+     & 1.03
+     & 1.02
+     & 1.02
+     & 1.02
+     & 1.03
+     & 1.02
+     & 1.03
+     & 1.02
      & 1.12
      & 1.12
      & 1.04
      & 1.03
      & 1.05
      & 1.0
-     & 1.02
+     & 1.03
      \tabularnewline \hline
     Q2
-     & 1.06
-     & 1.1
-     & 1.16
+     & 1.07
+     & 1.11
+     & 1.22
      & 1.15
      & 1.14
-     & 1.1
+     & 1.11
      & 1.17
      & 1.08
      & 1.37
-     & 1.21
+     & 1.03
+     & 1.3
+     & 1.05
+     & 1.09
+     & 1.03
+     & 1.07
+     & 1.02
+     & 1.04
+     & 1.04
+     & 1.03
+     & 1.12
+     & 1.07
+     & 1.12
+     & 1.07
+     & 1.04
+     & 1.22
      & 1.21
      & 1.07
      & 1.07
      & 1.08
      & 1.0
-     & 1.06
+     & 1.05
      \tabularnewline \hline
     Q3
-     & 1.11
-     & 1.12
-     & 1.41
-     & 1.5
-     & 1.43
-     & 1.26
-     & 1.56
-     & 1.55
-     & 2.19
-     & 1.39
-     & 1.39
-     & 1.11
+     & 1.1
      & 1.14
+     & 1.29
+     & 1.43
+     & 1.45
+     & 1.29
+     & 1.54
+     & 1.53
+     & 2.23
+     & 1.04
+     & 1.47
+     & 1.07
+     & 1.15
+     & 1.05
+     & 1.11
+     & 1.02
+     & 1.06
+     & 1.05
+     & 1.04
+     & 1.18
+     & 1.11
+     & 1.19
+     & 1.1
+     & 1.1
+     & 1.39
+     & 1.39
+     & 1.11
+     & 1.15
      & 1.12
      & 1.0
      & 1.1
      \tabularnewline \hline
-    pc\pc{95}
-     & 1.14
+    $95^{th}$
+     & 1.27
+     & 1.17
+     & 1.58
+     & 7.68
+     & 4.75
+     & 2.77
+     & 4.31
+     & 3.84
+     & 9.82
+     & 1.08
+     & 1.66
+     & 1.1
+     & 1.26
+     & 1.11
      & 1.19
-     & 2.94
-     & 7.65
-     & 5.28
-     & 3.03
-     & 4.18
-     & 3.86
-     & 9.76
-     & 2.21
-     & 2.15
+     & 1.04
+     & 1.09
+     & 1.1
+     & 1.06
      & 1.25
-     & 1.32
-     & 1.28
+     & 1.15
+     & 1.26
+     & 1.15
+     & 1.35
+     & 2.18
+     & 2.21
+     & 1.24
+     & 1.36
+     & 1.26
      & 1.0
-     & 1.19
+     & 1.31
      \tabularnewline \hline
     \end{tabular}
     \vspace*{-0.3cm}
