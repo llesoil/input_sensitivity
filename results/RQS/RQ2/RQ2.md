@@ -95,15 +95,15 @@ warnings.filterwarnings("ignore")
 
 ```python
 data_dir = "../../../data/"
-name_systems = ["nodejs", "poppler", "xz", "x264", "gcc", "lingeling", "sqlite"]
+name_systems = ["nodejs", "poppler", "xz", "x264", "gcc", "lingeling", "sqlite", "imagemagick"]
 
 data = dict()
 inputs_name = dict()
 inputs_count = dict()
-
 inputs_perf = dict()
 
 inputs_perf["gcc"] = ["size", "ctime", "exec"]
+inputs_perf["imagemagick"] = ["size", "time"]
 inputs_perf["lingeling"] = ["conflicts", "cps", "reductions"]
 inputs_perf["nodejs"] = ["ops"]
 inputs_perf["poppler"] = ["size", "time"]
@@ -115,6 +115,7 @@ inputs_perf["xz"] = ["size", "time"]
 inputs_feat = dict()
 
 inputs_feat["gcc"] = ["optim","-floop-interchange","-fprefetch-loop-arrays","-ffloat-store","-fno-asm"]
+inputs_feat["imagemagick"] = ["memory_r", "posterize_r", "gaussian-blur", "thread", "quality"]
 inputs_feat["lingeling"] = ["--boost", "--carduse", "--decompose", "--gluescale", "--lkhd", "--memlim", 
 "--minimize", "--prbsimple", "--sweepirr", "--sweepred"]
 inputs_feat["nodejs"] = ["--jitless", "--experimental-wasm-modules", "--experimental-vm-modules",
@@ -130,6 +131,7 @@ inputs_feat["xz"] = ["memory","format","level","depth"]
 inputs_categ = dict()
 
 inputs_categ["gcc"] = ["optim"]
+inputs_categ["imagemagick"] = []
 inputs_categ["lingeling"] = []
 inputs_categ["nodejs"] = []
 inputs_categ["poppler"] = ["format"]
@@ -412,6 +414,28 @@ For the binary size, it is a very interesting result; there is nothing wrong wit
 
 As presented in the paper, this is our textbook case of a stable software system (in our experiment) w.r.t. the input sensitivity.
 
+### Imagemagick
+
+#### time
+
+
+```python
+boxplot_imp("imagemagick", "time", xlim =[0,1], xname='Importances')
+boxplot_imp("imagemagick", "time", xlim =[-1,1], xname='Coefficients')
+```
+
+
+    
+![png](RQ2_files/RQ2_25_0.png)
+    
+
+
+
+    
+![png](RQ2_files/RQ2_25_1.png)
+    
+
+
 ### Lingeling
 
 #### conflicts
@@ -424,13 +448,13 @@ boxplot_imp("lingeling", "conflicts", xlim =[-1,1], xname='Coefficients')
 
 
     
-![png](RQ2_files/RQ2_25_0.png)
+![png](RQ2_files/RQ2_28_0.png)
     
 
 
 
     
-![png](RQ2_files/RQ2_25_1.png)
+![png](RQ2_files/RQ2_28_1.png)
     
 
 
@@ -450,13 +474,13 @@ boxplot_imp("lingeling", "cps", xlim =[-1,1], xname='Coefficients')
 
 
     
-![png](RQ2_files/RQ2_28_0.png)
+![png](RQ2_files/RQ2_31_0.png)
     
 
 
 
     
-![png](RQ2_files/RQ2_28_1.png)
+![png](RQ2_files/RQ2_31_1.png)
     
 
 
@@ -472,13 +496,13 @@ boxplot_imp("lingeling", "reductions", xlim =[-1,1], xname='Coefficients')
 
 
     
-![png](RQ2_files/RQ2_31_0.png)
+![png](RQ2_files/RQ2_34_0.png)
     
 
 
 
     
-![png](RQ2_files/RQ2_31_1.png)
+![png](RQ2_files/RQ2_34_1.png)
     
 
 
@@ -498,13 +522,13 @@ boxplot_imp("nodejs", "ops", xlim =[-1,1], xname='Coefficients')
 
 
     
-![png](RQ2_files/RQ2_35_0.png)
+![png](RQ2_files/RQ2_38_0.png)
     
 
 
 
     
-![png](RQ2_files/RQ2_35_1.png)
+![png](RQ2_files/RQ2_38_1.png)
     
 
 
@@ -526,13 +550,13 @@ boxplot_imp("poppler", "size", xlim =[-1,1], xname='Coefficients')
 
 
     
-![png](RQ2_files/RQ2_39_0.png)
+![png](RQ2_files/RQ2_42_0.png)
     
 
 
 
     
-![png](RQ2_files/RQ2_39_1.png)
+![png](RQ2_files/RQ2_42_1.png)
     
 
 
@@ -554,13 +578,13 @@ boxplot_imp("poppler", "time", xlim =[-1,1], xname='Coefficients')
 
 
     
-![png](RQ2_files/RQ2_42_0.png)
+![png](RQ2_files/RQ2_45_0.png)
     
 
 
 
     
-![png](RQ2_files/RQ2_42_1.png)
+![png](RQ2_files/RQ2_45_1.png)
     
 
 
@@ -580,13 +604,13 @@ boxplot_imp("sqlite", "q1", xlim =[-1,1], xname='Coefficients')
 
 
     
-![png](RQ2_files/RQ2_46_0.png)
+![png](RQ2_files/RQ2_49_0.png)
     
 
 
 
     
-![png](RQ2_files/RQ2_46_1.png)
+![png](RQ2_files/RQ2_49_1.png)
     
 
 
@@ -600,13 +624,13 @@ boxplot_imp("sqlite", "q2", xlim =[-1,1], xname='Coefficients')
 
 
     
-![png](RQ2_files/RQ2_48_0.png)
+![png](RQ2_files/RQ2_51_0.png)
     
 
 
 
     
-![png](RQ2_files/RQ2_48_1.png)
+![png](RQ2_files/RQ2_51_1.png)
     
 
 
@@ -620,13 +644,13 @@ boxplot_imp("sqlite", "q3", xlim =[-1,1], xname='Coefficients')
 
 
     
-![png](RQ2_files/RQ2_50_0.png)
+![png](RQ2_files/RQ2_53_0.png)
     
 
 
 
     
-![png](RQ2_files/RQ2_50_1.png)
+![png](RQ2_files/RQ2_53_1.png)
     
 
 
@@ -640,13 +664,13 @@ boxplot_imp("sqlite", "q4", xlim =[-1,1], xname='Coefficients')
 
 
     
-![png](RQ2_files/RQ2_52_0.png)
+![png](RQ2_files/RQ2_55_0.png)
     
 
 
 
     
-![png](RQ2_files/RQ2_52_1.png)
+![png](RQ2_files/RQ2_55_1.png)
     
 
 
@@ -660,13 +684,13 @@ boxplot_imp("sqlite", "q5", xlim =[-1,1], xname='Coefficients')
 
 
     
-![png](RQ2_files/RQ2_54_0.png)
+![png](RQ2_files/RQ2_57_0.png)
     
 
 
 
     
-![png](RQ2_files/RQ2_54_1.png)
+![png](RQ2_files/RQ2_57_1.png)
     
 
 
@@ -680,13 +704,13 @@ boxplot_imp("sqlite", "q6", xlim =[-1,1], xname='Coefficients')
 
 
     
-![png](RQ2_files/RQ2_56_0.png)
+![png](RQ2_files/RQ2_59_0.png)
     
 
 
 
     
-![png](RQ2_files/RQ2_56_1.png)
+![png](RQ2_files/RQ2_59_1.png)
     
 
 
@@ -700,13 +724,13 @@ boxplot_imp("sqlite", "q7", xlim =[-1,1], xname='Coefficients')
 
 
     
-![png](RQ2_files/RQ2_58_0.png)
+![png](RQ2_files/RQ2_61_0.png)
     
 
 
 
     
-![png](RQ2_files/RQ2_58_1.png)
+![png](RQ2_files/RQ2_61_1.png)
     
 
 
@@ -720,13 +744,13 @@ boxplot_imp("sqlite", "q8", xlim =[-1,1], xname='Coefficients')
 
 
     
-![png](RQ2_files/RQ2_60_0.png)
+![png](RQ2_files/RQ2_63_0.png)
     
 
 
 
     
-![png](RQ2_files/RQ2_60_1.png)
+![png](RQ2_files/RQ2_63_1.png)
     
 
 
@@ -740,13 +764,13 @@ boxplot_imp("sqlite", "q9", xlim =[-1,1], xname='Coefficients')
 
 
     
-![png](RQ2_files/RQ2_62_0.png)
+![png](RQ2_files/RQ2_65_0.png)
     
 
 
 
     
-![png](RQ2_files/RQ2_62_1.png)
+![png](RQ2_files/RQ2_65_1.png)
     
 
 
@@ -760,13 +784,13 @@ boxplot_imp("sqlite", "q10", xlim =[-1,1], xname='Coefficients')
 
 
     
-![png](RQ2_files/RQ2_64_0.png)
+![png](RQ2_files/RQ2_67_0.png)
     
 
 
 
     
-![png](RQ2_files/RQ2_64_1.png)
+![png](RQ2_files/RQ2_67_1.png)
     
 
 
@@ -780,13 +804,13 @@ boxplot_imp("sqlite", "q11", xlim =[-1,1], xname='Coefficients')
 
 
     
-![png](RQ2_files/RQ2_66_0.png)
+![png](RQ2_files/RQ2_69_0.png)
     
 
 
 
     
-![png](RQ2_files/RQ2_66_1.png)
+![png](RQ2_files/RQ2_69_1.png)
     
 
 
@@ -800,13 +824,13 @@ boxplot_imp("sqlite", "q12", xlim =[-1,1], xname='Coefficients')
 
 
     
-![png](RQ2_files/RQ2_68_0.png)
+![png](RQ2_files/RQ2_71_0.png)
     
 
 
 
     
-![png](RQ2_files/RQ2_68_1.png)
+![png](RQ2_files/RQ2_71_1.png)
     
 
 
@@ -820,13 +844,13 @@ boxplot_imp("sqlite", "q13", xlim =[-1,1], xname='Coefficients')
 
 
     
-![png](RQ2_files/RQ2_70_0.png)
+![png](RQ2_files/RQ2_73_0.png)
     
 
 
 
     
-![png](RQ2_files/RQ2_70_1.png)
+![png](RQ2_files/RQ2_73_1.png)
     
 
 
@@ -840,13 +864,13 @@ boxplot_imp("sqlite", "q14", xlim =[-1,1], xname='Coefficients')
 
 
     
-![png](RQ2_files/RQ2_72_0.png)
+![png](RQ2_files/RQ2_75_0.png)
     
 
 
 
     
-![png](RQ2_files/RQ2_72_1.png)
+![png](RQ2_files/RQ2_75_1.png)
     
 
 
@@ -860,13 +884,13 @@ boxplot_imp("sqlite", "q15", xlim =[-1,1], xname='Coefficients')
 
 
     
-![png](RQ2_files/RQ2_74_0.png)
+![png](RQ2_files/RQ2_77_0.png)
     
 
 
 
     
-![png](RQ2_files/RQ2_74_1.png)
+![png](RQ2_files/RQ2_77_1.png)
     
 
 
@@ -886,13 +910,13 @@ boxplot_imp("xz", "size", xlim =[-1,1], xname='Coefficients')
 
 
     
-![png](RQ2_files/RQ2_78_0.png)
+![png](RQ2_files/RQ2_81_0.png)
     
 
 
 
     
-![png](RQ2_files/RQ2_78_1.png)
+![png](RQ2_files/RQ2_81_1.png)
     
 
 
@@ -910,13 +934,13 @@ boxplot_imp("xz", "time", xlim =[-1,1], xname='Coefficients')
 
 
     
-![png](RQ2_files/RQ2_81_0.png)
+![png](RQ2_files/RQ2_84_0.png)
     
 
 
 
     
-![png](RQ2_files/RQ2_81_1.png)
+![png](RQ2_files/RQ2_84_1.png)
     
 
 
@@ -936,13 +960,13 @@ boxplot_imp("x264", "kbs", xlim =[-1,1], xname='Coefficients')
 
 
     
-![png](RQ2_files/RQ2_85_0.png)
+![png](RQ2_files/RQ2_88_0.png)
     
 
 
 
     
-![png](RQ2_files/RQ2_85_1.png)
+![png](RQ2_files/RQ2_88_1.png)
     
 
 
@@ -973,13 +997,13 @@ boxplot_imp("x264", "fps", xlim =[-1,1], xname='Coefficients')
 
 
     
-![png](RQ2_files/RQ2_88_0.png)
+![png](RQ2_files/RQ2_91_0.png)
     
 
 
 
     
-![png](RQ2_files/RQ2_88_1.png)
+![png](RQ2_files/RQ2_91_1.png)
     
 
 
@@ -993,13 +1017,13 @@ boxplot_imp("x264", "cpu", xlim =[-1,1], xname='Coefficients')
 
 
     
-![png](RQ2_files/RQ2_90_0.png)
+![png](RQ2_files/RQ2_93_0.png)
     
 
 
 
     
-![png](RQ2_files/RQ2_90_1.png)
+![png](RQ2_files/RQ2_93_1.png)
     
 
 
@@ -1013,13 +1037,13 @@ boxplot_imp("x264", "size", xlim =[-1,1], xname='Coefficients')
 
 
     
-![png](RQ2_files/RQ2_92_0.png)
+![png](RQ2_files/RQ2_95_0.png)
     
 
 
 
     
-![png](RQ2_files/RQ2_92_1.png)
+![png](RQ2_files/RQ2_95_1.png)
     
 
 
@@ -1033,13 +1057,13 @@ boxplot_imp("x264", "etime", xlim =[-1,1], xname='Coefficients')
 
 
     
-![png](RQ2_files/RQ2_94_0.png)
+![png](RQ2_files/RQ2_97_0.png)
     
 
 
 
     
-![png](RQ2_files/RQ2_94_1.png)
+![png](RQ2_files/RQ2_97_1.png)
     
 
 

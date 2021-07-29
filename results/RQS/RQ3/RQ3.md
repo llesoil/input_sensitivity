@@ -104,10 +104,12 @@ inputs_count = dict()
 inputs_perf = dict()
 
 inputs_perf["gcc"] = ["size", "ctime", "exec"]
-inputs_perf["lingeling"] = ["conflicts", "cps", "reductions"]
+inputs_perf["lingeling"] = ["conflicts", "reductions"]
 inputs_perf["nodejs"] = ["ops"]
 inputs_perf["poppler"] = ["size", "time"]
-inputs_perf["sqlite"] = ["q"+str(i+1) for i in range(15)]
+#inputs_perf["sqlite"] = ["q"+str(i+1) for i in range(15)]
+#not enough room
+inputs_perf["sqlite"] = ["q1","q12","q14"]
 inputs_perf["x264"] = ["size", "kbs", "fps", "etime", "cpu"]
 inputs_perf["xz"] = ["size", "time"]
 
@@ -154,6 +156,8 @@ for ns in name_systems:
 ```
 
 # RQ3 code and results
+
+# Partial results (i.e. the table of the article)
 
 ## Compute the performance ratios.
 
@@ -212,7 +216,8 @@ print("""\\caption{Performance ratio distributions across inputs,
       \\textit{Q1} the first quartile.
       \\textit{Q2} the median.
       \\textit{Q3} the third quartile.
-      \\textit{$95^{th}$} the $95^{th}$ percentile.}""")
+      \\textit{$95^{th}$} the $95^{th}$ percentile.
+      Due to space constraints, we arbitrarly select few performance properties.}""")
 print("\\label{tab:ratios}")
 print("\\vspace*{-0.4cm}")
 print("\\begin{tabular}{|"+"c|"*(len(perfs)+1)+"}")
@@ -263,17 +268,18 @@ print("\\end{table*}")
           \textit{Q1} the first quartile.
           \textit{Q2} the median.
           \textit{Q3} the third quartile.
-          \textit{$95^{th}$} the $95^{th}$ percentile.}
+          \textit{$95^{th}$} the $95^{th}$ percentile.
+          Due to space constraints, we arbitrarly select few performance properties.}
     \label{tab:ratios}
     \vspace*{-0.4cm}
-    \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+    \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
     \hline
     \textbf{\textit{System}}
      & \multicolumn{3}{|c|}{\cellcolor[HTML]{e8e8e8}{\textbf{\textit{gcc}}}}
-     & \multicolumn{3}{|c|}{\cellcolor[HTML]{e8e8e8}{\textbf{\textit{lingeling}}}}
+     & \multicolumn{2}{|c|}{\cellcolor[HTML]{e8e8e8}{\textbf{\textit{lingeling}}}}
      & \multicolumn{1}{|c|}{\cellcolor[HTML]{e8e8e8}{\textbf{\textit{nodejs}}}}
      & \multicolumn{2}{|c|}{\cellcolor[HTML]{e8e8e8}{\textbf{\textit{poppler}}}}
-     & \multicolumn{15}{|c|}{\cellcolor[HTML]{e8e8e8}{\textbf{\textit{sqlite}}}}
+     & \multicolumn{3}{|c|}{\cellcolor[HTML]{e8e8e8}{\textbf{\textit{sqlite}}}}
      & \multicolumn{5}{|c|}{\cellcolor[HTML]{e8e8e8}{\textbf{\textit{x264}}}}
      & \multicolumn{2}{|c|}{\cellcolor[HTML]{e8e8e8}{\textbf{\textit{xz}}}}
      \tabularnewline \hline
@@ -282,26 +288,13 @@ print("\\end{table*}")
      & \footnotesize exec
      & \footnotesize size
      & \footnotesize confl
-     & \footnotesize cps
      & \footnotesize reduc
      & \footnotesize ops
      & \footnotesize size
      & \footnotesize time
      & \footnotesize q1
-     & \footnotesize q10
-     & \footnotesize q11
      & \footnotesize q12
-     & \footnotesize q13
      & \footnotesize q14
-     & \footnotesize q15
-     & \footnotesize q2
-     & \footnotesize q3
-     & \footnotesize q4
-     & \footnotesize q5
-     & \footnotesize q6
-     & \footnotesize q7
-     & \footnotesize q8
-     & \footnotesize q9
      & \footnotesize cpu
      & \footnotesize etime
      & \footnotesize fps
@@ -311,93 +304,54 @@ print("\\end{table*}")
      & \footnotesize time
      \tabularnewline \hline
     Avg
-     & 1.08
-     & 1.11
-     & 1.33
+     & 1.09
+     & 1.13
+     & 1.4
      & 2.09
-     & 1.67
-     & 1.36
-     & 1.75
-     & 1.6
-     & 2.7
+     & 1.37
+     & 1.76
+     & 1.61
+     & 2.66
      & 1.04
-     & 1.31
-     & 1.05
-     & 1.1
-     & 1.04
-     & 1.08
-     & 1.02
-     & 1.05
-     & 1.04
-     & 1.03
-     & 1.11
-     & 1.08
-     & 1.12
      & 1.07
-     & 1.1
-     & 1.45
+     & 1.07
      & 1.44
-     & 1.1
+     & 1.44
+     & 1.09
      & 1.11
      & 1.11
      & 1.0
-     & 1.08
+     & 1.09
      \tabularnewline \hline
     Std
-     & 0.09
-     & 0.05
-     & 0.62
-     & 2.49
-     & 1.36
-     & 0.65
-     & 1.86
-     & 1.46
-     & 3.68
-     & 0.02
-     & 0.24
-     & 0.04
      & 0.08
-     & 0.04
      & 0.06
+     & 0.6
+     & 2.43
+     & 0.66
+     & 1.88
+     & 1.53
+     & 3.52
      & 0.02
-     & 0.02
-     & 0.03
-     & 0.02
-     & 0.09
      & 0.05
-     & 0.09
      & 0.05
-     & 0.17
-     & 1.5
-     & 1.49
-     & 0.13
+     & 1.39
+     & 1.55
+     & 0.11
      & 0.14
-     & 0.13
+     & 0.14
      & 0.0
      & 0.09
      \tabularnewline \hline
     $5^{th}$
      & 1.0
-     & 1.04
-     & 1.02
-     & 1.02
+     & 1.03
+     & 1.03
      & 1.02
      & 1.0
      & 1.01
      & 1.0
      & 1.03
-     & 1.01
-     & 1.01
-     & 1.0
-     & 1.01
-     & 1.01
-     & 1.01
-     & 1.01
-     & 1.02
-     & 1.01
-     & 1.01
-     & 1.01
-     & 1.02
      & 1.01
      & 1.01
      & 1.01
@@ -410,151 +364,243 @@ print("\\end{table*}")
      & 1.01
      \tabularnewline \hline
     Q1
-     & 1.01
-     & 1.07
-     & 1.09
-     & 1.05
-     & 1.05
+     & 1.03
+     & 1.08
+     & 1.16
+     & 1.06
      & 1.04
      & 1.09
      & 1.0
-     & 1.13
+     & 1.14
      & 1.02
      & 1.03
-     & 1.01
-     & 1.03
-     & 1.02
-     & 1.03
-     & 1.01
-     & 1.03
-     & 1.02
-     & 1.02
-     & 1.02
-     & 1.03
-     & 1.02
-     & 1.03
-     & 1.02
+     & 1.04
      & 1.12
      & 1.12
      & 1.04
      & 1.03
      & 1.05
      & 1.0
-     & 1.03
+     & 1.02
      \tabularnewline \hline
     Q2
-     & 1.07
-     & 1.11
-     & 1.22
+     & 1.06
+     & 1.13
+     & 1.24
      & 1.15
-     & 1.14
-     & 1.11
+     & 1.12
      & 1.17
      & 1.08
-     & 1.37
+     & 1.38
      & 1.03
-     & 1.3
-     & 1.05
-     & 1.09
-     & 1.03
+     & 1.06
      & 1.07
-     & 1.02
-     & 1.04
-     & 1.04
-     & 1.03
-     & 1.12
-     & 1.07
-     & 1.12
-     & 1.07
-     & 1.04
-     & 1.22
+     & 1.2
      & 1.21
-     & 1.07
+     & 1.06
      & 1.07
      & 1.08
      & 1.0
-     & 1.05
+     & 1.06
      \tabularnewline \hline
     Q3
-     & 1.1
-     & 1.14
-     & 1.29
-     & 1.43
-     & 1.45
-     & 1.29
-     & 1.54
+     & 1.13
+     & 1.17
+     & 1.38
+     & 1.56
+     & 1.3
+     & 1.58
      & 1.53
      & 2.23
      & 1.04
-     & 1.47
-     & 1.07
-     & 1.15
-     & 1.05
-     & 1.11
-     & 1.02
-     & 1.06
-     & 1.05
-     & 1.04
-     & 1.18
-     & 1.11
-     & 1.19
      & 1.1
      & 1.1
+     & 1.38
      & 1.39
-     & 1.39
-     & 1.11
+     & 1.1
      & 1.15
      & 1.12
      & 1.0
-     & 1.1
+     & 1.11
      \tabularnewline \hline
     $95^{th}$
-     & 1.27
-     & 1.17
-     & 1.58
-     & 7.68
-     & 4.75
-     & 2.77
-     & 4.31
+     & 1.25
+     & 1.21
+     & 2.38
+     & 7.95
+     & 2.9
+     & 4.16
      & 3.84
      & 9.82
      & 1.08
-     & 1.66
-     & 1.1
-     & 1.26
-     & 1.11
-     & 1.19
-     & 1.04
-     & 1.09
-     & 1.1
-     & 1.06
+     & 1.16
+     & 1.16
+     & 2.09
+     & 2.26
      & 1.25
-     & 1.15
-     & 1.26
-     & 1.15
-     & 1.35
-     & 2.18
-     & 2.21
-     & 1.24
      & 1.36
-     & 1.26
+     & 1.25
      & 1.0
-     & 1.31
+     & 1.26
      \tabularnewline \hline
     \end{tabular}
     \vspace*{-0.3cm}
     \end{table*}
 
 
+# Complete results 
+
 
 ```python
+data_dir = "../../../data/"
+name_systems = ["nodejs", "poppler", "xz", "x264", "gcc", "lingeling", "sqlite", "imagemagick"]
 
+data = dict()
+inputs_name = dict()
+inputs_count = dict()
+inputs_perf = dict()
+
+inputs_perf["gcc"] = ["size", "ctime", "exec"]
+inputs_perf["imagemagick"] = ["time"]
+inputs_perf["lingeling"] = ["conflicts", "cps", "reductions"]
+inputs_perf["nodejs"] = ["ops"]
+inputs_perf["poppler"] = ["size", "time"]
+inputs_perf["sqlite"] = ["q"+str(i+1) for i in range(15)]
+inputs_perf["x264"] = ["size", "kbs", "fps", "etime", "cpu"]
+inputs_perf["xz"] = ["size", "time"]
+
+
+inputs_feat = dict()
+
+inputs_feat["gcc"] = ["optim","-floop-interchange","-fprefetch-loop-arrays","-ffloat-store","-fno-asm"]
+inputs_feat["imagemagick"] = ["memory_r", "posterize_r", "gaussian-blur", "thread", "quality"]
+inputs_feat["lingeling"] = ["--boost", "--carduse", "--decompose", "--gluescale", "--lkhd", "--memlim", 
+"--minimize", "--prbsimple", "--sweepirr", "--sweepred"]
+inputs_feat["nodejs"] = ["--jitless", "--experimental-wasm-modules", "--experimental-vm-modules",
+                         "--preserve-symlinks-main","--no-warnings","--node-memory-debug"]
+inputs_feat["poppler"] = ["format","j","jp2","jbig2","ccitt"]
+inputs_feat["sqlite"] = ["-deserialize", "-memtrace", "-maxsize", "-append", "-output"]
+inputs_feat["x264"] = ["cabac", "ref", "deblock", "analyse", "me", "subme", "mixed_ref", "me_range", "trellis", 
+                "8x8dct", "fast_pskip", "chroma_qp_offset", "bframes", "b_pyramid", "b_adapt", "direct", 
+                "weightb", "open_gop", "weightp", "scenecut", "rc_lookahead", "mbtree", "qpmax", "aq-mode"]
+inputs_feat["xz"] = ["memory","format","level","depth"]
+
+
+inputs_categ = dict()
+
+inputs_categ["gcc"] = ["optim"]
+inputs_categ["imagemagick"] = []
+inputs_categ["lingeling"] = []
+inputs_categ["nodejs"] = []
+inputs_categ["poppler"] = ["format"]
+inputs_categ["sqlite"] = []
+inputs_categ["x264"] = ['analyse', 'me', 'direct', 'deblock']
+inputs_categ["xz"] = ['memory', 'format']
+
+
+for ns in name_systems:
+    
+    data_path = data_dir+ns+'/'
+    
+    inputs = sorted(os.listdir(data_path))
+    inputs.remove('others')
+
+    inputs_name[ns] = inputs
+    inputs_count[ns] = len(inputs)
+    
+    for i in range(len(inputs)):
+        loc = data_path+inputs[i]
+        data[ns, i] = pd.read_csv(loc)
 ```
 
 
 ```python
-
+header = ["Avg", "Std", "$5^{th}$", "Q1", "Q2", "Q3", "$95^{th}$"]
+ratio = dict()
+for ns in sorted(name_systems):
+    print("Results for",ns)
+    for perf in sorted(inputs_perf[ns]):
+        print("Results", perf)
+        numbers = [np.round(k,2) for k in get_ratios(ns, perf)]
+        disp=""
+        for i in range(len(numbers)):
+            disp+=" "+header[i]+" "+str(numbers[i]) 
+        print(disp)
 ```
+
+    Results for gcc
+    Results ctime
+     Avg 1.12 Std 0.06 $5^{th}$ 1.04 Q1 1.07 Q2 1.12 Q3 1.14 $95^{th}$ 1.23
+    Results exec
+     Avg 1.26 Std 0.26 $5^{th}$ 1.02 Q1 1.07 Q2 1.17 Q3 1.44 $95^{th}$ 1.7
+    Results size
+     Avg 1.07 Std 0.07 $5^{th}$ 1.0 Q1 1.01 Q2 1.08 Q3 1.1 $95^{th}$ 1.21
+    Results for imagemagick
+    Results time
+     Avg 1.05 Std 0.04 $5^{th}$ 1.01 Q1 1.02 Q2 1.04 Q3 1.06 $95^{th}$ 1.12
+    Results for lingeling
+    Results conflicts
+     Avg 2.02 Std 2.35 $5^{th}$ 1.02 Q1 1.05 Q2 1.14 Q3 1.49 $95^{th}$ 6.87
+    Results cps
+     Avg 1.69 Std 1.67 $5^{th}$ 1.02 Q1 1.05 Q2 1.14 Q3 1.45 $95^{th}$ 4.43
+    Results reductions
+     Avg 1.37 Std 0.67 $5^{th}$ 1.0 Q1 1.04 Q2 1.11 Q3 1.3 $95^{th}$ 3.01
+    Results for nodejs
+    Results ops
+     Avg 1.76 Std 1.99 $5^{th}$ 1.01 Q1 1.09 Q2 1.17 Q3 1.55 $95^{th}$ 4.16
+    Results for poppler
+    Results size
+     Avg 1.6 Std 1.43 $5^{th}$ 1.0 Q1 1.0 Q2 1.08 Q3 1.56 $95^{th}$ 3.71
+    Results time
+     Avg 2.68 Std 3.66 $5^{th}$ 1.02 Q1 1.14 Q2 1.37 Q3 2.18 $95^{th}$ 10.54
+    Results for sqlite
+    Results q1
+     Avg 1.04 Std 0.02 $5^{th}$ 1.01 Q1 1.02 Q2 1.03 Q3 1.04 $95^{th}$ 1.08
+    Results q10
+     Avg 1.03 Std 0.02 $5^{th}$ 1.01 Q1 1.02 Q2 1.03 Q3 1.04 $95^{th}$ 1.06
+    Results q11
+     Avg 1.11 Std 0.08 $5^{th}$ 1.0 Q1 1.02 Q2 1.11 Q3 1.18 $95^{th}$ 1.24
+    Results q12
+     Avg 1.08 Std 0.05 $5^{th}$ 1.02 Q1 1.03 Q2 1.07 Q3 1.11 $95^{th}$ 1.16
+    Results q13
+     Avg 1.11 Std 0.09 $5^{th}$ 1.01 Q1 1.02 Q2 1.11 Q3 1.17 $95^{th}$ 1.23
+    Results q14
+     Avg 1.07 Std 0.05 $5^{th}$ 1.01 Q1 1.03 Q2 1.06 Q3 1.1 $95^{th}$ 1.16
+    Results q15
+     Avg 1.1 Std 0.2 $5^{th}$ 1.02 Q1 1.02 Q2 1.04 Q3 1.1 $95^{th}$ 1.34
+    Results q2
+     Avg 1.3 Std 0.24 $5^{th}$ 1.01 Q1 1.03 Q2 1.29 Q3 1.46 $95^{th}$ 1.72
+    Results q3
+     Avg 1.05 Std 0.04 $5^{th}$ 1.0 Q1 1.02 Q2 1.04 Q3 1.07 $95^{th}$ 1.11
+    Results q4
+     Avg 1.1 Std 0.07 $5^{th}$ 1.01 Q1 1.03 Q2 1.1 Q3 1.16 $95^{th}$ 1.25
+    Results q5
+     Avg 1.04 Std 0.04 $5^{th}$ 1.01 Q1 1.02 Q2 1.03 Q3 1.05 $95^{th}$ 1.14
+    Results q6
+     Avg 1.08 Std 0.06 $5^{th}$ 1.01 Q1 1.03 Q2 1.07 Q3 1.1 $95^{th}$ 1.18
+    Results q7
+     Avg 1.02 Std 0.01 $5^{th}$ 1.01 Q1 1.01 Q2 1.02 Q3 1.02 $95^{th}$ 1.04
+    Results q8
+     Avg 1.05 Std 0.02 $5^{th}$ 1.02 Q1 1.03 Q2 1.04 Q3 1.06 $95^{th}$ 1.09
+    Results q9
+     Avg 1.04 Std 0.03 $5^{th}$ 1.01 Q1 1.02 Q2 1.04 Q3 1.06 $95^{th}$ 1.11
+    Results for x264
+    Results cpu
+     Avg 1.11 Std 0.15 $5^{th}$ 1.02 Q1 1.05 Q2 1.07 Q3 1.12 $95^{th}$ 1.28
+    Results etime
+     Avg 1.11 Std 0.14 $5^{th}$ 1.01 Q1 1.03 Q2 1.07 Q3 1.14 $95^{th}$ 1.33
+    Results fps
+     Avg 1.09 Std 0.1 $5^{th}$ 1.02 Q1 1.04 Q2 1.06 Q3 1.1 $95^{th}$ 1.23
+    Results kbs
+     Avg 1.45 Std 1.52 $5^{th}$ 1.05 Q1 1.12 Q2 1.22 Q3 1.39 $95^{th}$ 2.27
+    Results size
+     Avg 1.44 Std 1.46 $5^{th}$ 1.05 Q1 1.12 Q2 1.21 Q3 1.37 $95^{th}$ 2.23
+    Results for xz
+    Results size
+     Avg 1.0 Std 0.0 $5^{th}$ 1.0 Q1 1.0 Q2 1.0 Q3 1.0 $95^{th}$ 1.0
+    Results time
+     Avg 1.08 Std 0.08 $5^{th}$ 1.01 Q1 1.02 Q2 1.07 Q3 1.1 $95^{th}$ 1.19
+
 
 
 ```python

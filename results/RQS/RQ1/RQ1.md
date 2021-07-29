@@ -83,15 +83,15 @@ warnings.filterwarnings("ignore")
 
 ```python
 data_dir = "../../../data/"
-name_systems = ["nodejs", "poppler", "xz", "x264", "gcc", "lingeling", "sqlite"]
+name_systems = ["nodejs", "poppler", "xz", "x264", "gcc", "lingeling", "sqlite", "imagemagick"]
 
 data = dict()
 inputs_name = dict()
 inputs_count = dict()
-
 inputs_perf = dict()
 
 inputs_perf["gcc"] = ["size", "ctime", "exec"]
+inputs_perf["imagemagick"] = ["size", "time"]
 inputs_perf["lingeling"] = ["conflicts", "cps", "reductions"]
 inputs_perf["nodejs"] = ["ops"]
 inputs_perf["poppler"] = ["size", "time"]
@@ -103,6 +103,7 @@ inputs_perf["xz"] = ["size", "time"]
 inputs_feat = dict()
 
 inputs_feat["gcc"] = ["optim","-floop-interchange","-fprefetch-loop-arrays","-ffloat-store","-fno-asm"]
+inputs_feat["imagemagick"] = ["memory_r", "posterize_r", "gaussian-blur", "thread", "quality"]
 inputs_feat["lingeling"] = ["--boost", "--carduse", "--decompose", "--gluescale", "--lkhd", "--memlim", 
 "--minimize", "--prbsimple", "--sweepirr", "--sweepred"]
 inputs_feat["nodejs"] = ["--jitless", "--experimental-wasm-modules", "--experimental-vm-modules",
@@ -118,6 +119,7 @@ inputs_feat["xz"] = ["memory","format","level","depth"]
 inputs_categ = dict()
 
 inputs_categ["gcc"] = ["optim"]
+inputs_categ["imagemagick"] = []
 inputs_categ["lingeling"] = []
 inputs_categ["nodejs"] = []
 inputs_categ["poppler"] = ["format"]
@@ -341,9 +343,75 @@ describe(corr)
 
 The binary size of the compiled programs do not change at all, which is a good news.
 
-All correlations are positive and at least moderate.
+All correlations are positive (and moderate for a majority of correlations).
 
 We can reuse a model from one input to another for the binary size of gcc.
+
+### Imagemagick
+
+
+```python
+corr = plot_correlationmatrix_dendogram("imagemagick", "size")
+```
+
+
+    
+![png](RQ1_files/RQ1_25_0.png)
+    
+
+
+
+```python
+describe(corr)
+```
+
+
+
+
+    count    499500.00
+    mean          0.84
+    std           0.15
+    min           0.01
+    25%           0.80
+    50%           0.89
+    75%           0.94
+    max           1.00
+    dtype: float64
+
+
+
+
+```python
+corr = plot_correlationmatrix_dendogram("imagemagick", "time")
+```
+
+
+    
+![png](RQ1_files/RQ1_27_0.png)
+    
+
+
+
+```python
+describe(corr)
+```
+
+
+
+
+    count    500500.00
+    mean          0.95
+    std           0.06
+    min          -0.24
+    25%           0.93
+    50%           0.96
+    75%           0.97
+    max           1.00
+    dtype: float64
+
+
+
+Like gcc, imagemagick is not an input-sensitive case, there only correlated times, and one big group of inputs for time and size.
 
 ### Lingeling
 
@@ -356,7 +424,7 @@ corr = plot_correlationmatrix_dendogram("lingeling", "conflicts")
 
 
     
-![png](RQ1_files/RQ1_26_0.png)
+![png](RQ1_files/RQ1_32_0.png)
     
 
 
@@ -395,7 +463,7 @@ corr = plot_correlationmatrix_dendogram("lingeling", "cps")
 
 
     
-![png](RQ1_files/RQ1_30_0.png)
+![png](RQ1_files/RQ1_36_0.png)
     
 
 
@@ -436,7 +504,7 @@ corr = plot_correlationmatrix_dendogram("lingeling", "reductions")
 
 
     
-![png](RQ1_files/RQ1_34_0.png)
+![png](RQ1_files/RQ1_40_0.png)
     
 
 
@@ -475,7 +543,7 @@ corr = plot_correlationmatrix_dendogram("nodejs", "ops")
 
 
     
-![png](RQ1_files/RQ1_39_0.png)
+![png](RQ1_files/RQ1_45_0.png)
     
 
 
@@ -516,7 +584,7 @@ corr = plot_correlationmatrix_dendogram("poppler", "size")
 
 
     
-![png](RQ1_files/RQ1_44_0.png)
+![png](RQ1_files/RQ1_50_0.png)
     
 
 
@@ -557,7 +625,7 @@ corr = plot_correlationmatrix_dendogram("poppler", "time")
 
 
     
-![png](RQ1_files/RQ1_48_0.png)
+![png](RQ1_files/RQ1_54_0.png)
     
 
 
@@ -610,7 +678,7 @@ corr = plot_correlationmatrix_dendogram("sqlite", "q1")
 
 
     
-![png](RQ1_files/RQ1_53_0.png)
+![png](RQ1_files/RQ1_59_0.png)
     
 
 
@@ -643,7 +711,7 @@ corr = plot_correlationmatrix_dendogram("sqlite", "q2")
 
 
     
-![png](RQ1_files/RQ1_56_0.png)
+![png](RQ1_files/RQ1_62_0.png)
     
 
 
@@ -676,7 +744,7 @@ corr = plot_correlationmatrix_dendogram("sqlite", "q3")
 
 
     
-![png](RQ1_files/RQ1_59_0.png)
+![png](RQ1_files/RQ1_65_0.png)
     
 
 
@@ -709,7 +777,7 @@ corr = plot_correlationmatrix_dendogram("sqlite", "q4")
 
 
     
-![png](RQ1_files/RQ1_62_0.png)
+![png](RQ1_files/RQ1_68_0.png)
     
 
 
@@ -742,7 +810,7 @@ corr = plot_correlationmatrix_dendogram("sqlite", "q5")
 
 
     
-![png](RQ1_files/RQ1_65_0.png)
+![png](RQ1_files/RQ1_71_0.png)
     
 
 
@@ -775,7 +843,7 @@ corr = plot_correlationmatrix_dendogram("sqlite", "q6")
 
 
     
-![png](RQ1_files/RQ1_68_0.png)
+![png](RQ1_files/RQ1_74_0.png)
     
 
 
@@ -808,7 +876,7 @@ corr = plot_correlationmatrix_dendogram("sqlite", "q7")
 
 
     
-![png](RQ1_files/RQ1_71_0.png)
+![png](RQ1_files/RQ1_77_0.png)
     
 
 
@@ -841,7 +909,7 @@ corr = plot_correlationmatrix_dendogram("sqlite", "q8")
 
 
     
-![png](RQ1_files/RQ1_74_0.png)
+![png](RQ1_files/RQ1_80_0.png)
     
 
 
@@ -874,7 +942,7 @@ corr = plot_correlationmatrix_dendogram("sqlite", "q9")
 
 
     
-![png](RQ1_files/RQ1_77_0.png)
+![png](RQ1_files/RQ1_83_0.png)
     
 
 
@@ -907,7 +975,7 @@ corr = plot_correlationmatrix_dendogram("sqlite", "q10")
 
 
     
-![png](RQ1_files/RQ1_80_0.png)
+![png](RQ1_files/RQ1_86_0.png)
     
 
 
@@ -940,7 +1008,7 @@ corr = plot_correlationmatrix_dendogram("sqlite", "q11")
 
 
     
-![png](RQ1_files/RQ1_83_0.png)
+![png](RQ1_files/RQ1_89_0.png)
     
 
 
@@ -973,7 +1041,7 @@ corr = plot_correlationmatrix_dendogram("sqlite", "q12")
 
 
     
-![png](RQ1_files/RQ1_86_0.png)
+![png](RQ1_files/RQ1_92_0.png)
     
 
 
@@ -1006,7 +1074,7 @@ corr = plot_correlationmatrix_dendogram("sqlite", "q13")
 
 
     
-![png](RQ1_files/RQ1_89_0.png)
+![png](RQ1_files/RQ1_95_0.png)
     
 
 
@@ -1039,7 +1107,7 @@ corr = plot_correlationmatrix_dendogram("sqlite", "q14")
 
 
     
-![png](RQ1_files/RQ1_92_0.png)
+![png](RQ1_files/RQ1_98_0.png)
     
 
 
@@ -1072,7 +1140,7 @@ corr = plot_correlationmatrix_dendogram("sqlite", "q15")
 
 
     
-![png](RQ1_files/RQ1_95_0.png)
+![png](RQ1_files/RQ1_101_0.png)
     
 
 
@@ -1109,7 +1177,7 @@ corr = plot_correlationmatrix_dendogram("xz", "size")
 
 
     
-![png](RQ1_files/RQ1_100_0.png)
+![png](RQ1_files/RQ1_106_0.png)
     
 
 
@@ -1149,7 +1217,7 @@ corr = plot_correlationmatrix_dendogram("xz", "time")
 
 
     
-![png](RQ1_files/RQ1_104_0.png)
+![png](RQ1_files/RQ1_110_0.png)
     
 
 
@@ -1192,7 +1260,7 @@ corr = plot_correlationmatrix_dendogram("x264", "kbs")
 
 
     
-![png](RQ1_files/RQ1_109_0.png)
+![png](RQ1_files/RQ1_115_0.png)
     
 
 
@@ -1234,7 +1302,7 @@ corr = plot_correlationmatrix_dendogram("x264", "fps")
 
 
     
-![png](RQ1_files/RQ1_113_0.png)
+![png](RQ1_files/RQ1_119_0.png)
     
 
 
@@ -1269,7 +1337,7 @@ corr = plot_correlationmatrix_dendogram("x264", "cpu")
 
 
     
-![png](RQ1_files/RQ1_117_0.png)
+![png](RQ1_files/RQ1_123_0.png)
     
 
 
@@ -1304,7 +1372,7 @@ corr = plot_correlationmatrix_dendogram("x264", "size")
 
 
     
-![png](RQ1_files/RQ1_121_0.png)
+![png](RQ1_files/RQ1_127_0.png)
     
 
 
@@ -1352,7 +1420,7 @@ corr = plot_correlationmatrix_dendogram("x264", "etime")
 
 
     
-![png](RQ1_files/RQ1_125_0.png)
+![png](RQ1_files/RQ1_131_0.png)
     
 
 
