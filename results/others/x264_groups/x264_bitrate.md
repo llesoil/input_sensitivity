@@ -143,7 +143,7 @@ Within a group, configurations' performance generalize over all videos. Second, 
 For instance, the feature importance of `mbtree` varies from 0.09 (weak effect on Group 1) to 0.47 (strong effect on Group 2). Moreover, the coefficients of `mbtree` can be either positive or negative: the setting of `mbtree` value (either true or false) can have opposite effects depending of the group. It is exactly why we want to identify groups: as a way to tune options' values depending on input. 
 Finally, there exists video properties and categories to discriminate groups. For instance, Group 1 exhibits a high spatial and chunk complexity while Group 2 exhibits a low  spatial and high temporal complexity. 
 
-## Reduce the benchmarking cost by selecting onlye few inputs
+## Reduce the benchmarking cost by selecting only few inputs
 
 We propose to only keep 2 videos per group, cheap inputs in terms of encoding time, but highly correlated with other videos of their groups.
 

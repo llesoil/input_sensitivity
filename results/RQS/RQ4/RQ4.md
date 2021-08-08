@@ -1,5 +1,5 @@
 
-# RQ4 - Input sensitivity in research
+# RQ-D - Input sensitivity in research
 
 This part addresses the following question :
 
@@ -9,19 +9,19 @@ To do so, we gather research papers (see the protocol of the related submission 
 
 We read each of them carefully and  answer  four  different  questions:
 
-### Q1  -  Do  the  software systems process input data?
+### Q-A.  Do  the  software systems process input data?
 
 If most of research papers do not study configurable systems processing input data, the impact of input sensitivity in research would be relatively low. The idea of this research question is to estimate which proportion of the performance models could be affected by input sensitivity. 
 
-### Q2 - Does the experimental protocol consider several inputs?
+### Q-B. Does the experimental protocol consider several inputs?
 
 Then, we check if the research papers include several inputs in the study.  If  not,  it  would  suggest  that  the  performance  model only captures a partial truth, and might not generalize for other inputs fed to the software system. 
 
-### Q3 - Is the problem of input sensitivity mentioned e.g., in threat? 
+### Q-C. Is the problem of input sensitivity mentioned e.g., in threat? 
 
 This question aims to state whether researchers are aware of the input sensitivity threat, and which proportion of the papers mention it as a potential threat to validity. 
 
-### Q4 - Does the paper propose a solution to generalize the performance model across inputs? 
+### Q-D. Does the paper propose a solution to generalize the performance model across inputs? 
 
 Finally, we check if the paper proposes a solution solving input sensitivity i.e., if they are able to train a performance model that is general and robust enough to predict a near-optimal configuration for any input. 
 
@@ -31,7 +31,7 @@ Feel free to contact us if you disagree with the results, or if any comment seem
 
 ## RESULTS
 
-The rest of this document details the results for each paper and justifies the answers to Q1, Q2, Q3 and Q4. 
+The rest of this document details the results for each paper and justifies the answers to Q-A, Q-B, Q-C and Q-D. 
 
 We also provide references for each paper (bibTeX), and they are available in the sub-folder "papers" of this directory. For the paper with the id 12, search for the file named "12.pdf".
 
@@ -55,17 +55,17 @@ Bibtex :
   journal = {Empirical Software Engineering}
 }
 
-Q1 : 
+Q-A : 
 Yes, 10 configurable systems, including x264, SQLite, llvm, etc.
 
-Q2 : 
+Q-B : 
 "We measured their performance using standard benchmarks from the respective application domain." -> but looking at the material  https://github.com/jmguo/DECART/blob/master/multipleMetrics/results/CART_x264_Metric1and2_Details_crossvalidation_gridsearch.csv
 seems to be only one input per system -> No
 
-Q3 : 
+Q-C : 
 "We measured their performance using standard benchmarks from the respective application domain." in threats, but no mention of a potential lack of generalization -> No
 
-Q4 : 
+Q-D : 
 No
 
 
@@ -108,18 +108,18 @@ location = {Buenos Aires, Argentina},
 series = {SEAMS '17}
 }
 
-Q1 : 
+Q-A : 
 Yes, Cassandra, nosql database
 
-Q2 : 
+Q-B : 
 Yes, see Table 1 in the supplementary material here https://github.com/pooyanjamshidi/transferlearning/blob/master/online-appendix.pdf
 
-Q3 : 
+Q-C : 
 In the article, section Threats to validity "Moreover,
 we used standard benchmarks so that we are confident in that
 we have measured a realistic scenario." -> Yes
 
-Q4 : 
+Q-D : 
 While the proposed method is promising to apply on input sensitivity pb, it is not directly applied to inputs -> No
 
 
@@ -160,19 +160,19 @@ location = {Urbana-Champaign, IL, USA},
 series = {ASE 2017}
 }
 
-Q1 : 
+Q-A : 
 Yes, 4 configurable systems, including x264 and SQLite
 
-Q2 : 
+Q-B : 
 Yes, different workloads, see |W| in Table 1
 
-Q3 : 
+Q-C : 
 Yes, "We selected a diverse set of subject
 systems and a large number of purposefully selected environ-
 ment changes, but, as usual, one has to be careful when gen-
 eralizing to other subject systems and environment changes." in threats section 
 
-Q4 : 
+Q-D : 
 Yes, the paper uses transfer learning to transfer performances from one environment to the others, which includes inputs as well.
 Indeed a promising technique to test on more inputs.
 
@@ -208,20 +208,20 @@ location = {Paderborn, Germany},
 series = {ESEC/FSE 2017}
 }
 
-Q1 : 
+Q-A : 
 Yes, x264 and llvm at least
 
-Q2 : 
+Q-B : 
 In threats "We used ground-truth data of [30] which are
 measurements of real systems."
 Following the link in ref 30, http://fosd.de/SPLConqueror
 it is yet unclear which data are used for this paper.
 Assuming the data are those from the ICSE 2012 paper, there is only one input per system when downloading the supplementary material -> No
 
-Q3 : 
+Q-C : 
 No mention of input sensitivity, No
 
-Q4 : 
+Q-D : 
 No
 
 ### Paper 5
@@ -244,17 +244,17 @@ Bibtex :
   journal = {Software {\&} Systems Modeling}
 }
 
-Q1 : 
+Q-A : 
 Yes, 10 real-world highly-configurable systems, including x264
 
-Q2 : 
+Q-B : 
 According to the paper section 3.3 "using standard benchmarks for the respective domain", but following https://www.se.cs.uni-saarland.de/projects/tradeoffs/
 only one input per system ? -> No
 
-Q3 : 
+Q-C : 
 No mention of input sensitivity, No
 
-Q4 : 
+Q-D : 
 No
 
 ### Paper 6
@@ -295,10 +295,10 @@ location = {Paderborn, Germany},
 series = {ESEC/FSE 2017}
 }
 
-Q1 : 
+Q-A : 
 Yes, 9 software systems including berkeley lrzip, etc.
 
-Q2 : 
+Q-B : 
 
 Depending on the software, yes or no, e.g.
 
@@ -311,12 +311,12 @@ WordCount (wc) counts the number of occurences of thewords in a text file.
 RollingSort (rs) implements a common pattern in real-timeanalysis that performs rolling counts of messages.
 SOL (sol) is a network intensive topology, where the mes-sage is routed through an inter-worker network"
 
-We choose to answer "Yes" for Q2.
+We choose to answer "Yes" for Q-B.
 
-Q3 : 
+Q-C : 
 No mention of input sensitivity, No
 
-Q4 : 
+Q-D : 
 No
 
 ### Paper 7
@@ -336,19 +336,19 @@ pages={794-811},
 doi={10.1109/TSE.2018.2870895}
 }
 
-Q1 : 
+Q-A : 
 Yes, including x264, llvm, etc.
 
-Q2 : 
+Q-B : 
 Word Count and Rolling Sort executed with Stream Processing Systems
 Not many inputs, but we can answer Yes
 
-Q3 : 
+Q-C : 
 "Hence,  there  is  noinherent  mechanism  in  FLASH which  would  adapt  itself based  on  the  change  in  workload.  This  non-stationary nature  of  the  problem  is  a  significant  assumption  and currently  not  addressed  in  this  paper."
 -> Yes
 
-Q4 : 
-Same citation as Q3, the paper is honest on the limitations of the approach.
+Q-D : 
+Same citation as Q-C, the paper is honest on the limitations of the approach.
 -> No
 
 ### Paper 8
@@ -386,20 +386,20 @@ location = {Hanoi, Viet Nam},
 series = {iiWAS '14}
 }
 
-Q1 :
+Q-A :
 Yes, Apache, Nginx, and combination of tools that takes an input (web content)
 
-Q2 : 
+Q-B : 
 Yes, e.g.
 "Further, we use Machine Learning technique to pre-dict individual component and configuration energy usagewith varied workload"
 
 
-Q3 : 
+Q-C : 
 Yes, they even measure different performance values for different values, which is highly valuable in terms of input sensitivity.
 "This gives the insight that, depending on the workload, different configurations are unlikely to lead to significant impact on CPU power consumption."
 6.1.2 Experimental Results is really an interesting case that carry the same message as our paper.
 
-Q4 : 
+Q-D : 
 Yes, they highlight "levels" of workloads, and based on that, they can predict an accurate energy consumption associated to the workload.
 
 
@@ -420,17 +420,17 @@ Bibtex :
   booktitle = {Proceedings of the 20th International Systems and Software Product Line Conference}
 }
 
-Q1 : 
+Q-A : 
 No, the video generator do not consider any input data
 
-Q2 : 
-Q1 = No
+Q-B : 
+Q-A = No
 
-Q3 : 
-Q1 = No
+Q-C : 
+Q-A = No
 
-Q4 : 
-Q1 = No
+Q-D : 
+Q-A = No
 
 ### Paper 10
 
@@ -449,19 +449,19 @@ pages={64-70},
 doi={10.1109/MS.2017.4121211}
 } 
 
-Q1 : 
+Q-A : 
 Yes, 10 systems, including x264, SQLite
 
-Q2 : 
+Q-B : 
 One input per system, see https://github.com/learningconstraints/ICSE-17/tree/master/datasets
 following the link of http://learningconstraints.github.io/
 -> No
 
-Q3 : 
+Q-C : 
 "A first difficulty is related to the development of procedures (oracles) for measuring software configurations in different contexts. It may be difficult to find the right data or to create the realistic contextual conditions"
 -> Yes
 
-Q4 : 
+Q-D : 
 No
 
 
@@ -500,18 +500,18 @@ location = {L'Aquila, Italy},
 series = {ICPE '17}
 }
 
-Q1 : 
+Q-A : 
 Yes, including x264, xz and sqlite
 
-Q2 : 
+Q-B : 
 No, they just make the hardware vary.
 
-Q3 : 
+Q-C : 
 In future work, 
 "We  suspect  that  variations in system workload might influence transferability of system’sperformance prediction model by distorting system’s performance distribution across different hardware environments."
 -> Yes + plus an interesting idea to combine hardware and input data
 
-Q4 : 
+Q-D : 
 No
 
 
@@ -558,17 +558,17 @@ location = {Gothenburg, Sweden},
 series = {SPLC '18}
 }
 
-Q1 : 
+Q-A : 
 No, the simulator do not consider any input data
 
-Q2 : 
-Q1 = No
+Q-B : 
+Q-A = No
 
-Q3 : 
-Q1 = No
+Q-C : 
+Q-A = No
 
-Q4 : 
-Q1 = No
+Q-D : 
+Q-A = No
 
 ### Paper 13
 
@@ -605,16 +605,16 @@ location = {Madrid, Spain},
 series = {VAMOS 2018}
 }
 
-Q1 : 
+Q-A : 
 Yes, the software process different scripts of latex code
 
-Q2 : 
+Q-B : 
 Yes, different pdf codes are fed to the system
 
-Q3 : 
+Q-C : 
 No ?
 
-Q4 : 
+Q-D : 
 Yes, different pdf codes are fed to the system
 
 ### Paper 14
@@ -650,16 +650,16 @@ location = {Lincoln, Nebraska},
 series = {ASE '15}
 }
 
-Q1 : 
+Q-A : 
 Yes, 6 systems, including x264, llvm, SQLite, etc.
 
-Q2 : 
+Q-B : 
 No, they focus on configuration options (they are mostly interested in varying the sample size) so it explains why
 
-Q3 : 
+Q-C : 
 No
 
-Q4 : 
+Q-D : 
 No
 
 ### Paper 15
@@ -677,17 +677,17 @@ Bibtex :
       primaryClass={cs.LG}
 }
 
-Q1 : 
+Q-A : 
 No, the video generator do not consider any input data
 
-Q2 : 
-Q1 = No
+Q-B : 
+Q-A = No
 
-Q3 : 
-Q1 = No
+Q-C : 
+Q-A = No
 
-Q4 : 
-Q1 = No
+Q-D : 
+Q-A = No
 
 ### Paper 16
 
@@ -730,18 +730,18 @@ numpages = {31},
 keywords = {Sampling, Decision trees, Search-based software engineering, Performance prediction, Spectral learning}
 }
 
-Q1 : 
+Q-A : 
 Yes, including x264, SQLite, Apache
 
-Q2 : 
+Q-B : 
  -> SQLite
 Only one input per system e.g. Sintel for x264, the test suite (i.e. without detailing each test) for llvm, etc.
 -> No
 
-Q3 : 
+Q-C : 
 No
 
-Q4 : 
+Q-D : 
 "Since we aim at predicting performance for a special workload, we do not have to vary benchmarks"
 -> No
 
@@ -785,10 +785,10 @@ location = {Bergamo, Italy},
 series = {ESEC/FSE 2015}
 }
 
-Q1 : 
+Q-A : 
 Yes, seven systems, including lrzip, x264, etc.
 
-Q2 :
+Q-B :
 No, the experimental protocol is really impressive, but the measurements were done on one benchmark per system.
 Below few examples to justify our answer:
 x264 - "As benchmark, we measured the time needed to en-
@@ -803,11 +803,11 @@ n-body simulation shipped with the compiler, measuring
 the execution time of the simulation at different optimiza-
 tion levels." -> only one simulation/script
 
-Q3 : 
+Q-C : 
 No
 
-Q4 : 
-No, Q2 = No implies Q4 = No for this paper
+Q-D : 
+No, Q-B = No implies Q-D = No for this paper
 
 
 ### Paper 18
@@ -840,16 +840,16 @@ location = {Nashville, Tennessee},
 series = {SPLC '15}
 }
 
-Q1 : 
+Q-A : 
 Yes, 6 systems, including x264, SQLite, llvm, Apache
 
-Q2 :
+Q-B :
 No, same data as for other SPLConqueror publications
 
-Q3 : 
+Q-C : 
 No
 
-Q4 : 
+Q-D : 
 No
 
 
@@ -884,13 +884,13 @@ location = {Lincoln, Nebraska},
 series = {ASE '15}
 }
 
-Q1 : 
+Q-A : 
 Yes, 5 systems, including Apache, x264, llvm
 
-Q2 :
+Q-B :
 No, same data as refs 6 and 13 using measurements with one input per system
 
-Q3 : 
+Q-C : 
 Yes. Justification:
 "Since our approach is a black box method that operates on a
 high level of abstraction, more software specific concerns such
@@ -901,7 +901,7 @@ the modelling of features or performance objectives via some
 transformation such as the ones outlined above, and hence
 assume these threats are minimal."
 
-Q4 : 
+Q-D : 
 No
 
 ### Paper 20
@@ -919,17 +919,17 @@ Bibtex :
       primaryClass={cs.SE}
 }
 
-Q1 : 
+Q-A : 
 Yes, including SQLite
 
-Q2 : 
+Q-B : 
 "The performance measurements were done using a standard benchmark"
 -> No
 
-Q3 : 
+Q-C : 
 No mention of input sensitivity, no
 
-Q4 : 
+Q-D : 
 No 
 
 ### Paper 21
@@ -971,17 +971,17 @@ location = {Sevilla, Spain},
 series = {SPLC '17}
 }
 
-Q1 : 
+Q-A : 
 Yes, the products (ie the disparity tool) takes two images as inputs 
 
-Q2 : 
+Q-B : 
 Not sure, but seems to be a No
 Here is a possible justification, seciton 5.2:
 "This was performed by our dynamic energy mea-
 suring framework, which is responsible for executing the products
 with the same input and measure the energy consumption"
 
-Q3 : 
+Q-C : 
 Yes.
 In related work, when the authors quote ref 17 
 "Studies have shown that the energy consumption of a software
@@ -990,7 +990,7 @@ different design patterns [16], data structures [17], and refactor-
 ings [20]."
 We can consider it is a mention to input sensitivity to say that the energy consumption of a software system can be significantly influenced by data structures.
 
-Q4 : 
+Q-D : 
 No
 
 ### Paper 22
@@ -1032,16 +1032,16 @@ location = {Chicago, Illinois, USA},
 series = {SIGMOD '17}
 }
 
-Q1 : 
+Q-A : 
 Yes, 3 DBMS including PostG, mySQL
 
-Q2 : 
+Q-B : 
 Yes
 
-Q3 : 
+Q-C : 
 Yes, the purpose of this paper
 
-Q4 : 
+Q-D : 
 "It then
 creates models from this data that allow it to (1) select the most
 impactful knobs, (2) map previously unseen database workloads to
@@ -1095,10 +1095,10 @@ location = {Montreal, Quebec, Canada},
 series = {ICSE '19}
 }
 
-Q1 : 
+Q-A : 
 Yes, 10 real-world configurable software, including 7zip and x264
 
-Q2 : 
+Q-B : 
 No, even if there are lots of measurements, the data for each systems https://github.com/se-passau/Distance-Based_Data/tree/master/SupplementaryWebsite/MeasuredPerformanceValues
 only contains one performance
 They consider well-known benchmarks, but they did not provide the details e.g. for 7zip
@@ -1110,10 +1110,10 @@ It means that you will encounter the input sensitivity presented in this submiss
 
 So, for the second question of this paper, we are forced to answer No, even if the protocol is well-designed and really impressive in terms of measurement efforts.
 
-Q3 : 
+Q-C : 
 No
 
-Q4 : 
+Q-D : 
 No
 
 ### Paper 24
@@ -1157,20 +1157,20 @@ location = {Lake Buena Vista, FL, USA},
 series = {ESEC/FSE 2018}
 }
 
-Q1 : 
+Q-A : 
 Yes, 4 software systems, including Apache Storm
 
-Q2 : 
+Q-B : 
 Yes, e.g.
 "We selected 11 configuration options and measured through-put as response on standard benchmarks (SOL, WordCount, and RollingCount)."
 
-Q3 : 
+Q-C : 
 Yes,
 "We used two standard datasets as workload to train models and measure
 training time as the response variable. We varied both hardware
 (expected easy environment change) and workload (hard)."
 
-Q4 : 
+Q-D : 
 Yes, the method proposed in this paper adapts a performance model trained on a source environment (i.e. with a given input) and transfer it to a target environment (i.e. with another input).
 Indeed a good candidate solution to test on our data.
 
@@ -1190,17 +1190,17 @@ Bibtex :
       primaryClass={cs.DC}
 }
 
-Q1 : 
+Q-A : 
 Yes, Apache Storm
 
-Q2 : 
+Q-B : 
 Yes. Justification: 
 "In this section, we evaluate BO4CO using 3 different Storm
 benchmarks: (i) WordCount, (ii) RollingSort, (iii) SOL.
 RollingSort implements a common pattern in real-time data
 analysis that performs rolling counts of incoming messages."
 
-Q3 : 
+Q-C : 
 Yes.
 
 "First, the performance
@@ -1208,9 +1208,9 @@ difference between the best and worst settings is substantial,
 65%, and with more intense workloads we have observed
 differences in latency as large as 99%, see Table V. "
 
-This comment + table V showing the differences obtained with different settings depending on the workload -> basically our RQ3 in this paper
+This comment + table V showing the differences obtained with different settings depending on the workload -> basically our RQ-C in this paper
 
-Q4 : 
+Q-D : 
 No
 
 ### Paper 26
@@ -1227,13 +1227,13 @@ Bibtex :
   publisher={Gesellschaft f{\"u}r Informatik eV}
 }
 
-Q1 : 
+Q-A : 
 Yes, eg Compressor SPL process input data
 
-Q2 : 
+Q-B : 
 Yes, the  approach proposed in this paper generates input data, on which they apply performance models.
 
-Q3 : 
+Q-C : 
 Yes, this is the point of the paper actually, see section 4 e.g.
 "Our hypothesis is: considering input data in the measurement can improve the prediction of non-functional properties."
 The underlying assumption is input sensitivity. 
@@ -1242,7 +1242,7 @@ The underlying assumption is input sensitivity.
 data can indeed have an effect on non-functional properties."
 Yes
 
-Q4 : 
+Q-D : 
 Sound approach to test and reproduce on other domains than data compression, and maybe to combine with real data (i.e. in the approach, instead of generating random data, generate data based on the distribution really observed with real cases)
 Yes
 
@@ -1264,20 +1264,20 @@ Bibtex :
   url     = {http://jmlr.org/papers/v17/15-047.html}
 }
 
-Q1 : 
+Q-A : 
 Yes, 3 real-world cases, including llvm
 
-Q2 : 
+Q-B : 
 "The objectives are performance and memory
 footprint for a given suite of software programs when compiled with these settings."
 +
 https://github.com/FlashRepo/epsilon-PAL/tree/master/results_llvm
 Yes
 
-Q3 : 
+Q-C : 
 No
 
-Q4 : 
+Q-D : 
 No
 
 ### Paper 28
@@ -1313,15 +1313,15 @@ location = {Leuven, Belgium},
 series = {VAMOS '19}
 }
 
-Q1 : 
+Q-A : 
 Yes, Thingiverse process 3D models and prints them
 
-Q2 : 
+Q-B : 
 "In the end, 31 models remained whose topology are presented in
 Figure 3."
 Yes
 
-Q3 : 
+Q-C : 
 "The first threat is the set of 3D models we selected
 to analyze. In particular, we discarded models requiring substantial
 computation resources (due to a large number of configurations or
@@ -1330,7 +1330,7 @@ However, this made us ignore models with large configuration
 space, which are likely to be more challenging for the classifiers."
 Yes
 
-Q4 :
+Q-D :
 No. Justification here:
 "The first part is a quantita-
 tive evaluation of the performance of each classifier trained and
@@ -1342,10 +1342,10 @@ Title :
 
 Bibtex :
 
-Q1 : 
+Q-A : 
 Yes, spark & hadoop
 
-Q2 : 
+Q-B : 
 Yes, multiple benchmarks to test them
 
 " 1) TPC-DS [7] [...]
@@ -1354,13 +1354,13 @@ Yes, multiple benchmarks to test them
 4) 4) The SparkReg [4] [...]
 5) SparkKm is another SparkML benchmark"
 
-Q3 : 
+Q-C : 
 "CherryPick depends on representative workloads. Thus,
 one concern is CherryPick’s sensitivity to the variation
 of input workloads."
 Yes
 
-Q4 : 
+Q-D : 
 
 Tempted to say yes, because Cherrypick is almost there
 "CherryPick detects the need
@@ -1399,18 +1399,18 @@ Note to read before reading the following justifications. We kept this paper bec
 Here, a user is an "input data"; he has his/her own decision strategy, and based on the decisions he makes, we can predict the best choice for her/him.
 When transposing this to configurable systems, it could be an algorithm predicting the best configuration (aka the best choice) for a given input data.
 
-Q1 : 
+Q-A : 
 See the previous justification, yes.
 
-Q2 : 
+Q-B : 
 We do not know how many users there are in the generated data, but according to "In the generated dataset, each user submitted 100
 queries, and each query has requirements on 1-7 QoS prop-
 erties" we can say Yes.
 
-Q3 : 
+Q-C : 
 No
 
-Q4 : 
+Q-D : 
 No
 
 ### Paper 31
@@ -1445,17 +1445,17 @@ location = {Beijing, China},
 series = {SPLC '16}
 }
 
-Q1 : 
+Q-A : 
 Yes, 4 four systems, including Apache, llvm and x264
 
-Q2 : 
+Q-B : 
 No, same dataset as SPLConqueror (see previous justifications)
 
-Q3 : 
+Q-C : 
 No, neither detailed in the evaluation nor in threats
 
-Q4 : 
-No, Q2 = No implies Q4 = No for this paper
+Q-D : 
+No, Q-B = No implies Q-D = No for this paper
 
 
 ### Paper 32
@@ -1496,20 +1496,20 @@ location = {Paris, France},
 series = {SPLC '19}
 }
 
-Q1 : 
+Q-A : 
 Yes, the neural network are processing images
 
-Q2 : 
+Q-B : 
 Yes, they used MNIST and CIFAR-10
 
-Q3 : 
+Q-C : 
 Yes, justification
 "As we did not
 experiment with datasets involving a large variety of many or few classes and/or bigger images, it could be the case
 that our results are coincidental and do not generalize to other cases. Though, our framework manages to identify
 architectures leading to a large range of results indicating its ability to specialize to specific cases"
 
-Q4 : 
+Q-D : 
 No, it is a per-dataset architecture prediction.
 
 
@@ -1527,18 +1527,18 @@ Bibtex :
   volume={29}
 }
 
-Q1 : 
+Q-A : 
 Don't see any input. The ground-truth is used as validation (so not as input), and the Poisson's equation stays the same.
 No ?
 
-Q2 : 
-Q1 = No
+Q-B : 
+Q-A = No
 
-Q3 : 
-Q1 = No
+Q-C : 
+Q-A = No
 
-Q4 : 
-Q1 = No
+Q-D : 
+Q-A = No
 
 
 ### Paper 34
@@ -1583,20 +1583,20 @@ location = {Montpellier, France},
 series = {ASE 2018}
 }
 
-Q1 : 
+Q-A : 
 Yes, Kafka, processing messages
 
-Q2 : 
+Q-B : 
 Yes, various types of messages, see Table II and
 "Benchmark. Based on the previous Kafka testing experiences
 [25, 40], we design eight testing scenarios with the combination-
 s of different numbers of producers, message sizes, and message
 acknowledgement modes. Table 2 lists these testing setups."
 
-Q3 : 
+Q-C : 
 No
 
-Q4 : 
+Q-D : 
 No
 
 ### Paper 35
@@ -1616,19 +1616,19 @@ pages={301-311},
 doi={10.1109/ASE.2013.6693089}
 }
 
-Q1 : 
+Q-A : 
 Yes, 6 software systems, including x264, llvm, Apache, SQLite
 
-Q2 : 
+Q-B : 
 No, same data as SPLConqueror
 
-Q3 : 
+Q-C : 
 No, the only mention to input is "All systems have been deployed and used in
 real-world scenarios. Moreover, the performance is measured
 by standard benchmarks."
 It does not recognize the input sensitivity threat.
 
-Q4 : 
+Q-D : 
 No
 
 
@@ -1652,16 +1652,16 @@ keywords = {Cyber–physical systems, Software components, Power consumption, Ex
 abstract = {Context: Application of component based software engineering methods to heterogeneous computing (HC) enables different software configurations to realize the same function with different non–functional properties (NFP). Finding the best software configuration with respect to multiple NFPs is a non–trivial task. Objective: We propose a Software Component Allocation Framework (SCAF) with the goal to acquire a (sub–) optimal software configuration with respect to multiple NFPs, thus providing performance prediction of a software configuration in its early design phase. We focus on the software configuration optimization for the average energy consumption and average execution time. Method: We validated SCAF through its instantiation on a real–world demonstrator and a simulation. Firstly, we verified the correctness of our model through comparing the performance prediction of six software configurations to the actual performance, obtained through extensive measurements with a confidence interval of 95%. Secondly, to demonstrate how SCAF scales up, we performed software configuration optimization on 55 generated use–cases (with solution spaces ranging from 1030 to 3070) and benchmark the results against best performing random configurations. Results: The performance of a configuration as predicted by our framework matched the configuration implemented and measured on a real–world platform. Furthermore, by applying the genetic algorithm and simulated annealing to the weight function given in SCAF, we obtain sub–optimal software configurations differing in performance at most 7% and 13% from the optimal configuration (respectfully). Conclusion: SCAF is capable of correctly describing a HC platform and reliably predict the performance of software configuration in the early design phase. Automated in the form of an Eclipse plugin, SCAF allows software architects to model architectural constraints and preferences, acting as a multi–criterion software architecture decision support system. In addition to said, we also point out several interesting research directions, to further investigate and improve our approach.}
 }
 
-Q1 : 
+Q-A : 
 Yes, the robot here processes input images
 
-Q2 : 
+Q-B : 
 Yes, different images were recorded. The size of the input image fed to the algorithm processing it vary.
 
-Q3 : 
+Q-C : 
 No
 
-Q4 : 
+Q-D : 
 No 
 
 
@@ -1682,19 +1682,19 @@ pages={1-7},
 doi={10.1109/CloudTech.2017.8284699}
 }
 
-Q1 : 
+Q-A : 
 Yes, it includes data measured on SAT solvers (i.e. that processes input data)
 
-Q2 : 
+Q-B : 
 "First of all, the paper takes the dataset evaluated by the
 SatZilla solver These dataset have been used in the SAT
 competition."
 -> Yes, this dataset consider several SAT formulae
 
-Q3 : 
+Q-C : 
 No, no mention of input sensitivity
 
-Q4 : 
+Q-D : 
 "That is,
 the aim of this dataset is to predict each algorithm (solver) per-
 formance on the different instances. Therefore, the algorithm
@@ -1737,17 +1737,17 @@ location = {Portland, OR, USA},
 series = {PLDI '15}
 }
 
-Q1 : 
+Q-A : 
 Yes, the paper considers Petabricks, a compiler
 
-Q2 : 
+Q-B : 
 Yes, they consider multiple instances of inputs, justification here "To measure the efficacy of our system, we tested it on a suite of
 6 parallel PetaBricks benchmarks [5]."
 
-Q3 : 
+Q-C : 
 Yes, the title is "Autotuning Algorithmic Choice for Input Sensitivity"
 
-Q4 : 
+Q-D : 
 Yes, the paper proposes a two-step approach that should be reproduced on other software systems. A promising approach to tune a software system for its input.
 
 
@@ -1791,23 +1791,23 @@ location = {Gothenburg, Sweden},
 series = {SEAMS '18}
 }
 
-Q1 : 
+Q-A : 
 Yes, RUBIs (apparently an e-commerce website prototype, mimicking ebay according to https://github.com/cloud-control/brownout-rubis , the link given in the paper is dead for me). So it does have input data (e.g. the content of the webpage)
 
-Q2 : 
+Q-B : 
 Yes,
 "We used Autobench5 3 as
 a benchmark workload generator and drive httperf [25] to issue
 the requests"
 
-Q3 : 
+Q-C : 
 Yes,
 "Moreover, deci-
 sions can derive into separate policies that depend on the workload
 increase ranges" 
 The way they define resource contention may look like it is just an IO problem, but looks like the input sensitivity?
 
-Q4 : 
+Q-D : 
 Yes, it is applied to inputs. They cut the input space into different area of range? Looks like a classification of inputs before the prediction.
 Then, a probability is given for an action (classic for self-adaptative systems).
 
@@ -1849,10 +1849,10 @@ location = {Chicago, Illinois, USA},
 series = {KDD '13}
 }
 
-Q1 : 
+Q-A : 
 Yes, we can consider that Auto-Weka takes a dataset as "input", and tells which algorithm is best adapted to the case. In that sense, it has some inputs.
 
-Q2 : 
+Q-B : 
 "We evaluated Auto-WEKA on 21 prominent benchmark
 datasets (see Table 3): 15 sets from the UCI repository [11];
 the ‘convex’, ‘MNIST basic’ and ‘rotated MNIST with back-
@@ -1863,7 +1863,7 @@ CIFAR-10, where only the first 10 000 training data points
 are used rather than the full 50 000.)"
 -> Yes
 
-Q3 : 
+Q-C : 
 Yes, definitely
 "Furthermore, there was
 no single method that achieved good performance across
@@ -1871,9 +1871,9 @@ all datasets: every method was at least 22% worse than
 the best for at least one data set. We conclude that some
 form of algorithm selection is essential for achieving good
 performance"
-It is a quite common comment in many papers (e.g. paper 25 does the same remark). They try to quantify how it varies with inputs, which is quite the same as our RQ3.
+It is a quite common comment in many papers (e.g. paper 25 does the same remark). They try to quantify how it varies with inputs, which is quite the same as our RQ-C.
 
-Q4 : 
+Q-D : 
 No, it is dataset per dataset (but the algorithm selection part is interesting and looks like a first step of classification).
 Very interesting to test in terms of input sensitivity.
 
@@ -1893,16 +1893,16 @@ Bibtex :
   organization={IEEE}
 }
 
-Q1 : 
+Q-A : 
 Yes, different configurable systems like SQLite, LLVM, x264 
 
-Q2 : 
+Q-B : 
 No for x264, only one input
 No for llvm (the whole test suite and no detail)
 Yes for Apache (use of autobench)
 -> Yes
 
-Q3 : 
+Q-C : 
 "Besides the target platform, other factors influence non-
 functional properties of a program. Database performance
 depends on the workload, cache size, page size, disk speed,
@@ -1914,7 +1914,7 @@ also interesting:
 bias and uncommon performance behavior caused by flaws
 in benchmark designs."
 
-Q4 : 
+Q-D : 
 No
 
 
@@ -1966,18 +1966,18 @@ numpages = {31},
 keywords = {Feature-oriented software development, Measurement and optimization, SPL Conqueror, Non-functional properties, Software product lines}
 }
 
-Q1 : 
+Q-A : 
 Yes, including SQLite and Berkeley DB
 
-Q2 : 
+Q-B : 
 This citation "For instance, we measure the time for sorting of the LinkedList SPL and we use Oracle’s standard read benchmark for Berkeley DB"
 implies a Yes?
 
-Q3 : 
+Q-C : 
 No threat section, limitations are embedded in the results and in discussion. I did not found any reference to input sensitivity, which can be explained by the fact that the paper focus remains the considered variants, and not inputs at all.
 No
 
-Q4 : 
+Q-D : 
 No
 
 ### Paper 43
@@ -2016,22 +2016,22 @@ location = {Essen, Germany},
 series = {ASE 2012}
 }
 
-Q1 : 
+Q-A : 
 Yes. Justification:
 "In this case study, we address the problem of customizing
 an SAP ERP application to an expected customer work-
 load."
 
-Q2 : 
+Q-B : 
 "To generate load on the system we used the SAP
 Sales and Distribution (SD) Benchmark."
 Yes, they vary the load.
 
-Q3 : 
-In a way, Q1's citation should be enough to say Yes, but not mention to the difference of performance between worklaods.
+Q-C : 
+In a way, Q-A's citation should be enough to say Yes, but not mention to the difference of performance between worklaods.
 No?
 
-Q4 :
+Q-D :
 "Instead, the goal is to provide a prac-
 tical automated evaluation that helps the administrator to
 determine the optimal allocation of work process for a given
@@ -2053,10 +2053,10 @@ Bibtex :
       primaryClass={cs.SE}
 }
 
-Q1 : 
+Q-A : 
 Yes, including a Berkeley DB (input=database) and Density Converter (input=image)
 
-Q2 : 
+Q-B : 
 Different workloads for Berkeley
 "To reduce cost, we separate the iter-
 ative analysis and performance measurement in two steps and
@@ -2074,7 +2074,7 @@ details all the benchmarks, e.g.
 etc.
 Definitely yes, it could be part of our protocol if they train a performance model each time.
 
-Q3 : 
+Q-C : 
 No, not really the focus of the paper, neither in threats nor in dicussions.
 Closest citation to input sensitivity
 "[...], the time to run the taint analysis with
@@ -2083,7 +2083,7 @@ of 29 minutes to run the same 26 configurations. In fact, the
 iterative analysis did no finish executing after 24 hours in the
 other subject systems!"
 
-Q4 : 
+Q-D : 
 No ?
 
 ### Paper 45
@@ -2128,13 +2128,13 @@ location = {Edmonton AB, Canada},
 series = {ICPE '20}
 }
 
-Q1 : 
+Q-A : 
 Yes, including x264
 
-Q2 : 
+Q-B : 
 Yes,  17 input videos for x264, see Table 1
 
-Q3 : 
+Q-C : 
 Yes. Justification:
 It is a reproduction of a study on sampling effect including different input videos and showing that results can depend on input videos. 
 In addition,
@@ -2142,7 +2142,7 @@ In addition,
 results across the experiments, this is a preliminary study in this direction and future work should consider additional
 inputs based on an in-depth qualitative study of video characteristics."
 
-Q4 : 
+Q-D : 
 No, not the point of the paper
 
 ### Paper 46
@@ -2186,17 +2186,17 @@ location = {Bari, Italy},
 series = {ESEM '20}
 }
 
-Q1 : 
+Q-A : 
 Yes, LLVM and Apache at least
 
-Q2 : 
+Q-B : 
 No, not mentioned.
 They use data from ref 27, which is our 17th paper. See the justification for the paper 17.
 
-Q3 : 
+Q-C : 
 No, not throughout the paper and not in 4.8
 
-Q4 : 
+Q-D : 
 No
 
 ### Paper 47
@@ -2240,10 +2240,10 @@ location = {Virtual Event, Australia},
 series = {ASE '20}
 }
 
-Q1 : 
+Q-A : 
 Yes, including 7z, x264, vp9, etc.
 
-Q2 : 
+Q-B : 
 Seems to be only one workload. Possible justification here :
 "We measure the performance of a configuration by configuring a software system, and executing a workload."
 
@@ -2252,11 +2252,11 @@ it is not obvious to clarify this point
 
 No
 
-Q3 : 
+Q-C : 
 No, no mention in threats, and none read throughout the paper.
 
-Q4 : 
-No, for this paper Q2=No implies Q4=No
+Q-D : 
+No, for this paper Q-B=No implies Q-D=No
 
 
 ### Paper 48
@@ -2276,17 +2276,17 @@ pages={58-66},
 doi={10.1109/MS.2020.2987024}
 }
 
-Q1 : 
+Q-A : 
 Yes, Dune (input = images) and VP9 (input = videos)
 
-Q2 : 
+Q-B : 
 No, not really the purpose of the paper; hard to combine sampling, learning and inputs.
 
-Q3 : 
+Q-C : 
 No, none I noticed
 
-Q4 : 
-No, implied by Q2=No
+Q-D : 
+No, implied by Q-B=No
 
 ### Paper 49
 
@@ -2305,7 +2305,7 @@ pages={1-1},
 doi={10.1109/TSE.2020.2983927}
 }
 
-Q1 : 
+Q-A : 
 Yes, justification:
 "For evaluation, we explore five real-world software sys-
 tems from different domains– a video encoder, a SAT solver,
@@ -2313,7 +2313,7 @@ a SQL database, a high-performance C-compiler, and a
 streaming data analytics tool (measured under 57 enviro-
 ments overall)."
 
-Q2 : 
+Q-B : 
 Yes, see Table 1 combined with
 "The
 performance of each of the |C|configurations are measured
@@ -2322,7 +2322,7 @@ versions (V ). A unique combination of H,W,V constitutes
 an enviroment which is denoted by E"
 The different environments include different workloads 
 
-Q3 : 
+Q-C : 
 Yes, justification:
 "There is a possibility that measurement
 of other performance measures or availability of additional
@@ -2330,8 +2330,8 @@ performance measures may result in a different outcome.
 Therefore, one has to be careful when generalizing our
 findings to other subject systems and environment changes"
 
-Q4 : 
-Indeed a trasnfer-learning technique based on source selection to test on the different input goups or profiles shown in RQ1, that can solve the input sensivitity problem.
+Q-D : 
+Indeed a trasnfer-learning technique based on source selection to test on the different input goups or profiles shown in RQ-A, that can solve the input sensivitity problem.
 Yes
 
 ### Paper 50
@@ -2350,10 +2350,10 @@ archivePrefix={arXiv},
 primaryClass={cs.SE}
 }
 
-Q1 : 
+Q-A : 
 Yes, H2 (input=database) and DC (input = images)
 
-Q2 : 
+Q-B : 
 Yes, justification:
 "The BATIK rasterizer converts SVG files to a raster format.
 As workload, we used the DACAPO benchmark suite [55],
@@ -2362,10 +2362,10 @@ can be used for performance tests"
 and confirmed here 
 https://archive.softwareheritage.org/browse/revision/2e61f8ce57498194c2af0cd76e87498a174f07fa/?path=supplementary-website/experiment_data/data
 
-Q3 : 
+Q-C : 
 No, not in threats and not throughout this paper
 
-Q4 : 
+Q-D : 
 No, not the point of the paper
 
 
@@ -2385,10 +2385,10 @@ pages={611-622},
 doi={}
 }
 
-Q1 : 
+Q-A : 
 Yes, including xz and lrzip (input = file system), but also oggenc (input = audio files), which is quite novel
 
-Q2 : 
+Q-B : 
 Yes, 
 e.g. for lrzip
 "As a workload for the file compression tools lrzip and xz, we used
@@ -2399,13 +2399,13 @@ and for oggenc
 audio transcoder oggenc, we encoded a raw WAVE audio file of
 over 60 MB from the Wikimedia Commons collection."
 
-Q3 : 
+Q-C : 
 "we were able to test corner
 cases and assess scalability so that we believe that our results hold
 for many practical use cases."
 is close, but no?
 
-Q4 : 
+Q-D : 
 No, not really the point of the paper, more about the evolution of software in general, this could be combined with input sensitivity -> i.e. how does the input sensitivity evolve with versions and variants?
 
 
@@ -2423,10 +2423,10 @@ Only arxiv for now
   year={2020}
 }
 
-Q1 : 
+Q-A : 
 Yes, including Apache and MySQL
 
-Q2 : 
+Q-B : 
 Yes, justification:
 "Benchmark tools are used to
 generate workload and report performance measurements. For
@@ -2437,10 +2437,10 @@ Apache’s performance by the following command: “ab -n 1000
 provide an elegant solution to generate synthetic traffic on
 demand."
 
-Q3 : 
+Q-C : 
 No mention of input sensitivity, no?
 
-Q4 : 
+Q-D : 
 No
 
 ### Paper 53
@@ -2481,10 +2481,10 @@ location = {Virtual Event, France},
 series = {ICPE '21}
 }
 
-Q1 : 
+Q-A : 
 Yes, including Apache Server, PBZIP2 and PostgreSQL
 
-Q2 : 
+Q-B : 
 They vary the scenarii i.e. compress or decompress data,
 e.g.
 "For instance, PBZIP2 uses the configuration option -z
@@ -2498,7 +2498,7 @@ e.g.
 "The input to ConfProf is a configurable program
 and a usage scenario that exercises the program"
 
-Q3 : 
+Q-C : 
 Yes,
 "Similar to existing profiling techniques,
 ConfProf is based on dynamic analysis and therefore limited to
@@ -2506,8 +2506,8 @@ observing the executions triggered by a given set of inputs. The
 problem of finding suitable inputs for performance analysis [6, 8, 35]
 is orthogonal to the issue addressed here."
 
-Q4 : 
-No, see Q3's answer
+Q-D : 
+No, see Q-C's answer
 
 ### Paper 54
 
@@ -2554,10 +2554,10 @@ location = {Edmonton AB, Canada},
 series = {ICPE '20}
 }
 
-Q1 : 
+Q-A : 
 Yes, including x264, bzip, etc.
 
-Q2 : 
+Q-B : 
 No, each system has its own workload, but fixed. Justification:
 "We benchmarked BZIP2, GZIP, and XZ using large text compression benchmark [22],
 which represents first 109 bytes of Wikipedia XML archive. We
@@ -2573,10 +2573,10 @@ I created an account to see the repo and I got the following error message
 
 To access this page, you may need to log in with another account. You can also return to the previous page or go back to your dashboard."
 
-Q3 : 
+Q-C : 
 No, not in threats to validity
 
-Q4 : 
+Q-D : 
 It could be used to transfer the Pareto Frontier from one input to another by replacing the hardware/environment with the input data.
 -> Yes
 
@@ -2619,7 +2619,7 @@ location = {Catania, Sicily, Italy},
 series = {CF '20}
 }
 
-Q1 : 
+Q-A : 
 "The workload prediction accuracy of the proposed machine learning
 model was compared with three baseline machine learning regres-
 sion methods"
@@ -2627,7 +2627,7 @@ sion methods"
 Here the ML methods are like the configurable systems, and they process data
 -> Yes
 
-Q2 : 
+Q-B : 
 Yes, justification:
 "The benchmarks considered for the experiments are Back-
 propagation (backprop), KMeans clustering (k-means), and Needleman-
@@ -2635,7 +2635,7 @@ Wunsch (nw) kernels, which are obtained from the Rodinia bench-
 mark suite [10], along with the matrix multiplication (matmul)
 kernel."
 
-Q3 : 
+Q-C : 
 See the keyword "workload characterization" in the paper at the beginning.
 Definitely the underlying motivation of this paper.
 
@@ -2645,7 +2645,7 @@ that affect the run-time performance of the kernel"
 
 -> Yes
 
-Q4 : 
+Q-D : 
 Yes, a transfer learning technique to apply in another domain.
 
 ### Paper 56
@@ -2666,18 +2666,18 @@ publisher = {{USENIX} Association},
 month = apr,
 }
 
-Q1 : 
+Q-A : 
 Yes, justification:
 "(i) Application-level input parameters capture inputs that
 the application acts on;"
 
-Q2 : 
+Q-B : 
 Yes, justification:
 "We experiment with
 varying the size of these inputs on a scale of 1 to 10, with
 scale 1 being the default input size in the workload generator;"
 
-Q3 : 
+Q-C : 
 Yes. Justification:
 "(i) Application-level input parameters capture inputs that
 the application acts on; e.g., the records being sorted, or the
@@ -2685,7 +2685,7 @@ images being classified. We consider both the size of these
 inputs and (when noted) the actual values of these inputs."
 
 
-Q4 : 
+Q-D : 
 "Our second assumption is that, for a given input dataset size,
 the application’s input data is identical across all experiments.
 I.e., repeated runs of a test configuration act on the same input
@@ -2712,17 +2712,17 @@ pages={1-9},
 doi={10.23919/IFIPNetworking52078.2021.9472818}
 }
 
-Q1 : 
+Q-A : 
 Yes, including a Video-on-Demand (VoD) service  (according to the authors "modified VLC media player software") and a Key-Value Store (KVS) service. 
 Input data are operations sent by fake clients.
 
-Q2 : 
+Q-B : 
 Yes justification:
 "The KVS load generator controls the rate of KVS operations
 issued per second. Both generators produce load according to
 two distinct load patterns described below"
 
-Q3 : 
+Q-C : 
 "Under the assumption that there are sufficient number of
 samples in source domains, one can robustly measure diversity
 of the source domains. In this work, we used the Shannon
@@ -2732,7 +2732,7 @@ one approach amongst other approaches."
 
 also an interesting paper to read in order to understand how input sensitivity affects the way we should select the right source for a given target.
 
-Q4 : 
+Q-D : 
 Yes, it is a transfer learning based on source selection eg like paper 49 introducing Beetle.
 
 ### Paper 58
@@ -2752,13 +2752,13 @@ pages={1198-1209},
 doi={10.1109/ICSE43902.2021.00110}
 }
 
-Q1 : 
+Q-A : 
 Yes, gcc and llvm
 
-Q2 : 
+Q-B : 
 Yes, two C benchmarks (i.e., cBench and PolyBench)
 
-Q3 : 
+Q-C : 
 Yes,
 "(e.g., only a small number of optimization flags, referred to as
 impactful optimizations, can have noticeable impact on the
@@ -2767,7 +2767,7 @@ the direct application of the existing Bayesian optimization
 methods in compiler autotuning is not efficient (which will be
 demonstrated in our study presented in Section V-B)."
 
-Q4 : 
+Q-D : 
 "many compiler autotuning approaches have been proposed to automatically tune optimization flags in order to achieve required runtime performance for a given program"
 If the method proposed in this paper outperforms other SOTA methods, it is yet applicable on a per-input basis.
 We do not use prior knowledge (i.e. of other input programs) to compile the current one.
@@ -2790,10 +2790,10 @@ Bibtex :
   doi={10.1109/SEAMS.2019.00029}
 }
 
-Q1 : 
+Q-A : 
 Yes, including RUBIs, Tomcat, mySQL
 
-Q2 : 
+Q-B : 
 Yes, justification:
 "Notably, through different
 workload patterns, traces and frequencies, we obtained a total
@@ -2801,10 +2801,10 @@ of 72 cases for each pair of performance indicator and learning
 algorithm on S-RUBiS."
 -> different cases of trained algorithm
 
-Q3 : 
+Q-C : 
 Not in threats, and none I read throughout the paper -> No
 
-Q4 : 
+Q-D : 
 No, one model for each case
 
 
@@ -2825,10 +2825,10 @@ Bibtex :
   doi={10.1109/ICSE.2019.00113}
 }
 
-Q1 : 
+Q-A : 
 Yes, including x264, llvm, SQLite
 
-Q2 : 
+Q-B : 
 Note that input, in the paper, refers to configurations (logical for the authors, but might be confusing for us).
 
 They mostly use the data from SPLConqueror, so no variation wtr input data.
@@ -2836,10 +2836,10 @@ They mostly use the data from SPLConqueror, so no variation wtr input data.
 Confirmed by looking at https://github.com/DeepPerf/DeepPerf/tree/master/Data
 -> No
 
-Q3 : 
+Q-C : 
 Not in threats, not throughout the paper -> No
 
-Q4 : 
+Q-D : 
 No
 
 
@@ -2886,19 +2886,19 @@ pages = {137–145},
 numpages = {9}
 }
 
-Q1 : 
+Q-A : 
 A neural network, that takes a dataset as input, not conventional as system, but configurable and takes input data
 -> Yes
 
-Q2 : 
+Q-B : 
 5 different datasets : MNIST, ImageNet, Driving, Contagio/VirusTotal,
 and Drebin
 -> Yes
 
-Q3 : 
+Q-C : 
 No, not mentioned
 
-Q4 : 
+Q-D : 
 It is not obvious to use it in this case to solve the input sensivity problem 
 -> No
 
@@ -2922,19 +2922,19 @@ pages={470-480},
 doi={10.1109/ICSME.2019.00080}
 }
 
-Q1 : 
+Q-A : 
 Yes, including x264, llvm, SQLite
 
-Q2 : 
+Q-B : 
 "We use the ground-truth performance models described in [20]
 and provided by the SPLConqueror project2."
 Based on the previous explanations, no 
 
-Q3 : 
+Q-C : 
 No, not in threats, I did not read anything regarding input sensitivity in the paper
 
-Q4 : 
-No, Q2=No implies Q4=No for this paper
+Q-D : 
+No, Q-B=No implies Q-D=No for this paper
 
 
 ### Paper 63
@@ -2955,10 +2955,10 @@ doi={10.1109/CloudCom.2019.00015}
 }
 
 
-Q1 : 
+Q-A : 
 Yes, including MariaDB, a database manager system (input = database)
 
-Q2 : 
+Q-B : 
 Yes, justification:
 "We measured and modeled the variation in the database’s
 response throughput under varying configuration parameters,
@@ -2969,7 +2969,7 @@ alternatively, 10, 20, 40 and 64 warehouses, for a total database
 size on disk of approximately 1.2GB to 6.4GB."
 -> Yes, they vary the inputs in the experimental protocol
 
-Q3 : 
+Q-C : 
 
 Not directly in threats, but in future work, 
 "Additionally, we plan to
@@ -2980,6 +2980,6 @@ dimensionality and its parameters"
 This looks like a future work about sensitivity analysis i.e. database sensitivity, i.e. input sensitivity
 -> Yes
 
-Q4 : 
+Q-D : 
 Yes, a transfer learning technique that could be used on our measurements.
 
