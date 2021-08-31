@@ -223,6 +223,38 @@ def describe(corr):
     return np.round(pd.Series(corrDescription).describe(), 2)
 ```
 
+### We also compute the p-values related to the correlations
+
+We also show the proportion of bad p-values, with a threshold fixed at 0.05. A bad p-value is a p-value strictly greater than 0.05
+
+See https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.spearmanr.html
+
+"The p-value roughly indicates the probability of an uncorrelated system producing datasets that have a Spearman correlation at least as extreme as the one computed from these datasets. The p-values are not entirely reliable but are probably reasonable for datasets larger than 500 or so."
+
+
+```python
+def pct_bad_pval(ns, dim):
+    # ns : name_system
+    # dim : dimension
+    # output : the proportion of bad p-values
+    
+    # number of inputs
+    inputs_nb = inputs_count[ns]
+
+    pval = []
+
+    for i in range(inputs_nb):
+        for j in range(inputs_nb):
+            # A distribution of bitrates will have a correlaiton of 1 with itself
+            if i > j:
+                # we compute the Spearman correlation between the input video i and the input video j
+                corr, p_value = sc.spearmanr(data[ns, i][dim],
+                                          data[ns, j][dim])
+                pval.append(p_value)
+    
+    return len([p for p in pval if p > 0.05])/len(pval)
+```
+
 # RQ1 results for each system
 
 ### GCC
@@ -236,7 +268,7 @@ corr = plot_correlationmatrix_dendogram("gcc", "ctime")
 
 
     
-![png](RQ1_files/RQ1_13_0.png)
+![png](RQ1_files/RQ1_16_0.png)
     
 
 
@@ -267,9 +299,21 @@ The minimal value, fixed at 0.72, is not even a moderate correlations, and 75% o
 We observe very low values of compile times, sometimes in miliseconds.
 This can explain the poor correlogram.
 
-Practictally, it might be caused by the sample of scripts used for this experiment.
+Practically, it might be caused by the sample of scripts used for this experiment.
 Maybe we have to consider bigger programs or software systems, compile it, and include it in the study.
 Here there is only one class.
+
+
+```python
+pct_bad_pval("gcc", "ctime")
+```
+
+
+
+
+    0.0
+
+
 
 #### execution time
 
@@ -280,7 +324,7 @@ corr = plot_correlationmatrix_dendogram("gcc", "exec")
 
 
     
-![png](RQ1_files/RQ1_17_0.png)
+![png](RQ1_files/RQ1_21_0.png)
     
 
 
@@ -308,6 +352,18 @@ These distribution of execution times are mostly correlated with each other.
 
 But there are some negative correlations for a set of scripts. There are 2 groups of scripts, uncorrelated with each other.
 
+
+```python
+pct_bad_pval("gcc", "exec")
+```
+
+
+
+
+    0.09655172413793103
+
+
+
 #### size
 
 
@@ -317,7 +373,7 @@ corr = plot_correlationmatrix_dendogram("gcc", "size")
 
 
     
-![png](RQ1_files/RQ1_21_0.png)
+![png](RQ1_files/RQ1_26_0.png)
     
 
 
@@ -347,7 +403,21 @@ All correlations are positive (and moderate for a majority of correlations).
 
 We can reuse a model from one input to another for the binary size of gcc.
 
+
+```python
+pct_bad_pval("gcc", "size")
+```
+
+
+
+
+    0.0
+
+
+
 ### Imagemagick
+
+#### Size
 
 
 ```python
@@ -356,7 +426,7 @@ corr = plot_correlationmatrix_dendogram("imagemagick", "size")
 
 
     
-![png](RQ1_files/RQ1_25_0.png)
+![png](RQ1_files/RQ1_32_0.png)
     
 
 
@@ -382,12 +452,26 @@ describe(corr)
 
 
 ```python
+pct_bad_pval("imagemagick", "size")
+```
+
+
+
+
+    0.0011488511488511489
+
+
+
+#### Time
+
+
+```python
 corr = plot_correlationmatrix_dendogram("imagemagick", "time")
 ```
 
 
     
-![png](RQ1_files/RQ1_27_0.png)
+![png](RQ1_files/RQ1_36_0.png)
     
 
 
@@ -413,6 +497,18 @@ describe(corr)
 
 Like gcc, imagemagick is not an input-sensitive case, there only correlated times, and one big group of inputs for time and size.
 
+
+```python
+pct_bad_pval("imagemagick", "time")
+```
+
+
+
+
+    0.001972027972027972
+
+
+
 ### Lingeling
 
 #### conflicts
@@ -424,7 +520,7 @@ corr = plot_correlationmatrix_dendogram("lingeling", "conflicts")
 
 
     
-![png](RQ1_files/RQ1_32_0.png)
+![png](RQ1_files/RQ1_42_0.png)
     
 
 
@@ -454,6 +550,18 @@ These are gloablly uncorrelated (very low, low, or moderate) with each other, ap
 
 Training a performance model on this performance property and for this software system would be a nightmare, we cannot reuse anything.
 
+
+```python
+pct_bad_pval("lingeling", "conflicts")
+```
+
+
+
+
+    0.5351241351241351
+
+
+
 #### conflicts per second
 
 
@@ -463,7 +571,7 @@ corr = plot_correlationmatrix_dendogram("lingeling", "cps")
 
 
     
-![png](RQ1_files/RQ1_36_0.png)
+![png](RQ1_files/RQ1_47_0.png)
     
 
 
@@ -495,6 +603,18 @@ Training a performance model on this performance property and for this software 
 
 There might be some tiny differences explaining the different clusters between conflicts and cps.
 
+
+```python
+pct_bad_pval("lingeling", "cps")
+```
+
+
+
+
+    0.536996336996337
+
+
+
 #### reductions
 
 
@@ -504,7 +624,7 @@ corr = plot_correlationmatrix_dendogram("lingeling", "reductions")
 
 
     
-![png](RQ1_files/RQ1_40_0.png)
+![png](RQ1_files/RQ1_52_0.png)
     
 
 
@@ -532,6 +652,18 @@ For many SAT formulae, lingeling does not find any reduction. In this figure, th
 
 Apart from it, it is a bit like conflicts; a lot of uncorrelated values, a few "more than moderate" correlations, either positive or negative.
 
+
+```python
+pct_bad_pval("lingeling", "reductions")
+```
+
+
+
+
+    0.4413838013838014
+
+
+
 ### NodeJS
 
 #### number of operations per second
@@ -543,7 +675,7 @@ corr = plot_correlationmatrix_dendogram("nodejs", "ops")
 
 
     
-![png](RQ1_files/RQ1_45_0.png)
+![png](RQ1_files/RQ1_58_0.png)
     
 
 
@@ -573,6 +705,18 @@ The first group has in general low or moderate correlations, all positive.
 
 There are mostly high negative correlations between this big group and the rest of the scripts.
 
+
+```python
+pct_bad_pval("nodejs", "ops")
+```
+
+
+
+
+    0.4652257543640697
+
+
+
 ### Poppler
 
 #### size
@@ -584,7 +728,7 @@ corr = plot_correlationmatrix_dendogram("poppler", "size")
 
 
     
-![png](RQ1_files/RQ1_50_0.png)
+![png](RQ1_files/RQ1_64_0.png)
     
 
 
@@ -616,6 +760,18 @@ Apart from these outliers, there are different groups of pdfs, that are mostly h
  
 We highlight few profiles of pdf when extracting their images. 
 
+
+```python
+pct_bad_pval("poppler", "size")
+```
+
+
+
+
+    0.22813899091789558
+
+
+
 #### time
 
 
@@ -625,7 +781,7 @@ corr = plot_correlationmatrix_dendogram("poppler", "time")
 
 
     
-![png](RQ1_files/RQ1_54_0.png)
+![png](RQ1_files/RQ1_69_0.png)
     
 
 
@@ -667,6 +823,18 @@ In this first group, the input pdfs have similar time rankings; their performanc
 However, this group of pdfs is uncorrelated (very low, low) or negatively correlated (moderate, strong and very strong) with the second group of pdfs (see the triangle 2, in the middle). 
 In this case, a performance model trained on a pdf chosen in the first group should not be reused directly on a pdf of the second group. 
 
+
+```python
+pct_bad_pval("poppler", "time")
+```
+
+
+
+
+    0.7053441880013888
+
+
+
 ### SQLite
 
 #### q1
@@ -678,7 +846,7 @@ corr = plot_correlationmatrix_dendogram("sqlite", "q1")
 
 
     
-![png](RQ1_files/RQ1_59_0.png)
+![png](RQ1_files/RQ1_75_0.png)
     
 
 
@@ -702,6 +870,18 @@ describe(corr)
 
 
 
+
+```python
+pct_bad_pval("sqlite", "q1")
+```
+
+
+
+
+    0.025682326621923938
+
+
+
 #### q2
 
 
@@ -711,7 +891,7 @@ corr = plot_correlationmatrix_dendogram("sqlite", "q2")
 
 
     
-![png](RQ1_files/RQ1_62_0.png)
+![png](RQ1_files/RQ1_79_0.png)
     
 
 
@@ -735,6 +915,18 @@ describe(corr)
 
 
 
+
+```python
+pct_bad_pval("sqlite", "q2")
+```
+
+
+
+
+    0.12241610738255033
+
+
+
 #### q3
 
 
@@ -744,7 +936,7 @@ corr = plot_correlationmatrix_dendogram("sqlite", "q3")
 
 
     
-![png](RQ1_files/RQ1_65_0.png)
+![png](RQ1_files/RQ1_83_0.png)
     
 
 
@@ -768,6 +960,18 @@ describe(corr)
 
 
 
+
+```python
+pct_bad_pval("sqlite", "q3")
+```
+
+
+
+
+    0.016465324384787473
+
+
+
 #### q4
 
 
@@ -777,7 +981,7 @@ corr = plot_correlationmatrix_dendogram("sqlite", "q4")
 
 
     
-![png](RQ1_files/RQ1_68_0.png)
+![png](RQ1_files/RQ1_87_0.png)
     
 
 
@@ -801,6 +1005,18 @@ describe(corr)
 
 
 
+
+```python
+pct_bad_pval("sqlite", "q4")
+```
+
+
+
+
+    0.0023266219239373603
+
+
+
 #### q5
 
 
@@ -810,7 +1026,7 @@ corr = plot_correlationmatrix_dendogram("sqlite", "q5")
 
 
     
-![png](RQ1_files/RQ1_71_0.png)
+![png](RQ1_files/RQ1_91_0.png)
     
 
 
@@ -834,6 +1050,18 @@ describe(corr)
 
 
 
+
+```python
+pct_bad_pval("sqlite", "q5")
+```
+
+
+
+
+    0.07078299776286354
+
+
+
 #### q6
 
 
@@ -843,7 +1071,7 @@ corr = plot_correlationmatrix_dendogram("sqlite", "q6")
 
 
     
-![png](RQ1_files/RQ1_74_0.png)
+![png](RQ1_files/RQ1_95_0.png)
     
 
 
@@ -867,6 +1095,18 @@ describe(corr)
 
 
 
+
+```python
+pct_bad_pval("sqlite", "q6")
+```
+
+
+
+
+    0.0024161073825503354
+
+
+
 #### q7
 
 
@@ -876,7 +1116,7 @@ corr = plot_correlationmatrix_dendogram("sqlite", "q7")
 
 
     
-![png](RQ1_files/RQ1_77_0.png)
+![png](RQ1_files/RQ1_99_0.png)
     
 
 
@@ -900,6 +1140,18 @@ describe(corr)
 
 
 
+
+```python
+pct_bad_pval("sqlite", "q7")
+```
+
+
+
+
+    0.05700223713646532
+
+
+
 #### q8
 
 
@@ -909,7 +1161,7 @@ corr = plot_correlationmatrix_dendogram("sqlite", "q8")
 
 
     
-![png](RQ1_files/RQ1_80_0.png)
+![png](RQ1_files/RQ1_103_0.png)
     
 
 
@@ -933,6 +1185,18 @@ describe(corr)
 
 
 
+
+```python
+pct_bad_pval("sqlite", "q8")
+```
+
+
+
+
+    0.39991051454138704
+
+
+
 #### q9
 
 
@@ -942,7 +1206,7 @@ corr = plot_correlationmatrix_dendogram("sqlite", "q9")
 
 
     
-![png](RQ1_files/RQ1_83_0.png)
+![png](RQ1_files/RQ1_107_0.png)
     
 
 
@@ -966,6 +1230,18 @@ describe(corr)
 
 
 
+
+```python
+pct_bad_pval("sqlite", "q9")
+```
+
+
+
+
+    0.02621923937360179
+
+
+
 #### q10
 
 
@@ -975,7 +1251,7 @@ corr = plot_correlationmatrix_dendogram("sqlite", "q10")
 
 
     
-![png](RQ1_files/RQ1_86_0.png)
+![png](RQ1_files/RQ1_111_0.png)
     
 
 
@@ -999,6 +1275,18 @@ describe(corr)
 
 
 
+
+```python
+pct_bad_pval("sqlite", "q10")
+```
+
+
+
+
+    0.3989261744966443
+
+
+
 #### q11
 
 
@@ -1008,7 +1296,7 @@ corr = plot_correlationmatrix_dendogram("sqlite", "q11")
 
 
     
-![png](RQ1_files/RQ1_89_0.png)
+![png](RQ1_files/RQ1_115_0.png)
     
 
 
@@ -1032,6 +1320,18 @@ describe(corr)
 
 
 
+
+```python
+pct_bad_pval("sqlite", "q11")
+```
+
+
+
+
+    0.39991051454138704
+
+
+
 #### q12
 
 
@@ -1041,7 +1341,7 @@ corr = plot_correlationmatrix_dendogram("sqlite", "q12")
 
 
     
-![png](RQ1_files/RQ1_92_0.png)
+![png](RQ1_files/RQ1_119_0.png)
     
 
 
@@ -1065,6 +1365,18 @@ describe(corr)
 
 
 
+
+```python
+pct_bad_pval("sqlite", "q12")
+```
+
+
+
+
+    0.004742729306487696
+
+
+
 #### q13
 
 
@@ -1074,7 +1386,7 @@ corr = plot_correlationmatrix_dendogram("sqlite", "q13")
 
 
     
-![png](RQ1_files/RQ1_95_0.png)
+![png](RQ1_files/RQ1_123_0.png)
     
 
 
@@ -1098,6 +1410,18 @@ describe(corr)
 
 
 
+
+```python
+pct_bad_pval("sqlite", "q13")
+```
+
+
+
+
+    0.39991051454138704
+
+
+
  #### q14
 
 
@@ -1107,7 +1431,7 @@ corr = plot_correlationmatrix_dendogram("sqlite", "q14")
 
 
     
-![png](RQ1_files/RQ1_98_0.png)
+![png](RQ1_files/RQ1_127_0.png)
     
 
 
@@ -1131,6 +1455,18 @@ describe(corr)
 
 
 
+
+```python
+pct_bad_pval("sqlite", "q14")
+```
+
+
+
+
+    0.0044742729306487695
+
+
+
 #### q15
 
 
@@ -1140,7 +1476,7 @@ corr = plot_correlationmatrix_dendogram("sqlite", "q15")
 
 
     
-![png](RQ1_files/RQ1_101_0.png)
+![png](RQ1_files/RQ1_131_0.png)
     
 
 
@@ -1164,6 +1500,18 @@ describe(corr)
 
 
 
+
+```python
+pct_bad_pval("sqlite", "q15")
+```
+
+
+
+
+    0.2443847874720358
+
+
+
 Overall, two groups of databases appears; these two groups are highly-correlated (i.e. inside the groups) but uncorrelated or negatively correlated with each others
 
 ### xz
@@ -1177,7 +1525,7 @@ corr = plot_correlationmatrix_dendogram("xz", "size")
 
 
     
-![png](RQ1_files/RQ1_106_0.png)
+![png](RQ1_files/RQ1_137_0.png)
     
 
 
@@ -1201,6 +1549,18 @@ describe(corr)
 
 
 
+
+```python
+pct_bad_pval("xz", "size")
+```
+
+
+
+
+    0.013297872340425532
+
+
+
 As for gcc, xz is not so concerned by input sensitivity.
 
 In particular, the sizes of the output file in bytes, are very highly correlated for a vast majority of inputs, with a first quartile at 0.82.
@@ -1217,7 +1577,7 @@ corr = plot_correlationmatrix_dendogram("xz", "time")
 
 
     
-![png](RQ1_files/RQ1_110_0.png)
+![png](RQ1_files/RQ1_142_0.png)
     
 
 
@@ -1241,6 +1601,18 @@ describe(corr)
 
 
 
+
+```python
+pct_bad_pval("xz", "time")
+```
+
+
+
+
+    0.04609929078014184
+
+
+
 For time, it is less obvious.
 
 Overall, it is quite the same, with lower correlation values.
@@ -1260,7 +1632,7 @@ corr = plot_correlationmatrix_dendogram("x264", "kbs")
 
 
     
-![png](RQ1_files/RQ1_115_0.png)
+![png](RQ1_files/RQ1_148_0.png)
     
 
 
@@ -1284,6 +1656,18 @@ describe(corr)
 
 
 
+
+```python
+pct_bad_pval("x264", "kbs")
+```
+
+
+
+
+    0.07161272723170609
+
+
+
 for bitrate, the input sensitivity is high with moderate correlation on average (0.57), low correlation for first quartile (0.39), and some negative correlations (up to -0.69)
 
 On the positive side, half of the videos have strong positive correlations between their bitrates distributions (i.e. 0.63), and a quarter of the videos have very strong positive correlations (Q3 = 0.79).
@@ -1302,7 +1686,7 @@ corr = plot_correlationmatrix_dendogram("x264", "fps")
 
 
     
-![png](RQ1_files/RQ1_119_0.png)
+![png](RQ1_files/RQ1_153_0.png)
     
 
 
@@ -1326,6 +1710,18 @@ describe(corr)
 
 
 
+
+```python
+pct_bad_pval("x264", "fps")
+```
+
+
+
+
+    0.0011126995424087227
+
+
+
 for fps, we observe again very strong correlations (0.93 on average and for first quartile). Even extreme cases exhibit moderate correlations 0.50: we can conclude that the input sensitivity is low
 
 #### CPU usage
@@ -1337,7 +1733,7 @@ corr = plot_correlationmatrix_dendogram("x264", "cpu")
 
 
     
-![png](RQ1_files/RQ1_123_0.png)
+![png](RQ1_files/RQ1_158_0.png)
     
 
 
@@ -1361,6 +1757,18 @@ describe(corr)
 
 
 
+
+```python
+pct_bad_pval("x264", "cpu")
+```
+
+
+
+
+    0.0029186570485670274
+
+
+
 for cpu, correlations are moderate (0.79 on average, first quartile 0.74) while there are negative correlations. Hence the input sensitivity is more important than for encoding time or fps 
 
 #### Encoded size of video
@@ -1372,7 +1780,7 @@ corr = plot_correlationmatrix_dendogram("x264", "size")
 
 
     
-![png](RQ1_files/RQ1_127_0.png)
+![png](RQ1_files/RQ1_163_0.png)
     
 
 
@@ -1393,6 +1801,18 @@ describe(corr)
     75%           0.79
     max           1.00
     dtype: float64
+
+
+
+
+```python
+pct_bad_pval("x264", "size")
+```
+
+
+
+
+    0.07160657405451305
 
 
 
@@ -1420,7 +1840,7 @@ corr = plot_correlationmatrix_dendogram("x264", "etime")
 
 
     
-![png](RQ1_files/RQ1_131_0.png)
+![png](RQ1_files/RQ1_168_0.png)
     
 
 
@@ -1441,6 +1861,18 @@ describe(corr)
     75%           0.97
     max           1.00
     dtype: float64
+
+
+
+
+```python
+pct_bad_pval("x264", "etime")
+```
+
+
+
+
+    0.0008696490432834994
 
 
 
