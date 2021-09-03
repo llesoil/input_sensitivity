@@ -40,7 +40,7 @@ To stop the process, just press ctrl + c on your keyboard. Now go to the output 
 
 `cd output`
 
-You will see a list of csv file similar (each with the name of the inputs processed by xz). To make sure that data are stored and that the container is working, and display the first file:
+You will see a list of csv file similar (each with the name of the inputs processed by xz). To make sure that data are stored and that the container is working, and display the first file (if you are testing with another software system, just use `ls` to find a valid name):
 
 `cat E.coli.csv`
 
@@ -60,28 +60,30 @@ First, run this container :
 
 Then, go to the link displayed on your terminal, starting with http://127.0.0.1:8888/?token= like in the following picture:
 
-![Rep0](replication0.png)
+![Rep0](pictures/replication0.png)
 
 It will open a new tab on your web navigator, looking like this:
 
-![Rep1](replication1.png)
+![Rep1](pictures/replication1.png)
 
-You can now click on the 'src' directory...
+You can now click on the 'src' directory, and then on the 'main' directory...
 
-![Rep2](replication2.png)
+Finally, open the 'Main results.ipynb' notebook, it will open a new tab. To run the code, search for "Kernel" -> "Restart and run all", and click, like this :
 
-... And on the Main notebook, it will open a new tab. Finally, search for "Kernel" -> "Restart and run all", and click, like this :
-
-![Rep3](replication3.png)
+![Rep2](pictures/replication2.png)
 
 It will execute all the cells, displaying the different results of the submission.
 You do not have to interfere with the notebook.
-**WARNING! It might be long (at least 30 minutes) depending on your laptop, because there are lots of correlations to compute in figure 1 and lots of models for figure 2.**
+**WARNING! It might be long (maybe about 20-30 minutes) depending on your laptop, because there are lots of correlations to compute in figure 1 and lots of models for figure 2.**
 It is time for a cup of coffee/tea/chocolate!
 
-Check the results of the execution. The second part of the replication is done, you can now kill the process and exit the container.
+Check the results of the execution, i.e. the return of cells, and compare them to the figures of our paper.
 
-### To go further
+The second part of the replication is done, you can now kill the process and exit the container.
+
+Thank you for testing our artifact!
+
+### To go further (optional for the testing of artifacts)
 
 If you want to use our artifact to test new measurements, just follow this process:
 
@@ -103,9 +105,7 @@ Run the container as above:
 
 `sudo docker run -i -p 8888:8888 anonymicse2021/icse2022`
 
-Create a "mySoft" folder in the results directory, as in the following picture : this directory aims at gathering the results for the new software system mySoft.
-
-![Rep4](replication4.png)
+Create a "mySoft" folder in the results directory : this directory aims at gathering the results for the new software system mySoft.
 
 Open the main notebook.
 
@@ -117,6 +117,6 @@ by adding "mySoft" in the array. The second line of code should look like this :
 
 `name_systems = ["x264", "xz", "nodejs", "poppler", "mySoft"]`
 
-Execute the notebook as above, and check the "results/mySoft" directory.
+Then, fill the inputperf dictionary with an array with the performance properties, inputsfeat with the configuration options, and inputcateg with the categorial features of your software system.
 
-Thank you for testing our artifact!
+Execute the notebook as above, and check the "results/mySoft" directory.
