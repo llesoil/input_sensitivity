@@ -6,7 +6,7 @@ Since the measurements can be affected by the hardware it is executed on, we onl
 
 For measuring the different systems' performances, we used:
 - for gcc, environment 3
-- for the image software, environment 1
+- for imagemagick, environment 1
 - for lingeling, environment 1
 - for nodeJS, environment 1
 - for poppler, environment 1
