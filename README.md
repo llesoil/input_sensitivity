@@ -1,9 +1,9 @@
 # Predicting Performances of Configurable Systems
-# The Threat of Input Sensitivity
+# The Issue of Input Sensitivity
 
 Dear reviewers,
 
-This is the companion repository related to our ICSE submission.
+This is the companion repository related to our submission.
 
 ## Organization
 
