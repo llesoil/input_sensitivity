@@ -3008,3 +3008,44 @@ This looks like a future work about sensitivity analysis i.e. database sensitivi
 Q-D : 
 Yes, a transfer learning technique that could be used on our measurements.
 
+
+### Paper 64
+
+Title : 
+SATUNE : A Study-Driven Auto-Tuning Approach for Configurable Software Verification Tools
+
+Bibtex :
+not published yet? -> ASE 2021
+
+Q-A : 
+Yes, the algorithm process programs (java programs, C programs)
+
+Q-B : 
+Yes, justification:
+"we used all 368 benchmark programs
+from SV-COMP 2019. These Java programs are written with
+assertions, and the verification tools check if these asser-
+tions always hold. Among the 368 programs, 204 (55.4%)
+are known to be unsafe. For C tools, the SV-COMP 2018
+benchmark has 9523 programs in total. 2 We randomly selected
+a subset of 1000 programs that are subject to only one
+verification check. Out of the 1000 programs we selected,
+there are 335 programs that are subject to concurrency safety
+verification, 41 to memory safety verification, 65 to integer
+overflow verification, 485 to reachability verification, and 74
+to verification of termination"
+-> Yes, they vary the input programs in the experimental protocol
+
+Q-C : 
+
+Directly in the abstract:
+"Examining the dataset, we find
+there is generally no one-size-fits-all best configuration. Moreover,
+a statistical analysis shows that many individual configuration
+options do not have simple tradeoffs: they can be better or worse
+depending on the program."
+-> a big YES
+
+Q-D : 
+Yes, the purpose of the paper, SaTune!
+
