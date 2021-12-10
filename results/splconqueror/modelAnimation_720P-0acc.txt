@@ -1,0 +1,1 @@
+0 * root + 0.25 * rc_lookahead_10 + 2.61 * rc_lookahead_10 * subme_1 + 1.11 * rc_lookahead_10 * weightp_1 + -0.98 * rc_lookahead_10 * b_adapt_2 + -2.12 * rc_lookahead_10 * weightp_1 * 8x8dct_1 + 0.6 * rc_lookahead_10 * 8x8dct_1 + -0.14 * rc_lookahead_10 * weightb_1 + -0.4 * rc_lookahead_10 * weightp_1 * trellis_2 + 0.03 * rc_lookahead_10 * weightp_1 * subme_8
