@@ -1,9 +1,9 @@
-# Predicting Performances of Configurable Systems
-# The Issue of Input Sensitivity
+# Input Sensitivity
 
 Dear reviewers,
 
 This is the companion repository related to our submission.
+
 
 ## Organization
 
@@ -20,7 +20,7 @@ The article (pdf file) can be consulted directly in the root directory.
 
 ## Our research work in a nutshell
 
-This paper **investigates, demonstrates and quantifies what effects configurable system inputs can have on performances.**
+This paper **investigates, demonstrates and quantifies what effects configurable system inputs can have on performance.**
 
 ![Introduction picture](results/figures/figure1.png)
 
