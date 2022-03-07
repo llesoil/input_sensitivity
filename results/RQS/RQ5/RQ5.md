@@ -1,5 +1,5 @@
 
-# RQ4 - Input sensitivity in research
+# Input sensitivity in research
 
 This part addresses the following question :
 
