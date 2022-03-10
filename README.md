@@ -20,7 +20,7 @@ The article (pdf file) can be consulted directly in the root directory.
 
 ## Our research work in a nutshell
 
-This paper **investigates, demonstrates and quantifies how inputs of software systems interact with their configurations, thuis changing their performance.**
+This paper **investigates, demonstrates and quantifies how inputs of software systems interact with their configurations, thus changing their performance.**
 
 ![Introduction picture](results/figures/figure1.png)
 
