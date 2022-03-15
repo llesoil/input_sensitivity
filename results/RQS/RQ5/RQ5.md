@@ -615,7 +615,7 @@ Q-C :
 No ?
 
 Q-D : 
-Yes, different pdf codes are fed to the system
+No, the model does not generalize
 
 ### Paper 14
 
@@ -1050,6 +1050,7 @@ discussing how to identify which of the metrics gathered by the tun-
 ing tool best characterize an application’s workload."
 
 YES, definitely a candidate solution to generalize to other software systems dealing with input sensitvity!
+But only on a small domain.
 See also figure 3, interesting first step to characterize the workload.
 Looks like the paper of Ding et al. on Petabricks, a first step to classify the input of input, and then a second step to use these input properties to predict accurately the configs.
 
@@ -2717,8 +2718,7 @@ I.e., repeated runs of a test configuration act on the same input
 data. E.g., all training/test data for an application that sorts N
 records, will involve exactly the same N records. We call this
 our identical-inputs assumption."
-The performance model that is trained will generalize to all inputs that respecting the identical-inputs assumption.
-It is a all-in-one-dataset method -> Yes
+The performance model that is trained will generalize to all inputs that respecting the identical-inputs assumption, but input sensitivity is not respecting the identical-inputs assumption, so no.
 
 ### Paper 57
 
