@@ -3049,3 +3049,42 @@ depending on the program."
 Q-D : 
 Yes, the purpose of the paper, SaTune!
 
+### Paper 65
+
+Title : 
+Generalizable and Interpretable Learning for Configuration Extrapolation
+
+Bibtex :
+@inproceedings{10.1145/3468264.3468603,
+author = {Ding, Yi and Pervaiz, Ahsan and Carbin, Michael and Hoffmann, Henry},
+title = {Generalizable and Interpretable Learning for Configuration Extrapolation},
+year = {2021},
+isbn = {9781450385626},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3468264.3468603},
+doi = {10.1145/3468264.3468603},
+abstract = {Modern software applications are increasingly configurable, which puts a burden on users to tune these configurations for their target hardware and workloads. To help users, machine learning techniques can model the complex relationships between software configuration parameters and performance. While powerful, these learners have two major drawbacks: (1) they rarely incorporate prior knowledge and (2) they produce outputs that are not interpretable by users. These limitations make it difficult to (1) leverage information a user has already collected (e.g., tuning for new hardware using the best configurations from old hardware) and (2) gain insights into the learner’s behavior (e.g., understanding why the learner chose different configurations on different hardware or for different workloads). To address these issues, this paper presents two configuration optimization tools, GIL and GIL+, using the proposed generalizable and interpretable learning approaches. To incorporate prior knowledge, the proposed tools (1) start from known configurations, (2) iteratively construct a new linear model, (3) extrapolate better performance configurations from that model, and (4) repeat. Since the base learners are linear models, these tools are inherently interpretable. We enhance this property with a graphical representation of how they arrived at the highest performance configuration. We evaluate GIL and GIL+ by using them to configure Apache Spark workloads on different hardware platforms and find that, compared to prior work, GIL and GIL+ produce comparable, and sometimes even better performance configurations, but with interpretable results.},
+booktitle = {Proceedings of the 29th ACM Joint Meeting on European Software Engineering Conference and Symposium on the Foundations of Software Engineering},
+pages = {728–740},
+numpages = {13},
+keywords = {generalizability, machine learning, Configuration, interpretability},
+location = {Athens, Greece},
+series = {ESEC/FSE 2021}
+}
+
+Q-A : 
+Yes, Apache Spark
+
+Q-B : 
+We select ten Apache Spark workloads from the HiBench 4 big data
+benchmark suite [ 14 ] -> Yes
+
+Q-C : Yes, in the abstract
+"Modern software applications are increasingly configurable, which
+puts a burden on users to tune these configurations for their target
+hardware and workloads."
+
+Q-D : Yes
+
+
