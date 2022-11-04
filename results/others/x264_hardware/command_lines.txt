@@ -1,0 +1,8 @@
+oarsub -p "cputype = '***'" -l walltime=2: -I
+g5k-setup-docker -t
+sudo docker run anonymicse2021/x264_inputs
+
+mv output  ~/x264_hardware/data/output.tar.gz
+cd ~/x264_hardware/data
+tar -xvzf output.tar.gz
+mv output 
