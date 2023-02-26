@@ -1,9 +1,6 @@
 # Input Sensitivity
 
-Dear reviewers,
-
-This is the companion repository related to our submission.
-
+This is the companion repository related to our paper "Input Sensitivity on the Performance of Configurable Systems: An Empirical Study" submitted to the Journal of Software and Systems.
 
 ## Organization
 
@@ -27,5 +24,5 @@ This paper **investigates, demonstrates and quantifies how inputs of software sy
 
 ## Artifact evaluation
 
-Please read and follow the [README.md](https://anonymous.4open.science/repository/df319578-8767-47b0-919d-a8e57eb67d25/replication/README.md) file of the replication directory if you want to evaluate our artifacts.
+Please read and follow the [README.md](https://github.com/llesoil/input_sensitivity/tree/master/replication) file of the replication directory if you want to evaluate our artifacts.
 
